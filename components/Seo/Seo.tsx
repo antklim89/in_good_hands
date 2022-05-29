@@ -3,7 +3,7 @@ import { FC, memo } from 'react';
 
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from '~/constants';
 
-import { SeoProps } from './types';
+import { SeoProps } from './Seo.types';
 
 
 const Seo: FC<SeoProps> = ({
