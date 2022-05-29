@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
 
-const Layout: FC = ({ children }) => {
+const Layout: FC<PropsWithChildren<unknown>> = ({ children }) => {
     return (
         <div className="root">
             <header>
