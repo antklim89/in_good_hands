@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 
 import { HeaderProps } from './Header.types';
+import HeaderAuth from './HeaderAuth';
 import HeaderLinks from './HeaderLinks';
 
 
@@ -20,6 +21,7 @@ const Header: FC<HeaderProps> = () => {
                     </Text>
                 </Link>
                 <HeaderLinks />
+                <HeaderAuth />
             </Container>
         </Box>
     );

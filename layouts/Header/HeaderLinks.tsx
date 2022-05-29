@@ -1,4 +1,4 @@
-import { Text, Box } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC } from 'react';
 
@@ -21,26 +21,13 @@ const LINKS = [
 const HeaderLinks: FC = () => {
     return (
         <Box as="nav" ml="auto">
-            <Box
-                as="ul"
-                display="flex"
-            >
+            <Box as="ul" display="flex" listStyleType="none">
                 {LINKS.map(({ href, title }) => (
-                    <Box
-                        as="li"
-                        key={href}
-                        listStyleType="none"
-
-                    >
+                    <Box as="li" key={href}>
                         <Link passHref href={href}>
-                            <Text
-                                as="a"
-                                display="inline-block"
-                                p={4}
-                                textTransform="uppercase"
-                            >
+                            <Button as="a" textTransform="uppercase" variant="ghost">
                                 {title}
-                            </Text>
+                            </Button>
                         </Link>
                     </Box>
                 ))}
