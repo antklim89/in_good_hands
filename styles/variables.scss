@@ -1,0 +1,9 @@
+$primary-color: purple;
+$secondary-color: thistle;
+$success: green;
+$info: cyan;
+$warning: yellow;
+$danger: red;
+$primary-color-light: lighten($primary-color, 10);
+$secondary-color-dark: darken($primary-color, 10);
+

@@ -1,0 +1,38 @@
+{
+  "name": "in_good_hands",
+  "description": "In good hands",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "run-p dev:**",
+    "dev:next": "next dev -H 0.0.0.0",
+    "dev:strapi": "yarn --cwd ./strapi dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.1.2",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "framer-motion": "^6",
+    "next": "12.1.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "sass": "^1.49.8"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.19",
+    "@types/react": "17.0.39",
+    "eslint": "^8.9.0",
+    "eslint-config-next": "^12.1.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "4.5.5"
+  }
+}
