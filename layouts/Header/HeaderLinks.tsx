@@ -2,6 +2,8 @@ import { Box, Button } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC } from 'react';
 
+import { HeaderLinksProps } from './Header.types';
+
 
 const LINKS = [
     {
@@ -18,9 +20,9 @@ const LINKS = [
     },
 ];
 
-const HeaderLinks: FC = () => {
+const HeaderLinks: FC<HeaderLinksProps> = () => {
     return (
-        <Box as="nav" ml="auto">
+        <Box as="nav">
             <Box as="ul" display="flex" listStyleType="none">
                 {LINKS.map(({ href, title }) => (
                     <Box as="li" key={href}>

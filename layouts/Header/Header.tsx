@@ -2,12 +2,11 @@ import { Box, Text, Container } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC } from 'react';
 
-import { HeaderProps } from './Header.types';
 import HeaderAuth from './HeaderAuth';
-import HeaderLinks from './HeaderLinks';
+import HeaderDrawer from './HeaderDrawer';
 
 
-const Header: FC<HeaderProps> = () => {
+const Header: FC = () => {
     return (
         <Box
             as="header"
@@ -20,7 +19,8 @@ const Header: FC<HeaderProps> = () => {
                         In Good Hands
                     </Text>
                 </Link>
-                <HeaderLinks />
+                <Box flexGrow={1} />
+                <HeaderDrawer />
                 <HeaderAuth />
             </Container>
         </Box>
