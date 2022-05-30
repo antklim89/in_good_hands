@@ -16,6 +16,7 @@ export default Home;
 
 
 export const getStaticProps: GetStaticProps = async () => {
+    const hero = await fetch(`${process.env.STRAPI_API || 'http://localhost:1337'}/api/hero`).then((r) => r.json());
 
     return { props: { } };
 };
