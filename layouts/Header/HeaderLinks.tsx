@@ -35,6 +35,7 @@ const HeaderLinks: FC<HeaderLinksProps> = ({ onClose, ...props }) => {
                             <Button
                                 as="a"
                                 color="primary.text"
+                                colorScheme="primary"
                                 textTransform="uppercase"
                                 variant="ghost"
                                 onClick={onClose}

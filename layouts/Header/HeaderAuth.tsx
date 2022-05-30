@@ -9,14 +9,24 @@ const HeaderAuth: FC = () => {
             <Box as="ul" display="flex" listStyleType="none">
                 <Box as="li" >
                     <Link passHref href="/login">
-                        <Button as="a" color="primary.text" variant="ghost">
+                        <Button
+                            as="a"
+                            color="primary.text"
+                            colorScheme="primary"
+                            variant="ghost"
+                        >
                             Log In
                         </Button>
                     </Link>
                 </Box>
                 <Box as="li" >
                     <Link passHref href="/login">
-                        <Button as="a" color="primary.text" variant="ghost">
+                        <Button
+                            as="a"
+                            color="primary.text"
+                            colorScheme="primary"
+                            variant="ghost"
+                        >
                             Register
                         </Button>
                     </Link>
