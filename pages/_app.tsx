@@ -3,7 +3,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
 
 import Layout from '~/layouts/Layout';
-import { theme } from '~/styles/theme';
+import theme from '~/styles/theme';
 
 
 const MyApp = ({ Component, pageProps }: AppProps) => {

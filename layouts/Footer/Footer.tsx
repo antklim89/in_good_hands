@@ -4,7 +4,7 @@ import { FC } from 'react';
 
 const Footer: FC = () => {
     return (
-        <Box as="footer" bg="cornflowerblue">
+        <Box as="footer" bg="primary.600">
             <Container maxWidth="container.xl">
                 <Text py={4}>&copy; {new Date().getFullYear()} In Good Hands</Text>
             </Container>

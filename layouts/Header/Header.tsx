@@ -10,6 +10,7 @@ const Header: FC = () => {
     return (
         <Box
             as="header"
+            bg="primary.600"
             minHeight={4}
             shadow="md"
         >
