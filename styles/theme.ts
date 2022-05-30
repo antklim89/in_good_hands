@@ -14,7 +14,7 @@ export default extendTheme({
             700: 'hsl(34, 100%, 65%)',
             800: 'hsl(34, 100%, 60%)',
             900: 'hsl(34, 100%, 55%)',
-            text: 'black',
+            text: 'hsl(34, 100%, 20%)',
             textLight: 'white',
         },
         secondary: {

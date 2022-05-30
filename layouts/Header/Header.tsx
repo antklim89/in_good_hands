@@ -2,7 +2,6 @@ import { Box, Text, Container } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC } from 'react';
 
-import HeaderAuth from './HeaderAuth';
 import HeaderDrawer from './HeaderDrawer';
 
 
@@ -22,7 +21,6 @@ const Header: FC = () => {
                 </Link>
                 <Box flexGrow={1} />
                 <HeaderDrawer />
-                <HeaderAuth />
             </Container>
         </Box>
     );

@@ -20,14 +20,25 @@ const LINKS = [
     },
 ];
 
-const HeaderLinks: FC<HeaderLinksProps> = () => {
+const HeaderLinks: FC<HeaderLinksProps> = ({ onClose, ...props }) => {
     return (
         <Box as="nav">
-            <Box as="ul" display="flex" listStyleType="none">
+            <Box
+                as="ul"
+                display="flex"
+                listStyleType="none"
+                {...props}
+            >
                 {LINKS.map(({ href, title }) => (
                     <Box as="li" key={href}>
                         <Link passHref href={href}>
-                            <Button as="a" textTransform="uppercase" variant="ghost">
+                            <Button
+                                as="a"
+                                color="primary.text"
+                                textTransform="uppercase"
+                                variant="ghost"
+                                onClick={onClose}
+                            >
                                 {title}
                             </Button>
                         </Link>
