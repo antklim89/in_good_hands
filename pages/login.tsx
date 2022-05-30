@@ -3,16 +3,16 @@ import type { GetStaticProps, NextPage } from 'next';
 import Seo from '~/components/Seo';
 
 
-const Home: NextPage = () => {
+const LoginPage: NextPage = () => {
     return (
         <>
-            <Seo title="Home" />
-            <h1>HELLO</h1>
+            <Seo title="Login" />
+            <h1>LOGIN</h1>
         </>
     );
 };
 
-export default Home;
+export default LoginPage;
 
 
 export const getStaticProps: GetStaticProps = async () => {
