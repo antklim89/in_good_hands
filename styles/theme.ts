@@ -34,12 +34,13 @@ export default extendTheme({
     },
     styles: {
         global: {
-            p: {
+            'p': {
                 overflowWrap: 'break-word',
                 pb: 6,
                 lineHeight: 1.5,
-                color: '#333',
+                color: 'primary.text',
             },
+            'h1, h2, h3, h4, h5, h6': { color: 'primary.text' },
         },
     },
 });

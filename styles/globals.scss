@@ -17,15 +17,8 @@ a {
 
 
 .root {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-
-    > footer, > header {
-        flex-shrink: 0;
-    }
-
-    > main {
-        flex-grow: 1;
-    }
+    display: grid;
+    min-height: 100vh;
+    margin: 0;
+    grid-template-rows: auto 1fr auto;
 }
