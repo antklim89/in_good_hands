@@ -7,6 +7,7 @@
     "dev": "run-p dev:**",
     "dev:next": "next dev -H 0.0.0.0",
     "dev:strapi": "yarn --cwd ./strapi dev",
+    "dev:typegen": "graphql-codegen --config codegen.yml -w",
     "build": "next build",
     "start": "next start"
   },
@@ -23,18 +24,24 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "framer-motion": "^6",
+    "graphql": "^16.5.0",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "sass": "^1.52.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.6.2",
     "@types/node": "17.0.36",
     "@types/react": "18.0.9",
     "eslint": "^8.16.0",
     "eslint-config-next": "^12.1.6",
     "npm-run-all": "^4.1.5",
-    "typescript": "4.7.2"
+    "typescript": "4.7.2",
+    "@graphql-codegen/typescript": "2.4.11",
+    "@graphql-codegen/typescript-react-apollo": "3.2.14",
+    "@graphql-codegen/typescript-operations": "2.4.0",
+    "@graphql-codegen/introspection": "2.1.1"
   },
   "repository": {
     "type": "git",
