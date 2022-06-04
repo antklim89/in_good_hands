@@ -1,6 +1,10 @@
 overwrite: true
 schema: "./strapi/schema.graphql"
-documents: "queries/**/*.gql"
+documents: "queries/**/*.ts"
+config:
+  typesPrefix: I
+  avoidOptionals: true
+  maybeValue: T
 generates:
   generated/graphql.ts:
     plugins:
