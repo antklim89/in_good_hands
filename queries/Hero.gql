@@ -1,0 +1,16 @@
+query HeroQuery {
+    hero {
+      data {
+        attributes {
+          body
+          image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+}
