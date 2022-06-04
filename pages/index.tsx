@@ -1,9 +1,15 @@
 import type { GetStaticProps, NextPage } from 'next';
 
 import Seo from '~/components/Seo';
+import { IHero } from '~/types';
+import { fetchHero } from '~/utils/server';
 
 
-const Home: NextPage = () => {
+interface Props {
+    hero: IHero
+}
+
+const Home: NextPage<Props> = () => {
     return (
         <>
             <Seo title="Home" />
@@ -15,8 +21,9 @@ const Home: NextPage = () => {
 export default Home;
 
 
-export const getStaticProps: GetStaticProps = async () => {
-    const hero = await fetch(`${process.env.STRAPI_API || 'http://localhost:1337'}/api/hero`).then((r) => r.json());
+export const getStaticProps: GetStaticProps<Props> = async () => {
+    const hero = await fetchHero();
 
-    return { props: { } };
+
+    return { props: { hero } };
 };
