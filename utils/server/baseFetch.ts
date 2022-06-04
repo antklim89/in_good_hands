@@ -1,3 +1,4 @@
+import { STRAPI_URL } from '~/constants';
 
 
 interface BaseFetchArgs<Q, V> {
@@ -5,7 +6,7 @@ interface BaseFetchArgs<Q, V> {
     variables?: V
 }
 
-const GRAPHQL_URL = `${process.env.STRAPI_API || 'http://localhost:1337'}/graphql`;
+const GRAPHQL_URL = `${STRAPI_URL}/graphql`;
 
 
 export default async function baseFetch<
