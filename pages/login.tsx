@@ -1,13 +1,14 @@
 import type { GetStaticProps, NextPage } from 'next';
 
 import Seo from '~/components/Seo';
+import Auth from '~/layouts/Auth';
 
 
 const LoginPage: NextPage = () => {
     return (
         <>
             <Seo title="Login" />
-            <h1>LOGIN</h1>
+            <Auth type="login" />
         </>
     );
 };
