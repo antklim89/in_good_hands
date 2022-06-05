@@ -83,7 +83,7 @@ module.exports = {
         'jsx-a11y/label-has-for': 0,
         'jsx-a11y/anchor-is-valid': 0,
         'react/jsx-closing-bracket-location': 2,
-        'react/jsx-no-bind': [2, { ignoreDOMComponents: true }],
+        'react/jsx-no-bind': [0, { ignoreDOMComponents: true }],
         'react/function-component-definition': [2, { 'namedComponents': 'arrow-function' }],
         'react/jsx-max-depth': [1, { 'max': 5 }],
         'react/jsx-sort-props': [1, { callbacksLast: true, shorthandFirst: true }],
