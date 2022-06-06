@@ -29,7 +29,8 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "sass": "^1.52.1",
-    "zod": "^3.17.3"
+    "zod": "^3.17.3",
+    "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.6.2",
