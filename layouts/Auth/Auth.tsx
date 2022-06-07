@@ -1,15 +1,18 @@
-import { Center, Heading, Container } from '@chakra-ui/react';
-import { FC, useEffect, useState } from 'react';
+import { Center, Heading, Container, Button, Flex } from '@chakra-ui/react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { ZodError } from 'zod';
 
 import InputField from '~/components/InputField';
+import { login, register } from '~/utils/server';
 
 import { authSchema } from './Auth.schema';
 import { AuthErrorsType, AuthProps, AuthType } from './Auth.types';
 
 
 const Auth: FC<AuthProps> = ({ type = 'login' }) => {
-    const [input, setInput] = useState<AuthType>({ name: '', password: '' });
+    const [input, setInput] = useState<AuthType>({ username: '', email: '', password: '' });
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState<string | null>(null);
     const [inputError, setInputError] = useState<AuthErrorsType>({});
 
     useEffect(() => {
@@ -20,13 +23,32 @@ const Auth: FC<AuthProps> = ({ type = 'login' }) => {
                     setInputError((error as ZodError).formErrors.fieldErrors);
                 }
             });
-    }, Object.values(input));
 
-    const handleChangeInput = (name: string, value: string) => {
+        if (input.password === confirmPassword) {
+            setConfirmPasswordError(null);
+        } else {
+            setConfirmPasswordError('Passwords do not match.');
+        }
+    }, [...Object.values(input), confirmPassword]);
+
+    const handleChangeInput = (name: keyof AuthType, value: string) => {
         setInput((prevInput) => ({
             ...prevInput,
             [name]: value,
         }));
+    };
+
+    // const isValid = useMemo(() => {
+    //     return Object.values({ ...inputError, confirmPasswordError })
+    //         .every((i) => i);
+    // }, [Object.values({ ...inputError, confirmPasswordError }).join()]);
+
+    const handleAuth = () => {
+        if (type === 'login') {
+            login(input);
+        } else {
+            register(input);
+        }
     };
 
     return (
@@ -42,14 +64,26 @@ const Auth: FC<AuthProps> = ({ type = 'login' }) => {
                     {type}
                 </Heading>
                 <form>
+                    {type === 'register' && (
+                        <InputField
+                            autoComplete="name"
+                            error={inputError.username}
+                            label="Username"
+                            placeholder="Enter your username..."
+                            value={input.username}
+                            onChange={(e) => handleChangeInput('username', e.target.value)}
+                        />
+                    )}
                     <InputField
-                        error={inputError.name}
-                        label="Username"
-                        placeholder="Enter your username..."
-                        value={input.name}
-                        onChange={(e) => handleChangeInput('name', e.target.value)}
+                        autoComplete="email"
+                        error={inputError.email}
+                        label="E-mail"
+                        placeholder="Enter your e-mail..."
+                        value={input.email}
+                        onChange={(e) => handleChangeInput('email', e.target.value)}
                     />
                     <InputField
+                        autoComplete="new-password"
                         error={inputError.password}
                         label="Password"
                         placeholder="Enter your password..."
@@ -59,14 +93,20 @@ const Auth: FC<AuthProps> = ({ type = 'login' }) => {
                     />
                     {type === 'register' && (
                         <InputField
-                            error={inputError.name}
+                            autoComplete="new-password"
+                            error={confirmPasswordError}
                             label="Confirm password"
                             placeholder="Confirm your password..."
                             type="password"
-                            value={input.name}
-                            onChange={(e) => handleChangeInput('name', e.target.value)}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     )}
+                    <Flex justify="flex-end">
+                        <Button colorScheme="primary" onClick={() => handleAuth()}>
+                            Confirm
+                        </Button>
+                    </Flex>
                 </form>
             </Container>
         </Center>
