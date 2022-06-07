@@ -1,11 +1,17 @@
-import { Center, Heading, Container, Input } from '@chakra-ui/react';
-import { FC, useState } from 'react';
+import {
+    Center, Heading, Container, Input, FormControl, FormLabel, Text,
+} from '@chakra-ui/react';
+import { FC, useEffect, useState } from 'react';
 import zod, { ZodError } from 'zod';
 
 import { AuthProps } from './Auth.types';
 
 
-const authSchema = zod.object({ name: zod.string().max(5) });
+const authSchema = zod.object({
+    name: zod.string()
+        .max(50)
+        .min(2),
+});
 
 type AuthType = zod.infer<typeof authSchema>
 type AuthErrorsType = {
@@ -52,13 +58,16 @@ const Auth: FC<AuthProps> = ({ type = 'login' }) => {
                     {type}
                 </Heading>
                 <form>
-                    <Input
-                        colorScheme="primary"
-                        isInvalid={Boolean(inputError.name)}
-                        placeholder="Enter your username..."
-                        value={input.name}
-                        onChange={(e) => handleChangeInput('name', e.target.value)}
-                    />
+                    <FormControl isRequired isInvalid={Boolean(inputError.name)}>
+                        <FormLabel>Username</FormLabel>
+                        <Input
+                            colorScheme="primary"
+                            placeholder="Enter your username..."
+                            value={input.name}
+                            onChange={(e) => handleChangeInput('name', e.target.value)}
+                        />
+                        <Text color="gray.700" size="sm" textAlign="end">&nbsp;{inputError.name}</Text>
+                    </FormControl>
                 </form>
             </Container>
         </Center>
