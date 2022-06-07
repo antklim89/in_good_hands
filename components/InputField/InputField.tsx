@@ -10,7 +10,9 @@ const InputField: FC<InputFieldProps> = ({ error, label, ...props }) => {
         <FormControl isRequired isInvalid={Boolean(error)}>
             {label ? <FormLabel>{label}</FormLabel> : null}
             <Input {...props} colorScheme="primary" />
-            <Text color="gray.700" size="sm" textAlign="end">&nbsp;{error}</Text>
+            <Text color="gray.700" size="sm" textAlign="end">
+                &nbsp;{Array.isArray(error) ? error[0] : error}
+            </Text>
         </FormControl>
     );
 };
