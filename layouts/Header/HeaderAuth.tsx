@@ -20,7 +20,7 @@ const HeaderAuth: FC = () => {
                     </Link>
                 </Box>
                 <Box as="li" >
-                    <Link passHref href="/login">
+                    <Link passHref href="/register">
                         <Button
                             as="a"
                             color="primary.text"
