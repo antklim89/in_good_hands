@@ -13,11 +13,11 @@ import { AuthProps, AuthType } from './Auth.types';
 const Auth: FC<AuthProps> = ({ type = 'login' }) => {
     const formik = useFormik<AuthType>({
         initialValues: { username: '', email: '', password: '', confirm: '' },
-        onSubmit(val) {
+        async onSubmit(val) {
             if (type === 'login') {
-                login(val);
+                await login(val);
             } else {
-                register(val);
+                await register(val);
             }
 
         },
@@ -52,17 +52,15 @@ const Auth: FC<AuthProps> = ({ type = 'login' }) => {
                     {type}
                 </Heading>
                 <form onSubmit={formik.handleSubmit}>
-                    {/* {type === 'register' && (
+                    {type === 'register' && (
                         <InputField
                             autoComplete="name"
-                            error={errors.username}
+                            formik={formik}
                             label="Username"
                             name="username"
                             placeholder="Enter your username..."
-                            value={values.username}
-                            onChange={handleChange}
                         />
-                    )} */}
+                    )}
                     <InputField
                         autoComplete="email"
                         formik={formik}
@@ -70,30 +68,31 @@ const Auth: FC<AuthProps> = ({ type = 'login' }) => {
                         name="email"
                         placeholder="Enter your e-mail..."
                     />
-                    {/* <InputField
+                    <InputField
                         autoComplete="new-password"
-                        error={errors.password}
+                        formik={formik}
                         label="Password"
                         name="password"
                         placeholder="Enter your password..."
                         type="password"
-                        value={values.password}
-                        onChange={handleChange}
                     />
                     {type === 'register' && (
                         <InputField
                             autoComplete="new-password"
-                            error={errors.confirm}
+                            formik={formik}
                             label="Confirm password"
                             name="confirm"
                             placeholder="Confirm your password..."
                             type="password"
-                            value={values.confirm}
-                            onChange={handleChange}
                         />
-                    )} */}
+                    )}
                     <Flex justify="flex-end">
-                        <Button colorScheme="primary" disabled={!formik.isValid} type="submit">
+                        <Button
+                            colorScheme="primary"
+                            disabled={!formik.isValid}
+                            isLoading={formik.isSubmitting}
+                            type="submit"
+                        >
                             Confirm
                         </Button>
                     </Flex>

@@ -7,8 +7,8 @@ const InputField: InputFieldFC = ({ formik, label, name, ...props }) => {
     const error = formik.errors[name];
 
     return (
-        <FormControl isRequired isInvalid={Boolean(error)}>
-            {label ? <FormLabel>{label}</FormLabel> : null}
+        <FormControl isRequired isDisabled={formik.isSubmitting}>
+            {(label) ? <FormLabel>{label}</FormLabel> : null}
             <Input
                 {...props}
                 colorScheme="primary"
