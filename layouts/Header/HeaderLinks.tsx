@@ -34,7 +34,7 @@ const HeaderLinks: FC<HeaderLinksProps> = ({ onClose, ...props }) => {
                         <Link passHref href={href}>
                             <Button
                                 as="a"
-                                color="primary.text"
+                                color="primary.textLight"
                                 colorScheme="primary"
                                 textTransform="uppercase"
                                 variant="ghost"

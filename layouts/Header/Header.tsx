@@ -15,7 +15,7 @@ const Header: FC = () => {
         >
             <Container alignItems="center" display="flex" maxWidth="container.xl">
                 <Link passHref href="/">
-                    <Text as="a" fontSize="2xl">
+                    <Text as="a" color="primary.textLight" fontSize="2xl">
                         In Good Hands
                     </Text>
                 </Link>

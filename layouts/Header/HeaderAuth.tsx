@@ -11,7 +11,7 @@ const HeaderAuth: FC = () => {
                     <Link passHref href="/login">
                         <Button
                             as="a"
-                            color="primary.text"
+                            color="primary.textLight"
                             colorScheme="primary"
                             variant="ghost"
                         >
@@ -23,7 +23,7 @@ const HeaderAuth: FC = () => {
                     <Link passHref href="/register">
                         <Button
                             as="a"
-                            color="primary.text"
+                            color="primary.textLight"
                             colorScheme="primary"
                             variant="ghost"
                         >
