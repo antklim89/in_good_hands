@@ -1,20 +1,36 @@
-import { createContext, FC, useCallback, useMemo, useState } from 'react';
+import Cookie from 'js-cookie';
+import {
+    createContext, FC, useCallback, useEffect, useMemo, useState,
+} from 'react';
 
-import { AuthProviderProps } from './AuthProvider.types';
+import { USER_STORAGE_NAME } from '~/constants';
+
+import { AuthProviderProps, IAuthContext } from './AuthProvider.types';
 
 
-export const AuthContext = createContext({});
+export const AuthContext = createContext({} as IAuthContext);
 
 const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-    const [email, setEmail] = useState<null|string>(null);
-    const [username, setUsername] = useState<null|string>(null);
+    const [email, setEmail] = useState<IAuthContext['email']>(null);
+    const [username, setUsername] = useState<IAuthContext['username']>(null);
 
-    const setCredentials = useCallback((e: {username: string, email: string}) => {
+    useEffect(() => {
+        try {
+            const userString = Cookie.get(USER_STORAGE_NAME);
+            const user = JSON.parse(userString);
+            setEmail(user.email);
+            setUsername(user.username);
+        } catch (error) {
+            // null
+        }
+    }, []);
+
+    const setCredentials: IAuthContext['setCredentials'] = useCallback((e) => {
         setEmail(e.email);
         setUsername(e.username);
     }, []);
 
-    const clearCredentials = useCallback(() => {
+    const clearCredentials: IAuthContext['clearCredentials'] = useCallback(() => {
         setEmail(null);
         setUsername(null);
     }, []);

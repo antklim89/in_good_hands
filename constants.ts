@@ -3,3 +3,7 @@ export const DEFAULT_TITLE = process.env.DEFAULT_TITLE || 'In Good Hands';
 
 
 export const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+
+export const USER_STORAGE_NAME = 'USER';
+export const JWT_STORAGE_NAME = 'JWT';
+
