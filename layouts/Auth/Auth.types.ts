@@ -9,7 +9,3 @@ export interface AuthProps {
 
 
 export type AuthType = zod.infer<typeof authSchema>
-
-export type AuthErrorsType = {
-    [P in keyof AuthType]?: string[] | string | null;
-};

@@ -15,4 +15,8 @@ export const authSchema = zod.object({
         .trim()
         .max(50)
         .min(5),
+    confirm: zod.string()
+        .trim()
+        .max(50)
+        .min(5),
 });

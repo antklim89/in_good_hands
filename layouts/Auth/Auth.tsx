@@ -1,55 +1,43 @@
 import { Center, Heading, Container, Button, Flex } from '@chakra-ui/react';
-import { FC, useEffect, useMemo, useState } from 'react';
+import { useFormik } from 'formik';
+import { FC } from 'react';
 import { ZodError } from 'zod';
 
 import InputField from '~/components/InputField';
 import { login, register } from '~/utils/server';
 
 import { authSchema } from './Auth.schema';
-import { AuthErrorsType, AuthProps, AuthType } from './Auth.types';
+import { AuthProps, AuthType } from './Auth.types';
 
 
 const Auth: FC<AuthProps> = ({ type = 'login' }) => {
-    const [input, setInput] = useState<AuthType>({ username: '', email: '', password: '' });
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [confirmPasswordError, setConfirmPasswordError] = useState<string | null>(null);
-    const [inputError, setInputError] = useState<AuthErrorsType>({});
+    const formik = useFormik<AuthType>({
+        initialValues: { username: '', email: '', password: '', confirm: '' },
+        onSubmit(val) {
+            if (type === 'login') {
+                login(val);
+            } else {
+                register(val);
+            }
 
-    useEffect(() => {
-        authSchema.parseAsync(input)
-            .then(() => setInputError({}))
-            .catch((error) => {
-                if (error instanceof ZodError) {
-                    setInputError((error as ZodError).formErrors.fieldErrors);
+        },
+        async validate(val) {
+            try {
+                if (type === 'login') {
+                    await authSchema.pick({ email: true, password: true }).parseAsync(val);
+                } else {
+                    await authSchema.pick({ email: true, password: true, username: true }).parseAsync(val);
+                    if (val.confirm !== val.password) return { confirm: 'Passwords do not match.' };
                 }
-            });
+            } catch (error) {
+                if (error instanceof ZodError) {
+                    return error.formErrors.fieldErrors;
+                }
+            }
+            return {};
+        },
+    });
 
-        if (input.password === confirmPassword) {
-            setConfirmPasswordError(null);
-        } else {
-            setConfirmPasswordError('Passwords do not match.');
-        }
-    }, [...Object.values(input), confirmPassword]);
-
-    const handleChangeInput = (name: keyof AuthType, value: string) => {
-        setInput((prevInput) => ({
-            ...prevInput,
-            [name]: value,
-        }));
-    };
-
-    // const isValid = useMemo(() => {
-    //     return Object.values({ ...inputError, confirmPasswordError })
-    //         .every((i) => i);
-    // }, [Object.values({ ...inputError, confirmPasswordError }).join()]);
-
-    const handleAuth = () => {
-        if (type === 'login') {
-            login(input);
-        } else {
-            register(input);
-        }
-    };
 
     return (
         <Center height="100%">
@@ -63,47 +51,49 @@ const Auth: FC<AuthProps> = ({ type = 'login' }) => {
                 <Heading pb={4} textAlign="center" textTransform="uppercase">
                     {type}
                 </Heading>
-                <form>
-                    {type === 'register' && (
+                <form onSubmit={formik.handleSubmit}>
+                    {/* {type === 'register' && (
                         <InputField
                             autoComplete="name"
-                            error={inputError.username}
+                            error={errors.username}
                             label="Username"
+                            name="username"
                             placeholder="Enter your username..."
-                            value={input.username}
-                            onChange={(e) => handleChangeInput('username', e.target.value)}
+                            value={values.username}
+                            onChange={handleChange}
                         />
-                    )}
+                    )} */}
                     <InputField
                         autoComplete="email"
-                        error={inputError.email}
+                        formik={formik}
                         label="E-mail"
+                        name="email"
                         placeholder="Enter your e-mail..."
-                        value={input.email}
-                        onChange={(e) => handleChangeInput('email', e.target.value)}
                     />
-                    <InputField
+                    {/* <InputField
                         autoComplete="new-password"
-                        error={inputError.password}
+                        error={errors.password}
                         label="Password"
+                        name="password"
                         placeholder="Enter your password..."
                         type="password"
-                        value={input.password}
-                        onChange={(e) => handleChangeInput('password', e.target.value)}
+                        value={values.password}
+                        onChange={handleChange}
                     />
                     {type === 'register' && (
                         <InputField
                             autoComplete="new-password"
-                            error={confirmPasswordError}
+                            error={errors.confirm}
                             label="Confirm password"
+                            name="confirm"
                             placeholder="Confirm your password..."
                             type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            value={values.confirm}
+                            onChange={handleChange}
                         />
-                    )}
+                    )} */}
                     <Flex justify="flex-end">
-                        <Button colorScheme="primary" onClick={() => handleAuth()}>
+                        <Button colorScheme="primary" disabled={!formik.isValid} type="submit">
                             Confirm
                         </Button>
                     </Flex>

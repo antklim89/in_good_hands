@@ -1,15 +1,21 @@
 import { FormControl, FormLabel, Text, Input } from '@chakra-ui/react';
-import { FC } from 'react';
 
-import { InputFieldProps } from './InputField.types';
+import { InputFieldFC } from './InputField.types';
 
 
-const InputField: FC<InputFieldProps> = ({ error, label, ...props }) => {
+const InputField: InputFieldFC = ({ formik, label, name, ...props }) => {
+    const error = formik.errors[name];
 
     return (
         <FormControl isRequired isInvalid={Boolean(error)}>
             {label ? <FormLabel>{label}</FormLabel> : null}
-            <Input {...props} colorScheme="primary" />
+            <Input
+                {...props}
+                colorScheme="primary"
+                name={String(name)}
+                value={formik.values[name]}
+                onChange={formik.handleChange}
+            />
             <Text color="gray.700" size="sm" textAlign="end">
                 &nbsp;{Array.isArray(error) ? error[0] : error}
             </Text>
