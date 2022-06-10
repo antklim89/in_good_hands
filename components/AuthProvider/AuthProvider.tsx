@@ -1,4 +1,4 @@
-import Cookie from 'js-cookie';
+import Cookie from 'cookie';
 import {
     createContext, FC, useCallback, useEffect, useMemo, useState,
 } from 'react';
@@ -16,11 +16,11 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
     useEffect(() => {
         try {
-            const userString = Cookie.get(USER_STORAGE_NAME);
+            const userString = Cookie.parse(document.cookie)[USER_STORAGE_NAME];
             const user = JSON.parse(userString);
             setEmail(user.email);
             setUsername(user.username);
-        } catch (error) {
+        } catch (_) {
             // null
         }
     }, []);
