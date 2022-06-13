@@ -1,13 +1,18 @@
 import { Box, Button } from '@chakra-ui/react';
 import Link from 'next/link';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 
 import { useAuthContext } from '~/utils';
 import { logout } from '~/utils/server';
 
 
 const HeaderAuth: FC = () => {
-    const { isAuth, username } = useAuthContext();
+    const { isAuth, username, clearCredentials } = useAuthContext();
+
+    const handleLogout = useCallback(() => {
+        logout();
+        clearCredentials();
+    }, []);
 
     return (
         <nav>
@@ -31,7 +36,7 @@ const HeaderAuth: FC = () => {
                                     color="primary.textLight"
                                     colorScheme="primary"
                                     variant="ghost"
-                                    onClick={logout}
+                                    onClick={handleLogout}
                                 >
                                     Logout
                                 </Button>

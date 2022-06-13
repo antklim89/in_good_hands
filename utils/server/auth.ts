@@ -7,24 +7,23 @@ import { LoginQuery, RegisterQuery } from '~/queries/Auth';
 import baseFetch from './baseFetch';
 
 
-export async function login(variables: ILoginMutationVariables): Promise<void> {
-    try {
-        const data = await baseFetch<ILoginMutation>({ query: LoginQuery, variables });
-        document.cookie = Cookie.serialize(USER_STORAGE_NAME, JSON.stringify(data.login.user));
-        document.cookie = Cookie.serialize(JWT_STORAGE_NAME, JSON.stringify(data.login.jwt));
-    } catch (error) {
-        console.error(error);
-    }
+interface UserAuthData {
+    username: string;
+    email: string;
 }
 
-export async function register(variables: IRegisterMutationVariables): Promise<void> {
-    try {
-        const data = await baseFetch<IRegisterMutation>({ query: RegisterQuery, variables });
-        document.cookie = Cookie.serialize(USER_STORAGE_NAME, JSON.stringify(data.register.user));
-        document.cookie = Cookie.serialize(JWT_STORAGE_NAME, JSON.stringify(data.register.jwt));
-    } catch (error) {
-        console.error(error);
-    }
+export async function login(variables: ILoginMutationVariables): Promise<UserAuthData> {
+    const data = await baseFetch<ILoginMutation>({ query: LoginQuery, variables });
+    document.cookie = Cookie.serialize(USER_STORAGE_NAME, JSON.stringify(data.login.user));
+    document.cookie = Cookie.serialize(JWT_STORAGE_NAME, JSON.stringify(data.login.jwt));
+    return data.login.user;
+}
+
+export async function register(variables: IRegisterMutationVariables): Promise<UserAuthData> {
+    const data = await baseFetch<IRegisterMutation>({ query: RegisterQuery, variables });
+    document.cookie = Cookie.serialize(USER_STORAGE_NAME, JSON.stringify(data.register.user));
+    document.cookie = Cookie.serialize(JWT_STORAGE_NAME, JSON.stringify(data.register.jwt));
+    return data.register.user;
 }
 
 export function logout(): void {

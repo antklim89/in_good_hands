@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { ZodError } from 'zod';
 
 import InputField from '~/components/InputField';
+import { useAuthContext } from '~/utils';
 import { login, register } from '~/utils/server';
 
 import { authSchema } from './Auth.schema';
@@ -11,15 +12,18 @@ import { AuthProps, AuthType } from './Auth.types';
 
 
 const Auth: FC<AuthProps> = ({ type = 'login' }) => {
+    const { setCredentials } = useAuthContext();
+
     const formik = useFormik<AuthType>({
         initialValues: { username: '', email: '', password: '', confirm: '' },
         async onSubmit(val) {
             if (type === 'login') {
-                await login(val);
+                const user = await login(val);
+                setCredentials(user);
             } else {
-                await register(val);
+                const user = await register(val);
+                setCredentials(user);
             }
-
         },
         async validate(val) {
             try {

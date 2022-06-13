@@ -25,6 +25,7 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         }
     }, []);
 
+
     const setCredentials: IAuthContext['setCredentials'] = useCallback((e) => {
         setEmail(e.email);
         setUsername(e.username);
