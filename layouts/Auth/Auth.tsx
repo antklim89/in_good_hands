@@ -1,5 +1,8 @@
-import { Center, Heading, Container, Button, Flex } from '@chakra-ui/react';
+import {
+    Center, Heading, Container, Button, Flex, useToast,
+} from '@chakra-ui/react';
 import { useFormik } from 'formik';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { ZodError } from 'zod';
 
@@ -13,16 +16,26 @@ import { AuthProps, AuthType } from './Auth.types';
 
 const Auth: FC<AuthProps> = ({ type = 'login' }) => {
     const { setCredentials } = useAuthContext();
+    const toast = useToast();
+    const { back } = useRouter();
 
     const formik = useFormik<AuthType>({
         initialValues: { username: '', email: '', password: '', confirm: '' },
         async onSubmit(val) {
-            if (type === 'login') {
-                const user = await login(val);
-                setCredentials(user);
-            } else {
-                const user = await register(val);
-                setCredentials(user);
+            try {
+                if (type === 'login') {
+                    const user = await login(val);
+                    setCredentials(user);
+                    toast({ title: 'You have successfully logged in!', status: 'success' });
+                    back();
+                } else {
+                    const user = await register(val);
+                    setCredentials(user);
+                    toast({ title: 'You have successfully registred!', status: 'success' });
+                    back();
+                }
+            } catch (error) {
+                if (error instanceof Error) toast({ title: error.message, status: 'error' });
             }
         },
         async validate(val) {
