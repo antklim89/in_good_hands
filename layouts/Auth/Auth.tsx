@@ -105,7 +105,6 @@ const Auth: FC<AuthProps> = ({ type = 'login' }) => {
                     )}
                     <Flex justify="flex-end">
                         <Button
-                            colorScheme="primary"
                             disabled={!formik.isValid}
                             isLoading={formik.isSubmitting}
                             type="submit"

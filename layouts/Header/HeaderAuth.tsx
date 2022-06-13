@@ -24,7 +24,6 @@ const HeaderAuth: FC = () => {
                                 <Button
                                     as="a"
                                     color="primary.textLight"
-                                    colorScheme="primary"
                                     variant="ghost"
                                 >
                                     {username}
@@ -34,7 +33,6 @@ const HeaderAuth: FC = () => {
                                 <Button
                                     as="a"
                                     color="primary.textLight"
-                                    colorScheme="primary"
                                     variant="ghost"
                                     onClick={handleLogout}
                                 >
@@ -49,7 +47,6 @@ const HeaderAuth: FC = () => {
                                     <Button
                                         as="a"
                                         color="primary.textLight"
-                                        colorScheme="primary"
                                         variant="ghost"
                                     >
                                         Log In
@@ -61,7 +58,6 @@ const HeaderAuth: FC = () => {
                                     <Button
                                         as="a"
                                         color="primary.textLight"
-                                        colorScheme="primary"
                                         variant="ghost"
                                     >
                                         Register

@@ -42,4 +42,10 @@ export default extendTheme({
             'h1, h2, h3, h4, h5, h6': { color: 'primary.text' },
         },
     },
+    components: {
+        Button: {
+            baseStyle: { cursor: 'pointer' },
+            defaultProps: { colorScheme: 'primary' },
+        },
+    },
 });

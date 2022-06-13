@@ -11,7 +11,6 @@ const InputField: InputFieldFC = ({ formik, label, name, ...props }) => {
             {(label) ? <FormLabel>{label}</FormLabel> : null}
             <Input
                 {...props}
-                colorScheme="primary"
                 name={String(name)}
                 value={formik.values[name]}
                 onChange={formik.handleChange}
