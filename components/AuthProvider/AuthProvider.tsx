@@ -17,10 +17,16 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
     useEffect(() => {
         try {
-            const userString = Cookie.parse(document.cookie)[USER_STORAGE_NAME];
-            const user = JSON.parse(userString);
+            const userCookieString = Cookie.parse(document.cookie)[USER_STORAGE_NAME];
+            if (!userCookieString) {
+                setAuthInited(true);
+                return;
+            }
+            const user = JSON.parse(userCookieString);
             setEmail(user.email);
             setUsername(user.username);
+        } catch (_) {
+            // void
         } finally {
             setAuthInited(true);
         }
