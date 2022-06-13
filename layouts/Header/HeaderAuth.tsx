@@ -1,4 +1,4 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button, Progress } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC, useCallback } from 'react';
 
@@ -7,13 +7,22 @@ import { logout } from '~/utils/server';
 
 
 const HeaderAuth: FC = () => {
-    const { isAuth, username, clearCredentials } = useAuthContext();
+    const { isAuth, username, clearCredentials, authInited } = useAuthContext();
 
     const handleLogout = useCallback(() => {
         logout();
         clearCredentials();
     }, []);
 
+    if (!authInited) return (
+        <Progress
+            isIndeterminate
+            borderRadius="md"
+            colorScheme="primary"
+            mx={4}
+            width={32}
+        />
+    );
     return (
         <nav>
             <Box as="ul" display="flex" listStyleType="none">

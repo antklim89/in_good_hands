@@ -9,6 +9,7 @@ export interface IAuthContext {
      email: string | null;
      username: string | null;
      isAuth: boolean;
+     authInited: boolean;
      setCredentials: (e: {
          username: string;
          email: string;

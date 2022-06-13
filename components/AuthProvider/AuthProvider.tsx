@@ -13,6 +13,7 @@ export const AuthContext = createContext({} as IAuthContext);
 const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     const [email, setEmail] = useState<IAuthContext['email']>(null);
     const [username, setUsername] = useState<IAuthContext['username']>(null);
+    const [authInited, setAuthInited] = useState(false);
 
     useEffect(() => {
         try {
@@ -20,8 +21,8 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
             const user = JSON.parse(userString);
             setEmail(user.email);
             setUsername(user.username);
-        } catch (_) {
-            // null
+        } finally {
+            setAuthInited(true);
         }
     }, []);
 
@@ -38,10 +39,11 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
     const isAuth = useMemo(() => Boolean(email), [email, username]);
 
-    const value = useMemo(() => ({
+    const value: IAuthContext = useMemo(() => ({
         email,
         username,
         isAuth,
+        authInited,
         setCredentials,
         clearCredentials,
     }), [email, username]);
