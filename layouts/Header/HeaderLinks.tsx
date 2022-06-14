@@ -21,7 +21,7 @@ const LINKS = [
         title: 'about',
     },
     {
-        href: '/create ad',
+        href: '/ads/create',
         title: 'create ad',
         isProtected: true,
     },
