@@ -68,6 +68,7 @@ module.exports = {
         /**
         * React
         */
+        'react/jsx-no-constructed-context-values': 0,
         'react/jsx-no-useless-fragment': 0,
         'react/forbid-component-props': 0,
         'react/jsx-no-literals': 0,
