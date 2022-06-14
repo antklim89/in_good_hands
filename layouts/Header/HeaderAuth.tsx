@@ -2,8 +2,7 @@ import { Box, Button, Progress } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC, useCallback } from 'react';
 
-import { useAuthContext } from '~/utils';
-import { logout } from '~/utils/server';
+import { useAuthContext, logout } from '~/utils';
 
 
 const HeaderAuth: FC = () => {

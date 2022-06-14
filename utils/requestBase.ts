@@ -1,7 +1,7 @@
 import { STRAPI_URL } from '~/constants';
 
 
-interface BaseFetchArgs<V> {
+interface RequestBaseArgs<V> {
     query: string
     variables?: V
 }
@@ -9,9 +9,9 @@ interface BaseFetchArgs<V> {
 const GRAPHQL_URL = `${STRAPI_URL}/graphql`;
 
 
-export default async function baseFetch<
+export default async function requestBase<
     T = unknown, V = Record<string, string>
->({ query, variables }: BaseFetchArgs<V>): Promise<T> {
+>({ query, variables }: RequestBaseArgs<V>): Promise<T> {
     const response = await fetch(GRAPHQL_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

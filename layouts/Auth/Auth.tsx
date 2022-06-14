@@ -7,8 +7,7 @@ import { FC } from 'react';
 import { ZodError } from 'zod';
 
 import InputField from '~/components/InputField';
-import { useAuthContext } from '~/utils';
-import { login, register } from '~/utils/server';
+import { useAuthContext, login, register } from '~/utils';
 
 import { authSchema } from './Auth.schema';
 import { AuthProps, AuthType } from './Auth.types';

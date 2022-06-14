@@ -3,7 +3,7 @@ import type { GetStaticProps, NextPage } from 'next';
 import Seo from '~/components/Seo';
 import Hero from '~/layouts/Hero';
 import { IHero } from '~/types';
-import { fetchHero } from '~/utils/server';
+import { requestHero } from '~/utils';
 
 
 interface Props {
@@ -23,7 +23,7 @@ export default Home;
 
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-    const hero = await fetchHero();
+    const hero = await requestHero();
 
 
     return { props: { hero } };
