@@ -3,7 +3,8 @@ import { ReactNode } from 'react';
 
 export interface ProtectedProps {
      children: ReactNode
-     isAuthRequired?: boolean
+     protectIfAuth?: boolean
      initPlaceholder?: ReactNode
      protectedComponent?: ReactNode
+     disableProtection?: boolean
 }

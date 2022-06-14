@@ -9,7 +9,7 @@ import NotFoundPage from './404';
 
 const LoginPage: NextPage = () => {
     return (
-        <Protected isAuthRequired={false} protectedComponent={<NotFoundPage />}>
+        <Protected protectIfAuth protectedComponent={<NotFoundPage />}>
             <Seo title="Login" />
             <Auth type="login" />
         </Protected>
