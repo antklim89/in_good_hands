@@ -45,16 +45,20 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
     const isAuth = useMemo(() => Boolean(email), [email, username]);
 
-    const value: IAuthContext = useMemo(() => ({
-        email,
-        username,
-        isAuth,
-        authInited,
-        setCredentials,
-        clearCredentials,
-    }), [email, username]);
-
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+    return (
+        <AuthContext.Provider
+            value={{
+                email,
+                username,
+                isAuth,
+                authInited,
+                setCredentials,
+                clearCredentials,
+            }}
+        >
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
 export default AuthProvider;
