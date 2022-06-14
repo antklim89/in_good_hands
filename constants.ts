@@ -7,3 +7,4 @@ export const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhos
 export const USER_STORAGE_NAME = 'USER';
 export const JWT_STORAGE_NAME = 'JWT';
 
+export const AUTH_COOKIE_EXPIRES_TIME = 5;
