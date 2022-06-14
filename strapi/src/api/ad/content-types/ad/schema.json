@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ads",
+  "info": {
+    "singularName": "ad",
+    "pluralName": "ads",
+    "displayName": "Ad"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 500,
+      "minLength": 5
+    },
+    "body": {
+      "type": "richtext",
+      "required": true,
+      "minLength": 100,
+      "maxLength": 9000
+    },
+    "images": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": true
+    },
+    "age": {
+      "type": "integer",
+      "required": true,
+      "max": 300,
+      "min": 0
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "cats",
+        "dogs",
+        "birds",
+        "aquarium",
+        "rodents"
+      ],
+      "required": true
+    },
+    "breed": {
+      "type": "string",
+      "maxLength": 500,
+      "required": true,
+      "minLength": 3
+    },
+    "price": {
+      "type": "decimal",
+      "min": 0,
+      "required": true
+    }
+  }
+}

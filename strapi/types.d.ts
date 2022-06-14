@@ -14,6 +14,31 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  AdFiltersInput: { // input type
+    age?: NexusGenInputs['IntFilterInput'] | null; // IntFilterInput
+    and?: Array<NexusGenInputs['AdFiltersInput'] | null> | null; // [AdFiltersInput]
+    body?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
+    breed?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
+    createdAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
+    id?: NexusGenInputs['IDFilterInput'] | null; // IDFilterInput
+    not?: NexusGenInputs['AdFiltersInput'] | null; // AdFiltersInput
+    or?: Array<NexusGenInputs['AdFiltersInput'] | null> | null; // [AdFiltersInput]
+    price?: NexusGenInputs['FloatFilterInput'] | null; // FloatFilterInput
+    publishedAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
+    title?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
+    type?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
+    updatedAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
+  }
+  AdInput: { // input type
+    age?: number | null; // Int
+    body?: string | null; // String
+    breed?: string | null; // String
+    images?: Array<string | null> | null; // [ID]
+    price?: number | null; // Float
+    publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    title?: string | null; // String
+    type?: NexusGenEnums['ENUM_AD_TYPE'] | null; // ENUM_AD_TYPE
+  }
   BooleanFilterInput: { // input type
     and?: Array<boolean | null> | null; // [Boolean]
     between?: Array<boolean | null> | null; // [Boolean]
@@ -384,6 +409,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  ENUM_AD_TYPE: "aquarium" | "birds" | "cats" | "dogs" | "rodents"
   PublicationState: "live" | "preview"
 }
 
@@ -404,6 +430,21 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Ad: { // root type
+    age: number; // Int!
+    body: string; // String!
+    breed: string; // String!
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    price: number; // Float!
+    publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    title: string; // String!
+    type: NexusGenEnums['ENUM_AD_TYPE']; // ENUM_AD_TYPE!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  AdEntity: {};
+  AdEntityResponse: {};
+  AdEntityResponseCollection: {};
+  AdRelationResponseCollection: {};
   Error: { // root type
     message?: string | null; // String
   }
@@ -526,7 +567,7 @@ export interface NexusGenInterfaces {
 }
 
 export interface NexusGenUnions {
-  GenericMorph: NexusGenRootTypes['Hero'] | NexusGenRootTypes['I18NLocale'] | NexusGenRootTypes['UploadFile'] | NexusGenRootTypes['UsersPermissionsPermission'] | NexusGenRootTypes['UsersPermissionsRole'] | NexusGenRootTypes['UsersPermissionsUser'];
+  GenericMorph: NexusGenRootTypes['Ad'] | NexusGenRootTypes['Hero'] | NexusGenRootTypes['I18NLocale'] | NexusGenRootTypes['UploadFile'] | NexusGenRootTypes['UsersPermissionsPermission'] | NexusGenRootTypes['UsersPermissionsRole'] | NexusGenRootTypes['UsersPermissionsUser'];
 }
 
 export type NexusGenRootTypes = NexusGenObjects & NexusGenUnions
@@ -534,6 +575,32 @@ export type NexusGenRootTypes = NexusGenObjects & NexusGenUnions
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
+  Ad: { // field return type
+    age: number; // Int!
+    body: string; // String!
+    breed: string; // String!
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    images: NexusGenRootTypes['UploadFileRelationResponseCollection']; // UploadFileRelationResponseCollection!
+    price: number; // Float!
+    publishedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    title: string; // String!
+    type: NexusGenEnums['ENUM_AD_TYPE']; // ENUM_AD_TYPE!
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  AdEntity: { // field return type
+    attributes: NexusGenRootTypes['Ad'] | null; // Ad
+    id: string | null; // ID
+  }
+  AdEntityResponse: { // field return type
+    data: NexusGenRootTypes['AdEntity'] | null; // AdEntity
+  }
+  AdEntityResponseCollection: { // field return type
+    data: NexusGenRootTypes['AdEntity'][]; // [AdEntity!]!
+    meta: NexusGenRootTypes['ResponseCollectionMeta']; // ResponseCollectionMeta!
+  }
+  AdRelationResponseCollection: { // field return type
+    data: NexusGenRootTypes['AdEntity'][]; // [AdEntity!]!
+  }
   Error: { // field return type
     code: string; // String!
     message: string | null; // String
@@ -579,9 +646,11 @@ export interface NexusGenFieldTypes {
     data: NexusGenRootTypes['I18NLocaleEntity'][]; // [I18NLocaleEntity!]!
   }
   Mutation: { // field return type
+    createAd: NexusGenRootTypes['AdEntityResponse'] | null; // AdEntityResponse
     createUploadFile: NexusGenRootTypes['UploadFileEntityResponse'] | null; // UploadFileEntityResponse
     createUsersPermissionsRole: NexusGenRootTypes['UsersPermissionsCreateRolePayload'] | null; // UsersPermissionsCreateRolePayload
     createUsersPermissionsUser: NexusGenRootTypes['UsersPermissionsUserEntityResponse']; // UsersPermissionsUserEntityResponse!
+    deleteAd: NexusGenRootTypes['AdEntityResponse'] | null; // AdEntityResponse
     deleteHero: NexusGenRootTypes['HeroEntityResponse'] | null; // HeroEntityResponse
     deleteUploadFile: NexusGenRootTypes['UploadFileEntityResponse'] | null; // UploadFileEntityResponse
     deleteUsersPermissionsRole: NexusGenRootTypes['UsersPermissionsDeleteRolePayload'] | null; // UsersPermissionsDeleteRolePayload
@@ -593,6 +662,7 @@ export interface NexusGenFieldTypes {
     register: NexusGenRootTypes['UsersPermissionsLoginPayload']; // UsersPermissionsLoginPayload!
     removeFile: NexusGenRootTypes['UploadFileEntityResponse'] | null; // UploadFileEntityResponse
     resetPassword: NexusGenRootTypes['UsersPermissionsLoginPayload'] | null; // UsersPermissionsLoginPayload
+    updateAd: NexusGenRootTypes['AdEntityResponse'] | null; // AdEntityResponse
     updateFileInfo: NexusGenRootTypes['UploadFileEntityResponse']; // UploadFileEntityResponse!
     updateHero: NexusGenRootTypes['HeroEntityResponse'] | null; // HeroEntityResponse
     updateUploadFile: NexusGenRootTypes['UploadFileEntityResponse'] | null; // UploadFileEntityResponse
@@ -607,6 +677,8 @@ export interface NexusGenFieldTypes {
     total: number; // Int!
   }
   Query: { // field return type
+    ad: NexusGenRootTypes['AdEntityResponse'] | null; // AdEntityResponse
+    ads: NexusGenRootTypes['AdEntityResponseCollection'] | null; // AdEntityResponseCollection
     hero: NexusGenRootTypes['HeroEntityResponse'] | null; // HeroEntityResponse
     i18NLocale: NexusGenRootTypes['I18NLocaleEntityResponse'] | null; // I18NLocaleEntityResponse
     i18NLocales: NexusGenRootTypes['I18NLocaleEntityResponseCollection'] | null; // I18NLocaleEntityResponseCollection
@@ -754,6 +826,32 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Ad: { // field return type name
+    age: 'Int'
+    body: 'String'
+    breed: 'String'
+    createdAt: 'DateTime'
+    images: 'UploadFileRelationResponseCollection'
+    price: 'Float'
+    publishedAt: 'DateTime'
+    title: 'String'
+    type: 'ENUM_AD_TYPE'
+    updatedAt: 'DateTime'
+  }
+  AdEntity: { // field return type name
+    attributes: 'Ad'
+    id: 'ID'
+  }
+  AdEntityResponse: { // field return type name
+    data: 'AdEntity'
+  }
+  AdEntityResponseCollection: { // field return type name
+    data: 'AdEntity'
+    meta: 'ResponseCollectionMeta'
+  }
+  AdRelationResponseCollection: { // field return type name
+    data: 'AdEntity'
+  }
   Error: { // field return type name
     code: 'String'
     message: 'String'
@@ -799,9 +897,11 @@ export interface NexusGenFieldTypeNames {
     data: 'I18NLocaleEntity'
   }
   Mutation: { // field return type name
+    createAd: 'AdEntityResponse'
     createUploadFile: 'UploadFileEntityResponse'
     createUsersPermissionsRole: 'UsersPermissionsCreateRolePayload'
     createUsersPermissionsUser: 'UsersPermissionsUserEntityResponse'
+    deleteAd: 'AdEntityResponse'
     deleteHero: 'HeroEntityResponse'
     deleteUploadFile: 'UploadFileEntityResponse'
     deleteUsersPermissionsRole: 'UsersPermissionsDeleteRolePayload'
@@ -813,6 +913,7 @@ export interface NexusGenFieldTypeNames {
     register: 'UsersPermissionsLoginPayload'
     removeFile: 'UploadFileEntityResponse'
     resetPassword: 'UsersPermissionsLoginPayload'
+    updateAd: 'AdEntityResponse'
     updateFileInfo: 'UploadFileEntityResponse'
     updateHero: 'HeroEntityResponse'
     updateUploadFile: 'UploadFileEntityResponse'
@@ -827,6 +928,8 @@ export interface NexusGenFieldTypeNames {
     total: 'Int'
   }
   Query: { // field return type name
+    ad: 'AdEntityResponse'
+    ads: 'AdEntityResponseCollection'
     hero: 'HeroEntityResponse'
     i18NLocale: 'I18NLocaleEntityResponse'
     i18NLocales: 'I18NLocaleEntityResponseCollection'
@@ -974,7 +1077,17 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Ad: {
+    images: { // args
+      filters?: NexusGenInputs['UploadFileFiltersInput'] | null; // UploadFileFiltersInput
+      pagination: NexusGenInputs['PaginationArg'] | null; // PaginationArg
+      sort: Array<string | null> | null; // [String]
+    }
+  }
   Mutation: {
+    createAd: { // args
+      data: NexusGenInputs['AdInput']; // AdInput!
+    }
     createUploadFile: { // args
       data: NexusGenInputs['UploadFileInput']; // UploadFileInput!
     }
@@ -983,6 +1096,9 @@ export interface NexusGenArgTypes {
     }
     createUsersPermissionsUser: { // args
       data: NexusGenInputs['UsersPermissionsUserInput']; // UsersPermissionsUserInput!
+    }
+    deleteAd: { // args
+      id: string; // ID!
     }
     deleteUploadFile: { // args
       id: string; // ID!
@@ -1019,6 +1135,10 @@ export interface NexusGenArgTypes {
       password: string; // String!
       passwordConfirmation: string; // String!
     }
+    updateAd: { // args
+      data: NexusGenInputs['AdInput']; // AdInput!
+      id: string; // ID!
+    }
     updateFileInfo: { // args
       id: string; // ID!
       info?: NexusGenInputs['FileInfoInput'] | null; // FileInfoInput
@@ -1047,6 +1167,15 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    ad: { // args
+      id?: string | null; // ID
+    }
+    ads: { // args
+      filters?: NexusGenInputs['AdFiltersInput'] | null; // AdFiltersInput
+      pagination: NexusGenInputs['PaginationArg'] | null; // PaginationArg
+      publicationState: NexusGenEnums['PublicationState'] | null; // PublicationState
+      sort: Array<string | null> | null; // [String]
+    }
     i18NLocale: { // args
       id?: string | null; // ID
     }
@@ -1095,7 +1224,7 @@ export interface NexusGenArgTypes {
 }
 
 export interface NexusGenAbstractTypeMembers {
-  GenericMorph: "Hero" | "I18NLocale" | "UploadFile" | "UsersPermissionsPermission" | "UsersPermissionsRole" | "UsersPermissionsUser"
+  GenericMorph: "Ad" | "Hero" | "I18NLocale" | "UploadFile" | "UsersPermissionsPermission" | "UsersPermissionsRole" | "UsersPermissionsUser"
 }
 
 export interface NexusGenTypeInterfaces {

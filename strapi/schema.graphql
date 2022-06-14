@@ -2,6 +2,64 @@
 ### Do not make changes to this file directly
 
 
+type Ad {
+  age: Int!
+  body: String!
+  breed: String!
+  createdAt: DateTime
+  images(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection!
+  price: Float!
+  publishedAt: DateTime
+  title: String!
+  type: ENUM_AD_TYPE!
+  updatedAt: DateTime
+}
+
+type AdEntity {
+  attributes: Ad
+  id: ID
+}
+
+type AdEntityResponse {
+  data: AdEntity
+}
+
+type AdEntityResponseCollection {
+  data: [AdEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input AdFiltersInput {
+  age: IntFilterInput
+  and: [AdFiltersInput]
+  body: StringFilterInput
+  breed: StringFilterInput
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: AdFiltersInput
+  or: [AdFiltersInput]
+  price: FloatFilterInput
+  publishedAt: DateTimeFilterInput
+  title: StringFilterInput
+  type: StringFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input AdInput {
+  age: Int
+  body: String
+  breed: String
+  images: [ID]
+  price: Float
+  publishedAt: DateTime
+  title: String
+  type: ENUM_AD_TYPE
+}
+
+type AdRelationResponseCollection {
+  data: [AdEntity!]!
+}
+
 input BooleanFilterInput {
   and: [Boolean]
   between: [Boolean]
@@ -81,6 +139,14 @@ input DateTimeFilterInput {
   startsWith: DateTime
 }
 
+enum ENUM_AD_TYPE {
+  aquarium
+  birds
+  cats
+  dogs
+  rodents
+}
+
 type Error {
   code: String!
   message: String
@@ -115,7 +181,7 @@ input FloatFilterInput {
   startsWith: Float
 }
 
-union GenericMorph = Hero | I18NLocale | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph = Ad | Hero | I18NLocale | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
 
 type Hero {
   body: String!
@@ -306,6 +372,7 @@ input LongFilterInput {
 }
 
 type Mutation {
+  createAd(data: AdInput!): AdEntityResponse
   createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
 
   """Create a new role"""
@@ -313,6 +380,7 @@ type Mutation {
 
   """Create a new user"""
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
+  deleteAd(id: ID!): AdEntityResponse
   deleteHero: HeroEntityResponse
   deleteUploadFile(id: ID!): UploadFileEntityResponse
 
@@ -338,6 +406,7 @@ type Mutation {
   Reset user password. Confirm with a code (resetToken from forgotPassword)
   """
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+  updateAd(data: AdInput!, id: ID!): AdEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updateHero(data: HeroInput!): HeroEntityResponse
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
@@ -370,6 +439,8 @@ enum PublicationState {
 }
 
 type Query {
+  ad(id: ID): AdEntityResponse
+  ads(filters: AdFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): AdEntityResponseCollection
   hero: HeroEntityResponse
   i18NLocale(id: ID): I18NLocaleEntityResponse
   i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
