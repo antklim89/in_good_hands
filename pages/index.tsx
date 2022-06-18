@@ -2,12 +2,14 @@ import type { GetStaticProps, NextPage } from 'next';
 
 import Seo from '~/components/Seo';
 import Hero from '~/layouts/Hero';
-import { IHero } from '~/types';
+import { IAd, IHero } from '~/types';
 import { requestHero } from '~/utils';
+import { requestAds } from '~/utils/requestAds';
 
 
 interface Props {
     hero: IHero
+    ads: IAd[]
 }
 
 const Home: NextPage<Props> = ({ hero }) => {
@@ -24,7 +26,7 @@ export default Home;
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
     const hero = await requestHero();
+    const ads = await requestAds();
 
-
-    return { props: { hero } };
+    return { props: { hero, ads } };
 };

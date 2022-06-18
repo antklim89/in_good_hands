@@ -1,0 +1,27 @@
+
+
+query Ads {
+    ads {
+      data {
+          id
+          attributes {
+            birthday
+            type
+            body
+            breed
+            email
+            images {
+              data {
+                  id
+                  attributes {
+                    url
+                  }
+              }
+            }
+            price
+            tel
+            createdAt
+          }
+      }
+    }
+}
