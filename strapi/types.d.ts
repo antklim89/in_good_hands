@@ -15,29 +15,33 @@ declare global {
 
 export interface NexusGenInputs {
   AdFiltersInput: { // input type
-    age?: NexusGenInputs['IntFilterInput'] | null; // IntFilterInput
     and?: Array<NexusGenInputs['AdFiltersInput'] | null> | null; // [AdFiltersInput]
+    birthday?: NexusGenInputs['DateFilterInput'] | null; // DateFilterInput
     body?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     breed?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     createdAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
+    email?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     id?: NexusGenInputs['IDFilterInput'] | null; // IDFilterInput
     not?: NexusGenInputs['AdFiltersInput'] | null; // AdFiltersInput
     or?: Array<NexusGenInputs['AdFiltersInput'] | null> | null; // [AdFiltersInput]
     price?: NexusGenInputs['FloatFilterInput'] | null; // FloatFilterInput
     publishedAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
-    title?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
+    tel?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     type?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     updatedAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
+    user?: NexusGenInputs['UsersPermissionsUserFiltersInput'] | null; // UsersPermissionsUserFiltersInput
   }
   AdInput: { // input type
-    age?: number | null; // Int
+    birthday?: NexusGenScalars['Date'] | null; // Date
     body?: string | null; // String
     breed?: string | null; // String
+    email?: string | null; // String
     images?: Array<string | null> | null; // [ID]
     price?: number | null; // Float
     publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    title?: string | null; // String
+    tel?: string | null; // String
     type?: NexusGenEnums['ENUM_AD_TYPE'] | null; // ENUM_AD_TYPE
+    user?: string | null; // ID
   }
   BooleanFilterInput: { // input type
     and?: Array<boolean | null> | null; // [Boolean]
@@ -379,6 +383,7 @@ export interface NexusGenInputs {
     users?: Array<string | null> | null; // [ID]
   }
   UsersPermissionsUserFiltersInput: { // input type
+    ads?: NexusGenInputs['AdFiltersInput'] | null; // AdFiltersInput
     and?: Array<NexusGenInputs['UsersPermissionsUserFiltersInput'] | null> | null; // [UsersPermissionsUserFiltersInput]
     blocked?: NexusGenInputs['BooleanFilterInput'] | null; // BooleanFilterInput
     confirmationToken?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
@@ -396,6 +401,7 @@ export interface NexusGenInputs {
     username?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
   }
   UsersPermissionsUserInput: { // input type
+    ads?: Array<string | null> | null; // [ID]
     blocked?: boolean | null; // Boolean
     confirmationToken?: string | null; // String
     confirmed?: boolean | null; // Boolean
@@ -409,7 +415,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  ENUM_AD_TYPE: "aquarium" | "birds" | "cats" | "dogs" | "rodents"
+  ENUM_AD_TYPE: "aquarium" | "bird" | "cat" | "dog" | "rodent"
   PublicationState: "live" | "preview"
 }
 
@@ -431,13 +437,14 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Ad: { // root type
-    age: number; // Int!
+    birthday: NexusGenScalars['Date']; // Date!
     body: string; // String!
-    breed: string; // String!
+    breed?: string | null; // String
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    email: string; // String!
     price: number; // Float!
     publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    title: string; // String!
+    tel: string; // String!
     type: NexusGenEnums['ENUM_AD_TYPE']; // ENUM_AD_TYPE!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
@@ -576,16 +583,18 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnu
 
 export interface NexusGenFieldTypes {
   Ad: { // field return type
-    age: number; // Int!
+    birthday: NexusGenScalars['Date']; // Date!
     body: string; // String!
-    breed: string; // String!
+    breed: string | null; // String
     createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    email: string; // String!
     images: NexusGenRootTypes['UploadFileRelationResponseCollection']; // UploadFileRelationResponseCollection!
     price: number; // Float!
     publishedAt: NexusGenScalars['DateTime'] | null; // DateTime
-    title: string; // String!
+    tel: string; // String!
     type: NexusGenEnums['ENUM_AD_TYPE']; // ENUM_AD_TYPE!
     updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    user: NexusGenRootTypes['UsersPermissionsUserEntityResponse'] | null; // UsersPermissionsUserEntityResponse
   }
   AdEntity: { // field return type
     attributes: NexusGenRootTypes['Ad'] | null; // Ad
@@ -800,6 +809,7 @@ export interface NexusGenFieldTypes {
     ok: boolean; // Boolean!
   }
   UsersPermissionsUser: { // field return type
+    ads: NexusGenRootTypes['AdRelationResponseCollection'] | null; // AdRelationResponseCollection
     blocked: boolean | null; // Boolean
     confirmed: boolean | null; // Boolean
     createdAt: NexusGenScalars['DateTime'] | null; // DateTime
@@ -827,16 +837,18 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenFieldTypeNames {
   Ad: { // field return type name
-    age: 'Int'
+    birthday: 'Date'
     body: 'String'
     breed: 'String'
     createdAt: 'DateTime'
+    email: 'String'
     images: 'UploadFileRelationResponseCollection'
     price: 'Float'
     publishedAt: 'DateTime'
-    title: 'String'
+    tel: 'String'
     type: 'ENUM_AD_TYPE'
     updatedAt: 'DateTime'
+    user: 'UsersPermissionsUserEntityResponse'
   }
   AdEntity: { // field return type name
     attributes: 'Ad'
@@ -1051,6 +1063,7 @@ export interface NexusGenFieldTypeNames {
     ok: 'Boolean'
   }
   UsersPermissionsUser: { // field return type name
+    ads: 'AdRelationResponseCollection'
     blocked: 'Boolean'
     confirmed: 'Boolean'
     createdAt: 'DateTime'
@@ -1218,6 +1231,14 @@ export interface NexusGenArgTypes {
     users: { // args
       filters?: NexusGenInputs['UsersPermissionsUserFiltersInput'] | null; // UsersPermissionsUserFiltersInput
       pagination: NexusGenInputs['PaginationArg'] | null; // PaginationArg
+      sort: Array<string | null> | null; // [String]
+    }
+  }
+  UsersPermissionsUser: {
+    ads: { // args
+      filters?: NexusGenInputs['AdFiltersInput'] | null; // AdFiltersInput
+      pagination: NexusGenInputs['PaginationArg'] | null; // PaginationArg
+      publicationState: NexusGenEnums['PublicationState'] | null; // PublicationState
       sort: Array<string | null> | null; // [String]
     }
   }

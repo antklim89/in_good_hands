@@ -3,16 +3,18 @@
 
 
 type Ad {
-  age: Int!
+  birthday: Date!
   body: String!
-  breed: String!
+  breed: String
   createdAt: DateTime
+  email: String!
   images(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection!
   price: Float!
   publishedAt: DateTime
-  title: String!
+  tel: String!
   type: ENUM_AD_TYPE!
   updatedAt: DateTime
+  user: UsersPermissionsUserEntityResponse
 }
 
 type AdEntity {
@@ -30,30 +32,34 @@ type AdEntityResponseCollection {
 }
 
 input AdFiltersInput {
-  age: IntFilterInput
   and: [AdFiltersInput]
+  birthday: DateFilterInput
   body: StringFilterInput
   breed: StringFilterInput
   createdAt: DateTimeFilterInput
+  email: StringFilterInput
   id: IDFilterInput
   not: AdFiltersInput
   or: [AdFiltersInput]
   price: FloatFilterInput
   publishedAt: DateTimeFilterInput
-  title: StringFilterInput
+  tel: StringFilterInput
   type: StringFilterInput
   updatedAt: DateTimeFilterInput
+  user: UsersPermissionsUserFiltersInput
 }
 
 input AdInput {
-  age: Int
+  birthday: Date
   body: String
   breed: String
+  email: String
   images: [ID]
   price: Float
   publishedAt: DateTime
-  title: String
+  tel: String
   type: ENUM_AD_TYPE
+  user: ID
 }
 
 type AdRelationResponseCollection {
@@ -141,10 +147,10 @@ input DateTimeFilterInput {
 
 enum ENUM_AD_TYPE {
   aquarium
-  birds
-  cats
-  dogs
-  rodents
+  bird
+  cat
+  dog
+  rodent
 }
 
 type Error {
@@ -728,6 +734,7 @@ type UsersPermissionsUpdateRolePayload {
 }
 
 type UsersPermissionsUser {
+  ads(filters: AdFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): AdRelationResponseCollection
   blocked: Boolean
   confirmed: Boolean
   createdAt: DateTime
@@ -753,6 +760,7 @@ type UsersPermissionsUserEntityResponseCollection {
 }
 
 input UsersPermissionsUserFiltersInput {
+  ads: AdFiltersInput
   and: [UsersPermissionsUserFiltersInput]
   blocked: BooleanFilterInput
   confirmationToken: StringFilterInput
@@ -771,6 +779,7 @@ input UsersPermissionsUserFiltersInput {
 }
 
 input UsersPermissionsUserInput {
+  ads: [ID]
   blocked: Boolean
   confirmationToken: String
   confirmed: Boolean
