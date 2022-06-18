@@ -8,6 +8,7 @@
     "dev:next": "next dev -H 0.0.0.0",
     "dev:strapi": "yarn --cwd ./strapi dev",
     "dev:typegen": "graphql-codegen --config codegen.yml -w",
+    "dev:typecheck": "tsc --noEmit -w --preserveWatchOutput",
     "build": "next build",
     "start": "next start"
   },
@@ -27,6 +28,7 @@
     "formik": "^2.2.9",
     "framer-motion": "^6",
     "graphql": "^16.5.0",
+    "graphql-tag": "^2.12.6",
     "lodash": "^4.17.21",
     "next": "12.1.6",
     "react": "18.1.0",

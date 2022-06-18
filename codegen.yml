@@ -1,6 +1,6 @@
 overwrite: true
 schema: "./strapi/schema.graphql"
-documents: "queries/**/*.ts"
+documents: "queries/**/*.gql"
 config:
   typesPrefix: I
   avoidOptionals: true
