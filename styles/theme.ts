@@ -47,5 +47,6 @@ export default extendTheme({
             baseStyle: { cursor: 'pointer' },
             defaultProps: { colorScheme: 'primary' },
         },
+        Container: { baseStyle: { maxWidth: 'container.xl' } },
     },
 });
