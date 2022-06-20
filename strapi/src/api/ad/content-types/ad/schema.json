@@ -67,6 +67,12 @@
     "birthday": {
       "type": "date",
       "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": false,
+      "minLength": 3,
+      "maxLength": 250
     }
   }
 }

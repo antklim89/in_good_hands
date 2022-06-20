@@ -22,6 +22,7 @@ export interface NexusGenInputs {
     createdAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
     email?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     id?: NexusGenInputs['IDFilterInput'] | null; // IDFilterInput
+    name?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     not?: NexusGenInputs['AdFiltersInput'] | null; // AdFiltersInput
     or?: Array<NexusGenInputs['AdFiltersInput'] | null> | null; // [AdFiltersInput]
     price?: NexusGenInputs['FloatFilterInput'] | null; // FloatFilterInput
@@ -37,6 +38,7 @@ export interface NexusGenInputs {
     breed?: string | null; // String
     email?: string | null; // String
     images?: Array<string | null> | null; // [ID]
+    name?: string | null; // String
     price?: number | null; // Float
     publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     tel?: string | null; // String
@@ -442,6 +444,7 @@ export interface NexusGenObjects {
     breed?: string | null; // String
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
+    name?: string | null; // String
     price: number; // Float!
     publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     tel: string; // String!
@@ -589,6 +592,7 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     images: NexusGenRootTypes['UploadFileRelationResponseCollection']; // UploadFileRelationResponseCollection!
+    name: string | null; // String
     price: number; // Float!
     publishedAt: NexusGenScalars['DateTime'] | null; // DateTime
     tel: string; // String!
@@ -843,6 +847,7 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'DateTime'
     email: 'String'
     images: 'UploadFileRelationResponseCollection'
+    name: 'String'
     price: 'Float'
     publishedAt: 'DateTime'
     tel: 'String'

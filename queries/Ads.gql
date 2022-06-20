@@ -5,6 +5,7 @@ query Ads {
       data {
           id
           attributes {
+            name
             birthday
             type
             body
