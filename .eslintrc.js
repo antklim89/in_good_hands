@@ -106,6 +106,7 @@ module.exports = {
         /**
         * JavaScript
         */
+        'newline-per-chained-call': [1, { ignoreChainWithDepth: 3 }],
         'new-cap': 0,
         'no-underscore-dangle': [2, { 'allow': ['_q'] }],
         'capitalized-comments': 0,
