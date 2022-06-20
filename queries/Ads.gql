@@ -3,26 +3,22 @@
 query Ads {
     ads {
       data {
-          id
-          attributes {
-            name
-            birthday
-            type
-            body
-            breed
-            email
-            images {
-              data {
-                  id
-                  attributes {
-                    url
-                  }
-              }
+        id
+        attributes {
+          birthday
+          type
+          breed
+          images {
+            data {
+                id
+                attributes {
+                  url
+                }
             }
-            price
-            tel
-            createdAt
           }
+          price
+          createdAt
+        }
       }
     }
 }
