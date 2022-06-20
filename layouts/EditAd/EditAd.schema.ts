@@ -24,5 +24,5 @@ export const adEditSchema = zod.object({
         .email()
         .min(schema.attributes.email.minLength)
         .max(schema.attributes.email.maxLength),
-    birthday: zod.date(),
+    birthday: zod.string(),
 });

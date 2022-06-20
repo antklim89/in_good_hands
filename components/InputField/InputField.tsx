@@ -40,7 +40,7 @@ const InputField: InputFieldBaseFC = ({ formik, label, name, as, ...props }) => 
                 />
             );
         }
-    }, [as]);
+    }, [as, formik.values[name], formik.handleChange, name]);
 
     return (
         <FormControl isRequired isDisabled={formik.isSubmitting} mb={2}>

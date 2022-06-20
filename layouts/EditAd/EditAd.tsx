@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { ZodError } from 'zod';
 
 import InputField from '~/components/InputField';
+import schema from '~/strapi/src/api/ad/content-types/ad/schema.json';
 
 import { adEditSchema } from './EditAd.schema';
 import { CreateAdProps } from './EditAd.types';
@@ -55,15 +56,22 @@ const EditAd: FC<CreateAdProps> = ({ type = 'create' }) => {
                 </Heading>
                 <form onSubmit={formik.handleSubmit}>
                     <InputField
+                        as="textarea"
                         formik={formik}
                         label="Body"
                         name="body"
+                        resize="none"
                     />
                     <InputField
+                        as="select"
                         formik={formik}
                         label="Pet Type"
                         name="type"
-                    />
+                    >
+                        {schema.attributes.type.enum.map((itemType) => (
+                            <option key={itemType} value={itemType}>{itemType}</option>
+                        ))}
+                    </InputField>
                     <InputField
                         formik={formik}
                         label="Breed"
