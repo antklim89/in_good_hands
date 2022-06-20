@@ -1,20 +1,51 @@
-import { FormControl, FormLabel, Text, Input, Flex } from '@chakra-ui/react';
+import {
+    FormControl, FormLabel, Text, Flex, Input, InputProps, Select, SelectProps, Textarea, TextareaProps,
+} from '@chakra-ui/react';
+import { useMemo } from 'react';
 
-import { InputFieldFC } from './InputField.types';
+import { InputFieldBaseFC } from './InputField.types';
 
 
-const InputField: InputFieldFC = ({ formik, label, name, ...props }) => {
+const InputField: InputFieldBaseFC = ({ formik, label, name, as, ...props }) => {
     const error = formik.errors[name];
+
+    const component = useMemo(() => {
+        switch (as) {
+        case 'select':
+            return (
+                <Select
+                    {...props as SelectProps}
+                    name={String(name)}
+                    value={formik.values[name]}
+                    onChange={formik.handleChange}
+                />
+            );
+        case 'textarea':
+            return (
+                <Textarea
+                    {...props as TextareaProps}
+                    name={String(name)}
+                    value={formik.values[name]}
+                    onChange={formik.handleChange}
+                />
+            );
+        case 'input':
+        default:
+            return (
+                <Input
+                    {...props as InputProps}
+                    name={String(name)}
+                    value={formik.values[name]}
+                    onChange={formik.handleChange}
+                />
+            );
+        }
+    }, [as]);
 
     return (
         <FormControl isRequired isDisabled={formik.isSubmitting} mb={2}>
             {(label) ? <FormLabel>{label}</FormLabel> : null}
-            <Input
-                {...props}
-                name={String(name)}
-                value={formik.values[name]}
-                onChange={formik.handleChange}
-            />
+            {component}
             <Flex justifyContent="flex-end">
                 <Text
                     as="span"
