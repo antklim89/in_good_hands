@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, Text, Input } from '@chakra-ui/react';
+import { FormControl, FormLabel, Text, Input, Flex } from '@chakra-ui/react';
 
 import { InputFieldFC } from './InputField.types';
 
@@ -7,7 +7,7 @@ const InputField: InputFieldFC = ({ formik, label, name, ...props }) => {
     const error = formik.errors[name];
 
     return (
-        <FormControl isRequired isDisabled={formik.isSubmitting}>
+        <FormControl isRequired isDisabled={formik.isSubmitting} mb={2}>
             {(label) ? <FormLabel>{label}</FormLabel> : null}
             <Input
                 {...props}
@@ -15,9 +15,15 @@ const InputField: InputFieldFC = ({ formik, label, name, ...props }) => {
                 value={formik.values[name]}
                 onChange={formik.handleChange}
             />
-            <Text color="gray.700" size="sm" textAlign="end">
-                &nbsp;{Array.isArray(error) ? error[0] : error}
-            </Text>
+            <Flex justifyContent="flex-end">
+                <Text
+                    as="span"
+                    color="gray.500"
+                    fontSize="xs"
+                >
+                    &nbsp;{Array.isArray(error) ? error[0] : error}
+                </Text>
+            </Flex>
         </FormControl>
     );
 };
