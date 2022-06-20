@@ -46,7 +46,8 @@
     "price": {
       "type": "decimal",
       "min": 0,
-      "required": true
+      "required": true,
+      "max": 20000
     },
     "tel": {
       "type": "string",
@@ -56,7 +57,9 @@
     },
     "email": {
       "type": "email",
-      "required": true
+      "required": true,
+      "maxLength": 100,
+      "minLength": 5
     },
     "user": {
       "type": "relation",
