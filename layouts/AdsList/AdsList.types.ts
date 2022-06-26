@@ -1,6 +1,8 @@
-import { IAdPreview } from '~/types';
+import { IAdsQuery } from '~/generated/graphql';
 
 
 export interface AdsListProps {
-     ads: IAdPreview[]
+     ads: IAdsQuery['ads']['data']
 }
+
+export type AdsListItemProps = IAdsQuery['ads']['data'][0]

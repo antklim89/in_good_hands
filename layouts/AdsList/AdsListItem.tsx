@@ -6,13 +6,12 @@ import { FC } from 'react';
 
 import PetAge from '~/components/PetAge';
 import Price from '~/components/Price';
-import { IAdPreview } from '~/types';
 import { getStrapiUrl } from '~/utils';
 
+import { AdsListItemProps } from './AdsList.types';
 
-const AdsListItem: FC<IAdPreview> = ({
-    type, breed, images, id, birthday, price,
-}) => {
+
+const AdsListItem: FC<AdsListItemProps> = ({ id, attributes: { type, breed, images, birthday, price } }) => {
     return (
         <Flex
             as="section"
@@ -30,12 +29,12 @@ const AdsListItem: FC<IAdPreview> = ({
                     autoplayInterval={5000}
                     pauseOnHover={false}
                 >
-                    {images.map((image) => (
+                    {images.data.map((image) => (
                         <Image
                             alt={`${type} ${breed}`}
                             height={270}
-                            key={image}
-                            src={getStrapiUrl(image)}
+                            key={image.id}
+                            src={getStrapiUrl(image.attributes.url)}
                             width={400}
                         />
                     ))}

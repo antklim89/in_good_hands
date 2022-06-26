@@ -1,16 +1,16 @@
 import type { GetStaticProps, NextPage } from 'next';
 
 import Seo from '~/components/Seo';
+import { IAdsQuery, IHeroQuery } from '~/generated/graphql';
 import AdsList from '~/layouts/AdsList';
 import Hero from '~/layouts/Hero';
-import { IAdPreview, IHero } from '~/types';
 import { requestHero } from '~/utils';
 import { requestAds } from '~/utils/requestAds';
 
 
 interface Props {
-    hero: IHero
-    ads: IAdPreview[]
+    hero: IHeroQuery['hero']['data']
+    ads: IAdsQuery['ads']['data']
 }
 
 const Home: NextPage<Props> = ({ hero, ads }) => {

@@ -11,7 +11,6 @@ import type {
     IAdUpdateDataQueryVariables,
 } from '~/generated/graphql';
 import query from '~/queries/ad.gql';
-import { IAdEdit, IAdPreview } from '~/types';
 
 import requestBase from './requestBase';
 
@@ -22,41 +21,28 @@ type IAdUserMutationOmitVariables = {
 }
 
 
-export async function requestAds(): Promise<IAdPreview[]> {
-    const { ads } = await requestBase<IAdsQuery>({ query: query.Ads });
+export async function requestAds(): Promise<IAdsQuery['ads']['data']> {
+    const { ads: { data } } = await requestBase<IAdsQuery>({ query: query.Ads });
 
-    return ads.data.map(({ id, attributes: { images, ...data } }) => ({
-        id,
-        ...data,
-        images: images.data.map((image) => (image.attributes.url)),
-    }));
+    return data;
 }
 
-export async function requestAd(adId: string): Promise<IAdPreview> {
-    const { ad: { data: { id, attributes: { images, ...data } } } } = await requestBase<IAdQuery, IAdQueryVariables>({
+export async function requestAd(variables: IAdQueryVariables): Promise<IAdQuery['ad']['data']> {
+    const { ad: { data } } = await requestBase<IAdQuery, IAdQueryVariables>({
         query: query.Ad,
-        variables: { id: adId },
+        variables,
     });
 
-    return {
-        id,
-        ...data,
-        images: images.data.map((image) => (image.attributes.url)),
-    };
+    return data;
 }
 
-export async function requestAdUpdateData(adId: string): Promise<IAdEdit> {
-    const data = await requestBase<IAdUpdateDataQuery, IAdUpdateDataQueryVariables>({
+export async function requestAdUpdateData(variables: IAdUpdateDataQueryVariables): Promise<IAdUpdateDataQuery['ad']['data']> {
+    const { ad: { data } } = await requestBase<IAdUpdateDataQuery, IAdUpdateDataQueryVariables>({
         query: query.AdUpdateData,
-        variables: { id: adId },
+        variables,
     });
 
-    const { ad: { data: { id, attributes: { images, ...attributes } } } } = data;
-    return {
-        id,
-        ...attributes,
-        images: images.data.map((image) => (image.attributes.url)),
-    };
+    return data;
 }
 
 export async function requestUpdateAd(variables: IAdUserMutationOmitVariables): Promise<string> {

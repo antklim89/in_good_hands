@@ -1,13 +1,13 @@
-import { Text, Container, Box } from '@chakra-ui/react';
+import { Container, Box } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import { FC } from 'react';
 
 import Markdown from '~/components/Markdown';
-import { IHero } from '~/types';
+import { IHeroQuery } from '~/generated/graphql';
 import { getStrapiUrl } from '~/utils/getStrapiUrl';
 
 
-const Hero: FC<IHero> = ({ body, image }) => {
+const Hero: FC<IHeroQuery['hero']['data']> = ({ attributes: { body, image } }) => {
     return (
         <Box as="section" position="relative">
             <Container
@@ -42,7 +42,7 @@ const Hero: FC<IHero> = ({ body, image }) => {
                         layout="fill"
                         objectFit="cover"
                         objectPosition="center"
-                        src={getStrapiUrl(image)}
+                        src={getStrapiUrl(image.data.attributes.url)}
                     />
                 </Box>
             </Container>
