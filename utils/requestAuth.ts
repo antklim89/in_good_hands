@@ -23,14 +23,14 @@ function getOptions(): Cookie.CookieSerializeOptions {
 export async function login(variables: ILoginMutationVariables): Promise<UserRequestAuth> {
     const data = await requestBase<ILoginMutation>({ query: query.Login, variables });
     document.cookie = Cookie.serialize(USER_STORAGE_NAME, JSON.stringify(data.login.user), getOptions());
-    document.cookie = Cookie.serialize(JWT_STORAGE_NAME, JSON.stringify(data.login.jwt), getOptions());
+    document.cookie = Cookie.serialize(JWT_STORAGE_NAME, data.login.jwt, getOptions());
     return data.login.user;
 }
 
 export async function register(variables: IRegisterMutationVariables): Promise<UserRequestAuth> {
     const data = await requestBase<IRegisterMutation>({ query: query.Register, variables });
     document.cookie = Cookie.serialize(USER_STORAGE_NAME, JSON.stringify(data.register.user), getOptions());
-    document.cookie = Cookie.serialize(JWT_STORAGE_NAME, JSON.stringify(data.register.jwt), getOptions());
+    document.cookie = Cookie.serialize(JWT_STORAGE_NAME, data.register.jwt, getOptions());
     return data.register.user;
 }
 
