@@ -6,11 +6,11 @@ import { FC } from 'react';
 
 import PetAge from '~/components/PetAge';
 import Price from '~/components/Price';
-import { IAd } from '~/types';
+import { IAdPreview } from '~/types';
 import { getStrapiUrl } from '~/utils';
 
 
-const AdsListItem: FC<IAd> = ({
+const AdsListItem: FC<IAdPreview> = ({
     type, breed, images, id, birthday, price,
 }) => {
     return (

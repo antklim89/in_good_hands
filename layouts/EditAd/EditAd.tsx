@@ -10,19 +10,9 @@ import { adEditSchema } from './EditAd.schema';
 import { CreateAdProps } from './EditAd.types';
 
 
-const EditAd: FC<CreateAdProps> = ({ type = 'create' }) => {
-
+const EditAd: FC<CreateAdProps> = ({ type = 'create', initialValues }) => {
     const formik = useFormik({
-        initialValues: {
-            body: '',
-            type: '',
-            breed: '',
-            name: '',
-            price: '0',
-            tel: '',
-            email: '',
-            birthday: new Date().toISOString().split('T')[0],
-        },
+        initialValues,
         async onSubmit(val) {
             // try {
             //         const user = await login(val);
@@ -39,6 +29,7 @@ const EditAd: FC<CreateAdProps> = ({ type = 'create' }) => {
             }
             return {};
         },
+        validateOnMount: true,
     });
 
     return (
@@ -110,7 +101,7 @@ const EditAd: FC<CreateAdProps> = ({ type = 'create' }) => {
                     />
                     <Flex justify="flex-end" mt={16}>
                         <Button
-                            disabled={!formik.isValid}
+                            // disabled={!formik.isValid}
                             isLoading={formik.isSubmitting}
                             type="submit"
                         >

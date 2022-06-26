@@ -1,6 +1,6 @@
-import { IAd } from '~/types';
+import { IAdPreview } from '~/types';
 
 
 export interface AdsListProps {
-     ads: IAd[]
+     ads: IAdPreview[]
 }

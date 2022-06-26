@@ -1,24 +1,41 @@
 
-
-query Ads {
-    ads {
+fragment AdFragment on AdEntity {
+  id
+  attributes {
+    birthday
+    type
+    breed
+    images {
       data {
-        id
-        attributes {
-          birthday
-          type
-          breed
-          images {
-            data {
-                id
-                attributes {
-                  url
-                }
-            }
+          id
+          attributes {
+            url
           }
-          price
-          createdAt
-        }
       }
     }
+    price
+    createdAt
+  }
+}
+
+query Ad($id: ID!) {
+  ad(id: $id) {
+    data {
+      attributes {
+        email
+        body
+        name
+        tel
+      }
+      ...AdFragment
+    }
+  }
+}
+
+query Ads {
+  ads {
+    data {
+      ...AdFragment
+    }
+  }
 }
