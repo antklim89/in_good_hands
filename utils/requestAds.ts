@@ -1,11 +1,25 @@
 import Cookie from 'cookie';
 
 import { STRAPI_URL } from '~/constants';
-import type { IAdsQuery, IAdQuery, IAdQueryVariables } from '~/generated/graphql';
-import query from '~/queries/Ads.gql';
+import type {
+    IAdsQuery,
+    IAdQuery,
+    IAdQueryVariables,
+    IAdUpdateMutation,
+    IAdUpdateMutationVariables,
+    IAdUpdateDataQuery,
+    IAdUpdateDataQueryVariables,
+} from '~/generated/graphql';
+import query from '~/queries/ad.gql';
 import { IAdEdit, IAdPreview } from '~/types';
 
 import requestBase from './requestBase';
+
+
+type IAdUserMutationOmitVariables = {
+    id: IAdUpdateMutationVariables['id'],
+    data: Omit<IAdUpdateMutationVariables['data'], 'user' | 'publishedAt' | 'images'>
+}
 
 
 export async function requestAds(): Promise<IAdPreview[]> {
@@ -18,7 +32,7 @@ export async function requestAds(): Promise<IAdPreview[]> {
     }));
 }
 
-export async function requestAd(adId: string): Promise<IAdEdit> {
+export async function requestAd(adId: string): Promise<IAdPreview> {
     const { ad: { data: { id, attributes: { images, ...data } } } } = await requestBase<IAdQuery, IAdQueryVariables>({
         query: query.Ad,
         variables: { id: adId },
@@ -27,8 +41,31 @@ export async function requestAd(adId: string): Promise<IAdEdit> {
     return {
         id,
         ...data,
-        // images: images.data.map((image) => (image.attributes.url)),
+        images: images.data.map((image) => (image.attributes.url)),
     };
+}
+
+export async function requestAdUpdateData(adId: string): Promise<IAdEdit> {
+    const data = await requestBase<IAdUpdateDataQuery, IAdUpdateDataQueryVariables>({
+        query: query.AdUpdateData,
+        variables: { id: adId },
+    });
+
+    const { ad: { data: { id, attributes: { images, ...attributes } } } } = data;
+    return {
+        id,
+        ...attributes,
+        images: images.data.map((image) => (image.attributes.url)),
+    };
+}
+
+export async function requestUpdateAd(variables: IAdUserMutationOmitVariables): Promise<string> {
+    const { updateAd: { data: { id } } } = await requestBase<IAdUpdateMutation, IAdUserMutationOmitVariables>({
+        query: query.AdUpdate,
+        variables,
+    });
+
+    return id;
 }
 
 

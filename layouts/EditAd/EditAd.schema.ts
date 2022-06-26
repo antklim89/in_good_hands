@@ -1,28 +1,31 @@
 import zod from 'zod';
 
 import schema from '~/strapi/src/api/ad/content-types/ad/schema.json';
+import { IEnumAdType } from '~/types';
 
+
+const { attributes: attr } = schema;
 
 export const adEditSchema = zod.object({
     body: zod.string()
-        .min(schema.attributes.body.minLength)
-        .max(schema.attributes.body.maxLength),
-    type: zod.enum(schema.attributes.type.enum as [string, ...string[]]),
+        .min(attr.body.minLength)
+        .max(attr.body.maxLength),
+    type: zod.enum<IEnumAdType, [IEnumAdType, ...IEnumAdType[]]>(attr.type.enum as [IEnumAdType, ...IEnumAdType[]]),
     breed: zod.string()
-        .min(schema.attributes.breed.minLength)
-        .max(schema.attributes.breed.maxLength),
+        .min(attr.breed.minLength)
+        .max(attr.breed.maxLength),
     name: zod.string()
-        .min(schema.attributes.name.minLength)
-        .max(schema.attributes.name.maxLength),
+        .min(attr.name.minLength)
+        .max(attr.name.maxLength),
     price: zod.number()
-        .min(schema.attributes.price.min)
-        .max(schema.attributes.price.max),
+        .min(attr.price.min)
+        .max(attr.price.max),
     tel: zod.string()
-        .min(schema.attributes.tel.minLength)
-        .max(schema.attributes.tel.maxLength),
+        .min(attr.tel.minLength)
+        .max(attr.tel.maxLength),
     email: zod.string()
         .email()
-        .min(schema.attributes.email.minLength)
-        .max(schema.attributes.email.maxLength),
+        .min(attr.email.minLength)
+        .max(attr.email.maxLength),
     birthday: zod.string(),
 });

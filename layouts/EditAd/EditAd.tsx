@@ -1,25 +1,30 @@
-import { Center, Container, Heading, Flex, Button } from '@chakra-ui/react';
+import {
+    Center, Container, Heading, Flex, Button, useToast,
+} from '@chakra-ui/react';
 import { useFormik } from 'formik';
+import omit from 'lodash/omit';
 import { FC } from 'react';
 import { ZodError } from 'zod';
 
 import InputField from '~/components/InputField';
 import schema from '~/strapi/src/api/ad/content-types/ad/schema.json';
+import { requestUpdateAd } from '~/utils';
 
 import { adEditSchema } from './EditAd.schema';
-import { CreateAdProps } from './EditAd.types';
+import { EditAdProps } from './EditAd.types';
 
 
-const EditAd: FC<CreateAdProps> = ({ type = 'create', initialValues }) => {
+const EditAd: FC<EditAdProps> = ({ type = 'create', initialValues, id }) => {
+    const toast = useToast();
     const formik = useFormik({
         initialValues,
         async onSubmit(val) {
-            // try {
-            //         const user = await login(val);
-            //         toast({ title: 'You have successfully logged in!', status: 'success' });
-            // } catch (error) {
-            //     if (error instanceof Error) toast({ title: error.message, status: 'error' });
-            // }
+            try {
+                await requestUpdateAd({ id, data: omit(val, 'id', 'createdAt') });
+                toast({ title: 'Ad updated successfully!', status: 'success' });
+            } catch (error) {
+                if (error instanceof Error) toast({ title: error.message, status: 'error' });
+            }
         },
         async validate(val) {
             try {
@@ -101,11 +106,11 @@ const EditAd: FC<CreateAdProps> = ({ type = 'create', initialValues }) => {
                     />
                     <Flex justify="flex-end" mt={16}>
                         <Button
-                            // disabled={!formik.isValid}
+                            disabled={!formik.isValid}
                             isLoading={formik.isSubmitting}
                             type="submit"
                         >
-                            Confirm
+                            Save
                         </Button>
                     </Flex>
                 </form>

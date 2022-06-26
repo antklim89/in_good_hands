@@ -1,15 +1,9 @@
+import { IAdEdit } from '~/types';
 
 
-export interface CreateAdProps {
+export interface EditAdProps {
      type?: 'create'|'update';
-     initialValues: {
-          body: string;
-          type: string;
-          breed: string;
-          name: string;
-          price: number,
-          tel: string;
-          email: string;
-          birthday: string;
-     }
+     id: string;
+     images: string[]
+     initialValues: Omit<IAdEdit, 'id'| 'images'>
 }
