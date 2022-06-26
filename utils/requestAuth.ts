@@ -1,8 +1,13 @@
 import Cookie from 'cookie';
 
 import { AUTH_COOKIE_EXPIRES_TIME, JWT_STORAGE_NAME, USER_STORAGE_NAME } from '~/constants';
-import { ILoginMutation, ILoginMutationVariables, IRegisterMutationVariables, IRegisterMutation } from '~/generated/graphql';
-import query from '~/queries/Auth.gql';
+import {
+    ILoginMutation,
+    ILoginMutationVariables,
+    IRegisterMutationVariables,
+    IRegisterMutation,
+} from '~/generated/graphql';
+import query from '~/queries/auth.gql';
 
 import requestBase from './requestBase';
 

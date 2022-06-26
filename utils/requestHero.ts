@@ -1,5 +1,5 @@
 import type { IHeroQuery } from '~/generated/graphql';
-import query from '~/queries/Hero.gql';
+import query from '~/queries/hero.gql';
 import { IHero } from '~/types';
 
 import requestBase from './requestBase';
