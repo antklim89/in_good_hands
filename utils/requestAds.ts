@@ -36,8 +36,8 @@ export async function requestAd(variables: IAdQueryVariables): Promise<IAdQuery[
     return data;
 }
 
-export async function requestAdUpdateData(variables: IAdUpdateDataQueryVariables): Promise<IAdUpdateDataQuery['ad']['data']> {
-    const { ad: { data } } = await requestBase<IAdUpdateDataQuery, IAdUpdateDataQueryVariables>({
+export async function requestAdUpdateData(variables: IAdUpdateDataQueryVariables): Promise<IAdUpdateDataQuery['ads']['data'][0]> {
+    const { ads: { data: [data] } } = await requestBase<IAdUpdateDataQuery, IAdUpdateDataQueryVariables>({
         query: query.AdUpdateData,
         variables,
     });

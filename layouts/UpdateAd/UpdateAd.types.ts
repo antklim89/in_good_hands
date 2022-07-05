@@ -7,7 +7,7 @@ import { updateAdSchema } from './UpdateAd.schema';
 
 export interface UpdateAdProps {
      type?: 'create'|'update';
-     id: IAdUpdateDataQuery['ad']['data']['id'];
-     images: IAdUpdateDataQuery['ad']['data']['attributes']['images']
+     id: IAdUpdateDataQuery['ads']['data'][0]['id'];
+     images: IAdUpdateDataQuery['ads']['data'][0]['attributes']['images']
      initialValues: zod.infer<typeof updateAdSchema>
 }
