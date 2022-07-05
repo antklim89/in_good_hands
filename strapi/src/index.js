@@ -1,20 +1,33 @@
-'use strict';
 
 module.exports = {
-  /**
-   * An asynchronous register function that runs before
-   * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
-   */
-  register(/*{ strapi }*/) {},
+    register({ strapi }) {
+        const extensionService = strapi.plugin('graphql').service('extension');
 
-  /**
-   * An asynchronous bootstrap function that runs before
-   * your application gets started.
-   *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
-   */
-  bootstrap(/*{ strapi }*/) {},
+        extensionService.use({
+            resolversConfig: {
+                'Query.ads': {
+                    auth: false,
+                    middlewares: [
+                        async (next, parent, args, context, info) => {
+                            console.log('===== \n context.state', context.state);
+                            const updatedArgs = {
+                                ...args,
+                                filters: {
+                                    ...args.filters || {},
+                                    user: { id: { eq: '1' } },
+                                },
+                            };
+
+                            const res = await next(parent, updatedArgs, context, info);
+
+
+                            return res;
+                        },
+
+                    ],
+                },
+            },
+        });
+    },
 };
+
