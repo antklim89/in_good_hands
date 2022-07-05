@@ -1,7 +1,7 @@
 import { Box, Button } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 
 import Protected from '~/components/Protected';
 import { requestNewAd } from '~/utils';
@@ -26,6 +26,13 @@ const LINKS = [
 
 const HeaderLinks: FC<HeaderLinksProps> = ({ onClose, ...props }) => {
     const { push } = useRouter();
+
+    const handleCreateNewAd = useCallback(async () => {
+        const adId = await requestNewAd();
+        onClose?.();
+        await push(`/ads/update/${adId}`);
+    }, []);
+
     return (
         <Box as="nav">
             <Box
@@ -56,11 +63,7 @@ const HeaderLinks: FC<HeaderLinksProps> = ({ onClose, ...props }) => {
                             color="primary.textLight"
                             textTransform="uppercase"
                             variant="ghost"
-                            onClick={async () => {
-                                const adId = await requestNewAd();
-                                await push(`/ads/edit/${adId}`);
-                                onClose?.();
-                            }}
+                            onClick={handleCreateNewAd}
                         >
                             create ad
                         </Button>
