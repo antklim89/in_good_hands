@@ -25,12 +25,12 @@ export interface NexusGenInputs {
     name?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     not?: NexusGenInputs['AdFiltersInput'] | null; // AdFiltersInput
     or?: Array<NexusGenInputs['AdFiltersInput'] | null> | null; // [AdFiltersInput]
+    owner?: NexusGenInputs['UsersPermissionsUserFiltersInput'] | null; // UsersPermissionsUserFiltersInput
     price?: NexusGenInputs['FloatFilterInput'] | null; // FloatFilterInput
     publishedAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
     tel?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     type?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     updatedAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
-    user?: NexusGenInputs['UsersPermissionsUserFiltersInput'] | null; // UsersPermissionsUserFiltersInput
   }
   AdInput: { // input type
     birthday?: NexusGenScalars['Date'] | null; // Date
@@ -39,11 +39,11 @@ export interface NexusGenInputs {
     email?: string | null; // String
     images?: Array<string | null> | null; // [ID]
     name?: string | null; // String
+    owner?: string | null; // ID
     price?: number | null; // Float
     publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     tel?: string | null; // String
     type?: NexusGenEnums['ENUM_AD_TYPE'] | null; // ENUM_AD_TYPE
-    user?: string | null; // ID
   }
   BooleanFilterInput: { // input type
     and?: Array<boolean | null> | null; // [Boolean]
@@ -598,7 +598,6 @@ export interface NexusGenFieldTypes {
     tel: string; // String!
     type: NexusGenEnums['ENUM_AD_TYPE']; // ENUM_AD_TYPE!
     updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
-    user: NexusGenRootTypes['UsersPermissionsUserEntityResponse'] | null; // UsersPermissionsUserEntityResponse
   }
   AdEntity: { // field return type
     attributes: NexusGenRootTypes['Ad'] | null; // Ad
@@ -853,7 +852,6 @@ export interface NexusGenFieldTypeNames {
     tel: 'String'
     type: 'ENUM_AD_TYPE'
     updatedAt: 'DateTime'
-    user: 'UsersPermissionsUserEntityResponse'
   }
   AdEntity: { // field return type name
     attributes: 'Ad'

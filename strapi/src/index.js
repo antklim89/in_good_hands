@@ -1,3 +1,5 @@
+const { checkOwnerMiddleware } = require('./utils/checkOwnerMiddleware');
+
 
 module.exports = {
     register({ strapi }) {
@@ -5,29 +7,17 @@ module.exports = {
 
         extensionService.use({
             resolversConfig: {
-                'Query.ads': {
-                    auth: false,
-                    middlewares: [
-                        async (next, parent, args, context, info) => {
-                            console.log('===== \n context.state', context.state);
-                            const updatedArgs = {
-                                ...args,
-                                filters: {
-                                    ...args.filters || {},
-                                    user: { id: { eq: '1' } },
-                                },
-                            };
-
-                            const res = await next(parent, updatedArgs, context, info);
-
-
-                            return res;
-                        },
-
-                    ],
+                'Mutation.updateAd': {
+                    auth: true,
+                    middlewares: [checkOwnerMiddleware(strapi)],
+                },
+                'Mutation.deleteAd': {
+                    auth: true,
+                    middlewares: [checkOwnerMiddleware(strapi)],
                 },
             },
         });
     },
 };
+
 

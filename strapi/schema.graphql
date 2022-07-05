@@ -15,7 +15,6 @@ type Ad {
   tel: String!
   type: ENUM_AD_TYPE!
   updatedAt: DateTime
-  user: UsersPermissionsUserEntityResponse
 }
 
 type AdEntity {
@@ -43,12 +42,12 @@ input AdFiltersInput {
   name: StringFilterInput
   not: AdFiltersInput
   or: [AdFiltersInput]
+  owner: UsersPermissionsUserFiltersInput
   price: FloatFilterInput
   publishedAt: DateTimeFilterInput
   tel: StringFilterInput
   type: StringFilterInput
   updatedAt: DateTimeFilterInput
-  user: UsersPermissionsUserFiltersInput
 }
 
 input AdInput {
@@ -58,11 +57,11 @@ input AdInput {
   email: String
   images: [ID]
   name: String
+  owner: ID
   price: Float
   publishedAt: DateTime
   tel: String
   type: ENUM_AD_TYPE
-  user: ID
 }
 
 type AdRelationResponseCollection {

@@ -18,7 +18,7 @@ module.exports = createCoreController('api::ad.ad', ({ strapi }) => ({
             tel: '',
             email: '',
             birthday: new Date().toISOString().split('T')[0],
-            user: user.id,
+            owner: user.id,
         };
         const entity = await strapi.db.query('api::ad.ad').create({ data });
         return entity.id;

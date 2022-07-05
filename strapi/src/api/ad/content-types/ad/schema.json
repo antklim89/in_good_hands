@@ -61,10 +61,11 @@
       "maxLength": 100,
       "minLength": 5
     },
-    "user": {
+    "owner": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
+      "private": true,
       "inversedBy": "ads"
     },
     "birthday": {
