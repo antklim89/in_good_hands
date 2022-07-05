@@ -6,7 +6,7 @@ import { IEnumAdType } from '~/types';
 
 const { attributes: attr } = schema;
 
-export const adEditSchema = zod.object({
+export const updateAdSchema = zod.object({
     body: zod.string()
         .min(attr.body.minLength)
         .max(attr.body.maxLength),

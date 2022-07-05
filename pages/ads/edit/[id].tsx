@@ -2,7 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next';
 
 import Seo from '~/components/Seo';
 import { IAdUpdateDataQuery } from '~/generated/graphql';
-import EditAd from '~/layouts/EditAd';
+import EditAd from '~/layouts/UpdateAd';
 import { requestAdUpdateData } from '~/utils';
 
 

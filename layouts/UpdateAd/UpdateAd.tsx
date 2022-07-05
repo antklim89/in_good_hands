@@ -2,7 +2,6 @@ import {
     Center, Container, Heading, Flex, Button, useToast,
 } from '@chakra-ui/react';
 import { useFormik } from 'formik';
-import omit from 'lodash/omit';
 import { FC } from 'react';
 import { ZodError } from 'zod';
 
@@ -10,25 +9,26 @@ import InputField from '~/components/InputField';
 import schema from '~/strapi/src/api/ad/content-types/ad/schema.json';
 import { requestUpdateAd } from '~/utils';
 
-import { adEditSchema } from './EditAd.schema';
-import { EditAdProps } from './EditAd.types';
+import { updateAdSchema } from './UpdateAd.schema';
+import { UpdateAdProps } from './UpdateAd.types';
 
 
-const EditAd: FC<EditAdProps> = ({ type = 'create', initialValues, id }) => {
+const UpdateAd: FC<UpdateAdProps> = ({ type = 'create', initialValues, id }) => {
     const toast = useToast();
+
     const formik = useFormik({
         initialValues,
-        async onSubmit(val) {
+        async onSubmit(data) {
             try {
-                await requestUpdateAd({ id, data: omit(val, 'id', 'createdAt') });
+                await requestUpdateAd({ id, data });
                 toast({ title: 'Ad updated successfully!', status: 'success' });
             } catch (error) {
                 if (error instanceof Error) toast({ title: error.message, status: 'error' });
             }
         },
-        async validate(val) {
+        async validate(data) {
             try {
-                await adEditSchema.parseAsync(val);
+                await updateAdSchema.parseAsync(data);
             } catch (error) {
                 if (error instanceof ZodError) return error.formErrors.fieldErrors;
             }
@@ -119,5 +119,5 @@ const EditAd: FC<EditAdProps> = ({ type = 'create', initialValues, id }) => {
     );
 };
 
-export default EditAd;
+export default UpdateAd;
 
