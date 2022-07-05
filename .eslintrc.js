@@ -106,6 +106,7 @@ module.exports = {
         /**
         * JavaScript
         */
+        'max-params': 0,
         'newline-per-chained-call': [1, { ignoreChainWithDepth: 3 }],
         'new-cap': 0,
         'no-underscore-dangle': [2, { 'allow': ['_q'] }],

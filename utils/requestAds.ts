@@ -17,7 +17,7 @@ import requestBase from './requestBase';
 
 type IAdUserMutationOmitVariables = {
     id: IAdUpdateMutationVariables['id'],
-    data: Omit<IAdUpdateMutationVariables['data'], 'user' | 'publishedAt' | 'images'>
+    data: Omit<IAdUpdateMutationVariables['data'], 'owner' | 'publishedAt' | 'images'>
 }
 
 
