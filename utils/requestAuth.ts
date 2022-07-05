@@ -12,27 +12,22 @@ import query from '~/queries/auth.gql';
 import requestBase from './requestBase';
 
 
-interface UserRequestAuth {
-    username: string;
-    email: string;
-}
-
 function getOptions(): Cookie.CookieSerializeOptions {
     const date = new Date();
     date.setDate(date.getDate() + AUTH_COOKIE_EXPIRES_TIME);
     const expires = new Date(date);
 
-    return { expires };
+    return { expires, path: '/' };
 }
 
-export async function login(variables: ILoginMutationVariables): Promise<UserRequestAuth> {
+export async function login(variables: ILoginMutationVariables): Promise<ILoginMutation['login']['user']> {
     const data = await requestBase<ILoginMutation>({ query: query.Login, variables });
     document.cookie = Cookie.serialize(USER_STORAGE_NAME, JSON.stringify(data.login.user), getOptions());
     document.cookie = Cookie.serialize(JWT_STORAGE_NAME, data.login.jwt, getOptions());
     return data.login.user;
 }
 
-export async function register(variables: IRegisterMutationVariables): Promise<UserRequestAuth> {
+export async function register(variables: IRegisterMutationVariables): Promise<IRegisterMutation['register']['user']> {
     const data = await requestBase<IRegisterMutation>({ query: query.Register, variables });
     document.cookie = Cookie.serialize(USER_STORAGE_NAME, JSON.stringify(data.register.user), getOptions());
     document.cookie = Cookie.serialize(JWT_STORAGE_NAME, data.register.jwt, getOptions());
