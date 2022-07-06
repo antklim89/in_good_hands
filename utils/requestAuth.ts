@@ -1,6 +1,3 @@
-import Cookie from 'cookie';
-
-import { AUTH_COOKIE_EXPIRES_TIME, JWT_STORAGE_NAME, USER_STORAGE_NAME } from '~/constants';
 import {
     ILoginMutation,
     ILoginMutationVariables,
@@ -9,32 +6,25 @@ import {
 } from '~/generated/graphql';
 import query from '~/queries/auth.gql';
 
+import { clearJWTCookie, clearUserCookie, setJWTCookie, setUserCookie } from './getCookies';
 import requestBase from './requestBase';
 
 
-function getOptions(): Cookie.CookieSerializeOptions {
-    const date = new Date();
-    date.setDate(date.getDate() + AUTH_COOKIE_EXPIRES_TIME);
-    const expires = new Date(date);
-
-    return { expires, path: '/' };
-}
-
 export async function login(variables: ILoginMutationVariables): Promise<ILoginMutation['login']['user']> {
     const data = await requestBase<ILoginMutation>({ query: query.Login, variables });
-    document.cookie = Cookie.serialize(USER_STORAGE_NAME, JSON.stringify(data.login.user), getOptions());
-    document.cookie = Cookie.serialize(JWT_STORAGE_NAME, data.login.jwt, getOptions());
+    setUserCookie(data.login.user);
+    setJWTCookie(data.login.jwt);
     return data.login.user;
 }
 
 export async function register(variables: IRegisterMutationVariables): Promise<IRegisterMutation['register']['user']> {
     const data = await requestBase<IRegisterMutation>({ query: query.Register, variables });
-    document.cookie = Cookie.serialize(USER_STORAGE_NAME, JSON.stringify(data.register.user), getOptions());
-    document.cookie = Cookie.serialize(JWT_STORAGE_NAME, data.register.jwt, getOptions());
+    setUserCookie(data.register.user);
+    setJWTCookie(data.register.jwt);
     return data.register.user;
 }
 
 export function logout(): void {
-    document.cookie = Cookie.serialize(USER_STORAGE_NAME, '', { expires: new Date(0) });
-    document.cookie = Cookie.serialize(JWT_STORAGE_NAME, '', { expires: new Date(0) });
+    clearUserCookie();
+    clearJWTCookie();
 }

@@ -1,6 +1,4 @@
-import Cookie from 'cookie';
-
-import { JWT_STORAGE_NAME, STRAPI_URL } from '~/constants';
+import { STRAPI_URL } from '~/constants';
 import type {
     IAdsQuery,
     IAdQuery,
@@ -13,6 +11,8 @@ import type {
 import query from '~/queries/ad.gql';
 
 import requestBase from './requestBase';
+
+import { getJWTCookie } from '.';
 
 
 type IAdUserMutationOmitVariables = {
@@ -55,7 +55,7 @@ export async function requestUpdateAd(variables: IAdUserMutationOmitVariables): 
 }
 
 export async function requestUploadAdImage(images: File[], refId:string): Promise<IAdUpdateDataQuery['ads']['data'][0]['attributes']['images']['data']> {
-    const token = Cookie.parse(document.cookie)[JWT_STORAGE_NAME];
+    const token = getJWTCookie();
     const formData = new FormData();
     images.forEach((image) => formData.append('files', image));
     formData.append('refId', refId);
@@ -73,7 +73,7 @@ export async function requestUploadAdImage(images: File[], refId:string): Promis
 
 export async function requestDeleteAdImage(imageId: string): Promise<string> {
     if (!imageId) throw new Error('Image id required');
-    const token = Cookie.parse(document.cookie)[JWT_STORAGE_NAME];
+    const token = getJWTCookie();
 
     const data = await fetch(`${STRAPI_URL}/api/upload/files/${imageId}`, {
         method: 'DELETE',
@@ -85,7 +85,7 @@ export async function requestDeleteAdImage(imageId: string): Promise<string> {
 
 
 export async function requestNewAd(): Promise<number> {
-    const token = Cookie.parse(document.cookie)[JWT_STORAGE_NAME];
+    const token = getJWTCookie();
     const data = await fetch(`${STRAPI_URL}/api/ads/new`, {
         method: 'POST',
         body: JSON.stringify({ data: {} }),

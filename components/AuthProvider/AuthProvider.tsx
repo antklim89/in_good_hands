@@ -1,9 +1,8 @@
-import Cookie from 'cookie';
 import {
     createContext, FC, useCallback, useEffect, useMemo, useState,
 } from 'react';
 
-import { USER_STORAGE_NAME } from '~/constants';
+import { getUserCookie } from '~/utils';
 
 import { AuthProviderProps, IAuthContext } from './AuthProvider.types';
 
@@ -17,12 +16,11 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
     useEffect(() => {
         try {
-            const userCookieString = Cookie.parse(document.cookie)[USER_STORAGE_NAME];
-            if (!userCookieString) {
+            const user = getUserCookie();
+            if (!user) {
                 setAuthInited(true);
                 return;
             }
-            const user = JSON.parse(userCookieString);
             setEmail(user.email);
             setUsername(user.username);
         } catch (_) {

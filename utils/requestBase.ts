@@ -1,7 +1,8 @@
-import Cookie from 'cookie';
 import type { DocumentNode } from 'graphql';
 
 import { STRAPI_URL } from '~/constants';
+
+import { getJWTCookie } from '.';
 
 
 interface RequestBaseArgs<V> {
@@ -17,7 +18,7 @@ export default async function requestBase<
     T = unknown, V = Record<string, string>
 >({ query, variables, jwt }: RequestBaseArgs<V>): Promise<T> {
     const { print } = await import('graphql');
-    const token = jwt || (typeof window !== 'undefined' && Cookie.parse(document.cookie).JWT);
+    const token = getJWTCookie(jwt);
 
     const headers = {
         'Content-Type': 'application/json',
