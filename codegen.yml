@@ -5,6 +5,8 @@ config:
   typesPrefix: I
   avoidOptionals: true
   maybeValue: T
+  skipTypename: true
+  disableDescriptions: true
 generates:
   generated/graphql.ts:
     plugins:
