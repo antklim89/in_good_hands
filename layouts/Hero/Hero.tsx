@@ -37,13 +37,17 @@ const Hero: FC<IHeroQuery['hero']['data']> = ({ attributes: { body, image } }) =
                     top={0}
                     zIndex={-1}
                 >
-                    <NextImage
-                        alt="hero"
-                        layout="fill"
-                        objectFit="cover"
-                        objectPosition="center"
-                        src={getStrapiUrl(image.data.attributes.url)}
-                    />
+                    {image.data
+                        ? (
+                            <NextImage
+                                alt="hero"
+                                layout="fill"
+                                objectFit="cover"
+                                objectPosition="center"
+                                src={getStrapiUrl(image.data.attributes.url)}
+                            />
+                        )
+                        : null}
                 </Box>
             </Container>
         </Box>
