@@ -33,7 +33,7 @@ query Ad($id: ID!) {
 }
 
 query Ads {
-  ads {
+  ads(filters: { isPublished: {eq: true}}) {
     data {
       ...AdFragment
     }
@@ -41,10 +41,14 @@ query Ads {
 }
 
 query AdUpdateData($id: ID!, $ownerId: ID!) {
-  ads(filters: {id: {eq: $id}, owner: {id: {eq: $ownerId}}}, publicationState: PREVIEW) {
+  ads(filters: {
+      id: {eq: $id},
+      owner: {id: {eq: $ownerId}},
+    }) {
     data {
       id
       attributes {
+        isPublished
         birthday
         type
         body

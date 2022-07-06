@@ -106,6 +106,14 @@ const UpdateAd: FC<UpdateAdProps> = ({ type = 'create', initialValues, id, image
                         name="birthday"
                         type="date"
                     />
+                    <InputField
+                        as="switch"
+                        formik={formik}
+                        isRequired={false}
+                        label="Published"
+                        name="isPublished"
+                        size="lg"
+                    />
                     <Flex justify="flex-end" mt={16}>
                         <Button
                             disabled={!formik.isValid}

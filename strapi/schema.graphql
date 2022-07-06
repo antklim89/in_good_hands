@@ -9,9 +9,9 @@ type Ad {
   createdAt: DateTime
   email: String!
   images(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection!
+  isPublished: Boolean!
   name: String
   price: Float!
-  publishedAt: DateTime
   tel: String!
   type: ENUM_AD_TYPE!
   updatedAt: DateTime
@@ -39,12 +39,12 @@ input AdFiltersInput {
   createdAt: DateTimeFilterInput
   email: StringFilterInput
   id: IDFilterInput
+  isPublished: BooleanFilterInput
   name: StringFilterInput
   not: AdFiltersInput
   or: [AdFiltersInput]
   owner: UsersPermissionsUserFiltersInput
   price: FloatFilterInput
-  publishedAt: DateTimeFilterInput
   tel: StringFilterInput
   type: StringFilterInput
   updatedAt: DateTimeFilterInput
@@ -56,10 +56,10 @@ input AdInput {
   breed: String
   email: String
   images: [ID]
+  isPublished: Boolean
   name: String
   owner: ID
   price: Float
-  publishedAt: DateTime
   tel: String
   type: ENUM_AD_TYPE
 }
@@ -448,7 +448,7 @@ enum PublicationState {
 
 type Query {
   ad(id: ID): AdEntityResponse
-  ads(filters: AdFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): AdEntityResponseCollection
+  ads(filters: AdFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): AdEntityResponseCollection
   hero: HeroEntityResponse
   i18NLocale(id: ID): I18NLocaleEntityResponse
   i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
@@ -736,7 +736,7 @@ type UsersPermissionsUpdateRolePayload {
 }
 
 type UsersPermissionsUser {
-  ads(filters: AdFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): AdRelationResponseCollection
+  ads(filters: AdFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): AdRelationResponseCollection
   blocked: Boolean
   confirmed: Boolean
   createdAt: DateTime

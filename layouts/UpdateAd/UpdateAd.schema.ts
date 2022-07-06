@@ -28,4 +28,5 @@ export const updateAdSchema = zod.object({
         .min(attr.email.minLength)
         .max(attr.email.maxLength),
     birthday: zod.string(),
+    isPublished: zod.boolean(),
 });

@@ -22,12 +22,12 @@ export interface NexusGenInputs {
     createdAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
     email?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     id?: NexusGenInputs['IDFilterInput'] | null; // IDFilterInput
+    isPublished?: NexusGenInputs['BooleanFilterInput'] | null; // BooleanFilterInput
     name?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     not?: NexusGenInputs['AdFiltersInput'] | null; // AdFiltersInput
     or?: Array<NexusGenInputs['AdFiltersInput'] | null> | null; // [AdFiltersInput]
     owner?: NexusGenInputs['UsersPermissionsUserFiltersInput'] | null; // UsersPermissionsUserFiltersInput
     price?: NexusGenInputs['FloatFilterInput'] | null; // FloatFilterInput
-    publishedAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
     tel?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     type?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     updatedAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
@@ -38,10 +38,10 @@ export interface NexusGenInputs {
     breed?: string | null; // String
     email?: string | null; // String
     images?: Array<string | null> | null; // [ID]
+    isPublished?: boolean | null; // Boolean
     name?: string | null; // String
     owner?: string | null; // ID
     price?: number | null; // Float
-    publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     tel?: string | null; // String
     type?: NexusGenEnums['ENUM_AD_TYPE'] | null; // ENUM_AD_TYPE
   }
@@ -444,9 +444,9 @@ export interface NexusGenObjects {
     breed?: string | null; // String
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
+    isPublished: boolean; // Boolean!
     name?: string | null; // String
     price: number; // Float!
-    publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     tel: string; // String!
     type: NexusGenEnums['ENUM_AD_TYPE']; // ENUM_AD_TYPE!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -592,9 +592,9 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     images: NexusGenRootTypes['UploadFileRelationResponseCollection']; // UploadFileRelationResponseCollection!
+    isPublished: boolean; // Boolean!
     name: string | null; // String
     price: number; // Float!
-    publishedAt: NexusGenScalars['DateTime'] | null; // DateTime
     tel: string; // String!
     type: NexusGenEnums['ENUM_AD_TYPE']; // ENUM_AD_TYPE!
     updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
@@ -846,9 +846,9 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'DateTime'
     email: 'String'
     images: 'UploadFileRelationResponseCollection'
+    isPublished: 'Boolean'
     name: 'String'
     price: 'Float'
-    publishedAt: 'DateTime'
     tel: 'String'
     type: 'ENUM_AD_TYPE'
     updatedAt: 'DateTime'
@@ -1189,7 +1189,6 @@ export interface NexusGenArgTypes {
     ads: { // args
       filters?: NexusGenInputs['AdFiltersInput'] | null; // AdFiltersInput
       pagination: NexusGenInputs['PaginationArg'] | null; // PaginationArg
-      publicationState: NexusGenEnums['PublicationState'] | null; // PublicationState
       sort: Array<string | null> | null; // [String]
     }
     i18NLocale: { // args
@@ -1241,7 +1240,6 @@ export interface NexusGenArgTypes {
     ads: { // args
       filters?: NexusGenInputs['AdFiltersInput'] | null; // AdFiltersInput
       pagination: NexusGenInputs['PaginationArg'] | null; // PaginationArg
-      publicationState: NexusGenEnums['PublicationState'] | null; // PublicationState
       sort: Array<string | null> | null; // [String]
     }
   }
