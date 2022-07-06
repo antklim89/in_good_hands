@@ -55,6 +55,7 @@ query AdUpdateData($id: ID!, $ownerId: ID!) {
         tel
         images {
           data {
+            id
             attributes {
               url
             }

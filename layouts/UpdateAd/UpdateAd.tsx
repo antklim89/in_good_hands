@@ -11,9 +11,10 @@ import { requestUpdateAd } from '~/utils';
 
 import { updateAdSchema } from './UpdateAd.schema';
 import { UpdateAdProps } from './UpdateAd.types';
+import UpdateAdImages from './UpdateAdImages';
 
 
-const UpdateAd: FC<UpdateAdProps> = ({ type = 'create', initialValues, id }) => {
+const UpdateAd: FC<UpdateAdProps> = ({ type = 'create', initialValues, id, images }) => {
     const toast = useToast();
 
     const formik = useFormik({
@@ -58,6 +59,7 @@ const UpdateAd: FC<UpdateAdProps> = ({ type = 'create', initialValues, id }) => 
                         name="body"
                         resize="none"
                     />
+                    <UpdateAdImages id={id} images={images} />
                     <InputField
                         as="select"
                         formik={formik}

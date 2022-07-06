@@ -1,6 +1,6 @@
 import Cookie from 'cookie';
 
-import { STRAPI_URL } from '~/constants';
+import { JWT_STORAGE_NAME, STRAPI_URL } from '~/constants';
 import type {
     IAdsQuery,
     IAdQuery,
@@ -54,9 +54,38 @@ export async function requestUpdateAd(variables: IAdUserMutationOmitVariables): 
     return id;
 }
 
+export async function requestUploadAdImage(images: File[], refId:string): Promise<IAdUpdateDataQuery['ads']['data'][0]['attributes']['images']['data']> {
+    const token = Cookie.parse(document.cookie)[JWT_STORAGE_NAME];
+    const formData = new FormData();
+    images.forEach((image) => formData.append('files', image));
+    formData.append('refId', refId);
+    formData.append('ref', 'api::ad.ad');
+    formData.append('field', 'images');
+
+    const data = await fetch(`${STRAPI_URL}/api/upload`, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Authorization': `Bearer ${token}` },
+    }).then((r) => r.json());
+
+    return data.map(({ id, ...attributes }: Record<string, unknown>) => ({ id: `${id}`, attributes }));
+}
+
+export async function requestDeleteAdImage(imageId: string): Promise<string> {
+    if (!imageId) throw new Error('Image id required');
+    const token = Cookie.parse(document.cookie)[JWT_STORAGE_NAME];
+
+    const data = await fetch(`${STRAPI_URL}/api/upload/files/${imageId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` },
+    }).then((r) => r.json());
+
+    return data.id;
+}
+
 
 export async function requestNewAd(): Promise<number> {
-    const token = Cookie.parse(document.cookie).JWT;
+    const token = Cookie.parse(document.cookie)[JWT_STORAGE_NAME];
     const data = await fetch(`${STRAPI_URL}/api/ads/new`, {
         method: 'POST',
         body: JSON.stringify({ data: {} }),
