@@ -29,13 +29,15 @@ const HeaderAuth: FC = () => {
                     ? (
                         <>
                             <Box as="li" >
-                                <Button
-                                    as="a"
-                                    color="primary.textLight"
-                                    variant="ghost"
-                                >
-                                    {username}
-                                </Button>
+                                <Link passHref href="/profile">
+                                    <Button
+                                        as="a"
+                                        color="primary.textLight"
+                                        variant="ghost"
+                                    >
+                                        {username}
+                                    </Button>
+                                </Link>
                             </Box>
                             <Box as="li" >
                                 <Button
