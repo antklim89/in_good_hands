@@ -41,7 +41,7 @@ query Ads {
 }
 
 query AdUpdateData($id: ID!, $ownerId: ID!) {
-  ads(filters: {id: {eq: $id}, owner: {id: {eq: $ownerId}}}) {
+  ads(filters: {id: {eq: $id}, owner: {id: {eq: $ownerId}}}, publicationState: PREVIEW) {
     data {
       id
       attributes {
