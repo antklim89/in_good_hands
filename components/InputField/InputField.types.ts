@@ -1,8 +1,8 @@
-import { InputProps, SelectProps, TextareaProps } from '@chakra-ui/react';
+import { InputProps, SelectProps, TextareaProps, SwitchProps } from '@chakra-ui/react';
 import { ChangeEvent, ReactNode } from 'react';
 
 
-export type Values = Record<string, string|number>;
+export type Values = Record<string, string|number|boolean>;
 
 interface FormikType<T extends Values> {
      values: T;
@@ -26,4 +26,5 @@ export interface InputFieldBaseFC {
      <T extends Values>(props: InputFieldProps<T> & {as?: 'input'} & Omit<InputProps, 'name'| 'as'>): JSX.Element
      <T extends Values>(props: InputFieldProps<T> & {as: 'select'} & Omit<SelectProps, 'name'| 'as'>): JSX.Element
      <T extends Values>(props: InputFieldProps<T> & {as: 'textarea'} & Omit<TextareaProps, 'name'| 'as'>): JSX.Element
+     <T extends Values>(props: InputFieldProps<T> & {as: 'switch'} & Omit<SwitchProps, 'name'| 'as'>): JSX.Element
 }

@@ -1,5 +1,16 @@
 import {
-    FormControl, FormLabel, Text, Flex, Input, InputProps, Select, SelectProps, Textarea, TextareaProps,
+    FormControl,
+    FormLabel,
+    Text,
+    Flex,
+    Input,
+    InputProps,
+    Select,
+    SelectProps,
+    Textarea,
+    TextareaProps,
+    Switch,
+    SwitchProps,
 } from '@chakra-ui/react';
 import { useMemo } from 'react';
 
@@ -8,6 +19,7 @@ import { InputFieldBaseFC } from './InputField.types';
 
 const InputField: InputFieldBaseFC = ({ formik, label, name, as, ...props }) => {
     const error = formik.errors[name];
+    const value = formik.values[name];
 
     const component = useMemo(() => {
         switch (as) {
@@ -16,7 +28,7 @@ const InputField: InputFieldBaseFC = ({ formik, label, name, as, ...props }) => 
                 <Select
                     {...props as SelectProps}
                     name={String(name)}
-                    value={formik.values[name]}
+                    value={String(value)}
                     onChange={formik.handleChange}
                 />
             );
@@ -25,7 +37,16 @@ const InputField: InputFieldBaseFC = ({ formik, label, name, as, ...props }) => 
                 <Textarea
                     {...props as TextareaProps}
                     name={String(name)}
-                    value={formik.values[name]}
+                    value={String(value)}
+                    onChange={formik.handleChange}
+                />
+            );
+        case 'switch':
+            return (
+                <Switch
+                    {...props as SwitchProps}
+                    isChecked={typeof value === 'boolean' ? value : false}
+                    name={String(name)}
                     onChange={formik.handleChange}
                 />
             );
@@ -35,12 +56,12 @@ const InputField: InputFieldBaseFC = ({ formik, label, name, as, ...props }) => 
                 <Input
                     {...props as InputProps}
                     name={String(name)}
-                    value={formik.values[name]}
+                    value={String(value)}
                     onChange={formik.handleChange}
                 />
             );
         }
-    }, [as, formik.values[name], formik.handleChange, name]);
+    }, [as, value, formik.handleChange, name]);
 
     return (
         <FormControl isRequired isDisabled={formik.isSubmitting} mb={2}>
