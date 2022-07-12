@@ -308,6 +308,8 @@ export interface NexusGenInputs {
     caption?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     createdAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
     ext?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
+    folder?: NexusGenInputs['UploadFolderFiltersInput'] | null; // UploadFolderFiltersInput
+    folderPath?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     formats?: NexusGenInputs['JSONFilterInput'] | null; // JSONFilterInput
     hash?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
     height?: NexusGenInputs['IntFilterInput'] | null; // IntFilterInput
@@ -328,6 +330,8 @@ export interface NexusGenInputs {
     alternativeText?: string | null; // String
     caption?: string | null; // String
     ext?: string | null; // String
+    folder?: string | null; // ID
+    folderPath?: string | null; // String
     formats?: NexusGenScalars['JSON'] | null; // JSON
     hash?: string | null; // String
     height?: number | null; // Int
@@ -339,6 +343,28 @@ export interface NexusGenInputs {
     size?: number | null; // Float
     url?: string | null; // String
     width?: number | null; // Int
+  }
+  UploadFolderFiltersInput: { // input type
+    and?: Array<NexusGenInputs['UploadFolderFiltersInput'] | null> | null; // [UploadFolderFiltersInput]
+    children?: NexusGenInputs['UploadFolderFiltersInput'] | null; // UploadFolderFiltersInput
+    createdAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
+    files?: NexusGenInputs['UploadFileFiltersInput'] | null; // UploadFileFiltersInput
+    id?: NexusGenInputs['IDFilterInput'] | null; // IDFilterInput
+    name?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
+    not?: NexusGenInputs['UploadFolderFiltersInput'] | null; // UploadFolderFiltersInput
+    or?: Array<NexusGenInputs['UploadFolderFiltersInput'] | null> | null; // [UploadFolderFiltersInput]
+    parent?: NexusGenInputs['UploadFolderFiltersInput'] | null; // UploadFolderFiltersInput
+    path?: NexusGenInputs['StringFilterInput'] | null; // StringFilterInput
+    pathId?: NexusGenInputs['IntFilterInput'] | null; // IntFilterInput
+    updatedAt?: NexusGenInputs['DateTimeFilterInput'] | null; // DateTimeFilterInput
+  }
+  UploadFolderInput: { // input type
+    children?: Array<string | null> | null; // [ID]
+    files?: Array<string | null> | null; // [ID]
+    name?: string | null; // String
+    parent?: string | null; // ID
+    path?: string | null; // String
+    pathId?: number | null; // Int
   }
   UsersPermissionsLoginInput: { // input type
     identifier: string; // String!
@@ -508,6 +534,17 @@ export interface NexusGenObjects {
   UploadFileEntityResponse: {};
   UploadFileEntityResponseCollection: {};
   UploadFileRelationResponseCollection: {};
+  UploadFolder: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    name: string; // String!
+    path: string; // String!
+    pathId: number; // Int!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  UploadFolderEntity: {};
+  UploadFolderEntityResponse: {};
+  UploadFolderEntityResponseCollection: {};
+  UploadFolderRelationResponseCollection: {};
   UsersPermissionsCreateRolePayload: { // root type
     ok: boolean; // Boolean!
   }
@@ -577,7 +614,7 @@ export interface NexusGenInterfaces {
 }
 
 export interface NexusGenUnions {
-  GenericMorph: NexusGenRootTypes['Ad'] | NexusGenRootTypes['Hero'] | NexusGenRootTypes['I18NLocale'] | NexusGenRootTypes['UploadFile'] | NexusGenRootTypes['UsersPermissionsPermission'] | NexusGenRootTypes['UsersPermissionsRole'] | NexusGenRootTypes['UsersPermissionsUser'];
+  GenericMorph: NexusGenRootTypes['Ad'] | NexusGenRootTypes['Hero'] | NexusGenRootTypes['I18NLocale'] | NexusGenRootTypes['UploadFile'] | NexusGenRootTypes['UploadFolder'] | NexusGenRootTypes['UsersPermissionsPermission'] | NexusGenRootTypes['UsersPermissionsRole'] | NexusGenRootTypes['UsersPermissionsUser'];
 }
 
 export type NexusGenRootTypes = NexusGenObjects & NexusGenUnions
@@ -660,11 +697,13 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createAd: NexusGenRootTypes['AdEntityResponse'] | null; // AdEntityResponse
     createUploadFile: NexusGenRootTypes['UploadFileEntityResponse'] | null; // UploadFileEntityResponse
+    createUploadFolder: NexusGenRootTypes['UploadFolderEntityResponse'] | null; // UploadFolderEntityResponse
     createUsersPermissionsRole: NexusGenRootTypes['UsersPermissionsCreateRolePayload'] | null; // UsersPermissionsCreateRolePayload
     createUsersPermissionsUser: NexusGenRootTypes['UsersPermissionsUserEntityResponse']; // UsersPermissionsUserEntityResponse!
     deleteAd: NexusGenRootTypes['AdEntityResponse'] | null; // AdEntityResponse
     deleteHero: NexusGenRootTypes['HeroEntityResponse'] | null; // HeroEntityResponse
     deleteUploadFile: NexusGenRootTypes['UploadFileEntityResponse'] | null; // UploadFileEntityResponse
+    deleteUploadFolder: NexusGenRootTypes['UploadFolderEntityResponse'] | null; // UploadFolderEntityResponse
     deleteUsersPermissionsRole: NexusGenRootTypes['UsersPermissionsDeleteRolePayload'] | null; // UsersPermissionsDeleteRolePayload
     deleteUsersPermissionsUser: NexusGenRootTypes['UsersPermissionsUserEntityResponse']; // UsersPermissionsUserEntityResponse!
     emailConfirmation: NexusGenRootTypes['UsersPermissionsLoginPayload'] | null; // UsersPermissionsLoginPayload
@@ -678,6 +717,7 @@ export interface NexusGenFieldTypes {
     updateFileInfo: NexusGenRootTypes['UploadFileEntityResponse']; // UploadFileEntityResponse!
     updateHero: NexusGenRootTypes['HeroEntityResponse'] | null; // HeroEntityResponse
     updateUploadFile: NexusGenRootTypes['UploadFileEntityResponse'] | null; // UploadFileEntityResponse
+    updateUploadFolder: NexusGenRootTypes['UploadFolderEntityResponse'] | null; // UploadFolderEntityResponse
     updateUsersPermissionsRole: NexusGenRootTypes['UsersPermissionsUpdateRolePayload'] | null; // UsersPermissionsUpdateRolePayload
     updateUsersPermissionsUser: NexusGenRootTypes['UsersPermissionsUserEntityResponse']; // UsersPermissionsUserEntityResponse!
     upload: NexusGenRootTypes['UploadFileEntityResponse']; // UploadFileEntityResponse!
@@ -697,6 +737,8 @@ export interface NexusGenFieldTypes {
     me: NexusGenRootTypes['UsersPermissionsMe'] | null; // UsersPermissionsMe
     uploadFile: NexusGenRootTypes['UploadFileEntityResponse'] | null; // UploadFileEntityResponse
     uploadFiles: NexusGenRootTypes['UploadFileEntityResponseCollection'] | null; // UploadFileEntityResponseCollection
+    uploadFolder: NexusGenRootTypes['UploadFolderEntityResponse'] | null; // UploadFolderEntityResponse
+    uploadFolders: NexusGenRootTypes['UploadFolderEntityResponseCollection'] | null; // UploadFolderEntityResponseCollection
     usersPermissionsRole: NexusGenRootTypes['UsersPermissionsRoleEntityResponse'] | null; // UsersPermissionsRoleEntityResponse
     usersPermissionsRoles: NexusGenRootTypes['UsersPermissionsRoleEntityResponseCollection'] | null; // UsersPermissionsRoleEntityResponseCollection
     usersPermissionsUser: NexusGenRootTypes['UsersPermissionsUserEntityResponse'] | null; // UsersPermissionsUserEntityResponse
@@ -737,6 +779,30 @@ export interface NexusGenFieldTypes {
   }
   UploadFileRelationResponseCollection: { // field return type
     data: NexusGenRootTypes['UploadFileEntity'][]; // [UploadFileEntity!]!
+  }
+  UploadFolder: { // field return type
+    children: NexusGenRootTypes['UploadFolderRelationResponseCollection'] | null; // UploadFolderRelationResponseCollection
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    files: NexusGenRootTypes['UploadFileRelationResponseCollection'] | null; // UploadFileRelationResponseCollection
+    name: string; // String!
+    parent: NexusGenRootTypes['UploadFolderEntityResponse'] | null; // UploadFolderEntityResponse
+    path: string; // String!
+    pathId: number; // Int!
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  UploadFolderEntity: { // field return type
+    attributes: NexusGenRootTypes['UploadFolder'] | null; // UploadFolder
+    id: string | null; // ID
+  }
+  UploadFolderEntityResponse: { // field return type
+    data: NexusGenRootTypes['UploadFolderEntity'] | null; // UploadFolderEntity
+  }
+  UploadFolderEntityResponseCollection: { // field return type
+    data: NexusGenRootTypes['UploadFolderEntity'][]; // [UploadFolderEntity!]!
+    meta: NexusGenRootTypes['ResponseCollectionMeta']; // ResponseCollectionMeta!
+  }
+  UploadFolderRelationResponseCollection: { // field return type
+    data: NexusGenRootTypes['UploadFolderEntity'][]; // [UploadFolderEntity!]!
   }
   UsersPermissionsCreateRolePayload: { // field return type
     ok: boolean; // Boolean!
@@ -914,11 +980,13 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createAd: 'AdEntityResponse'
     createUploadFile: 'UploadFileEntityResponse'
+    createUploadFolder: 'UploadFolderEntityResponse'
     createUsersPermissionsRole: 'UsersPermissionsCreateRolePayload'
     createUsersPermissionsUser: 'UsersPermissionsUserEntityResponse'
     deleteAd: 'AdEntityResponse'
     deleteHero: 'HeroEntityResponse'
     deleteUploadFile: 'UploadFileEntityResponse'
+    deleteUploadFolder: 'UploadFolderEntityResponse'
     deleteUsersPermissionsRole: 'UsersPermissionsDeleteRolePayload'
     deleteUsersPermissionsUser: 'UsersPermissionsUserEntityResponse'
     emailConfirmation: 'UsersPermissionsLoginPayload'
@@ -932,6 +1000,7 @@ export interface NexusGenFieldTypeNames {
     updateFileInfo: 'UploadFileEntityResponse'
     updateHero: 'HeroEntityResponse'
     updateUploadFile: 'UploadFileEntityResponse'
+    updateUploadFolder: 'UploadFolderEntityResponse'
     updateUsersPermissionsRole: 'UsersPermissionsUpdateRolePayload'
     updateUsersPermissionsUser: 'UsersPermissionsUserEntityResponse'
     upload: 'UploadFileEntityResponse'
@@ -951,6 +1020,8 @@ export interface NexusGenFieldTypeNames {
     me: 'UsersPermissionsMe'
     uploadFile: 'UploadFileEntityResponse'
     uploadFiles: 'UploadFileEntityResponseCollection'
+    uploadFolder: 'UploadFolderEntityResponse'
+    uploadFolders: 'UploadFolderEntityResponseCollection'
     usersPermissionsRole: 'UsersPermissionsRoleEntityResponse'
     usersPermissionsRoles: 'UsersPermissionsRoleEntityResponseCollection'
     usersPermissionsUser: 'UsersPermissionsUserEntityResponse'
@@ -991,6 +1062,30 @@ export interface NexusGenFieldTypeNames {
   }
   UploadFileRelationResponseCollection: { // field return type name
     data: 'UploadFileEntity'
+  }
+  UploadFolder: { // field return type name
+    children: 'UploadFolderRelationResponseCollection'
+    createdAt: 'DateTime'
+    files: 'UploadFileRelationResponseCollection'
+    name: 'String'
+    parent: 'UploadFolderEntityResponse'
+    path: 'String'
+    pathId: 'Int'
+    updatedAt: 'DateTime'
+  }
+  UploadFolderEntity: { // field return type name
+    attributes: 'UploadFolder'
+    id: 'ID'
+  }
+  UploadFolderEntityResponse: { // field return type name
+    data: 'UploadFolderEntity'
+  }
+  UploadFolderEntityResponseCollection: { // field return type name
+    data: 'UploadFolderEntity'
+    meta: 'ResponseCollectionMeta'
+  }
+  UploadFolderRelationResponseCollection: { // field return type name
+    data: 'UploadFolderEntity'
   }
   UsersPermissionsCreateRolePayload: { // field return type name
     ok: 'Boolean'
@@ -1107,6 +1202,9 @@ export interface NexusGenArgTypes {
     createUploadFile: { // args
       data: NexusGenInputs['UploadFileInput']; // UploadFileInput!
     }
+    createUploadFolder: { // args
+      data: NexusGenInputs['UploadFolderInput']; // UploadFolderInput!
+    }
     createUsersPermissionsRole: { // args
       data: NexusGenInputs['UsersPermissionsRoleInput']; // UsersPermissionsRoleInput!
     }
@@ -1117,6 +1215,9 @@ export interface NexusGenArgTypes {
       id: string; // ID!
     }
     deleteUploadFile: { // args
+      id: string; // ID!
+    }
+    deleteUploadFolder: { // args
       id: string; // ID!
     }
     deleteUsersPermissionsRole: { // args
@@ -1166,6 +1267,10 @@ export interface NexusGenArgTypes {
       data: NexusGenInputs['UploadFileInput']; // UploadFileInput!
       id: string; // ID!
     }
+    updateUploadFolder: { // args
+      data: NexusGenInputs['UploadFolderInput']; // UploadFolderInput!
+      id: string; // ID!
+    }
     updateUsersPermissionsRole: { // args
       data: NexusGenInputs['UsersPermissionsRoleInput']; // UsersPermissionsRoleInput!
       id: string; // ID!
@@ -1207,6 +1312,14 @@ export interface NexusGenArgTypes {
       pagination: NexusGenInputs['PaginationArg'] | null; // PaginationArg
       sort: Array<string | null> | null; // [String]
     }
+    uploadFolder: { // args
+      id?: string | null; // ID
+    }
+    uploadFolders: { // args
+      filters?: NexusGenInputs['UploadFolderFiltersInput'] | null; // UploadFolderFiltersInput
+      pagination: NexusGenInputs['PaginationArg'] | null; // PaginationArg
+      sort: Array<string | null> | null; // [String]
+    }
     usersPermissionsRole: { // args
       id?: string | null; // ID
     }
@@ -1220,6 +1333,18 @@ export interface NexusGenArgTypes {
     }
     usersPermissionsUsers: { // args
       filters?: NexusGenInputs['UsersPermissionsUserFiltersInput'] | null; // UsersPermissionsUserFiltersInput
+      pagination: NexusGenInputs['PaginationArg'] | null; // PaginationArg
+      sort: Array<string | null> | null; // [String]
+    }
+  }
+  UploadFolder: {
+    children: { // args
+      filters?: NexusGenInputs['UploadFolderFiltersInput'] | null; // UploadFolderFiltersInput
+      pagination: NexusGenInputs['PaginationArg'] | null; // PaginationArg
+      sort: Array<string | null> | null; // [String]
+    }
+    files: { // args
+      filters?: NexusGenInputs['UploadFileFiltersInput'] | null; // UploadFileFiltersInput
       pagination: NexusGenInputs['PaginationArg'] | null; // PaginationArg
       sort: Array<string | null> | null; // [String]
     }
@@ -1246,7 +1371,7 @@ export interface NexusGenArgTypes {
 }
 
 export interface NexusGenAbstractTypeMembers {
-  GenericMorph: "Ad" | "Hero" | "I18NLocale" | "UploadFile" | "UsersPermissionsPermission" | "UsersPermissionsRole" | "UsersPermissionsUser"
+  GenericMorph: "Ad" | "Hero" | "I18NLocale" | "UploadFile" | "UploadFolder" | "UsersPermissionsPermission" | "UsersPermissionsRole" | "UsersPermissionsUser"
 }
 
 export interface NexusGenTypeInterfaces {

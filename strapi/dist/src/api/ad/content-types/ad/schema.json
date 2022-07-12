@@ -1,0 +1,87 @@
+{
+    "kind": "collectionType",
+    "collectionName": "ads",
+    "info": {
+        "singularName": "ad",
+        "pluralName": "ads",
+        "displayName": "Ad",
+        "description": ""
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "body": {
+            "type": "richtext",
+            "required": true,
+            "minLength": 100,
+            "maxLength": 9000
+        },
+        "images": {
+            "type": "media",
+            "multiple": true,
+            "required": true,
+            "allowedTypes": [
+                "images"
+            ]
+        },
+        "type": {
+            "type": "enumeration",
+            "enum": [
+                "cat",
+                "dog",
+                "bird",
+                "aquarium",
+                "rodent"
+            ],
+            "required": true
+        },
+        "breed": {
+            "type": "string",
+            "maxLength": 500,
+            "required": false,
+            "minLength": 3
+        },
+        "price": {
+            "type": "decimal",
+            "min": 0,
+            "required": true,
+            "max": 20000
+        },
+        "tel": {
+            "type": "string",
+            "required": true,
+            "maxLength": 100,
+            "minLength": 5
+        },
+        "email": {
+            "type": "email",
+            "required": true,
+            "maxLength": 100,
+            "minLength": 5
+        },
+        "owner": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "plugin::users-permissions.user",
+            "private": true,
+            "inversedBy": "ads"
+        },
+        "birthday": {
+            "type": "date",
+            "required": true
+        },
+        "name": {
+            "type": "string",
+            "required": false,
+            "minLength": 3,
+            "maxLength": 250
+        },
+        "isPublished": {
+            "type": "boolean",
+            "default": false,
+            "required": true
+        }
+    }
+}

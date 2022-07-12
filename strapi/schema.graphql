@@ -189,7 +189,7 @@ input FloatFilterInput {
   startsWith: Float
 }
 
-union GenericMorph = Ad | Hero | I18NLocale | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph = Ad | Hero | I18NLocale | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
 
 type Hero {
   body: String!
@@ -382,6 +382,7 @@ input LongFilterInput {
 type Mutation {
   createAd(data: AdInput!): AdEntityResponse
   createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
+  createUploadFolder(data: UploadFolderInput!): UploadFolderEntityResponse
 
   """Create a new role"""
   createUsersPermissionsRole(data: UsersPermissionsRoleInput!): UsersPermissionsCreateRolePayload
@@ -391,6 +392,7 @@ type Mutation {
   deleteAd(id: ID!): AdEntityResponse
   deleteHero: HeroEntityResponse
   deleteUploadFile(id: ID!): UploadFileEntityResponse
+  deleteUploadFolder(id: ID!): UploadFolderEntityResponse
 
   """Delete an existing role"""
   deleteUsersPermissionsRole(id: ID!): UsersPermissionsDeleteRolePayload
@@ -418,6 +420,7 @@ type Mutation {
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updateHero(data: HeroInput!): HeroEntityResponse
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
+  updateUploadFolder(data: UploadFolderInput!, id: ID!): UploadFolderEntityResponse
 
   """Update an existing role"""
   updateUsersPermissionsRole(data: UsersPermissionsRoleInput!, id: ID!): UsersPermissionsUpdateRolePayload
@@ -455,6 +458,8 @@ type Query {
   me: UsersPermissionsMe
   uploadFile(id: ID): UploadFileEntityResponse
   uploadFiles(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileEntityResponseCollection
+  uploadFolder(id: ID): UploadFolderEntityResponse
+  uploadFolders(filters: UploadFolderFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFolderEntityResponseCollection
   usersPermissionsRole(id: ID): UsersPermissionsRoleEntityResponse
   usersPermissionsRoles(filters: UsersPermissionsRoleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsRoleEntityResponseCollection
   usersPermissionsUser(id: ID): UsersPermissionsUserEntityResponse
@@ -557,6 +562,8 @@ input UploadFileFiltersInput {
   caption: StringFilterInput
   createdAt: DateTimeFilterInput
   ext: StringFilterInput
+  folder: UploadFolderFiltersInput
+  folderPath: StringFilterInput
   formats: JSONFilterInput
   hash: StringFilterInput
   height: IntFilterInput
@@ -578,6 +585,8 @@ input UploadFileInput {
   alternativeText: String
   caption: String
   ext: String
+  folder: ID
+  folderPath: String
   formats: JSON
   hash: String
   height: Int
@@ -593,6 +602,59 @@ input UploadFileInput {
 
 type UploadFileRelationResponseCollection {
   data: [UploadFileEntity!]!
+}
+
+type UploadFolder {
+  children(filters: UploadFolderFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFolderRelationResponseCollection
+  createdAt: DateTime
+  files(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection
+  name: String!
+  parent: UploadFolderEntityResponse
+  path: String!
+  pathId: Int!
+  updatedAt: DateTime
+}
+
+type UploadFolderEntity {
+  attributes: UploadFolder
+  id: ID
+}
+
+type UploadFolderEntityResponse {
+  data: UploadFolderEntity
+}
+
+type UploadFolderEntityResponseCollection {
+  data: [UploadFolderEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input UploadFolderFiltersInput {
+  and: [UploadFolderFiltersInput]
+  children: UploadFolderFiltersInput
+  createdAt: DateTimeFilterInput
+  files: UploadFileFiltersInput
+  id: IDFilterInput
+  name: StringFilterInput
+  not: UploadFolderFiltersInput
+  or: [UploadFolderFiltersInput]
+  parent: UploadFolderFiltersInput
+  path: StringFilterInput
+  pathId: IntFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input UploadFolderInput {
+  children: [ID]
+  files: [ID]
+  name: String
+  parent: ID
+  path: String
+  pathId: Int
+}
+
+type UploadFolderRelationResponseCollection {
+  data: [UploadFolderEntity!]!
 }
 
 type UsersPermissionsCreateRolePayload {
