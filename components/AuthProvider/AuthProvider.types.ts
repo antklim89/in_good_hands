@@ -6,6 +6,7 @@ export interface AuthProviderProps {
 }
 
 export interface IAuthContext {
+     id: string | null;
      email: string | null;
      username: string | null;
      isAuth: boolean;

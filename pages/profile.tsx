@@ -19,7 +19,7 @@ const ProfilePage: NextPage<Props> = () => {
 export default ProfilePage;
 
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
 
     return { props: { } };
 };

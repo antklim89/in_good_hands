@@ -22,3 +22,11 @@ mutation Register($email: String!, $password: String!, $username: String!) {
     }
   }
 }
+
+mutation UpdateCredentials($id: ID!, $data: UsersPermissionsUserInput!) {
+  updateUsersPermissionsUser(id: $id, data: $data) {
+    data {
+      id
+    }
+  }
+}

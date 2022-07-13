@@ -10,6 +10,7 @@ import { AuthProviderProps, IAuthContext } from './AuthProvider.types';
 export const AuthContext = createContext({} as IAuthContext);
 
 const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
+    const [id, setId] = useState<IAuthContext['id']>(null);
     const [email, setEmail] = useState<IAuthContext['email']>(null);
     const [username, setUsername] = useState<IAuthContext['username']>(null);
     const [authInited, setAuthInited] = useState(false);
@@ -23,6 +24,7 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
             }
             setEmail(user.email);
             setUsername(user.username);
+            setId(user.id);
         } catch (_) {
             // void
         } finally {
@@ -46,6 +48,7 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     return (
         <AuthContext.Provider
             value={{
+                id,
                 email,
                 username,
                 isAuth,

@@ -3,6 +3,7 @@ import {
     ILoginMutationVariables,
     IRegisterMutationVariables,
     IRegisterMutation,
+    IUpdateCredentialsMutation,
 } from '~/generated/graphql';
 import query from '~/queries/auth.gql';
 
@@ -27,4 +28,13 @@ export async function register(variables: IRegisterMutationVariables): Promise<I
 export function logout(): void {
     clearUserCookie();
     clearJWTCookie();
+}
+
+export async function updateCredentials(variables: {id: string, data: {email: string, username: string}}): Promise<IUpdateCredentialsMutation['updateUsersPermissionsUser']['data']> {
+    const data = await requestBase<
+        IUpdateCredentialsMutation,
+        {id: string, data: {email: string, username: string}}
+    >({ query: query.UpdateCredentials, variables });
+
+    return data.updateUsersPermissionsUser.data;
 }
