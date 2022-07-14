@@ -28,7 +28,7 @@ webpack({
             {
                 test: /\.ts$/,
                 loader: 'swc-loader',
-                options: JSON.parse(fs.readFileSync(resolve(__dirname, '.swcrc'), 'utf-8')),
+                options: JSON.parse(fs.readFileSync(resolve(process.cwd(), '.swcrc'), 'utf-8')),
             },
         ],
     },

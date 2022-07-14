@@ -1,90 +1,34 @@
-// Require the framework and instantiate it
+import path from 'path';
+
+import { fastifyAutoload } from '@fastify/autoload';
 import fastify from 'fastify';
 
 
-const app = fastify({ logger: true });
+const app = fastify({ logger: false });
 
 
-app.register(
-    import('@fastify/compress'),
-    { global: false },
-);
+const { PORT = 8000 } = process.env;
 
-app.register(import('@fastify/cors'), {
-    // put your options here
-});
-
-app.register(import('@fastify/multipart'));
-
-// Declare a route
-app.get('/', async (request, reply) => {
-    return { hello: 'YYYYYdsasdssad' };
-});
-
-app.register(import('@fastify/swagger'), {
-    routePrefix: '/documentation',
-    swagger: {
-        info: {
-            title: 'Test swagger',
-            description: 'Testing the Fastify swagger API',
-            version: '0.1.0',
-        },
-        externalDocs: {
-            url: 'https://swagger.io',
-            description: 'Find more info here',
-        },
-        host: 'localhost',
-        schemes: ['http'],
-        consumes: ['application/json'],
-        produces: ['application/json'],
-        tags: [
-            { name: 'user', description: 'User related end-points' },
-            { name: 'code', description: 'Code related end-points' },
-        ],
-        definitions: {
-            User: {
-                type: 'object',
-                required: ['id', 'email'],
-                properties: {
-                    id: { type: 'string', format: 'uuid' },
-                    firstName: { type: 'string' },
-                    lastName: { type: 'string' },
-                    email: { type: 'string', format: 'email' },
-                },
-            },
-        },
-        securityDefinitions: {
-            apiKey: {
-                type: 'apiKey',
-                name: 'apiKey',
-                in: 'header',
-            },
-        },
-    },
-    uiConfig: {
-        docExpansion: 'full',
-        deepLinking: false,
-    },
-    uiHooks: {
-        onRequest (request, reply, next) {
-            next();
-        },
-        preHandler (request, reply, next) {
-            next();
-        },
-    },
-    staticCSP: true,
-    transformStaticCSP: (header) => header,
-    exposeRoute: true,
+app.register(fastifyAutoload, {
+    dir: path.join(__dirname, 'plugins'),
+    options: {},
 });
 
 
-// Run the server!
+app.register(fastifyAutoload, {
+    dir: path.join(__dirname, 'routes'),
+    options: {},
+});
+
+
 export const start = async () => {
     try {
-        await app.listen({ port: 3000 });
+        await app.listen({ port: Number(PORT) }, () => {
+            // eslint-disable-next-line no-console
+            console.log(`Server started on port ${PORT}`);
+        });
     } catch (err) {
-        app.log.error(err);
+        console.error(err);
         process.exit(1);
     }
 };

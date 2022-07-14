@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "dev": "node webpack.js"
+    "dev": "nodemon ./output/server.js"
   },
   "keywords": [],
   "author": "",
