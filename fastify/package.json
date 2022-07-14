@@ -7,9 +7,7 @@
     "dev": "run-p dev:**",
     "dev:nodemon": "nodemon ./output/server.js",
     "dev:swc": "swc ./src -d ./output -w",
-    "test": "jest --watchAll",
-    "prisma:gen": "prisma generate --schema=./src/prisma/schema.prisma",
-    "prisma:migrate": "prisma migrate dev --schema=./src/prisma/schema.prisma "
+    "test": "jest --watchAll"
   },
   "keywords": [],
   "author": "",

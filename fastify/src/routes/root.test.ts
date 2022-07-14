@@ -9,6 +9,6 @@ describe('Test', () => {
 
     it('default root route', async () => {
         const data = await app.inject({ url: '/', method: 'GET', headers: { 'content-type': 'application/json' } });
-        expect(data.json()).toHaveProperty('root', true);
+        expect(data.json()).toHaveProperty('msg', 'Hello');
     });
 });
