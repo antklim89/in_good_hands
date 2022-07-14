@@ -14,6 +14,7 @@ app.register(fastifyAutoload, {
 
 app.register(fastifyAutoload, {
     dir: path.join(__dirname, 'routes'),
+    ignorePattern: /\.test\./,
     options: {},
 });
 
