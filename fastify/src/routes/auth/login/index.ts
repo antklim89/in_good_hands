@@ -1,14 +1,14 @@
-import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import { FastifyInstance } from 'fastify';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 
-
 import schema from './schema';
 
+import { RouteOptions } from '@/types';
 
-export default async function login(fastify: FastifyInstance, { prisma }: { prisma: PrismaClient }) {
+
+export default async function login(fastify: FastifyInstance, { prisma }: RouteOptions) {
     fastify.route({
         method: 'POST',
         url: '/',
@@ -16,7 +16,11 @@ export default async function login(fastify: FastifyInstance, { prisma }: { pris
         async handler(req, repl) {
             const { email, password } = req.body as Record<string, string>;
 
-            const user = await prisma.user.findFirst({ where: { email } }).catch();
+            const user = await prisma.user.findUnique({
+                where: { email },
+                select: { email: true, name: true, id: true, hash: true },
+            });
+
             if (!user) {
                 return repl.status(400).send({ message: 'E-mail or password is not valid.' });
             }
@@ -27,7 +31,7 @@ export default async function login(fastify: FastifyInstance, { prisma }: { pris
                 return repl.status(400).send({ message: 'E-mail or password is not valid.' });
             }
 
-            const responseUser = _.pick(user, ['email', 'firstName', 'lastName']);
+            const responseUser = _.pick(user, ['email', 'name', 'id']);
             const token = jwt.sign(responseUser, 'SECRET');
 
             return { user: responseUser, token };

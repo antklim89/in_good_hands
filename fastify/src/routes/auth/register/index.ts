@@ -4,43 +4,43 @@ import jwt from 'jsonwebtoken';
 
 import schema from './schema';
 
+import { JWT_SECRET } from '@/constants';
+import { RouteOptions } from '@/types';
 
-export default async function register (fastify: FastifyInstance) {
+
+export default async function register (fastify: FastifyInstance, { prisma }: RouteOptions) {
     fastify.route({
         method: 'POST',
         url: '/',
         schema,
         async handler(req, repl) {
-            const { email, password, firstName, lastName } = req.body as Record<string, string>;
+            const { email, password, name } = req.body as Record<string, string>;
 
-            const isUserExist = FAKE_DB.find((user) => user.email === email);
+            const isUserExist = await prisma.user.findUnique({ where: { email } });
             if (isUserExist) {
                 return repl.status(409).send({ message: 'E-mail already exists.' });
             }
 
             const hash = await new Promise<string>((resolve, reject) => {
-                bcryptjs.hash(password, 8, (err: any, result: any) => {
+                bcryptjs.hash(password, 8, (err, result) => {
                     if (err) return reject(err);
                     return resolve(result);
                 });
             });
 
-            const newUser = { email, hash, firstName, lastName };
-            FAKE_DB.push(newUser);
+            const newUser = await prisma.user.create({
+                data: {
+                    email,
+                    hash,
+                    name,
+                },
+                select: { email: true, id: true, name: true },
+            });
 
-            const token = jwt.sign(newUser, 'SECRET');
+            const token = jwt.sign(newUser, JWT_SECRET);
 
 
-            return { user: { email, firstName, lastName }, token };
+            return { user: newUser, token };
         },
     });
 }
-
-export const FAKE_DB = [
-    {
-        email: 'example@mail.com',
-        hash: '$2a$08$mVgFhWTwt3tviMEuS.WqAe/dvJLzPp8B4od9nUjKlDsBbDiWF5tXK', // qwer123
-        firstName: 'John',
-        lastName: 'Smith',
-    },
-];

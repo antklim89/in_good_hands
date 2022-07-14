@@ -11,7 +11,7 @@ const app = fastify({ logger: false });
 
 app.register(fastifyAutoload, {
     dir: path.join(__dirname, 'plugins'),
-    options: { prisma },
+    options: {},
 });
 
 

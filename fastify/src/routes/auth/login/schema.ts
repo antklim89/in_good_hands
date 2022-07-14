@@ -1,7 +1,6 @@
-import { RouteShorthandOptions } from 'fastify';
 
 
-const schema: RouteShorthandOptions['schema'] = {
+const schema = {
     body: {
         type: 'object',
         required: ['password', 'email'],
@@ -18,8 +17,8 @@ const schema: RouteShorthandOptions['schema'] = {
                     type: 'object',
                     properties: {
                         email: { type: 'string' },
-                        firstName: { type: 'string' },
-                        lastName: { type: 'string' },
+                        name: { type: 'string' },
+                        id: { type: 'string' },
                     },
                 },
                 token: { type: 'string' },
