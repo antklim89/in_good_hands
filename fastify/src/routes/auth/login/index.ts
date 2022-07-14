@@ -1,15 +1,14 @@
+import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import { FastifyInstance } from 'fastify';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 
-import { FAKE_DB } from '../register';
-
 
 import schema from './schema';
 
 
-export default async function login (fastify: FastifyInstance) {
+export default async function login(fastify: FastifyInstance, { prisma }: { prisma: PrismaClient }) {
     fastify.route({
         method: 'POST',
         url: '/',
@@ -17,7 +16,7 @@ export default async function login (fastify: FastifyInstance) {
         async handler(req, repl) {
             const { email, password } = req.body as Record<string, string>;
 
-            const user = FAKE_DB.find((u) => u.email === email);
+            const user = await prisma.user.findFirst({ where: { email } }).catch();
             if (!user) {
                 return repl.status(400).send({ message: 'E-mail or password is not valid.' });
             }

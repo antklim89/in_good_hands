@@ -2,7 +2,7 @@ import { FastifyInstance } from 'fastify';
 
 
 export default async function route (fastify: FastifyInstance) {
-    fastify.get('/', async (request, reply) => {
+    fastify.get('/', async () => {
         return { root: true };
     });
 }
