@@ -53,6 +53,7 @@ module.exports = {
         /**
         * Imports
         */
+        'import/no-unresolved': 0,
         'import/prefer-default-export': 0,
         'import/extensions': 0,
         'import/newline-after-import': ['error', { count: 2 }],
@@ -167,13 +168,6 @@ module.exports = {
             pragma: 'React',
             fragment: 'Fragment',
             version: 'detect',
-        },
-
-        'import/resolver': {
-            alias: {
-                map: [['~', path.join(__dirname, './')]],
-                extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.vue'],
-            },
         },
     },
 
