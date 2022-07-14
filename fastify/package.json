@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "dev": "nodemon ./output/server.js"
+    "dev": "nodemon ./output/server.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
