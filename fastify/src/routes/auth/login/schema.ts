@@ -5,8 +5,8 @@ const schema = {
         type: 'object',
         required: ['password', 'email'],
         properties: {
-            password: { type: 'string' },
-            email: { type: 'string' },
+            password: { type: 'string', default: 'qwer123' },
+            email: { type: 'string', default: 'example@mail.com' },
         },
     },
     response: {
@@ -16,9 +16,9 @@ const schema = {
                 user: {
                     type: 'object',
                     properties: {
-                        email: { type: 'string' },
-                        name: { type: 'string' },
-                        id: { type: 'string' },
+                        email: { type: 'string', default: 'example@mail.com' },
+                        name: { type: 'string', default: 'John' },
+                        id: { type: 'string', default: '05f0182d-385a-46dc-bc02-da04fc42d03e' },
                     },
                 },
                 token: { type: 'string' },

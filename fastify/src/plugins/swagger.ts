@@ -23,28 +23,19 @@ export default fp(async (app) => {
                 { name: 'code', description: 'Code related end-points' },
             ],
             definitions: {},
+
             securityDefinitions: {
-                apiKey: {
+                auth: {
                     type: 'apiKey',
-                    name: 'apiKey',
+                    name: 'auth',
                     in: 'header',
                 },
             },
         },
         uiConfig: {
-            docExpansion: 'full',
+            docExpansion: 'none',
             deepLinking: false,
         },
-        uiHooks: {
-            onRequest (request, reply, next) {
-                next();
-            },
-            preHandler (request, reply, next) {
-                next();
-            },
-        },
-        staticCSP: true,
-        transformStaticCSP: (header) => header,
         exposeRoute: true,
     });
 });
