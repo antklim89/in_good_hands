@@ -7,7 +7,7 @@ import { JWT_SECRET } from '~/fastify/constants';
 import { RouteOptions } from '~/fastify/types';
 
 
-export default async function login(fastify: FastifyInstance, { prisma }: RouteOptions) {
+export default async function update(fastify: FastifyInstance, { prisma }: RouteOptions) {
     fastify.route({
         method: 'POST',
         url: '/',

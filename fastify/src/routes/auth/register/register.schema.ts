@@ -1,23 +1,13 @@
-import loginSchema from '../login/login.schema';
+import { registerSchema, authResponseSchema } from '~/fastify/schemas/user';
 
 
 const schema = {
     tags: ['auth'],
     operationId: 'Register',
-    body: {
-        type: 'object',
-        required: ['name', ...loginSchema.body.required],
-        properties: {
-            ...loginSchema.body.properties,
-            name: {
-                type: 'string',
-                default: 'John',
-                minLength: 3,
-                maxLength: 50,
-            },
-        },
+    body: registerSchema,
+    response: {
+        200: authResponseSchema,
     },
-    response: loginSchema.response,
 };
 
 export default schema;
