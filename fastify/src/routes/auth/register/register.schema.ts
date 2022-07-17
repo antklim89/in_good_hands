@@ -3,6 +3,7 @@ import loginSchema from '../login/login.schema';
 
 const schema = {
     tags: ['auth'],
+    operationId: 'Register',
     body: {
         type: 'object',
         required: ['name', ...loginSchema.body.required],

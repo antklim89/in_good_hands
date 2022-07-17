@@ -2,6 +2,7 @@
 
 const schema = {
     tags: ['auth'],
+    operationId: 'Login',
     body: {
         type: 'object',
         required: ['password', 'email'],

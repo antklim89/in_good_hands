@@ -1,7 +1,7 @@
 
 
-export declare module 'fastify' {
-    interface FastifyRequest {
+declare module 'fastify' {
+    export interface FastifyRequest {
         user: {
             id: string
             name: string

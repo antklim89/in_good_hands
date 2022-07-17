@@ -2,6 +2,7 @@
 
 const schema = {
     tags: ['auth'],
+    operationId: 'Update',
     body: {
         type: 'object',
         required: ['email', 'name'],

@@ -1,2 +1,2 @@
-export * from './route-options.ts';
+export * from './route-options';
 

@@ -1,8 +1,9 @@
 import bcrypt from 'bcryptjs';
-import { FastifyInstance } from 'fastify';
+import { FastifyInstance, FastifyRequest } from 'fastify';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 
+import { Auth } from '@/swagger';
 import { RouteOptions } from '@/types';
 
 import schema from './login.schema';
@@ -13,8 +14,8 @@ export default async function login(fastify: FastifyInstance, { prisma }: RouteO
         method: 'POST',
         url: '/',
         schema,
-        async handler(req, repl) {
-            const { email, password } = req.body as Record<string, string>;
+        async handler(req: FastifyRequest<{ Body: Auth.Login.RequestBody }>, repl) {
+            const { email, password } = req.body;
 
             const user = await prisma.user.findUnique({
                 where: { email },
