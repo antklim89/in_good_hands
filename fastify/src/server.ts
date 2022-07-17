@@ -14,7 +14,7 @@ export const start = async () => {
             generateApi({
                 name: 'index.ts',
                 output: resolve(process.cwd(), './src/swagger'),
-                spec: app.swagger() as import('swagger-schema-official').Spec,
+                spec: app.swagger(),
                 httpClientType: 'axios', // or "fetch"
                 defaultResponseAsSuccess: true,
                 generateRouteTypes: true,
