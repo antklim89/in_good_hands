@@ -7,7 +7,16 @@ import fastify from 'fastify';
 
 const prisma = new PrismaClient();
 
-const app = fastify({ logger: true });
+const app = fastify({
+    logger: {
+        base: null,
+        timestamp: false,
+        transport: {
+            target: 'pino-pretty',
+            options: { colorize: true },
+        },
+    },
+});
 
 app.register(fastifyAutoload, {
     dir: path.join(__dirname, 'plugins'),
