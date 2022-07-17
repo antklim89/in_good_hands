@@ -2,11 +2,10 @@ import bcryptjs from 'bcryptjs';
 import { FastifyInstance } from 'fastify';
 import jwt from 'jsonwebtoken';
 
-
-import { JWT_SECRET } from '@/constants';
-import { RouteOptions } from '@/types';
-
 import schema from './register.schema';
+
+import { JWT_SECRET } from '~/fastify/constants';
+import { RouteOptions } from '~/fastify/types';
 
 
 export default async function register(fastify: FastifyInstance, { prisma }: RouteOptions) {

@@ -1,11 +1,10 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
 import jwt from 'jsonwebtoken';
 
-
-import { JWT_SECRET } from '@/constants';
-import { RouteOptions } from '@/types';
-
 import schema from './update.schema';
+
+import { JWT_SECRET } from '~/fastify/constants';
+import { RouteOptions } from '~/fastify/types';
 
 
 export default async function login(fastify: FastifyInstance, { prisma }: RouteOptions) {

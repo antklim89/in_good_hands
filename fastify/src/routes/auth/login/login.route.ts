@@ -3,10 +3,10 @@ import { FastifyInstance, FastifyRequest } from 'fastify';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 
-import { Auth } from '@/swagger';
-import { RouteOptions } from '@/types';
-
 import schema from './login.schema';
+
+import { Auth } from '~/fastify/swagger';
+import { RouteOptions } from '~/fastify/types';
 
 
 export default async function login(fastify: FastifyInstance, { prisma }: RouteOptions) {
