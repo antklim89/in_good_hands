@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 
+import { PrismaClient } from '@prisma/client';
 import { generateApi } from 'swagger-typescript-api';
 
 import app from './app';
@@ -7,15 +8,18 @@ import app from './app';
 
 const { PORT = 8000 } = process.env;
 
-
 export const start = async () => {
     try {
+        const prisma = new PrismaClient();
+
+        app.prisma = prisma;
+
         await app.listen({ port: Number(PORT), host: '0.0.0.0' }, () => {
             generateApi({
                 name: 'index.ts',
                 output: resolve(process.cwd(), './src/swagger'),
-                spec: app.swagger(),
-                httpClientType: 'axios', // or "fetch"
+                spec: app.swagger() as import('swagger-schema-official').Spec,
+                httpClientType: 'axios',
                 defaultResponseAsSuccess: true,
                 generateRouteTypes: true,
                 generateResponses: true,
@@ -28,7 +32,7 @@ export const start = async () => {
                 enumNamesAsValues: false,
                 moduleNameFirstTag: false,
                 generateUnionEnums: false,
-            }).catch(console.error);
+            }).catch((error) => console.error('Swagger typescript gen error: \n', error.message));
         });
     } catch (err) {
         app.log.error(err);

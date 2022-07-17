@@ -9,10 +9,14 @@
         },
         "baseUrl": ".",
         "paths": {
-            "@/*": ["./src/*"],
-            "@/": ["./src/"]
+            "~/fastify/*": [
+                "./src/*"
+            ],
+            "~/fastify/": [
+                "./src/"
+            ]
         }
-  },
+    },
     "module": {
         "type": "commonjs",
         "strict": true,

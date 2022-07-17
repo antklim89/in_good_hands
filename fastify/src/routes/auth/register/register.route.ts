@@ -5,18 +5,17 @@ import jwt from 'jsonwebtoken';
 import schema from './register.schema';
 
 import { JWT_SECRET } from '~/fastify/constants';
-import { RouteOptions } from '~/fastify/types';
 
 
-export default async function register(fastify: FastifyInstance, { prisma }: RouteOptions) {
-    fastify.route({
+export default async function register(app: FastifyInstance) {
+    app.route({
         method: 'POST',
         url: '/',
         schema,
         async handler(req, repl) {
             const { email, password, name } = req.body as Record<string, string>;
 
-            const isUserExist = await prisma.user.findUnique({ where: { email } });
+            const isUserExist = await app.prisma.user.findUnique({ where: { email } });
             if (isUserExist) {
                 return repl.status(409).send({ message: 'E-mail already exists.' });
             }
@@ -28,7 +27,7 @@ export default async function register(fastify: FastifyInstance, { prisma }: Rou
                 });
             });
 
-            const newUser = await prisma.user.create({
+            const newUser = await app.prisma.user.create({
                 data: {
                     email,
                     hash,

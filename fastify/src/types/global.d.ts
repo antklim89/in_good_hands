@@ -11,7 +11,7 @@ export declare module 'fastify' {
     }
 
     interface FastifyInstance {
-        swagger: () => import('swagger-schema-official').Spec
+        prisma: import('@prisma/client').PrismaClient
     }
 }
 

@@ -6,18 +6,17 @@ import _ from 'lodash';
 import schema from './login.schema';
 
 import { Auth } from '~/fastify/swagger';
-import { RouteOptions } from '~/fastify/types';
 
 
-export default async function login(fastify: FastifyInstance, { prisma }: RouteOptions) {
-    fastify.route({
+export default async function login(app: FastifyInstance) {
+    app.route({
         method: 'POST',
         url: '/',
         schema,
         async handler(req: FastifyRequest<{ Body: Auth.Login.RequestBody }>, repl) {
             const { email, password } = req.body;
 
-            const user = await prisma.user.findUnique({
+            const user = await app.prisma.user.findUnique({
                 where: { email },
                 select: { email: true, name: true, id: true, hash: true },
             });

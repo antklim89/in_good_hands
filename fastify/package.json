@@ -2,12 +2,13 @@
   "name": "fastify",
   "version": "1.0.0",
   "description": "This project was bootstrapped with Fastify-CLI.",
-  "main": "app.js",
+  "main": "./src/server.ts",
   "scripts": {
     "dev": "run-p dev:**",
     "dev:nodemon": "nodemon ./output/server.js --ignore swagger/",
     "dev:swc": "swc ./src -d ./output -w",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll -i",
+    "migrate": "prisma migrate dev"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "@fastify/sensible": "^4.1.0",
     "@fastify/swagger": "^7.4.1",
     "@prisma/client": "^4.0.0",
+    "@swc-node/register": "^1.5.1",
     "@types/bcryptjs": "^2.4.2",
     "bcryptjs": "^2.4.3",
     "fastify": "^4.0.0",

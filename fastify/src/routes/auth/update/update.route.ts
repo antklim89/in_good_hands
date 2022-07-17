@@ -4,11 +4,10 @@ import jwt from 'jsonwebtoken';
 import schema from './update.schema';
 
 import { JWT_SECRET } from '~/fastify/constants';
-import { RouteOptions } from '~/fastify/types';
 
 
-export default async function update(fastify: FastifyInstance, { prisma }: RouteOptions) {
-    fastify.route({
+export default async function update(app: FastifyInstance) {
+    app.route({
         method: 'POST',
         url: '/',
         schema,

@@ -1,11 +1,10 @@
-import app from '../app';
+import { init } from '~/fastify/test';
 
+
+const { app, close } = init('ROOT');
 
 describe('Test', () => {
-
-    afterAll(() => {
-        app.close();
-    });
+    afterAll(close);
 
     it('default root route', async () => {
         const data = await app.inject({ url: '/', method: 'GET', headers: { 'content-type': 'application/json' } });
