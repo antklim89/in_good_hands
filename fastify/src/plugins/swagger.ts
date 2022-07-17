@@ -6,8 +6,8 @@ export default fp(async (app) => {
         routePrefix: '/documentation',
         swagger: {
             info: {
-                title: 'Test swagger',
-                description: 'Testing the Fastify swagger API',
+                title: 'In Good Hands API',
+                description: 'Swagger API',
                 version: '0.1.0',
             },
             externalDocs: {
@@ -18,10 +18,6 @@ export default fp(async (app) => {
             schemes: ['http'],
             consumes: ['application/json'],
             produces: ['application/json'],
-            tags: [
-                { name: 'user', description: 'User related end-points' },
-                { name: 'code', description: 'Code related end-points' },
-            ],
             definitions: {},
 
             securityDefinitions: {

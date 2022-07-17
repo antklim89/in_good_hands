@@ -1,6 +1,7 @@
 
 
 const schema = {
+    tags: ['auth'],
     body: {
         type: 'object',
         required: ['email', 'name'],

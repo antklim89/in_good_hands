@@ -1,12 +1,23 @@
 
 
 const schema = {
+    tags: ['auth'],
     body: {
         type: 'object',
         required: ['password', 'email'],
         properties: {
-            password: { type: 'string', default: 'qwer123' },
-            email: { type: 'string', default: 'example@mail.com' },
+            password: {
+                type: 'string',
+                default: 'qwer123',
+                minLength: 3,
+                maxLength: 50,
+            },
+            email: {
+                type: 'string',
+                default: 'example@mail.com',
+                minLength: 3,
+                maxLength: 50,
+            },
         },
     },
     response: {
