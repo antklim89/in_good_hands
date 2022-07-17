@@ -6,12 +6,11 @@ const { PORT = 8000 } = process.env;
 
 export const start = async () => {
     try {
-        await app.listen({ port: Number(PORT), host: '0.0.0.0' }, () => {
-            // eslint-disable-next-line no-console
-            console.log(`Server started on port ${PORT}`);
+        await app.listen({ port: Number(PORT), host: '0.0.0.0' }, (address) => {
+            app.log.info(address);
         });
     } catch (err) {
-        console.error(err);
+        app.log.error(err);
         process.exit(1);
     }
 };

@@ -1,4 +1,4 @@
-import loginSchema from '../login/schema';
+import loginSchema from '../login/login.schema';
 
 
 const schema = {

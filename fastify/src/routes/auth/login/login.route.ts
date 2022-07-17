@@ -3,9 +3,9 @@ import { FastifyInstance } from 'fastify';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 
-import schema from './schema';
-
 import { RouteOptions } from '@/types';
+
+import schema from './login.schema';
 
 
 export default async function login(fastify: FastifyInstance, { prisma }: RouteOptions) {

@@ -7,7 +7,7 @@ import fastify from 'fastify';
 
 const prisma = new PrismaClient();
 
-const app = fastify({ logger: false });
+const app = fastify({ logger: true });
 
 app.register(fastifyAutoload, {
     dir: path.join(__dirname, 'plugins'),
@@ -17,8 +17,8 @@ app.register(fastifyAutoload, {
 
 app.register(fastifyAutoload, {
     dir: path.join(__dirname, 'routes'),
-    ignorePattern: /\.test\./,
     options: { prisma },
+    indexPattern: /.*\.route\.js/,
 });
 
 

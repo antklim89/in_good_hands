@@ -1,10 +1,11 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
 import jwt from 'jsonwebtoken';
 
-import schema from './schema';
 
 import { JWT_SECRET } from '@/constants';
 import { RouteOptions } from '@/types';
+
+import schema from './update.schema';
 
 
 export default async function login(fastify: FastifyInstance, { prisma }: RouteOptions) {
@@ -21,7 +22,6 @@ export default async function login(fastify: FastifyInstance, { prisma }: RouteO
             done();
         },
         async handler(req, repl) {
-            console.log('==== \n req', req.user);
             const { email, name } = req.body as Record<string, string>;
         },
     });
