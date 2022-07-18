@@ -1,33 +1,30 @@
-import { execSync } from 'child_process';
-
 import { PrismaClient } from '@prisma/client';
 
-import app from '../app';
+import { generateSwaggerTypes } from '../utils';
+
+import { populateDb } from './populateDb';
+
+import app from '~/fastify/app';
 
 
-export const init = (name: string) => {
-    try {
-        execSync(`dropdb ${name}`, { encoding: 'utf8' });
-    } catch (_) { /**/ }
+export const init = () => {
+    const dbUrl = 'postgresql://anton@localhost:5432/test?schema=public';
 
-    execSync(`createdb ${name}`);
-    execSync(`pg_dump in_good_hands -s | psql ${name}`);
-
-    const prisma = new PrismaClient({
-        datasources: { db: { url: `postgresql://anton@localhost:5432/${name}?schema=public` } },
-    });
+    const prisma = new PrismaClient({ datasources: { db: { url: dbUrl } } });
     app.prisma = prisma;
 
+    beforeAll(async () => {
+        await populateDb(prisma);
 
-    const close = async () => {
+        await app.ready().then(() => generateSwaggerTypes(app));
+    });
+
+    afterAll(async () => {
         await app.prisma.$disconnect();
-        await app.close();
-        execSync(`dropdb ${name}`);
-    };
+    });
 
     return {
         app,
-        close,
         prisma,
     };
 };

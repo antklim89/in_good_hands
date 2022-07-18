@@ -1,13 +1,13 @@
 import { init } from '~/fastify/test';
 
 
-const { app, close } = init('ROOT');
+const { app, prisma } = init();
 
-describe('Test', () => {
-    afterAll(close);
-
-    it('default root route', async () => {
+describe('Root', () => {
+    it('GET /', async () => {
+        const users = await prisma.user.findMany();
         const data = await app.inject({ url: '/', method: 'GET', headers: { 'content-type': 'application/json' } });
         expect(data.json()).toHaveProperty('msg', 'Hello');
+        expect(users).toHaveLength(3);
     });
 });

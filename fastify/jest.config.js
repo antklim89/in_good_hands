@@ -158,9 +158,10 @@ const config = {
     // ],
 
     // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-    // testPathIgnorePatterns: [
-    //   "/node_modules/"
-    // ],
+    testPathIgnorePatterns: [
+        '/node_modules/',
+        '/swagger/',
+    ],
 
     // The regexp pattern or array of patterns that Jest uses to detect test files
     // testRegex: [],
@@ -187,7 +188,7 @@ const config = {
     // verbose: undefined,
 
     // An array of regexp patterns that are matched against all source file paths before re-running tests in watch mode
-    // watchPathIgnorePatterns: [],
+    watchPathIgnorePatterns: ['/swagger/'],
 
     // Whether to use watchman for file crawling
     // watchman: true,
