@@ -4,6 +4,7 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "hash" TEXT NOT NULL,
+    "tel" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -19,7 +20,8 @@ CREATE TABLE "Ad" (
     "description" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "tel" TEXT NOT NULL,
-    "published" BOOLEAN NOT NULL,
+    "price" INTEGER NOT NULL,
+    "isPublished" BOOLEAN NOT NULL,
     "ownerId" TEXT NOT NULL,
 
     CONSTRAINT "Ad_pkey" PRIMARY KEY ("id")
