@@ -15,14 +15,14 @@ export namespace Auth {
    * @tags auth
    * @name Login
    * @request POST:/auth/login/
-   * @response `200` `{ user?: { email?: string, name?: string, id?: string }, token?: string }` Default Response
+   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
    */
   export namespace Login {
     export type RequestParams = {};
     export type RequestQuery = {};
     export type RequestBody = { password: string; email: string };
     export type RequestHeaders = {};
-    export type ResponseBody = { user?: { email?: string; name?: string; id?: string }; token?: string };
+    export type ResponseBody = { user: { email: string; name: string; id: string }; token: string };
   }
   /**
    * No description
@@ -43,14 +43,14 @@ export namespace Auth {
    * @tags auth
    * @name Register
    * @request POST:/auth/register/
-   * @response `200` `{ user?: { email?: string, name?: string, id?: string }, token?: string }` Default Response
+   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
    */
   export namespace Register {
     export type RequestParams = {};
     export type RequestQuery = {};
     export type RequestBody = { password: string; email: string; name: string };
     export type RequestHeaders = {};
-    export type ResponseBody = { user?: { email?: string; name?: string; id?: string }; token?: string };
+    export type ResponseBody = { user: { email: string; name: string; id: string }; token: string };
   }
 }
 
@@ -210,10 +210,10 @@ export class Api<SecurityDataType extends unknown> {
      * @tags auth
      * @name Login
      * @request POST:/auth/login/
-     * @response `200` `{ user?: { email?: string, name?: string, id?: string }, token?: string }` Default Response
+     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
      */
     login: (body: { password: string; email: string }, params: RequestParams = {}) =>
-      this.http.request<{ user?: { email?: string; name?: string; id?: string }; token?: string }, any>({
+      this.http.request<{ user: { email: string; name: string; id: string }; token: string }, any>({
         path: `/auth/login/`,
         method: "POST",
         body: body,
@@ -245,10 +245,10 @@ export class Api<SecurityDataType extends unknown> {
      * @tags auth
      * @name Register
      * @request POST:/auth/register/
-     * @response `200` `{ user?: { email?: string, name?: string, id?: string }, token?: string }` Default Response
+     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
      */
     register: (body: { password: string; email: string; name: string }, params: RequestParams = {}) =>
-      this.http.request<{ user?: { email?: string; name?: string; id?: string }; token?: string }, any>({
+      this.http.request<{ user: { email: string; name: string; id: string }; token: string }, any>({
         path: `/auth/register/`,
         method: "POST",
         body: body,

@@ -33,6 +33,7 @@ export const registerSchema = {
 
 export const userResponseSchema = {
     type: 'object',
+    required: ['email', 'name', 'id'],
     properties: {
         email: { type: 'string', default: 'example@mail.com' },
         name: { type: 'string', default: 'John' },
@@ -42,6 +43,7 @@ export const userResponseSchema = {
 
 export const authResponseSchema = {
     type: 'object',
+    required: ['token', 'user'],
     properties: {
         user: userResponseSchema,
         token: { type: 'string' },
