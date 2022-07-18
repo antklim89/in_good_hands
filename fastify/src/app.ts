@@ -30,4 +30,11 @@ app.register(fastifyAutoload, {
 });
 
 
+app.setErrorHandler((error, req, repl) => {
+    if ((error?.statusCode || 0) < 500) return error;
+    repl.status(500);
+    return repl.status(500).send({ message: 'Unexpected server error. Try again later.' });
+});
+
+
 export default app;
