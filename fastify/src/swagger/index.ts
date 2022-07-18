@@ -27,20 +27,6 @@ export namespace Auth {
   /**
    * No description
    * @tags auth
-   * @name Register
-   * @request POST:/auth/register/
-   * @response `200` `{ user?: { email?: string, name?: string, id?: string }, token?: string }` Default Response
-   */
-  export namespace Register {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = { password: string; email: string; name: string };
-    export type RequestHeaders = {};
-    export type ResponseBody = { user?: { email?: string; name?: string; id?: string }; token?: string };
-  }
-  /**
-   * No description
-   * @tags auth
    * @name Update
    * @request POST:/auth/update/
    * @response `200` `void` Default Response
@@ -51,6 +37,20 @@ export namespace Auth {
     export type RequestBody = { name: string; email: string };
     export type RequestHeaders = { auth: string };
     export type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @tags auth
+   * @name Register
+   * @request POST:/auth/register/
+   * @response `200` `{ user?: { email?: string, name?: string, id?: string }, token?: string }` Default Response
+   */
+  export namespace Register {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = { password: string; email: string; name: string };
+    export type RequestHeaders = {};
+    export type ResponseBody = { user?: { email?: string; name?: string; id?: string }; token?: string };
   }
 }
 
@@ -226,6 +226,23 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags auth
+     * @name Update
+     * @request POST:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (body: { name: string; email: string }, params: RequestParams = {}) =>
+      this.http.request<void, any>({
+        path: `/auth/update/`,
+        method: "POST",
+        body: body,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags auth
      * @name Register
      * @request POST:/auth/register/
      * @response `200` `{ user?: { email?: string, name?: string, id?: string }, token?: string }` Default Response
@@ -237,23 +254,6 @@ export class Api<SecurityDataType extends unknown> {
         body: body,
         type: ContentType.Json,
         format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Update
-     * @request POST:/auth/update/
-     * @response `200` `void` Default Response
-     */
-    update: (body: { name: string; email: string }, params: RequestParams = {}) =>
-      this.http.request<void, any>({
-        path: `/auth/update/`,
-        method: "POST",
-        body: body,
-        type: ContentType.Json,
         ...params,
       }),
   };

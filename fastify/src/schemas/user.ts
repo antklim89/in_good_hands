@@ -6,13 +6,11 @@ export const loginSchema = {
     properties: {
         password: {
             type: 'string',
-            default: 'qwer123',
             minLength: 3,
             maxLength: 50,
         },
         email: {
             type: 'string',
-            default: 'example@mail.com',
             minLength: 3,
             maxLength: 50,
         },
@@ -27,7 +25,6 @@ export const registerSchema = {
         ...loginSchema.properties,
         name: {
             type: 'string',
-            default: 'John',
             minLength: 3,
             maxLength: 50,
         },

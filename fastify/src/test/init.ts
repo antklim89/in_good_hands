@@ -12,9 +12,11 @@ export const init = () => {
 
     const prisma = new PrismaClient({ datasources: { db: { url: dbUrl } } });
     app.prisma = prisma;
+    app.log.level = 'silent';
+    let db: Awaited<ReturnType<typeof populateDb>>;
 
     beforeAll(async () => {
-        await populateDb(prisma);
+        db = await populateDb(prisma);
 
         await app.ready().then(() => generateSwaggerTypes(app));
     });
@@ -26,5 +28,6 @@ export const init = () => {
     return {
         app,
         prisma,
+        db: () => db,
     };
 };

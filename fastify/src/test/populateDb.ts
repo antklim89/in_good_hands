@@ -14,10 +14,13 @@ export const createUser = (data: Partial<User> = {}) => ({
 
 export async function populateDb(prisma: PrismaClient) {
     await prisma.user.deleteMany();
-    return prisma.user.createMany({
-        data: _.times(3, (i) => createUser({
-            email: `email${i + 1}@mail.com`,
-            name: `Username${i + 1}`,
-        })),
-    });
+
+    const users = await Promise.all(_.times(3, (i) => prisma.user.create({ data: createUser({
+        email: `email${i + 1}@mail.com`,
+        name: `Username${i + 1}`,
+    }) })));
+
+    return {
+        users,
+    };
 }
