@@ -8,8 +8,9 @@
     "dev:nodemon": "nodemon ./output/server.js --ignore swagger/",
     "dev:swc": "swc ./src -d ./output -w",
     "test": "jest --watchAll -i",
-    "test:migrate": "DATABASE_URL=\"postgresql://anton@localhost:5432/test?schema=public\" yarn migrate",
-    "migrate": "prisma migrate dev",
+    "migrate": "run-s migrate:**",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:test": "DATABASE_URL=\"postgresql://anton@localhost:5432/test?schema=public\" prisma migrate dev",
     "studio": "prisma studio --browser none"
   },
   "keywords": [],
