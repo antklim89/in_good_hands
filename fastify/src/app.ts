@@ -1,7 +1,10 @@
 import path from 'path';
 
+
 import { fastifyAutoload } from '@fastify/autoload';
 import fastify from 'fastify';
+
+import { ClientException, verifyJWT } from './utils';
 
 
 const app = fastify({
@@ -14,6 +17,18 @@ const app = fastify({
             options: { colorize: true },
         },
     },
+});
+
+app.addHook('preHandler', async (req) => {
+    req.getUser = () => {
+        const user = verifyJWT(req);
+        if (user) return user;
+        throw new ClientException('You are not authorized.', 401);
+    };
+
+    req.checkUser = () => {
+        return verifyJWT(req);
+    };
 });
 
 
