@@ -1,22 +1,4 @@
 
-export const adResponseSchema = {
-    type: 'object',
-    required: ['id', 'createdAt', 'updatedAt', 'name', 'type', 'breed', 'description', 'email', 'isPublished', 'price'],
-    properties: {
-        id: { type: 'number' },
-        createdAt: { type: 'string' },
-        updatedAt: { type: 'string' },
-        name: { type: 'string' },
-        type: { type: 'string' },
-        breed: { type: 'string' },
-        description: { type: 'string' },
-        email: { type: 'string' },
-        tel: { type: 'string' },
-        isPublished: { type: 'string' },
-        price: { type: 'number' },
-    },
-} as const;
-
 export const adInputSchema = {
     type: 'object',
     properties: {
@@ -30,7 +12,20 @@ export const adInputSchema = {
     },
 } as const;
 
-export const adsResponseSchema = {
+export const adsPreviewListItemResponseSchema = {
+    type: 'object',
+    properties: {
+        id: { type: 'number', nullable: false },
+        createdAt: { type: 'string', nullable: false },
+        updatedAt: { type: 'string', nullable: false },
+        name: { type: 'string', nullable: false },
+        type: { type: 'string', nullable: false },
+        breed: { type: 'string', nullable: false },
+        price: { type: 'number', nullable: false },
+    },
+} as const;
+
+export const adsPreviewListResponseSchema = {
     type: 'array',
-    items: adResponseSchema,
+    items: adsPreviewListItemResponseSchema,
 } as const;

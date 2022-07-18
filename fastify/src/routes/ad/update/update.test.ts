@@ -28,7 +28,7 @@ describe('PATCH /ad/update', () => {
             type: 'dog',
 
             createdAt: 'YYY',
-            isPublished: true,
+            isPublished: false,
             id: 99999,
             foo: 'bar',
         };
