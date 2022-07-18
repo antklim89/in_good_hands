@@ -19,7 +19,6 @@ export const adResponseSchema = {
 
 export const adInputSchema = {
     type: 'object',
-    required: ['tel', 'type', 'breed', 'description', 'email', 'price'],
     properties: {
         name: { type: ['string', 'null'] },
         type: { type: 'string' },
@@ -28,7 +27,6 @@ export const adInputSchema = {
         email: { type: 'string' },
         tel: { type: 'string' },
         price: { type: 'number' },
-        image: { isFileType: true },
     },
 } as const;
 

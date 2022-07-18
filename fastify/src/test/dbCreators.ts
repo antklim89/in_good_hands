@@ -27,7 +27,7 @@ export function createAd<T extends Partial<Prisma.AdCreateInput>>(data = {} as T
         breed: 'haski',
         description: 'Lorem ipsum',
         type: 'dog',
-        tel: '555-55-77',
+        tel: '555-55-55',
         isPublished: false,
         price: 100,
         ...data,
