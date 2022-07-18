@@ -52,8 +52,8 @@ export const authResponseSchema = {
 
 export const authHeaderSchema = {
     type: 'object',
-    required: ['auth'],
+    required: ['authentication'],
     properties: {
-        auth: { type: 'string' },
+        authentication: { type: 'string' },
     },
 };

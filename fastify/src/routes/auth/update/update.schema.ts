@@ -4,7 +4,14 @@ import { authHeaderSchema, registerSchema } from '~/fastify/schemas';
 const schema = {
     tags: ['auth'],
     operationId: 'Update',
-    body: registerSchema,
+    body: {
+        type: 'object',
+        required: [],
+        properties: {
+            email: registerSchema.properties.email,
+            name: registerSchema.properties.name,
+        },
+    },
     response: { 200: { type: 'null' } },
     headers: authHeaderSchema,
 };

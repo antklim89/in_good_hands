@@ -1,26 +1,26 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
-import jwt from 'jsonwebtoken';
 
 import schema from './update.schema';
 
-import { JWT_SECRET } from '~/fastify/constants';
+import { Auth } from '~/fastify/swagger';
 
 
 export default async function update(app: FastifyInstance) {
     app.route({
-        method: 'POST',
+        method: 'PATCH',
         url: '/',
         schema,
-        preHandler(req, repl, done) {
-            const token = req.headers.auth;
+        async handler(req: FastifyRequest<{Body: Auth.Update.RequestBody}>, repl): Promise<Auth.Update.ResponseBody> {
+            const user = req.getUser();
+            const { body } = req;
 
-            const data = jwt.verify(token as string, JWT_SECRET);
-            req.user = data as FastifyRequest['user'];
+            await app.prisma.user.update({
+                data: body,
+                where: { id: user.id },
+                select: { id: true },
+            });
 
-            done();
-        },
-        async handler(req, repl) {
-            const { email, name } = req.body as Record<string, string>;
+            return repl.status(200).send();
         },
     });
 }

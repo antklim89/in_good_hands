@@ -28,14 +28,14 @@ export namespace Auth {
    * No description
    * @tags auth
    * @name Update
-   * @request POST:/auth/update/
+   * @request PATCH:/auth/update/
    * @response `200` `void` Default Response
    */
   export namespace Update {
     export type RequestParams = {};
     export type RequestQuery = {};
-    export type RequestBody = { name: string; email: string };
-    export type RequestHeaders = { auth: string };
+    export type RequestBody = { email?: string; name?: string };
+    export type RequestHeaders = { authentication: string };
     export type ResponseBody = void;
   }
   /**
@@ -227,13 +227,13 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags auth
      * @name Update
-     * @request POST:/auth/update/
+     * @request PATCH:/auth/update/
      * @response `200` `void` Default Response
      */
-    update: (body: { name: string; email: string }, params: RequestParams = {}) =>
+    update: (body: { email?: string; name?: string }, params: RequestParams = {}) =>
       this.http.request<void, any>({
         path: `/auth/update/`,
-        method: "POST",
+        method: "PATCH",
         body: body,
         type: ContentType.Json,
         ...params,
