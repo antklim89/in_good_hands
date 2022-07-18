@@ -10,6 +10,7 @@ const schema = {
         properties: {
             email: registerSchema.properties.email,
             name: registerSchema.properties.name,
+            tel: { type: 'string' },
         },
     },
     response: { 200: { type: 'null' } },

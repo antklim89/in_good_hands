@@ -1,6 +1,5 @@
 import path from 'path';
 
-
 import { fastifyAutoload } from '@fastify/autoload';
 import fastify from 'fastify';
 
@@ -17,7 +16,14 @@ const app = fastify({
             options: { colorize: true },
         },
     },
+    ajv: {
+        customOptions: {
+            removeAdditional: 'all',
+            useDefaults: false,
+        },
+    },
 });
+
 
 app.addHook('preHandler', async (req) => {
     req.getUser = () => {

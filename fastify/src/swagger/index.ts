@@ -34,7 +34,7 @@ export namespace Auth {
   export namespace Update {
     export type RequestParams = {};
     export type RequestQuery = {};
-    export type RequestBody = { email?: string; name?: string };
+    export type RequestBody = { email?: string; name?: string; tel?: string };
     export type RequestHeaders = { authentication: string };
     export type ResponseBody = void;
   }
@@ -230,7 +230,7 @@ export class Api<SecurityDataType extends unknown> {
      * @request PATCH:/auth/update/
      * @response `200` `void` Default Response
      */
-    update: (body: { email?: string; name?: string }, params: RequestParams = {}) =>
+    update: (body: { email?: string; name?: string; tel?: string }, params: RequestParams = {}) =>
       this.http.request<void, any>({
         path: `/auth/update/`,
         method: "PATCH",
