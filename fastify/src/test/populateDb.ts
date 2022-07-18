@@ -14,7 +14,7 @@ export async function populateDb(prisma: PrismaClient) {
     }) })));
 
     const ads = await Promise.all(_.times(3, () => prisma.ad.create({ data: createAd({
-        ownerId: users[0].id,
+        owner: { connect: { id: users[0].id } },
     }) })));
 
     return {

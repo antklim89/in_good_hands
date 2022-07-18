@@ -6,30 +6,30 @@ export const hashedPassword = '$2a$08$JrwM2968gWMa.mm.BGoILO7G9CXOw4WDl5HhofuBGn
 export const notHashedPassword = 'qwer123';
 
 
-type CreateUserInput = Partial<Prisma.UserCreateInput>
+type CreateUserReturn<T> = Prisma.UserCreateInput & T;
 
-type CreateAdInput = Partial<Prisma.AdCreateInput> & {
-    ownerId: string;
-};
-
-export const createUser = (data = {} as CreateUserInput) => ({
-    email: `email${_.uniqueId()}@mail.com`,
-    hash: hashedPassword,
-    name: `Username${_.uniqueId()}`,
-    ...data,
-});
+export function createUser<T extends Partial<Prisma.UserCreateInput>>(data = {} as T): CreateUserReturn<T> {
+    return {
+        email: `email${_.uniqueId()}@mail.com`,
+        hash: hashedPassword,
+        name: `Username${_.uniqueId()}`,
+        ...data,
+    };
+}
 
 
-export const createAd = ({ ownerId, ...data } = {} as CreateAdInput) => ({
-    email: `email${_.uniqueId()}@mail.com`,
-    name: `petname${_.uniqueId()}`,
-    breed: 'haski',
-    description: 'Lorem ipsum',
-    type: 'dog',
-    tel: '555-55-77',
-    isPublished: false,
-    ...data,
-    owner: {
-        connect: { id: ownerId },
-    },
-});
+type CreateAdReturn<T> = Omit<Prisma.AdCreateInput, 'owner'> & T;
+
+export function createAd<T extends Partial<Prisma.AdCreateInput>>(data = {} as T): CreateAdReturn<T> {
+    return {
+        email: `email${_.uniqueId()}@mail.com`,
+        name: `petname${_.uniqueId()}`,
+        breed: 'haski',
+        description: 'Lorem ipsum',
+        type: 'dog',
+        tel: '555-55-77',
+        isPublished: false,
+        price: 100,
+        ...data,
+    };
+}
