@@ -1,4 +1,4 @@
-import { loginSchema, authResponseSchema } from '~/fastify/schemas/user';
+import { loginSchema, authResponseSchema } from '~/fastify/schemas';
 
 
 const schema = {

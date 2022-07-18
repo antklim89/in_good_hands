@@ -35,9 +35,9 @@ export const userResponseSchema = {
     type: 'object',
     required: ['email', 'name', 'id'],
     properties: {
-        email: { type: 'string', default: 'example@mail.com' },
-        name: { type: 'string', default: 'John' },
-        id: { type: 'string', default: '05f0182d-385a-46dc-bc02-da04fc42d03e' },
+        email: { type: 'string' },
+        name: { type: 'string' },
+        id: { type: 'string' },
     },
 };
 
@@ -47,5 +47,13 @@ export const authResponseSchema = {
     properties: {
         user: userResponseSchema,
         token: { type: 'string' },
+    },
+};
+
+export const authHeaderSchema = {
+    type: 'object',
+    required: ['auth'],
+    properties: {
+        auth: { type: 'string' },
     },
 };
