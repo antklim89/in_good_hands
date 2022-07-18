@@ -22,13 +22,13 @@ type CreateAdReturn<T> = Omit<Prisma.AdCreateInput, 'owner'> & T;
 
 export function createAd<T extends Partial<Prisma.AdCreateInput>>(data = {} as T): CreateAdReturn<T> {
     return {
-        email: `email${_.uniqueId()}@mail.com`,
-        name: `petname${_.uniqueId()}`,
+        email: 'email@mail.com',
+        name: 'petname',
         breed: 'haski',
         description: 'Lorem ipsum',
         type: 'dog',
         tel: '555-55-55',
-        isPublished: false,
+        isPublished: true,
         price: 100,
         ...data,
     };

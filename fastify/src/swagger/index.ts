@@ -27,13 +27,20 @@ export namespace Ad {
   /**
    * No description
    * @tags ad
-   * @name FindMany
-   * @request GET:/ad/find-many/
-   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, description: string, email: string, tel?: string, isPublished: string })[]` Default Response
+   * @name PreviewList
+   * @request GET:/ad/preview-list/
+   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
    */
-  export namespace FindMany {
+  export namespace PreviewList {
     export type RequestParams = {};
-    export type RequestQuery = { cursor?: string };
+    export type RequestQuery = {
+      cursor?: number;
+      searchName?: string;
+      searchBreed?: string;
+      searchType?: string;
+      ltePrice?: number;
+      gtePrice?: number;
+    };
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = {
@@ -43,10 +50,7 @@ export namespace Ad {
       name: string;
       type: string;
       breed: string;
-      description: string;
-      email: string;
-      tel?: string;
-      isPublished: string;
+      price: number;
     }[];
   }
   /**
@@ -310,11 +314,21 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags ad
-     * @name FindMany
-     * @request GET:/ad/find-many/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, description: string, email: string, tel?: string, isPublished: string })[]` Default Response
+     * @name PreviewList
+     * @request GET:/ad/preview-list/
+     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
      */
-    findMany: (query?: { cursor?: string }, params: RequestParams = {}) =>
+    previewList: (
+      query?: {
+        cursor?: number;
+        searchName?: string;
+        searchBreed?: string;
+        searchType?: string;
+        ltePrice?: number;
+        gtePrice?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.http.request<
         {
           id: number;
@@ -323,14 +337,11 @@ export class Api<SecurityDataType extends unknown> {
           name: string;
           type: string;
           breed: string;
-          description: string;
-          email: string;
-          tel?: string;
-          isPublished: string;
+          price: number;
         }[],
         any
       >({
-        path: `/ad/find-many/`,
+        path: `/ad/preview-list/`,
         method: "GET",
         query: query,
         format: "json",
