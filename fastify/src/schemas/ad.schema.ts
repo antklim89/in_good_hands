@@ -1,9 +1,11 @@
+import { AnimalType } from '@prisma/client';
+
 
 export const adInputSchema = {
     type: 'object',
     properties: {
         name: { type: ['string', 'null'] },
-        type: { type: 'string' },
+        type: { type: 'string', enum: Object.values(AnimalType) },
         breed: { type: 'string' },
         description: { type: 'string' },
         email: { type: 'string' },

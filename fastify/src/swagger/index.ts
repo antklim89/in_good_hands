@@ -65,7 +65,7 @@ export namespace Ad {
     export type RequestQuery = { id: number };
     export type RequestBody = {
       name?: string | null;
-      type?: string;
+      type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
       breed?: string;
       description?: string;
       email?: string;
@@ -80,7 +80,7 @@ export namespace Ad {
    * @tags ad
    * @name UpdateData
    * @request GET:/ad/update-data/
-   * @response `200` `{ name?: string | null, type?: string, breed?: string, description?: string, email?: string, tel?: string, price?: number }` Default Response
+   * @response `200` `{ name?: string | null, type?: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed?: string, description?: string, email?: string, tel?: string, price?: number }` Default Response
    */
   export namespace UpdateData {
     export type RequestParams = {};
@@ -89,7 +89,7 @@ export namespace Ad {
     export type RequestHeaders = { authentication: string };
     export type ResponseBody = {
       name?: string | null;
-      type?: string;
+      type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
       breed?: string;
       description?: string;
       email?: string;
@@ -360,7 +360,7 @@ export class Api<SecurityDataType extends unknown> {
       query: { id: number },
       body: {
         name?: string | null;
-        type?: string;
+        type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
         breed?: string;
         description?: string;
         email?: string;
@@ -384,13 +384,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags ad
      * @name UpdateData
      * @request GET:/ad/update-data/
-     * @response `200` `{ name?: string | null, type?: string, breed?: string, description?: string, email?: string, tel?: string, price?: number }` Default Response
+     * @response `200` `{ name?: string | null, type?: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed?: string, description?: string, email?: string, tel?: string, price?: number }` Default Response
      */
     updateData: (query: { adId: number }, params: RequestParams = {}) =>
       this.http.request<
         {
           name?: string | null;
-          type?: string;
+          type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
           breed?: string;
           description?: string;
           email?: string;
