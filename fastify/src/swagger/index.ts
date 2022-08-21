@@ -144,6 +144,23 @@ export namespace Auth {
   }
 }
 
+export namespace Image {
+  /**
+   * No description
+   * @tags image
+   * @name Upload
+   * @request POST:/image/upload/
+   * @response `201` `void` Default Response
+   */
+  export namespace Upload {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = any;
+    export type RequestHeaders = {};
+    export type ResponseBody = void;
+  }
+}
+
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType } from "axios";
 
 export type QueryParamsType = Record<string | number, any>;
@@ -457,6 +474,24 @@ export class Api<SecurityDataType extends unknown> {
         method: "PATCH",
         body: body,
         type: ContentType.Json,
+        ...params,
+      }),
+  };
+  image = {
+    /**
+     * No description
+     *
+     * @tags image
+     * @name Upload
+     * @request POST:/image/upload/
+     * @response `201` `void` Default Response
+     */
+    upload: (data?: any, params: RequestParams = {}) =>
+      this.http.request<void, any>({
+        path: `/image/upload/`,
+        method: "POST",
+        body: data,
+        type: ContentType.FormData,
         ...params,
       }),
   };

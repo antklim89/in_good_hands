@@ -30,6 +30,15 @@ model Ad {
   isPublished Boolean
   owner       User       @relation(fields: [ownerId], references: [id])
   ownerId     String
+  images      Image[]
+}
+
+model Image {
+  id        Int    @id @default(autoincrement())
+  src       String
+  thumbnail String
+  ad        Ad     @relation(fields: [adId], references: [id])
+  adId      Int
 }
 
 enum AnimalType {
