@@ -28,9 +28,6 @@
       ]
     }
   },
-  "files": [
-    "./types/global.d.ts"
-  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",

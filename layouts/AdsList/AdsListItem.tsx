@@ -8,7 +8,7 @@ import { FC } from 'react';
 
 import PetAge from '~/components/PetAge';
 import Price from '~/components/Price';
-import { getStrapiUrl } from '~/utils';
+import { getApiURL } from '~/utils';
 
 import { AdsListItemProps } from './AdsList.types';
 
@@ -33,7 +33,7 @@ const AdsListItem: FC<AdsListItemProps> = ({ id, attributes: { type, breed, imag
                                     alt={`${type} ${breed}`}
                                     height={270}
                                     key={image.id}
-                                    src={getStrapiUrl(image.attributes.url)}
+                                    src={getApiURL(image.attributes.url)}
                                     width={400}
                                 />
                             ))}

@@ -3,7 +3,7 @@ import { Box, IconButton, useToast, Spinner } from '@chakra-ui/react';
 import Image from 'next/image';
 import { FC, MouseEventHandler, useCallback, useState } from 'react';
 
-import { getStrapiUrl, requestDeleteAdImage } from '~/utils';
+import { getApiURL, requestDeleteAdImage } from '~/utils';
 
 import { UpdateAdImageProps } from './UpdateAd.types';
 
@@ -39,7 +39,7 @@ const UpdateAdImage: FC<UpdateAdImageProps> = ({ attributes, id: imgId, setUploa
                         <Image
                             alt="uploaded image"
                             height={75}
-                            src={getStrapiUrl(attributes.url)}
+                            src={getApiURL(attributes.url)}
                             width={75}
                         />
                     </Box>

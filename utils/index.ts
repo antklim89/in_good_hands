@@ -1,6 +1,4 @@
-export * from './getStrapiUrl';
+export * from './getApiUrl';
 export * from './useAuthContext';
-export * from './requestHero';
-export * from './requestAds';
 export * from './getCookies';
 export * from './api';

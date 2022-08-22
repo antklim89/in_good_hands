@@ -4,7 +4,7 @@ import { FC } from 'react';
 
 import Markdown from '~/components/Markdown';
 import { IHeroQuery } from '~/generated/graphql';
-import { getStrapiUrl } from '~/utils/getStrapiUrl';
+import { getApiURL } from '~/utils/getApiUrl';
 
 
 const Hero: FC<IHeroQuery['hero']['data']> = ({ attributes: { body, image } }) => {
@@ -44,7 +44,7 @@ const Hero: FC<IHeroQuery['hero']['data']> = ({ attributes: { body, image } }) =
                                 layout="fill"
                                 objectFit="cover"
                                 objectPosition="center"
-                                src={getStrapiUrl(image.data.attributes.url)}
+                                src={getApiURL(image.data.attributes.url)}
                             />
                         )
                         : null}
