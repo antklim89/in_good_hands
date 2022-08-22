@@ -1,11 +1,12 @@
-import { AnimalType } from '@prisma/client';
 
+
+export const animalsTypes = ['cat', 'dog', 'bird', 'aquarium', 'rodent'] as const;
 
 export const adInputSchema = {
     type: 'object',
     properties: {
         name: { type: ['string', 'null'] },
-        type: { type: 'string', enum: Object.values(AnimalType) },
+        type: { type: 'string', enum: animalsTypes },
         breed: { type: 'string' },
         description: { type: 'string' },
         email: { type: 'string' },
