@@ -3,26 +3,23 @@ import { useFormik } from 'formik';
 import React, { FC } from 'react';
 
 import InputField from '~/components/InputField';
-import { updateCredentials, useAuthContext } from '~/utils';
+import { api, useAuthContext } from '~/utils';
 
 
 const ProfileCredentials: FC = () => {
-    const { email, username, id } = useAuthContext();
+    const { user } = useAuthContext();
     const toast = useToast();
 
     const formik = useFormik({
-        initialValues: { username: username || '', email: email || '' },
+        initialValues: { name: user?.name || '', email: user?.email || '' },
         async onSubmit(data) {
             try {
-                await updateCredentials({ id: id || '', data });
+                await api.auth.update(data);
                 toast({ title: 'Credentials successfully updated.', status: 'error' });
             } catch (error) {
                 if (error instanceof Error) toast({ title: error.message, status: 'error' });
             }
         },
-        // async validate(val) {
-        //     return {};
-        // },
     });
 
 
@@ -40,10 +37,10 @@ const ProfileCredentials: FC = () => {
                     placeholder="Enter your e-mail..."
                 />
                 <InputField
-                    autoComplete="username"
+                    autoComplete="name"
                     formik={formik}
-                    label="Username"
-                    name="username"
+                    label="Name"
+                    name="name"
                     placeholder="Enter username..."
                 />
                 <Flex justify="flex-end">

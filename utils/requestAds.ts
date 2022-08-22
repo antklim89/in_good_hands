@@ -10,9 +10,8 @@ import type {
 } from '~/generated/graphql';
 import query from '~/queries/ad.gql';
 
+import { getUserCookie } from './getCookies';
 import requestBase from './requestBase';
-
-import { getJWTCookie } from '.';
 
 
 type IAdUserMutationOmitVariables = {
@@ -55,7 +54,7 @@ export async function requestUpdateAd(variables: IAdUserMutationOmitVariables): 
 }
 
 export async function requestUploadAdImage(images: File[], refId:string): Promise<IAdUpdateDataQuery['ads']['data'][0]['attributes']['images']['data']> {
-    const token = getJWTCookie();
+    const userCookie = getUserCookie();
     const formData = new FormData();
     images.forEach((image) => formData.append('files', image));
     formData.append('refId', refId);
@@ -65,7 +64,7 @@ export async function requestUploadAdImage(images: File[], refId:string): Promis
     const data = await fetch(`${STRAPI_URL}/api/upload`, {
         method: 'POST',
         body: formData,
-        headers: { 'Authorization': `Bearer ${token}` },
+        headers: { 'Authorization': `Bearer ${userCookie?.token}` },
     }).then((r) => r.json());
 
     return data.map(({ id, ...attributes }: Record<string, unknown>) => ({ id: `${id}`, attributes }));
@@ -73,11 +72,11 @@ export async function requestUploadAdImage(images: File[], refId:string): Promis
 
 export async function requestDeleteAdImage(imageId: string): Promise<string> {
     if (!imageId) throw new Error('Image id required');
-    const token = getJWTCookie();
+    const userCookie = getUserCookie();
 
     const data = await fetch(`${STRAPI_URL}/api/upload/files/${imageId}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` },
+        headers: { 'Authorization': `Bearer ${userCookie?.token}` },
     }).then((r) => r.json());
 
     return data.id;
@@ -85,13 +84,13 @@ export async function requestDeleteAdImage(imageId: string): Promise<string> {
 
 
 export async function requestNewAd(): Promise<number> {
-    const token = getJWTCookie();
+    const userCookie = getUserCookie();
     const data = await fetch(`${STRAPI_URL}/api/ads/new`, {
         method: 'POST',
         body: JSON.stringify({ data: {} }),
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${userCookie?.token}`,
         },
     }).then((r) => r.json());
     return data as number;

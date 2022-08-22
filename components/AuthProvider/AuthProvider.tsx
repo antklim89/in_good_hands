@@ -2,7 +2,8 @@ import {
     createContext, FC, useCallback, useEffect, useMemo, useState,
 } from 'react';
 
-import { getUserCookie } from '~/utils';
+import { IUser } from '~/types';
+import { api, clearUserCookie, getUserCookie } from '~/utils';
 
 import { AuthProviderProps, IAuthContext } from './AuthProvider.types';
 
@@ -10,51 +11,42 @@ import { AuthProviderProps, IAuthContext } from './AuthProvider.types';
 export const AuthContext = createContext({} as IAuthContext);
 
 const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-    const [id, setId] = useState<IAuthContext['id']>(null);
-    const [email, setEmail] = useState<IAuthContext['email']>(null);
-    const [username, setUsername] = useState<IAuthContext['username']>(null);
+    const [user, setUser] = useState<IUser|null>(null);
     const [authInited, setAuthInited] = useState(false);
 
+    const isAuth = useMemo(() => Boolean(user), [user]);
+
     useEffect(() => {
-        try {
-            const user = getUserCookie();
-            if (!user) {
-                setAuthInited(true);
-                return;
-            }
-            setEmail(user.email);
-            setUsername(user.username);
-            setId(user.id);
-        } catch (_) {
-            // void
-        } finally {
-            setAuthInited(true);
-        }
+        const userCookie = getUserCookie();
+        setUser(userCookie?.user || null);
+        setAuthInited(true);
     }, []);
 
 
-    const setCredentials: IAuthContext['setCredentials'] = useCallback((e) => {
-        setEmail(e.email);
-        setUsername(e.username);
+    const login: IAuthContext['login'] = useCallback(async (body) => {
+        const { data } = await api.auth.login(body);
+        setUser(data.user);
     }, []);
 
-    const clearCredentials: IAuthContext['clearCredentials'] = useCallback(() => {
-        setEmail(null);
-        setUsername(null);
+    const register: IAuthContext['register'] = useCallback(async (body) => {
+        const { data } = await api.auth.register(body);
+        setUser(data.user);
     }, []);
 
-    const isAuth = useMemo(() => Boolean(email), [email, username]);
+    const logout: IAuthContext['logout'] = useCallback(() => {
+        setUser(null);
+        clearUserCookie();
+    }, []);
 
     return (
         <AuthContext.Provider
             value={{
-                id,
-                email,
-                username,
+                user,
                 isAuth,
                 authInited,
-                setCredentials,
-                clearCredentials,
+                login,
+                register,
+                logout,
             }}
         >
             {children}

@@ -7,29 +7,27 @@ import { FC } from 'react';
 import { ZodError } from 'zod';
 
 import InputField from '~/components/InputField';
-import { useAuthContext, login, register } from '~/utils';
+import { useAuthContext, api } from '~/utils';
 
 import { authSchema } from './Auth.schema';
 import { AuthProps, AuthType } from './Auth.types';
 
 
 const Auth: FC<AuthProps> = ({ type = 'login' }) => {
-    const { setCredentials } = useAuthContext();
+    const { login, register } = useAuthContext();
     const toast = useToast();
     const { back } = useRouter();
 
     const formik = useFormik<AuthType>({
-        initialValues: { username: '', email: '', password: '', confirm: '' },
+        initialValues: { name: '', email: '', password: '', confirm: '' },
         async onSubmit(val) {
             try {
                 if (type === 'login') {
-                    const user = await login(val);
-                    setCredentials(user);
+                    await login(val)
                     toast({ title: 'You have successfully logged in!', status: 'success' });
                     back();
                 } else {
-                    const user = await register(val);
-                    setCredentials(user);
+                    await register(val);
                     toast({ title: 'You have successfully registred!', status: 'success' });
                     back();
                 }
@@ -72,8 +70,8 @@ const Auth: FC<AuthProps> = ({ type = 'login' }) => {
                         <InputField
                             autoComplete="name"
                             formik={formik}
-                            label="Username"
-                            name="username"
+                            label="Name"
+                            name="name"
                             placeholder="Enter your username..."
                         />
                     )}

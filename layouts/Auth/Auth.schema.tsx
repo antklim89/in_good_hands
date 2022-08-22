@@ -2,7 +2,7 @@ import zod from 'zod';
 
 
 export const authSchema = zod.object({
-    username: zod.string()
+    name: zod.string()
         .trim()
         .max(50)
         .min(2),

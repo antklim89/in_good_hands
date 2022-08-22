@@ -1,4 +1,7 @@
-import { IUserFragment } from '~/generated/graphql';
 
 
-export interface User extends IUserFragment {}
+export interface IUser {
+    id: string
+    email: string
+    name: string
+}

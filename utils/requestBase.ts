@@ -2,13 +2,13 @@ import type { DocumentNode } from 'graphql';
 
 import { STRAPI_URL } from '~/constants';
 
-import { getJWTCookie } from '.';
+import { getUserCookie } from './getCookies';
 
 
 interface RequestBaseArgs<V> {
     query: DocumentNode;
     variables?: V;
-    jwt?: string;
+    cookie?: string;
 }
 
 const GRAPHQL_URL = `${STRAPI_URL}/graphql`;
@@ -16,13 +16,13 @@ const GRAPHQL_URL = `${STRAPI_URL}/graphql`;
 
 export default async function requestBase<
     T = unknown, V = Record<string, string>
->({ query, variables, jwt }: RequestBaseArgs<V>): Promise<T> {
+>({ query, variables, cookie }: RequestBaseArgs<V>): Promise<T> {
     const { print } = await import('graphql');
-    const token = getJWTCookie(jwt);
+    const cookieUser = getUserCookie(cookie);
 
     const headers = {
         'Content-Type': 'application/json',
-        ...token ? { 'Authorization': `Bearer ${token}` } : {},
+        ...cookieUser ? { 'Authorization': `Bearer ${cookieUser.token}` } : {},
     };
     const response = await fetch(GRAPHQL_URL, {
         method: 'POST',

@@ -1,20 +1,19 @@
 import { ReactNode } from 'react';
 
+import type { Auth } from '~/fastify/src/swagger';
+import { IUser } from '~/types';
+
 
 export interface AuthProviderProps {
-     children: ReactNode
+    children: ReactNode
 }
 
 export interface IAuthContext {
-     id: string | null;
-     email: string | null;
-     username: string | null;
-     isAuth: boolean;
-     authInited: boolean;
-     setCredentials: (e: {
-         username: string;
-         email: string;
-     }) => void;
-     clearCredentials: () => void;
- }
+    user: IUser|null
+    isAuth: boolean;
+    authInited: boolean;
+    login: (e: Auth.Login.RequestBody) => void;
+    register: (e: Auth.Register.RequestBody) => void;
+    logout: () => void;
+}
 
