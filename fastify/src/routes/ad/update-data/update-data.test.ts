@@ -28,6 +28,7 @@ describe('GET /ad/update-data', () => {
 
         expect(response.statusCode).toEqual(200);
 
+        expect(data).toHaveProperty('id');
         expect(data).toHaveProperty('type');
         expect(data).toHaveProperty('breed');
         expect(data).toHaveProperty('description');

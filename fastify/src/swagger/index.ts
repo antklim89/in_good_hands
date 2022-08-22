@@ -9,6 +9,97 @@
  * ---------------------------------------------------------------
  */
 
+export namespace Ad {
+  /**
+   * No description
+   * @tags ad
+   * @name New
+   * @request POST:/ad/new/
+   * @response `201` `{ id: number }` Default Response
+   */
+  export namespace New {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = { authentication: string };
+    export type ResponseBody = { id: number };
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name Update
+   * @request PATCH:/ad/update/
+   * @response `200` `void` Default Response
+   */
+  export namespace Update {
+    export type RequestParams = {};
+    export type RequestQuery = { id: number };
+    export type RequestBody = {
+      name?: string | null;
+      type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+      breed?: string;
+      description?: string;
+      email?: string;
+      tel?: string;
+      price?: number;
+    };
+    export type RequestHeaders = { authentication: string };
+    export type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name PreviewList
+   * @request GET:/ad/preview-list/
+   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
+   */
+  export namespace PreviewList {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      cursor?: number;
+      searchName?: string;
+      searchBreed?: string;
+      searchType?: string;
+      ltePrice?: number;
+      gtePrice?: number;
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = {
+      id: number;
+      createdAt: string;
+      updatedAt: string;
+      name: string;
+      type: string;
+      breed: string;
+      price: number;
+    }[];
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name UpdateData
+   * @request GET:/ad/update-data/
+   * @response `200` `{ name: string | null, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, id: number }` Default Response
+   */
+  export namespace UpdateData {
+    export type RequestParams = {};
+    export type RequestQuery = { adId: number };
+    export type RequestBody = never;
+    export type RequestHeaders = { authentication: string };
+    export type ResponseBody = {
+      name: string | null;
+      type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+      breed: string;
+      description: string;
+      email: string;
+      tel: string;
+      price: number;
+      id: number;
+    };
+  }
+}
+
 export namespace Auth {
   /**
    * No description
@@ -51,143 +142,6 @@ export namespace Auth {
     export type RequestBody = { email?: string; name?: string; tel?: string };
     export type RequestHeaders = { authentication: string };
     export type ResponseBody = void;
-  }
-}
-
-export namespace Ad {
-  /**
-   * No description
-   * @tags ad
-   * @name Create
-   * @request POST:/ad/create/
-   * @response `200` `void` Default Response
-   */
-  export namespace Create {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = {
-      name?: string | null;
-      type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-      breed?: string;
-      description?: string;
-      email?: string;
-      tel?: string;
-      price?: number;
-    };
-    export type RequestHeaders = {};
-    export type ResponseBody = void;
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name FindMany
-   * @request GET:/ad/find-many/
-   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, description: string, email: string, tel?: string, isPublished: string })[]` Default Response
-   */
-  export namespace FindMany {
-    export type RequestParams = {};
-    export type RequestQuery = { cursor?: string };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = {
-      id: number;
-      createdAt: string;
-      updatedAt: string;
-      name: string;
-      type: string;
-      breed: string;
-      description: string;
-      email: string;
-      tel?: string;
-      isPublished: string;
-    }[];
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name PreviewList
-   * @request GET:/ad/preview-list/
-   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
-   */
-  export namespace PreviewList {
-    export type RequestParams = {};
-    export type RequestQuery = {
-      cursor?: number;
-      searchName?: string;
-      searchBreed?: string;
-      searchType?: string;
-      ltePrice?: number;
-      gtePrice?: number;
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = {
-      id: number;
-      createdAt: string;
-      updatedAt: string;
-      name: string;
-      type: string;
-      breed: string;
-      price: number;
-    }[];
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name New
-   * @request POST:/ad/new/
-   * @response `201` `{ id: number }` Default Response
-   */
-  export namespace New {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = { authentication: string };
-    export type ResponseBody = { id: number };
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name Update
-   * @request PATCH:/ad/update/
-   * @response `200` `void` Default Response
-   */
-  export namespace Update {
-    export type RequestParams = {};
-    export type RequestQuery = { id: number };
-    export type RequestBody = {
-      name?: string | null;
-      type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-      breed?: string;
-      description?: string;
-      email?: string;
-      tel?: string;
-      price?: number;
-    };
-    export type RequestHeaders = { authentication: string };
-    export type ResponseBody = void;
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name UpdateData
-   * @request GET:/ad/update-data/
-   * @response `200` `{ name?: string | null, type?: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed?: string, description?: string, email?: string, tel?: string, price?: number }` Default Response
-   */
-  export namespace UpdateData {
-    export type RequestParams = {};
-    export type RequestQuery = { adId: number };
-    export type RequestBody = never;
-    export type RequestHeaders = { authentication: string };
-    export type ResponseBody = {
-      name?: string | null;
-      type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-      breed?: string;
-      description?: string;
-      email?: string;
-      tel?: string;
-      price?: number;
-    };
   }
 }
 
@@ -351,6 +305,120 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       ...params,
     });
 
+  ad = {
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name New
+     * @request POST:/ad/new/
+     * @response `201` `{ id: number }` Default Response
+     */
+    new: (params: RequestParams = {}) =>
+      this.request<{ id: number }, any>({
+        path: `/ad/new/`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name Update
+     * @request PATCH:/ad/update/
+     * @response `200` `void` Default Response
+     */
+    update: (
+      query: { id: number },
+      body: {
+        name?: string | null;
+        type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+        breed?: string;
+        description?: string;
+        email?: string;
+        tel?: string;
+        price?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/ad/update/`,
+        method: "PATCH",
+        query: query,
+        body: body,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name PreviewList
+     * @request GET:/ad/preview-list/
+     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
+     */
+    previewList: (
+      query?: {
+        cursor?: number;
+        searchName?: string;
+        searchBreed?: string;
+        searchType?: string;
+        ltePrice?: number;
+        gtePrice?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<
+        {
+          id: number;
+          createdAt: string;
+          updatedAt: string;
+          name: string;
+          type: string;
+          breed: string;
+          price: number;
+        }[],
+        any
+      >({
+        path: `/ad/preview-list/`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name UpdateData
+     * @request GET:/ad/update-data/
+     * @response `200` `{ name: string | null, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, id: number }` Default Response
+     */
+    updateData: (query: { adId: number }, params: RequestParams = {}) =>
+      this.request<
+        {
+          name: string | null;
+          type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+          breed: string;
+          description: string;
+          email: string;
+          tel: string;
+          price: number;
+          id: number;
+        },
+        any
+      >({
+        path: `/ad/update-data/`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+  };
   auth = {
     /**
      * No description
@@ -402,178 +470,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "PATCH",
         body: body,
         type: ContentType.Json,
-        ...params,
-      }),
-  };
-  ad = {
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name Create
-     * @request POST:/ad/create/
-     * @response `200` `void` Default Response
-     */
-    create: (
-      data: {
-        name?: string | null;
-        type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-        breed?: string;
-        description?: string;
-        email?: string;
-        tel?: string;
-        price?: number;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/ad/create/`,
-        method: "POST",
-        body: data,
-        type: ContentType.FormData,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name FindMany
-     * @request GET:/ad/find-many/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, description: string, email: string, tel?: string, isPublished: string })[]` Default Response
-     */
-    findMany: (query?: { cursor?: string }, params: RequestParams = {}) =>
-      this.request<
-        {
-          id: number;
-          createdAt: string;
-          updatedAt: string;
-          name: string;
-          type: string;
-          breed: string;
-          description: string;
-          email: string;
-          tel?: string;
-          isPublished: string;
-        }[],
-        any
-      >({
-        path: `/ad/find-many/`,
-        method: "GET",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name PreviewList
-     * @request GET:/ad/preview-list/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
-     */
-    previewList: (
-      query?: {
-        cursor?: number;
-        searchName?: string;
-        searchBreed?: string;
-        searchType?: string;
-        ltePrice?: number;
-        gtePrice?: number;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<
-        {
-          id: number;
-          createdAt: string;
-          updatedAt: string;
-          name: string;
-          type: string;
-          breed: string;
-          price: number;
-        }[],
-        any
-      >({
-        path: `/ad/preview-list/`,
-        method: "GET",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name New
-     * @request POST:/ad/new/
-     * @response `201` `{ id: number }` Default Response
-     */
-    new: (params: RequestParams = {}) =>
-      this.request<{ id: number }, any>({
-        path: `/ad/new/`,
-        method: "POST",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name Update
-     * @request PATCH:/ad/update/
-     * @response `200` `void` Default Response
-     */
-    update: (
-      query: { id: number },
-      body: {
-        name?: string | null;
-        type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-        breed?: string;
-        description?: string;
-        email?: string;
-        tel?: string;
-        price?: number;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/ad/update/`,
-        method: "PATCH",
-        query: query,
-        body: body,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name UpdateData
-     * @request GET:/ad/update-data/
-     * @response `200` `{ name?: string | null, type?: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed?: string, description?: string, email?: string, tel?: string, price?: number }` Default Response
-     */
-    updateData: (query: { adId: number }, params: RequestParams = {}) =>
-      this.request<
-        {
-          name?: string | null;
-          type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-          breed?: string;
-          description?: string;
-          email?: string;
-          tel?: string;
-          price?: number;
-        },
-        any
-      >({
-        path: `/ad/update-data/`,
-        method: "GET",
-        query: query,
-        format: "json",
         ...params,
       }),
   };
