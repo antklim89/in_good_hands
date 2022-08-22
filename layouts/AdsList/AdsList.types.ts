@@ -1,8 +1,8 @@
-import { IAdsQuery } from '~/generated/graphql';
+import { Ad } from '~/fastify/src/swagger';
 
 
 export interface AdsListProps {
-     ads: IAdsQuery['ads']['data']
+     ads: Ad.PreviewList.ResponseBody
 }
 
-export type AdsListItemProps = IAdsQuery['ads']['data'][0]
+export type AdsListItemProps = Ad.PreviewList.ResponseBody[number]

@@ -1,23 +1,21 @@
 import type { GetStaticProps, NextPage } from 'next';
 
 import Seo from '~/components/Seo';
-import { IAdsQuery, IHeroQuery } from '~/generated/graphql';
+import { Ad } from '~/fastify/src/swagger';
 import AdsList from '~/layouts/AdsList';
 import Hero from '~/layouts/Hero';
-import { requestHero } from '~/utils';
-import { requestAds } from '~/utils/requestAds';
+import { api } from '~/utils';
 
 
 interface Props {
-    hero: IHeroQuery['hero']['data']
-    ads: IAdsQuery['ads']['data']
+    ads: Ad.PreviewList.ResponseBody
 }
 
-const Home: NextPage<Props> = ({ hero, ads }) => {
+const Home: NextPage<Props> = ({ ads }) => {
     return (
         <>
             <Seo title="Home" />
-            <Hero {...hero} />
+            <Hero />
             <AdsList ads={ads} />
         </>
     );
@@ -27,8 +25,7 @@ export default Home;
 
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-    const hero = await requestHero();
-    const ads = await requestAds();
+    const { data: ads } = await api().ad.previewList();
 
-    return { props: { hero, ads } };
+    return { props: { ads } };
 };

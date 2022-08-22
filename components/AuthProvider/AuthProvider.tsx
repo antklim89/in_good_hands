@@ -24,12 +24,12 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
 
     const login: IAuthContext['login'] = useCallback(async (body) => {
-        const { data } = await api.auth.login(body);
+        const { data } = await api().auth.login(body);
         setUser(data.user);
     }, []);
 
     const register: IAuthContext['register'] = useCallback(async (body) => {
-        const { data } = await api.auth.register(body);
+        const { data } = await api().auth.register(body);
         setUser(data.user);
     }, []);
 

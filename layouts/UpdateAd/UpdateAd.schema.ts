@@ -1,16 +1,13 @@
 import zod from 'zod';
 
-import schema from '~/strapi/src/api/ad/content-types/ad/schema.json';
-import { IEnumAdType } from '~/types';
+import { animalsTypes, adInputSchema } from '~/fastify/src/schemas/ad.schema';
 
-
-const { attributes: attr } = schema;
 
 export const updateAdSchema = zod.object({
     body: zod.string()
         .min(attr.body.minLength)
         .max(attr.body.maxLength),
-    type: zod.enum<IEnumAdType, [IEnumAdType, ...IEnumAdType[]]>(attr.type.enum as [IEnumAdType, ...IEnumAdType[]]),
+    type: zod.enum(animalsTypes),
     breed: zod.string()
         .min(attr.breed.minLength)
         .max(attr.breed.maxLength),

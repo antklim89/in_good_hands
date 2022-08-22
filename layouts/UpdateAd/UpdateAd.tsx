@@ -6,8 +6,6 @@ import { FC } from 'react';
 import { ZodError } from 'zod';
 
 import InputField from '~/components/InputField';
-import schema from '~/strapi/src/api/ad/content-types/ad/schema.json';
-import { requestUpdateAd } from '~/utils';
 
 import { updateAdSchema } from './UpdateAd.schema';
 import { UpdateAdProps } from './UpdateAd.types';

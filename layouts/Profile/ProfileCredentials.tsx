@@ -14,7 +14,7 @@ const ProfileCredentials: FC = () => {
         initialValues: { name: user?.name || '', email: user?.email || '' },
         async onSubmit(data) {
             try {
-                await api.auth.update(data);
+                await api().auth.update(data);
                 toast({ title: 'Credentials successfully updated.', status: 'error' });
             } catch (error) {
                 if (error instanceof Error) toast({ title: error.message, status: 'error' });

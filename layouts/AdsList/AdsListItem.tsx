@@ -1,19 +1,15 @@
 import {
-    Flex, Box, Heading, Button, Text, Center,
+    Flex, Heading, Button,
 } from '@chakra-ui/react';
-import Image from 'next/image';
 import Link from 'next/link';
-import Carousel from 'nuka-carousel';
 import { FC } from 'react';
 
-import PetAge from '~/components/PetAge';
 import Price from '~/components/Price';
-import { getApiURL } from '~/utils';
 
 import { AdsListItemProps } from './AdsList.types';
 
 
-const AdsListItem: FC<AdsListItemProps> = ({ id, attributes: { type, breed, images, birthday, price } }) => {
+const AdsListItem: FC<AdsListItemProps> = ({ id, type, breed, price }) => {
     return (
         <Flex
             as="section"
@@ -24,7 +20,7 @@ const AdsListItem: FC<AdsListItemProps> = ({ id, attributes: { type, breed, imag
             p={4}
             width="full"
         >
-            <Box flexBasis={200} flexGrow={1} mr={8}>
+            {/* <Box flexBasis={200} flexGrow={1} mr={8}>
                 {images.data.length > 0
                     ? (
                         <Carousel>
@@ -46,12 +42,12 @@ const AdsListItem: FC<AdsListItemProps> = ({ id, attributes: { type, breed, imag
                             </Text>
                         </Center>
                     )}
-            </Box>
+            </Box> */}
             <Flex flexBasis={200} flexDirection="column" flexGrow={5} >
                 <Heading>
                     {type} {breed}
                 </Heading>
-                <PetAge birthday={birthday} />
+                {/* <PetAge birthday={birthday} /> */}
                 <Price flexGrow={1} fontSize="2xl" price={price} />
                 <Flex justifyContent="flex-end">
                     <Link passHref href={`/ads/${id}`}>

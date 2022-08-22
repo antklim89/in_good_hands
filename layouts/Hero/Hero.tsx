@@ -3,11 +3,11 @@ import NextImage from 'next/image';
 import { FC } from 'react';
 
 import Markdown from '~/components/Markdown';
-import { IHeroQuery } from '~/generated/graphql';
-import { getApiURL } from '~/utils/getApiUrl';
+
+import heroImage from './Hero.image.png';
 
 
-const Hero: FC<IHeroQuery['hero']['data']> = ({ attributes: { body, image } }) => {
+const Hero: FC = () => {
     return (
         <Box as="section" position="relative">
             <Container
@@ -25,7 +25,13 @@ const Hero: FC<IHeroQuery['hero']['data']> = ({ attributes: { body, image } }) =
                     width="50%"
                 >
                     <Markdown >
-                        {body}
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Omnis eius et quidem, id in ipsam aperiam quia hic dolorum
+                        assumenda placeat, itaque qui reprehenderit provident consectetur vel.
+                        Fugit, accusamus esse.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Repellat eveniet sint dignissimos earum sequi tempora fugit
+                        asperiores quod exercitationem et. Veritatis.
                     </Markdown>
                 </Box>
                 <Box
@@ -37,17 +43,13 @@ const Hero: FC<IHeroQuery['hero']['data']> = ({ attributes: { body, image } }) =
                     top={0}
                     zIndex={-1}
                 >
-                    {image.data
-                        ? (
-                            <NextImage
-                                alt="hero"
-                                layout="fill"
-                                objectFit="cover"
-                                objectPosition="center"
-                                src={getApiURL(image.data.attributes.url)}
-                            />
-                        )
-                        : null}
+                    <NextImage
+                        alt="hero"
+                        layout="fill"
+                        objectFit="cover"
+                        objectPosition="center"
+                        src={heroImage}
+                    />
                 </Box>
             </Container>
         </Box>
