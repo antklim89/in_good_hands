@@ -7,6 +7,7 @@
     "dev": "run-p dev:**",
     "dev:next": "next dev -H 0.0.0.0",
     "dev:strapi": "yarn --cwd ./strapi dev",
+    "dev:fastify": "yarn --cwd ./fastify dev",
     "dev:typegen": "graphql-codegen --config codegen.yml -w",
     "dev:typecheck": "tsc --noEmit -w --preserveWatchOutput",
     "build": "next build",
