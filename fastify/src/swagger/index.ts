@@ -112,14 +112,14 @@ export namespace Ad {
     export type RequestParams = {};
     export type RequestQuery = { id: number };
     export type RequestBody = {
-      name?: string;
-      type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-      breed?: string;
-      description?: string;
-      email?: string;
-      tel?: string;
-      price?: number;
-      isPublished?: boolean;
+      name: string;
+      type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+      breed: string;
+      description: string;
+      email: string;
+      tel: string;
+      price: number;
+      isPublished: boolean;
     };
     export type RequestHeaders = { authentication: string };
     export type ResponseBody = void;
@@ -147,6 +147,23 @@ export namespace Ad {
       isPublished: boolean;
       id: number;
     };
+  }
+}
+
+export namespace Image {
+  /**
+   * No description
+   * @tags image
+   * @name Upload
+   * @request POST:/image/upload/
+   * @response `201` `void` Default Response
+   */
+  export namespace Upload {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = any;
+    export type RequestHeaders = {};
+    export type ResponseBody = void;
   }
 }
 
@@ -191,23 +208,6 @@ export namespace Auth {
     export type RequestQuery = {};
     export type RequestBody = { email?: string; name?: string; tel?: string };
     export type RequestHeaders = { authentication: string };
-    export type ResponseBody = void;
-  }
-}
-
-export namespace Image {
-  /**
-   * No description
-   * @tags image
-   * @name Upload
-   * @request POST:/image/upload/
-   * @response `201` `void` Default Response
-   */
-  export namespace Upload {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = any;
-    export type RequestHeaders = {};
     export type ResponseBody = void;
   }
 }
@@ -481,14 +481,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     update: (
       query: { id: number },
       body: {
-        name?: string;
-        type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-        breed?: string;
-        description?: string;
-        email?: string;
-        tel?: string;
-        price?: number;
-        isPublished?: boolean;
+        name: string;
+        type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+        breed: string;
+        description: string;
+        email: string;
+        tel: string;
+        price: number;
+        isPublished: boolean;
       },
       params: RequestParams = {},
     ) =>
@@ -528,6 +528,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "GET",
         query: query,
         format: "json",
+        ...params,
+      }),
+  };
+  image = {
+    /**
+     * No description
+     *
+     * @tags image
+     * @name Upload
+     * @request POST:/image/upload/
+     * @response `201` `void` Default Response
+     */
+    upload: (data?: any, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/image/upload/`,
+        method: "POST",
+        body: data,
+        type: ContentType.FormData,
         ...params,
       }),
   };
@@ -582,24 +600,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "PATCH",
         body: body,
         type: ContentType.Json,
-        ...params,
-      }),
-  };
-  image = {
-    /**
-     * No description
-     *
-     * @tags image
-     * @name Upload
-     * @request POST:/image/upload/
-     * @response `201` `void` Default Response
-     */
-    upload: (data?: any, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/image/upload/`,
-        method: "POST",
-        body: data,
-        type: ContentType.FormData,
         ...params,
       }),
   };

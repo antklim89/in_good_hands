@@ -9,37 +9,47 @@ export const adInputSchema = {
             type: 'string',
             minLength: 3,
             maxLength: 100,
+            nullable: false,
         },
         type: {
             type: 'string',
             enum: animalsTypes,
+            nullable: false,
         },
         breed: {
             type: 'string',
             minLength: 3,
             maxLength: 100,
+            nullable: false,
         },
         description: {
             type: 'string',
             minLength: 3,
             maxLength: 4000,
+            nullable: false,
         },
         email: {
             type: 'string',
             minLength: 3,
             maxLength: 100,
+            nullable: false,
         },
         tel: {
             type: 'string',
             minLength: 3,
             maxLength: 100,
+            nullable: false,
         },
         price: {
             type: 'number',
             minimum: 0,
             maximum: 99999,
+            nullable: false,
         },
-        isPublished: { type: 'boolean' },
+        isPublished: {
+            type: 'boolean',
+            nullable: false,
+        },
     },
 } as const;
 

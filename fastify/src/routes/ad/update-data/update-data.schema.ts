@@ -7,7 +7,6 @@ const schema = {
     response: {
         200: {
             ...adInputSchema,
-            required: Object.keys(adInputSchema.properties),
             properties: {
                 ...adInputSchema.properties,
                 id: { type: 'number', nullable: false },
