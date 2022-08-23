@@ -1,6 +1,6 @@
 
 
-declare module 'fastify' {
+export declare module 'fastify' {
     import type { JWTUser } from './JWTUser';
 
 
