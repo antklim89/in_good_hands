@@ -13,53 +13,6 @@ export namespace Ad {
   /**
    * No description
    * @tags ad
-   * @name Create
-   * @request POST:/ad/create/
-   * @response `200` `void` Default Response
-   */
-  export namespace Create {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = {
-      name?: string | null;
-      type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-      breed?: string;
-      description?: string;
-      email?: string;
-      tel?: string;
-      price?: number;
-    };
-    export type RequestHeaders = {};
-    export type ResponseBody = void;
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name FindMany
-   * @request GET:/ad/find-many/
-   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, description: string, email: string, tel?: string, isPublished: string })[]` Default Response
-   */
-  export namespace FindMany {
-    export type RequestParams = {};
-    export type RequestQuery = { cursor?: string };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = {
-      id: number;
-      createdAt: string;
-      updatedAt: string;
-      name: string;
-      type: string;
-      breed: string;
-      description: string;
-      email: string;
-      tel?: string;
-      isPublished: string;
-    }[];
-  }
-  /**
-   * No description
-   * @tags ad
    * @name New
    * @request POST:/ad/new/
    * @response `201` `{ id: number }` Default Response
@@ -353,65 +306,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     });
 
   ad = {
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name Create
-     * @request POST:/ad/create/
-     * @response `200` `void` Default Response
-     */
-    create: (
-      data: {
-        name?: string | null;
-        type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-        breed?: string;
-        description?: string;
-        email?: string;
-        tel?: string;
-        price?: number;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/ad/create/`,
-        method: "POST",
-        body: data,
-        type: ContentType.FormData,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name FindMany
-     * @request GET:/ad/find-many/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, description: string, email: string, tel?: string, isPublished: string })[]` Default Response
-     */
-    findMany: (query?: { cursor?: string }, params: RequestParams = {}) =>
-      this.request<
-        {
-          id: number;
-          createdAt: string;
-          updatedAt: string;
-          name: string;
-          type: string;
-          breed: string;
-          description: string;
-          email: string;
-          tel?: string;
-          isPublished: string;
-        }[],
-        any
-      >({
-        path: `/ad/find-many/`,
-        method: "GET",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-
     /**
      * No description
      *

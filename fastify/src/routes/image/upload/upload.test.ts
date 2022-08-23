@@ -1,3 +1,8 @@
+import fs from 'fs';
+import { resolve } from 'path';
+
+import formAutoContent from 'form-auto-content';
+
 import { init } from '~/fastify/test';
 import { generateJWT } from '~/fastify/utils';
 
@@ -12,17 +17,15 @@ const defaultOptions: import('light-my-request').InjectOptions = {
 
 describe('POST /image/upload', () => {
     it('should create new ad', async () => {
-        const headers = {
-            'authentication': generateJWT(db().users[0]).token,
-            'Content-Type': 'multipart/form-data',
-        };
+        // const headers = {
+        //     'authentication': generateJWT(db().users[0]).token,
+        // };
 
-        const file = Buffer.from([1, 1]);
-        const payload = { file, field: 'file' };
+        const form = formAutoContent({
+            image: fs.createReadStream(resolve(__dirname, './upload.schema.ts')),
+        });
 
-        const response = await app.inject({ ...defaultOptions, headers, payload });
-        console.log('==== \n response', response.body);
+        const response = await app.inject({ ...defaultOptions, ...form });
 
-        // const api = await new Api(new HttpClient()).image.upload({ file });
     });
 });

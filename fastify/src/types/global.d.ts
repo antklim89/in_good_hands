@@ -1,7 +1,6 @@
 
 
-// @ts-expect-error export
-export declare module 'fastify' {
+declare module 'fastify' {
     import type { JWTUser } from './JWTUser';
 
 
@@ -21,3 +20,9 @@ export declare module 'fastify' {
     }
 }
 
+
+declare module 'form-auto-content' {
+    export default function formAutoContent(
+        arg: Record<string, unknown>
+    ): { payload: Record<string, unknown>, headers: Record<string, string> };
+}
