@@ -34,7 +34,6 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules",
-    "fastify"
+    "node_modules"
   ]
 }
