@@ -2,7 +2,7 @@ import { Ad } from '~/fastify/src/swagger';
 
 
 export interface UpdateAdProps {
-     ad?: Ad.UpdateData.ResponseBody;
+     ad: Ad.UpdateData.ResponseBody;
 }
 
 // export interface UpdateAdImagesProps {

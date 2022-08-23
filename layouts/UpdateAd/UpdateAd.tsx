@@ -18,20 +18,19 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
 
     const formik = useFormik<UpdateAdSchema>({
         initialValues: {
-            breed: ad?.breed || '',
-            description: ad?.description || '',
-            email: ad?.email || '',
-            name: ad?.name || '',
-            price: ad?.price || 0,
-            tel: ad?.tel || '',
-            type: ad?.type || 'cat',
+            breed: ad.breed || '',
+            description: ad.description || '',
+            email: ad.email || '',
+            name: ad.name || '',
+            price: ad.price || 0,
+            tel: ad.tel || '',
+            type: ad.type || 'cat',
+            isPublished: ad.isPublished || false,
         },
         async onSubmit(data) {
             try {
-                if (ad) {
-                    await api().ad.update({ id: ad?.id }, data);
-                    toast({ title: 'Ad updated successfully!', status: 'success' });
-                }
+                await api().ad.update({ id: ad.id }, data);
+                toast({ title: 'Ad updated successfully!', status: 'success' });
             } catch (error) {
                 if (error instanceof Error) toast({ title: error.message, status: 'error' });
             }
@@ -115,14 +114,14 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
                         name="birthday"
                         type="date"
                     /> */}
-                    {/* <InputField
+                    <InputField
                         as="switch"
                         formik={formik}
                         isRequired={false}
                         label="Published"
                         name="isPublished"
                         size="lg"
-                    /> */}
+                    />
                     <Flex justify="flex-end" mt={16}>
                         <Button
                             disabled={!formik.isValid}

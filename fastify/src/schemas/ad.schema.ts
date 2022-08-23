@@ -6,7 +6,7 @@ export const adInputSchema = {
     type: 'object',
     properties: {
         name: {
-            type: ['string', 'null'],
+            type: 'string',
             minLength: 3,
             maxLength: 100,
         },
@@ -15,22 +15,22 @@ export const adInputSchema = {
             enum: animalsTypes,
         },
         breed: {
-            type: ['string', 'null'],
+            type: 'string',
             minLength: 3,
             maxLength: 100,
         },
         description: {
-            type: ['string', 'null'],
+            type: 'string',
             minLength: 3,
             maxLength: 4000,
         },
         email: {
-            type: ['string', 'null'],
+            type: 'string',
             minLength: 3,
             maxLength: 100,
         },
         tel: {
-            type: ['string', 'null'],
+            type: 'string',
             minLength: 3,
             maxLength: 100,
         },
@@ -39,6 +39,7 @@ export const adInputSchema = {
             minimum: 0,
             maximum: 99999,
         },
+        isPublished: { type: 'boolean' },
     },
 } as const;
 

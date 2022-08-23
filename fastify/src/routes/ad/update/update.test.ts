@@ -53,9 +53,9 @@ describe('PATCH /ad/update', () => {
 
         expect(updatedAd.breed).toEqual(beforeUpdateAd.breed);
         expect(updatedAd.tel).toEqual(beforeUpdateAd.tel);
+        expect(updatedAd.isPublished).toEqual(payload.isPublished);
 
         expect(updatedAd.createdAt).not.toEqual(payload.createdAt);
-        expect(updatedAd.isPublished).not.toEqual(payload.isPublished);
         expect(updatedAd.id).not.toEqual(payload.id);
         expect(updatedAd).not.toHaveProperty('foo');
 

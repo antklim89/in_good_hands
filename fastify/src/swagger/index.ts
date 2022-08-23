@@ -13,6 +13,29 @@ export namespace Ad {
   /**
    * No description
    * @tags ad
+   * @name Create
+   * @request POST:/ad/create/
+   * @response `200` `void` Default Response
+   */
+  export namespace Create {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = {
+      name?: string;
+      type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+      breed?: string;
+      description?: string;
+      email?: string;
+      tel?: string;
+      price?: number;
+      isPublished?: boolean;
+    };
+    export type RequestHeaders = {};
+    export type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @tags ad
    * @name FindMany
    * @request GET:/ad/find-many/
    * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, description: string, email: string, tel?: string, isPublished: string })[]` Default Response
@@ -34,28 +57,6 @@ export namespace Ad {
       tel?: string;
       isPublished: string;
     }[];
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name Create
-   * @request POST:/ad/create/
-   * @response `200` `void` Default Response
-   */
-  export namespace Create {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = {
-      name?: string | null;
-      type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-      breed?: string | null;
-      description?: string | null;
-      email?: string | null;
-      tel?: string | null;
-      price?: number;
-    };
-    export type RequestHeaders = {};
-    export type ResponseBody = void;
   }
   /**
    * No description
@@ -111,13 +112,14 @@ export namespace Ad {
     export type RequestParams = {};
     export type RequestQuery = { id: number };
     export type RequestBody = {
-      name?: string | null;
+      name?: string;
       type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-      breed?: string | null;
-      description?: string | null;
-      email?: string | null;
-      tel?: string | null;
+      breed?: string;
+      description?: string;
+      email?: string;
+      tel?: string;
       price?: number;
+      isPublished?: boolean;
     };
     export type RequestHeaders = { authentication: string };
     export type ResponseBody = void;
@@ -127,7 +129,7 @@ export namespace Ad {
    * @tags ad
    * @name UpdateData
    * @request GET:/ad/update-data/
-   * @response `200` `{ name: string | null, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string | null, description: string | null, email: string | null, tel: string | null, price: number, id: number }` Default Response
+   * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, isPublished: boolean, id: number }` Default Response
    */
   export namespace UpdateData {
     export type RequestParams = {};
@@ -135,13 +137,14 @@ export namespace Ad {
     export type RequestBody = never;
     export type RequestHeaders = { authentication: string };
     export type ResponseBody = {
-      name: string | null;
+      name: string;
       type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-      breed: string | null;
-      description: string | null;
-      email: string | null;
-      tel: string | null;
+      breed: string;
+      description: string;
+      email: string;
+      tel: string;
       price: number;
+      isPublished: boolean;
       id: number;
     };
   }
@@ -357,6 +360,35 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags ad
+     * @name Create
+     * @request POST:/ad/create/
+     * @response `200` `void` Default Response
+     */
+    create: (
+      data: {
+        name?: string;
+        type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+        breed?: string;
+        description?: string;
+        email?: string;
+        tel?: string;
+        price?: number;
+        isPublished?: boolean;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/ad/create/`,
+        method: "POST",
+        body: data,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ad
      * @name FindMany
      * @request GET:/ad/find-many/
      * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, description: string, email: string, tel?: string, isPublished: string })[]` Default Response
@@ -381,34 +413,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "GET",
         query: query,
         format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name Create
-     * @request POST:/ad/create/
-     * @response `200` `void` Default Response
-     */
-    create: (
-      data: {
-        name?: string | null;
-        type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-        breed?: string | null;
-        description?: string | null;
-        email?: string | null;
-        tel?: string | null;
-        price?: number;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/ad/create/`,
-        method: "POST",
-        body: data,
-        type: ContentType.FormData,
         ...params,
       }),
 
@@ -477,13 +481,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     update: (
       query: { id: number },
       body: {
-        name?: string | null;
+        name?: string;
         type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-        breed?: string | null;
-        description?: string | null;
-        email?: string | null;
-        tel?: string | null;
+        breed?: string;
+        description?: string;
+        email?: string;
+        tel?: string;
         price?: number;
+        isPublished?: boolean;
       },
       params: RequestParams = {},
     ) =>
@@ -502,18 +507,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags ad
      * @name UpdateData
      * @request GET:/ad/update-data/
-     * @response `200` `{ name: string | null, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string | null, description: string | null, email: string | null, tel: string | null, price: number, id: number }` Default Response
+     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, isPublished: boolean, id: number }` Default Response
      */
     updateData: (query: { adId: number }, params: RequestParams = {}) =>
       this.request<
         {
-          name: string | null;
+          name: string;
           type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-          breed: string | null;
-          description: string | null;
-          email: string | null;
-          tel: string | null;
+          breed: string;
+          description: string;
+          email: string;
+          tel: string;
           price: number;
+          isPublished: boolean;
           id: number;
         },
         any
