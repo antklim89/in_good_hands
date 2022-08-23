@@ -5,13 +5,40 @@ export const animalsTypes = ['cat', 'dog', 'bird', 'aquarium', 'rodent'] as cons
 export const adInputSchema = {
     type: 'object',
     properties: {
-        name: { type: ['string', 'null'] },
-        type: { type: 'string', enum: animalsTypes },
-        breed: { type: 'string' },
-        description: { type: 'string' },
-        email: { type: 'string' },
-        tel: { type: 'string' },
-        price: { type: 'number' },
+        name: {
+            type: ['string', 'null'],
+            minLength: 3,
+            maxLength: 100,
+        },
+        type: {
+            type: 'string',
+            enum: animalsTypes,
+        },
+        breed: {
+            type: ['string', 'null'],
+            minLength: 3,
+            maxLength: 100,
+        },
+        description: {
+            type: ['string', 'null'],
+            minLength: 3,
+            maxLength: 4000,
+        },
+        email: {
+            type: ['string', 'null'],
+            minLength: 3,
+            maxLength: 100,
+        },
+        tel: {
+            type: ['string', 'null'],
+            minLength: 3,
+            maxLength: 100,
+        },
+        price: {
+            type: 'number',
+            minimum: 0,
+            maximum: 99999,
+        },
     },
 } as const;
 
