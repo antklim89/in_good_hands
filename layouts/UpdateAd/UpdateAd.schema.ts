@@ -1,29 +1,40 @@
-import zod from 'zod';
+import { z } from 'zod';
 
-import { animalsTypes, adInputSchema } from '~/fastify/src/schemas/ad.schema';
+import { adInputSchema } from '~/fastify/src/schemas/ad.schema';
 
 
-export const updateAdSchema = zod.object({
-    body: zod.string()
-        .min(attr.body.minLength)
-        .max(attr.body.maxLength),
-    type: zod.enum(animalsTypes),
-    breed: zod.string()
-        .min(attr.breed.minLength)
-        .max(attr.breed.maxLength),
-    name: zod.string()
-        .min(attr.name.minLength)
-        .max(attr.name.maxLength),
-    price: zod.number()
-        .min(attr.price.min)
-        .max(attr.price.max),
-    tel: zod.string()
-        .min(attr.tel.minLength)
-        .max(attr.tel.maxLength),
-    email: zod.string()
+const props = adInputSchema.properties;
+
+export const updateAdSchema = z.object({
+    description: z.string()
+        .min(props.description.minLength)
+        .max(props.description.maxLength)
+        .optional(),
+    type: z.enum(props.type.enum)
+        .optional(),
+    breed: z.string()
+        .min(props.breed.minLength)
+        .max(props.breed.maxLength)
+        .optional(),
+    name: z.string()
+        .min(props.name.minLength)
+        .max(props.name.maxLength)
+        .optional(),
+    price: z.number()
+        .min(props.price.min)
+        .max(props.price.max)
+        .optional(),
+    tel: z.string()
+        .min(props.tel.minLength)
+        .max(props.tel.maxLength)
+        .optional(),
+    email: z.string()
         .email()
-        .min(attr.email.minLength)
-        .max(attr.email.maxLength),
-    birthday: zod.string(),
-    isPublished: zod.boolean(),
+        .min(props.email.minLength)
+        .max(props.email.maxLength)
+        .optional(),
+    // birthday: z.string(),
+    // isPublished: z.boolean(),
 });
+
+export type UpdateAdSchema = z.infer<typeof updateAdSchema>

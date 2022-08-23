@@ -3,7 +3,7 @@ import {
 } from 'react';
 
 import { IUser } from '~/types';
-import { api, clearUserCookie, getUserCookie } from '~/utils';
+import { api, clearUserCookie, getUserCookie, setUserCookie } from '~/utils';
 
 import { AuthProviderProps, IAuthContext } from './AuthProvider.types';
 
@@ -25,11 +25,13 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
     const login: IAuthContext['login'] = useCallback(async (body) => {
         const { data } = await api().auth.login(body);
+        setUserCookie(data);
         setUser(data.user);
     }, []);
 
     const register: IAuthContext['register'] = useCallback(async (body) => {
         const { data } = await api().auth.register(body);
+        setUserCookie(data);
         setUser(data.user);
     }, []);
 

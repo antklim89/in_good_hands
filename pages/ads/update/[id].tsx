@@ -15,11 +15,7 @@ const UpdateAdPage: NextPage<Props> = ({ ad }) => {
     return (
         <>
             <Seo title="Create new ad" />
-            <UpdateAd
-                id={ad.id}
-                // images={images}
-                initialValues={ad}
-            />
+            <UpdateAd ad={ad} />
         </>
     );
 };
@@ -35,7 +31,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ params, re
         const { data: ad } = await api(req).ad.updateData({ adId: Number(params.id) });
         if (!ad) return { notFound: true };
 
-        ad.email = ad.email.length === 0 ? user.email : ad.email;
+        ad.email = (ad.email && ad.email.length === 0) ? user.email : ad.email;
 
         return { props: { ad } };
     } catch (error) {

@@ -6,21 +6,32 @@ import { FC } from 'react';
 import { ZodError } from 'zod';
 
 import InputField from '~/components/InputField';
+import { adInputSchema } from '~/fastify/src/schemas/ad.schema';
+import { api } from '~/utils';
 
-import { updateAdSchema } from './UpdateAd.schema';
+import { UpdateAdSchema, updateAdSchema } from './UpdateAd.schema';
 import { UpdateAdProps } from './UpdateAd.types';
-import UpdateAdImages from './UpdateAdImages';
 
 
-const UpdateAd: FC<UpdateAdProps> = ({ type = 'create', initialValues, id, images }) => {
+const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
     const toast = useToast();
 
-    const formik = useFormik({
-        initialValues,
+    const formik = useFormik<UpdateAdSchema>({
+        initialValues: {
+            breed: ad?.breed || '',
+            description: ad?.description || '',
+            email: ad?.email || '',
+            name: ad?.name || '',
+            price: ad?.price || 0,
+            tel: ad?.tel || '',
+            type: ad?.type || 'cat',
+        },
         async onSubmit(data) {
             try {
-                await requestUpdateAd({ id, data });
-                toast({ title: 'Ad updated successfully!', status: 'success' });
+                if (ad) {
+                    await api().ad.update({ id: ad?.id }, data);
+                    toast({ title: 'Ad updated successfully!', status: 'success' });
+                }
             } catch (error) {
                 if (error instanceof Error) toast({ title: error.message, status: 'error' });
             }
@@ -47,24 +58,24 @@ const UpdateAd: FC<UpdateAdProps> = ({ type = 'create', initialValues, id, image
                 p={[1, 4, 10]}
             >
                 <Heading pb={4} textAlign="center" textTransform="uppercase">
-                    {type}
+                    {ad ? 'Update ad' : 'Create ad'}
                 </Heading>
                 <form onSubmit={formik.handleSubmit}>
                     <InputField
                         as="textarea"
                         formik={formik}
                         label="Body"
-                        name="body"
+                        name="description"
                         resize="none"
                     />
-                    <UpdateAdImages id={id} images={images} />
+                    {/* <UpdateAdImages id={id} images={images} /> */}
                     <InputField
                         as="select"
                         formik={formik}
                         label="Pet Type"
                         name="type"
                     >
-                        {schema.attributes.type.enum.map((itemType) => (
+                        {adInputSchema.properties.type.enum.map((itemType) => (
                             <option key={itemType} value={itemType}>{itemType}</option>
                         ))}
                     </InputField>
@@ -98,20 +109,20 @@ const UpdateAd: FC<UpdateAdProps> = ({ type = 'create', initialValues, id, image
                         name="tel"
                         type="tel"
                     />
-                    <InputField
+                    {/* <InputField
                         formik={formik}
                         label="Pet birthday"
                         name="birthday"
                         type="date"
-                    />
-                    <InputField
+                    /> */}
+                    {/* <InputField
                         as="switch"
                         formik={formik}
                         isRequired={false}
                         label="Published"
                         name="isPublished"
                         size="lg"
-                    />
+                    /> */}
                     <Flex justify="flex-end" mt={16}>
                         <Button
                             disabled={!formik.isValid}

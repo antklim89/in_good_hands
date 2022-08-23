@@ -7,7 +7,7 @@ import { FC } from 'react';
 import { ZodError } from 'zod';
 
 import InputField from '~/components/InputField';
-import { useAuthContext, api } from '~/utils';
+import { useAuthContext } from '~/utils';
 
 import { authSchema } from './Auth.schema';
 import { AuthProps, AuthType } from './Auth.types';
@@ -23,7 +23,7 @@ const Auth: FC<AuthProps> = ({ type = 'login' }) => {
         async onSubmit(val) {
             try {
                 if (type === 'login') {
-                    await login(val)
+                    await login(val);
                     toast({ title: 'You have successfully logged in!', status: 'success' });
                     back();
                 } else {

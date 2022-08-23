@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { FC, useCallback } from 'react';
 
 import Protected from '~/components/Protected';
-import { requestNewAd } from '~/utils';
+import { api } from '~/utils';
 
 import { HeaderLinksProps } from './Header.types';
 
@@ -28,9 +28,9 @@ const HeaderLinks: FC<HeaderLinksProps> = ({ onClose, ...props }) => {
     const { push } = useRouter();
 
     const handleCreateNewAd = useCallback(async () => {
-        const adId = await requestNewAd();
+        const { data: ad } = await api().ad.new();
         onClose?.();
-        await push(`/ads/update/${adId}`);
+        await push(`/ads/update/${ad.id}`);
     }, []);
 
     return (
