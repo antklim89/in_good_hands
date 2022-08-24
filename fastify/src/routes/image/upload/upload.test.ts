@@ -15,15 +15,13 @@ const defaultOptions: import('light-my-request').InjectOptions = {
 };
 
 
+const image = fs.createReadStream(resolve(__dirname, './test.image.png'));
+
 describe('POST /image/upload', () => {
     it('should create new ad', async () => {
-        // const headers = {
-        //     'authentication': generateJWT(db().users[0]).token,
-        // };
+        const form = formAutoContent({ image });
 
-        const form = formAutoContent({
-            image: fs.createReadStream(resolve(__dirname, './upload.schema.ts')),
-        });
+        form.headers.authentication = generateJWT(db().users[0]).token;
 
         const response = await app.inject({ ...defaultOptions, ...form });
 
