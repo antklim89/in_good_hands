@@ -9,69 +9,52 @@
  * ---------------------------------------------------------------
  */
 
-export namespace Ad {
+export namespace Auth {
   /**
    * No description
-   * @tags ad
-   * @name Create
-   * @request POST:/ad/create/
+   * @tags auth
+   * @name Login
+   * @request POST:/auth/login/
+   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
+   */
+  export namespace Login {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = { password: string; email: string };
+    export type RequestHeaders = {};
+    export type ResponseBody = { user: { email: string; name: string; id: string }; token: string };
+  }
+  /**
+   * No description
+   * @tags auth
+   * @name Register
+   * @request POST:/auth/register/
+   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
+   */
+  export namespace Register {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = { password: string; email: string; name: string };
+    export type RequestHeaders = {};
+    export type ResponseBody = { user: { email: string; name: string; id: string }; token: string };
+  }
+  /**
+   * No description
+   * @tags auth
+   * @name Update
+   * @request PATCH:/auth/update/
    * @response `200` `void` Default Response
    */
-  export namespace Create {
+  export namespace Update {
     export type RequestParams = {};
     export type RequestQuery = {};
-    export type RequestBody = {
-      name?: string;
-      type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-      breed?: string;
-      description?: string;
-      email?: string;
-      tel?: string;
-      price?: number;
-      isPublished?: boolean;
-    };
-    export type RequestHeaders = {};
+    export type RequestBody = { email?: string; name?: string; tel?: string };
+    export type RequestHeaders = { authentication: string };
     export type ResponseBody = void;
   }
-  /**
-   * No description
-   * @tags ad
-   * @name FindMany
-   * @request GET:/ad/find-many/
-   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, description: string, email: string, tel?: string, isPublished: string })[]` Default Response
-   */
-  export namespace FindMany {
-    export type RequestParams = {};
-    export type RequestQuery = { cursor?: string };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = {
-      id: number;
-      createdAt: string;
-      updatedAt: string;
-      name: string;
-      type: string;
-      breed: string;
-      description: string;
-      email: string;
-      tel?: string;
-      isPublished: string;
-    }[];
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name New
-   * @request POST:/ad/new/
-   * @response `201` `{ id: number }` Default Response
-   */
-  export namespace New {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = { authentication: string };
-    export type ResponseBody = { id: number };
-  }
+}
+
+export namespace Ad {
   /**
    * No description
    * @tags ad
@@ -100,6 +83,20 @@ export namespace Ad {
       breed: string;
       price: number;
     }[];
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name New
+   * @request POST:/ad/new/
+   * @response `201` `{ id: number }` Default Response
+   */
+  export namespace New {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = { authentication: string };
+    export type ResponseBody = { id: number };
   }
   /**
    * No description
@@ -163,51 +160,6 @@ export namespace Image {
     export type RequestQuery = {};
     export type RequestBody = any;
     export type RequestHeaders = {};
-    export type ResponseBody = void;
-  }
-}
-
-export namespace Auth {
-  /**
-   * No description
-   * @tags auth
-   * @name Login
-   * @request POST:/auth/login/
-   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-   */
-  export namespace Login {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = { password: string; email: string };
-    export type RequestHeaders = {};
-    export type ResponseBody = { user: { email: string; name: string; id: string }; token: string };
-  }
-  /**
-   * No description
-   * @tags auth
-   * @name Register
-   * @request POST:/auth/register/
-   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-   */
-  export namespace Register {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = { password: string; email: string; name: string };
-    export type RequestHeaders = {};
-    export type ResponseBody = { user: { email: string; name: string; id: string }; token: string };
-  }
-  /**
-   * No description
-   * @tags auth
-   * @name Update
-   * @request PATCH:/auth/update/
-   * @response `200` `void` Default Response
-   */
-  export namespace Update {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = { email?: string; name?: string; tel?: string };
-    export type RequestHeaders = { authentication: string };
     export type ResponseBody = void;
   }
 }
@@ -355,83 +307,61 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       ...params,
     });
 
-  ad = {
+  auth = {
     /**
      * No description
      *
-     * @tags ad
-     * @name Create
-     * @request POST:/ad/create/
+     * @tags auth
+     * @name Login
+     * @request POST:/auth/login/
+     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
+     */
+    login: (body: { password: string; email: string }, params: RequestParams = {}) =>
+      this.request<{ user: { email: string; name: string; id: string }; token: string }, any>({
+        path: `/auth/login/`,
+        method: "POST",
+        body: body,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Register
+     * @request POST:/auth/register/
+     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
+     */
+    register: (body: { password: string; email: string; name: string }, params: RequestParams = {}) =>
+      this.request<{ user: { email: string; name: string; id: string }; token: string }, any>({
+        path: `/auth/register/`,
+        method: "POST",
+        body: body,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
      * @response `200` `void` Default Response
      */
-    create: (
-      data: {
-        name?: string;
-        type?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-        breed?: string;
-        description?: string;
-        email?: string;
-        tel?: string;
-        price?: number;
-        isPublished?: boolean;
-      },
-      params: RequestParams = {},
-    ) =>
+    update: (body: { email?: string; name?: string; tel?: string }, params: RequestParams = {}) =>
       this.request<void, any>({
-        path: `/ad/create/`,
-        method: "POST",
-        body: data,
-        type: ContentType.FormData,
+        path: `/auth/update/`,
+        method: "PATCH",
+        body: body,
+        type: ContentType.Json,
         ...params,
       }),
-
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name FindMany
-     * @request GET:/ad/find-many/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, description: string, email: string, tel?: string, isPublished: string })[]` Default Response
-     */
-    findMany: (query?: { cursor?: string }, params: RequestParams = {}) =>
-      this.request<
-        {
-          id: number;
-          createdAt: string;
-          updatedAt: string;
-          name: string;
-          type: string;
-          breed: string;
-          description: string;
-          email: string;
-          tel?: string;
-          isPublished: string;
-        }[],
-        any
-      >({
-        path: `/ad/find-many/`,
-        method: "GET",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name New
-     * @request POST:/ad/new/
-     * @response `201` `{ id: number }` Default Response
-     */
-    new: (params: RequestParams = {}) =>
-      this.request<{ id: number }, any>({
-        path: `/ad/new/`,
-        method: "POST",
-        format: "json",
-        ...params,
-      }),
-
+  };
+  ad = {
     /**
      * No description
      *
@@ -466,6 +396,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/ad/preview-list/`,
         method: "GET",
         query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name New
+     * @request POST:/ad/new/
+     * @response `201` `{ id: number }` Default Response
+     */
+    new: (params: RequestParams = {}) =>
+      this.request<{ id: number }, any>({
+        path: `/ad/new/`,
+        method: "POST",
         format: "json",
         ...params,
       }),
@@ -546,60 +492,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "POST",
         body: data,
         type: ContentType.FormData,
-        ...params,
-      }),
-  };
-  auth = {
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Login
-     * @request POST:/auth/login/
-     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-     */
-    login: (body: { password: string; email: string }, params: RequestParams = {}) =>
-      this.request<{ user: { email: string; name: string; id: string }; token: string }, any>({
-        path: `/auth/login/`,
-        method: "POST",
-        body: body,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Register
-     * @request POST:/auth/register/
-     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-     */
-    register: (body: { password: string; email: string; name: string }, params: RequestParams = {}) =>
-      this.request<{ user: { email: string; name: string; id: string }; token: string }, any>({
-        path: `/auth/register/`,
-        method: "POST",
-        body: body,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
-     */
-    update: (body: { email?: string; name?: string; tel?: string }, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/auth/update/`,
-        method: "PATCH",
-        body: body,
-        type: ContentType.Json,
         ...params,
       }),
   };
