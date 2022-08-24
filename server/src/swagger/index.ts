@@ -106,20 +106,6 @@ export namespace Auth {
   /**
    * No description
    * @tags auth
-   * @name Register
-   * @request POST:/auth/register/
-   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-   */
-  export namespace Register {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = { password: string; email: string; name: string };
-    export type RequestHeaders = {};
-    export type ResponseBody = { user: { email: string; name: string; id: string }; token: string };
-  }
-  /**
-   * No description
-   * @tags auth
    * @name Login
    * @request POST:/auth/login/
    * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
@@ -128,6 +114,20 @@ export namespace Auth {
     export type RequestParams = {};
     export type RequestQuery = {};
     export type RequestBody = { password: string; email: string };
+    export type RequestHeaders = {};
+    export type ResponseBody = { user: { email: string; name: string; id: string }; token: string };
+  }
+  /**
+   * No description
+   * @tags auth
+   * @name Register
+   * @request POST:/auth/register/
+   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
+   */
+  export namespace Register {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = { password: string; email: string; name: string };
     export type RequestHeaders = {};
     export type ResponseBody = { user: { email: string; name: string; id: string }; token: string };
   }
@@ -428,13 +428,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags auth
-     * @name Register
-     * @request POST:/auth/register/
+     * @name Login
+     * @request POST:/auth/login/
      * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
      */
-    register: (body: { password: string; email: string; name: string }, params: RequestParams = {}) =>
+    login: (body: { password: string; email: string }, params: RequestParams = {}) =>
       this.request<{ user: { email: string; name: string; id: string }; token: string }, any>({
-        path: `/auth/register/`,
+        path: `/auth/login/`,
         method: "POST",
         body: body,
         type: ContentType.Json,
@@ -446,13 +446,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags auth
-     * @name Login
-     * @request POST:/auth/login/
+     * @name Register
+     * @request POST:/auth/register/
      * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
      */
-    login: (body: { password: string; email: string }, params: RequestParams = {}) =>
+    register: (body: { password: string; email: string; name: string }, params: RequestParams = {}) =>
       this.request<{ user: { email: string; name: string; id: string }; token: string }, any>({
-        path: `/auth/login/`,
+        path: `/auth/register/`,
         method: "POST",
         body: body,
         type: ContentType.Json,
