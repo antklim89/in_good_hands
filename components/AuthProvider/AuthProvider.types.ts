@@ -1,6 +1,6 @@
+import type { Auth } from '@in_good_hands/server/src/swagger';
 import { ReactNode } from 'react';
 
-import type { Auth } from '~/fastify/src/swagger';
 import { IUser } from '~/types';
 
 

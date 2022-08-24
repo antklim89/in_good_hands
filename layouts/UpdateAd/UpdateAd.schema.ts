@@ -1,6 +1,5 @@
+import { adInputSchema } from ''@in_good_hands/server/src/schemas/ad.schema';
 import { z } from 'zod';
-
-import { adInputSchema } from '~/fastify/src/schemas/ad.schema';
 
 
 const props = adInputSchema.properties;

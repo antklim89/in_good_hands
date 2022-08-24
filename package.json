@@ -3,15 +3,19 @@
   "description": "In good hands",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "server"
+  ],
   "scripts": {
     "dev": "run-p dev:**",
     "dev:next": "next dev -H 0.0.0.0",
-    "dev:fastify": "yarn --cwd ./fastify dev",
+    "dev:server": "yarn --cwd ./server dev",
     "dev:typecheck": "tsc --noEmit -w --preserveWatchOutput",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@in_good_hands/server": "1.0.0",
     "@chakra-ui/icons": "^2.0.1",
     "@chakra-ui/react": "^2.1.2",
     "@emotion/react": "^11",

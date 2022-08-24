@@ -1,4 +1,4 @@
-import { Ad } from '~/fastify/src/swagger';
+import { Ad } from '@in_good_hands/server/src/swagger';
 
 
 export interface AdsListProps {

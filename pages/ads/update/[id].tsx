@@ -1,7 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next';
 
 import Seo from '~/components/Seo';
-import { Ad } from '~/fastify/src/swagger';
+import { Ad } from '@in_good_hands/server/src/swagger';
 import UpdateAd from '~/layouts/UpdateAd';
 import { api, getUserCookie } from '~/utils';
 

@@ -1,7 +1,7 @@
 import type { IncomingMessage } from 'http';
 
 import { API_URL } from '~/constants';
-import { Api } from '~/fastify/src/swagger';
+import { Api } from '@in_good_hands/server/src/swagger';
 
 import { getUserCookie } from './getCookies';
 
