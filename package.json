@@ -7,7 +7,7 @@
     "dev": "run-p dev:**",
     "dev:next": "next dev -H 0.0.0.0",
     "dev:fastify": "yarn --cwd ./fastify dev",
-    "off-dev:typecheck": "tsc --noEmit -w --preserveWatchOutput",
+    "dev:typecheck": "tsc --noEmit -w --preserveWatchOutput",
     "build": "next build",
     "start": "next start"
   },
