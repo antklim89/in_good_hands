@@ -4,7 +4,7 @@ export declare module 'fastify' {
     import type { JWTUser } from './JWTUser';
 
 
-    interface FastifyRequest {
+    export interface FastifyRequest {
         user: {
             id: string
             name: string
@@ -15,14 +15,9 @@ export declare module 'fastify' {
         getUser: () => JWTUser
     }
 
-    interface FastifyInstance {
+    export interface FastifyInstance {
         prisma: import('@prisma/client').PrismaClient
     }
 }
 
 
-declare module 'form-auto-content' {
-    export default function formAutoContent(
-        arg: Record<string, unknown>
-    ): { payload: Record<string, unknown>, headers: Record<string, string> };
-}
