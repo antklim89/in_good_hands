@@ -82,11 +82,18 @@ describe('PATCH /ad/update', () => {
             id: String(adToUpdate.id),
         };
 
-        const response = await app.inject({ ...defaultOptions, headers, payload, query });
+        const notUpdatedDescription = 'NOT UPDATED';
+
+        const response = await app.inject({
+            ...defaultOptions,
+            headers,
+            payload: { ...payload, description: notUpdatedDescription },
+            query,
+        });
         expect(response.statusCode).toEqual(404);
 
         const updatedAd = await prisma.ad.findUniqueOrThrow({ where: { id: adToUpdate.id } });
-        expect(updatedAd.description).not.toEqual(payload.description);
+        expect(updatedAd.description).not.toEqual(notUpdatedDescription);
 
 
     });
