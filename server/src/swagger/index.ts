@@ -153,14 +153,14 @@ export namespace Image {
    * @tags image
    * @name Upload
    * @request POST:/image/upload/
-   * @response `201` `void` Default Response
+   * @response `201` `number` Default Response
    */
   export namespace Upload {
     export type RequestParams = {};
     export type RequestQuery = {};
     export type RequestBody = any;
     export type RequestHeaders = {};
-    export type ResponseBody = void;
+    export type ResponseBody = number;
   }
 }
 
@@ -484,14 +484,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags image
      * @name Upload
      * @request POST:/image/upload/
-     * @response `201` `void` Default Response
+     * @response `201` `number` Default Response
      */
     upload: (data?: any, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<number, any>({
         path: `/image/upload/`,
         method: "POST",
         body: data,
         type: ContentType.FormData,
+        format: "json",
         ...params,
       }),
   };

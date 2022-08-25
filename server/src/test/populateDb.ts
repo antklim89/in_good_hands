@@ -9,6 +9,7 @@ const ADS_QTY = 20;
 
 
 export async function populateDb(prisma: PrismaClient) {
+    await prisma.image.deleteMany();
     await prisma.ad.deleteMany();
     await prisma.user.deleteMany();
 
