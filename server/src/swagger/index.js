@@ -111,21 +111,6 @@ export class Api extends HttpClient {
      * No description
      *
      * @tags ad
-     * @name New
-     * @request POST:/ad/new/
-     * @response `201` `{ id: number }` Default Response
-     */
-    new: (params = {}) =>
-      this.request({
-        path: `/ad/new/`,
-        method: "POST",
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags ad
      * @name PreviewList
      * @request GET:/ad/preview-list/
      * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
@@ -135,6 +120,21 @@ export class Api extends HttpClient {
         path: `/ad/preview-list/`,
         method: "GET",
         query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name New
+     * @request POST:/ad/new/
+     * @response `201` `{ id: number }` Default Response
+     */
+    new: (params = {}) =>
+      this.request({
+        path: `/ad/new/`,
+        method: "POST",
         format: "json",
         ...params,
       }),
@@ -168,25 +168,6 @@ export class Api extends HttpClient {
         path: `/ad/update-data/`,
         method: "GET",
         query: query,
-        format: "json",
-        ...params,
-      }),
-  };
-  image = {
-    /**
-     * No description
-     *
-     * @tags image
-     * @name Upload
-     * @request POST:/image/upload/
-     * @response `201` `number` Default Response
-     */
-    upload: (data, params = {}) =>
-      this.request({
-        path: `/image/upload/`,
-        method: "POST",
-        body: data,
-        type: ContentType.FormData,
         format: "json",
         ...params,
       }),
@@ -240,6 +221,25 @@ export class Api extends HttpClient {
         method: "PATCH",
         body: body,
         type: ContentType.Json,
+        ...params,
+      }),
+  };
+  image = {
+    /**
+     * No description
+     *
+     * @tags image
+     * @name Upload
+     * @request POST:/image/upload/
+     * @response `201` `number` Default Response
+     */
+    upload: (data, params = {}) =>
+      this.request({
+        path: `/image/upload/`,
+        method: "POST",
+        body: data,
+        type: ContentType.FormData,
+        format: "json",
         ...params,
       }),
   };

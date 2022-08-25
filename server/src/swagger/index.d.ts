@@ -13,24 +13,6 @@ export declare namespace Ad {
   /**
    * No description
    * @tags ad
-   * @name New
-   * @request POST:/ad/new/
-   * @response `201` `{ id: number }` Default Response
-   */
-  namespace New {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = never;
-    type RequestHeaders = {
-      authentication: string;
-    };
-    type ResponseBody = {
-      id: number;
-    };
-  }
-  /**
-   * No description
-   * @tags ad
    * @name PreviewList
    * @request GET:/ad/preview-list/
    * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
@@ -56,6 +38,24 @@ export declare namespace Ad {
       breed: string;
       price: number;
     }[];
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name New
+   * @request POST:/ad/new/
+   * @response `201` `{ id: number }` Default Response
+   */
+  namespace New {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {
+      authentication: string;
+    };
+    type ResponseBody = {
+      id: number;
+    };
   }
   /**
    * No description
@@ -111,22 +111,6 @@ export declare namespace Ad {
       isPublished: boolean;
       id: number;
     };
-  }
-}
-export declare namespace Image {
-  /**
-   * No description
-   * @tags image
-   * @name Upload
-   * @request POST:/image/upload/
-   * @response `201` `number` Default Response
-   */
-  namespace Upload {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = any;
-    type RequestHeaders = {};
-    type ResponseBody = number;
   }
 }
 export declare namespace Auth {
@@ -200,6 +184,22 @@ export declare namespace Auth {
     type ResponseBody = void;
   }
 }
+export declare namespace Image {
+  /**
+   * No description
+   * @tags image
+   * @name Upload
+   * @request POST:/image/upload/
+   * @response `201` `number` Default Response
+   */
+  namespace Upload {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = any;
+    type RequestHeaders = {};
+    type ResponseBody = number;
+  }
+}
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType } from "axios";
 export declare type QueryParamsType = Record<string | number, any>;
 export interface FullRequestParams extends Omit<AxiosRequestConfig, "data" | "params" | "url" | "responseType"> {
@@ -271,19 +271,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags ad
-     * @name New
-     * @request POST:/ad/new/
-     * @response `201` `{ id: number }` Default Response
-     */
-    new: (params?: RequestParams) => Promise<
-      AxiosResponse<{
-        id: number;
-      }>
-    >;
-    /**
-     * No description
-     *
-     * @tags ad
      * @name PreviewList
      * @request GET:/ad/preview-list/
      * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
@@ -310,6 +297,19 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
           price: number;
         }[]
       >
+    >;
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name New
+     * @request POST:/ad/new/
+     * @response `201` `{ id: number }` Default Response
+     */
+    new: (params?: RequestParams) => Promise<
+      AxiosResponse<{
+        id: number;
+      }>
     >;
     /**
      * No description
@@ -361,17 +361,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         id: number;
       }>
     >;
-  };
-  image: {
-    /**
-     * No description
-     *
-     * @tags image
-     * @name Upload
-     * @request POST:/image/upload/
-     * @response `201` `number` Default Response
-     */
-    upload: (data?: any, params?: RequestParams) => Promise<AxiosResponse<number>>;
   };
   auth: {
     /**
@@ -439,5 +428,16 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<AxiosResponse<void>>;
+  };
+  image: {
+    /**
+     * No description
+     *
+     * @tags image
+     * @name Upload
+     * @request POST:/image/upload/
+     * @response `201` `number` Default Response
+     */
+    upload: (data?: any, params?: RequestParams) => Promise<AxiosResponse<number>>;
   };
 }
