@@ -7,13 +7,10 @@
             "syntax": "typescript",
             "dynamicImport": true
         },
-        "baseUrl": ".",
+        "baseUrl": "./src",
         "paths": {
             "@/*": [
-                "src/*"
-            ],
-            "@/": [
-                "src/"
+                "*"
             ]
         }
     },

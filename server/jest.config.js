@@ -1,6 +1,3 @@
-const { readFileSync } = require('fs');
-const { resolve } = require('path');
-
 
 const config = {
     clearMocks: true,
@@ -11,7 +8,7 @@ const config = {
         '/node_modules/',
         '/swagger/',
     ],
-    transform: { '^.+\\.(t|j)sx?$': ['@swc/jest', JSON.parse(readFileSync(resolve(__dirname, '.swcrc'), 'utf-8'))] },
+    transform: { '^.+\\.(t|j)sx?$': ['@swc/jest'] },
     watchPathIgnorePatterns: ['/swagger/'],
 };
 
