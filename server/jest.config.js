@@ -10,6 +10,7 @@ const config = {
     ],
     transform: { '^.+\\.(t|j)sx?$': ['@swc/jest'] },
     watchPathIgnorePatterns: ['/swagger/'],
+    testTimeout: 50000,
 };
 
 module.exports = config;
