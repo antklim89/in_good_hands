@@ -1,5 +1,3 @@
-import { authHeaderSchema } from '@/schemas';
-
 
 const schema = {
     tags: ['image'],
@@ -22,7 +20,6 @@ const schema = {
     //         },
     //     },
     // },
-    // headers: authHeaderSchema,
 };
 
 export default schema;

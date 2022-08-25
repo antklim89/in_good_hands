@@ -32,6 +32,6 @@ describe('POST /add/new', () => {
 
         const response = await app.inject({ ...defaultOptions, headers });
 
-        expect(response.statusCode).toEqual(400);
+        expect(response.statusCode).toEqual(401);
     });
 });

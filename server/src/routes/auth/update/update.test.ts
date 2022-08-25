@@ -48,6 +48,6 @@ describe('PATCH /auth/register', () => {
 
         const response = await app.inject({ ...defaultOptions, payload });
 
-        expect(response.statusCode).toEqual(400);
+        expect(response.statusCode).toEqual(401);
     });
 });

@@ -69,7 +69,7 @@ describe('PATCH /ad/update', () => {
 
         const response = await app.inject({ ...defaultOptions, payload: { ...payload, name: 'UPDATED2 NAME' }, query });
 
-        expect(response.statusCode).toEqual(400);
+        expect(response.statusCode).toEqual(401);
     });
 
     it('should not update the othe user\'s ad', async () => {

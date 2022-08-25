@@ -49,11 +49,3 @@ export const authResponseSchema = {
         token: { type: 'string' },
     },
 };
-
-export const authHeaderSchema = {
-    type: 'object',
-    required: ['authentication'],
-    properties: {
-        authentication: { type: 'string' },
-    },
-};

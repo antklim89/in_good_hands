@@ -1,4 +1,3 @@
-import { authHeaderSchema } from '@/schemas';
 
 
 const schema = {
@@ -12,7 +11,6 @@ const schema = {
             },
         },
     },
-    headers: authHeaderSchema,
 };
 
 export default schema;

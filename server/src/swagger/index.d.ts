@@ -21,9 +21,7 @@ export declare namespace Ad {
     type RequestParams = {};
     type RequestQuery = {};
     type RequestBody = never;
-    type RequestHeaders = {
-      authentication: string;
-    };
+    type RequestHeaders = {};
     type ResponseBody = {
       id: number;
     };
@@ -79,9 +77,7 @@ export declare namespace Ad {
       price: number;
       isPublished: boolean;
     };
-    type RequestHeaders = {
-      authentication: string;
-    };
+    type RequestHeaders = {};
     type ResponseBody = void;
   }
   /**
@@ -97,9 +93,7 @@ export declare namespace Ad {
       adId: number;
     };
     type RequestBody = never;
-    type RequestHeaders = {
-      authentication: string;
-    };
+    type RequestHeaders = {};
     type ResponseBody = {
       name: string;
       type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
@@ -178,9 +172,7 @@ export declare namespace Auth {
       name?: string;
       tel?: string;
     };
-    type RequestHeaders = {
-      authentication: string;
-    };
+    type RequestHeaders = {};
     type ResponseBody = void;
   }
 }

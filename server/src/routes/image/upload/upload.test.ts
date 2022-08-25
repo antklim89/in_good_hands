@@ -22,14 +22,14 @@ const defaultOptions: import('light-my-request').InjectOptions = {
 };
 
 
-const image = fs.createReadStream(resolve(process.cwd(), './src/test/test.image.jpg'));
+const image = () => fs.createReadStream(resolve(process.cwd(), './src/test/test.image.jpg'));
 
 describe('POST /image/upload', () => {
     it('should upload new image', async () => {
         fs.rmSync(UPLOAD_IMAGES_BASE_PATH, { recursive: true, force: true });
 
         const form = formAutoContent({
-            image,
+            image: image(),
             adId: db().ads[0].id,
         });
 
@@ -48,16 +48,16 @@ describe('POST /image/upload', () => {
         expect(uploadedImage).toHaveProperty('adId', db().ads[0].id);
     });
 
-    // it('should not upload image from wrong user', async () => {
-    //     const form = formAutoContent({
-    //         image: image(),
-    //         adId: db().ads[0].id,
-    //     });
+    it('should not upload image from wrong user', async () => {
+        const form = formAutoContent({
+            image: image(),
+            adId: db().ads[0].id,
+        });
 
-    //     form.headers.authentication = generateJWT(db().users[1]).token;
-    //     const response = await app.inject({ ...defaultOptions, ...form });
+        form.headers.authentication = generateJWT(db().users[1]).token;
+        const response = await app.inject({ ...defaultOptions, ...form });
 
-    //     expect(response.statusCode).toEqual(403);
+        expect(response.statusCode).toEqual(403);
 
-    // });
+    });
 });

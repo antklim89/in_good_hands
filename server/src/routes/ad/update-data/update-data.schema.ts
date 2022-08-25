@@ -1,4 +1,4 @@
-import { adInputSchema, authHeaderSchema } from '@/schemas';
+import { adInputSchema } from '@/schemas';
 
 
 const schema = {
@@ -19,7 +19,6 @@ const schema = {
             adId: { type: 'number', nullable: false },
         },
     },
-    headers: authHeaderSchema,
 };
 
 export default schema;

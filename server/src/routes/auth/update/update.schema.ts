@@ -1,4 +1,4 @@
-import { authHeaderSchema, registerSchema } from '@/schemas';
+import { registerSchema } from '@/schemas';
 
 
 const schema = {
@@ -14,7 +14,6 @@ const schema = {
         },
     },
     response: { 200: { type: 'null' } },
-    headers: authHeaderSchema,
 };
 
 export default schema;
