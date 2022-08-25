@@ -1,7 +1,7 @@
+import { Ad } from '@in-good-hands/server/src/swagger';
 import type { GetStaticProps, NextPage } from 'next';
 
 import Seo from '~/components/Seo';
-import { Ad } from '@in_good_hands/server/src/swagger';
 import AdsList from '~/layouts/AdsList';
 import Hero from '~/layouts/Hero';
 import { api } from '~/utils';

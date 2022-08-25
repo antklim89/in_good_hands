@@ -2,9 +2,9 @@ import { Container, Box } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import { FC } from 'react';
 
-import Markdown from '~/components/Markdown';
+import heroImage from './Hero.image.jpg';
 
-import heroImage from './Hero.image.png';
+import Markdown from '~/components/Markdown';
 
 
 const Hero: FC = () => {

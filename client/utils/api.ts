@@ -1,15 +1,14 @@
 import type { IncomingMessage } from 'http';
 
-import { API_URL } from '~/constants';
-import { Api } from '@in_good_hands/server/src/swagger';
+import { Api } from '@in-good-hands/server/src/swagger';
 
 import { getUserCookie } from './getCookies';
 
+import { API_URL } from '~/constants';
+
 
 export const api = (req?: IncomingMessage) => {
-    const headers = {
-        ...req?.headers,
-    };
+    const headers: { authentication?: string } = {};
 
     if (req) {
         const cookieUser = getUserCookie(req.headers.cookie);

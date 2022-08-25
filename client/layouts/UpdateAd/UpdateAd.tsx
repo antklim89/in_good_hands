@@ -1,16 +1,16 @@
 import {
     Center, Container, Heading, Flex, Button, useToast,
 } from '@chakra-ui/react';
+import { adInputSchema } from '@in-good-hands/server/src/schemas/ad.schema';
 import { useFormik } from 'formik';
 import { FC } from 'react';
 import { ZodError } from 'zod';
 
-import InputField from '~/components/InputField';
-import { adInputSchema } from '@in_good_hands/server/src/schemas/ad.schema';
-import { api } from '~/utils';
-
 import { UpdateAdSchema, updateAdSchema } from './UpdateAd.schema';
 import { UpdateAdProps } from './UpdateAd.types';
+
+import InputField from '~/components/InputField';
+import { api } from '~/utils';
 
 
 const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {

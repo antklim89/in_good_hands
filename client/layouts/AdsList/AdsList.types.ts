@@ -1,4 +1,4 @@
-import { Ad } from '@in_good_hands/server/src/swagger';
+import { Ad } from '@in-good-hands/server/src/swagger';
 
 
 export interface AdsListProps {

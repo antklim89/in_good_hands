@@ -7,7 +7,7 @@ import { ChangeEventHandler, FC, useCallback, useState } from 'react';
 import { requestUploadAdImage } from '~/utils';
 
 import { UpdateAdImagesProps } from './UpdateAd.types';
-import UpdateAdImage from './UpdateAdImage';
+import UpdateAdImage from './UpdateAdImage.tsx.off';
 
 
 const UpdateAdImages: FC<UpdateAdImagesProps> = ({ images, id: adId }) => {

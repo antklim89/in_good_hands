@@ -14,7 +14,7 @@ export async function generateSwaggerTypes(app: FastifyInstance): Promise<void> 
             defaultResponseAsSuccess: true,
             generateRouteTypes: true,
             generateResponses: true,
-            toJS: false,
+            toJS: true,
             extractRequestParams: false,
             extractRequestBody: false,
             defaultResponseType: false,

@@ -22,13 +22,14 @@
     "paths": {
       "~/*": [
         "./*"
-      ],
+      ]
     }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx", 
+    "layouts/UpdateAd/UpdateAdImage.tsx.off"
   ],
   "exclude": [
     "node_modules",

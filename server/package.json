@@ -1,5 +1,5 @@
 {
-  "name": "@in_good_hands/server",
+  "name": "@in-good-hands/server",
   "version": "1.0.0",
   "description": "This project was bootstrapped with Fastify-CLI.",
   "main": "./src/server.ts",
@@ -37,19 +37,15 @@
     "nodemon": "^2.0.19",
     "pino-pretty": "^8.1.0",
     "prisma": "^4.0.0",
-    "sharp": "^0.30.7",
     "swagger-typescript-api": "^9.3.1",
     "swc-loader": "^0.2.3",
     "webpack": "^5.73.0",
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.2",
-    "@types/jsonwebtoken": "^8.5.9",
     "@swc/cli": "^0.1.57",
     "@swc/core": "^1.2.213",
     "@swc/jest": "^0.2.21",
-    "@types/jest": "^28.1.6",
     "form-auto-content": "^2.2.0",
     "jest": "^28.1.3",
     "npm-run-all": "^4.1.5",
