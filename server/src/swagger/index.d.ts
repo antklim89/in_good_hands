@@ -13,6 +13,24 @@ export declare namespace Ad {
   /**
    * No description
    * @tags ad
+   * @name New
+   * @request POST:/ad/new/
+   * @response `201` `{ id: number }` Default Response
+   */
+  namespace New {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {
+      authentication: string;
+    };
+    type ResponseBody = {
+      id: number;
+    };
+  }
+  /**
+   * No description
+   * @tags ad
    * @name PreviewList
    * @request GET:/ad/preview-list/
    * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
@@ -38,24 +56,6 @@ export declare namespace Ad {
       breed: string;
       price: number;
     }[];
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name New
-   * @request POST:/ad/new/
-   * @response `201` `{ id: number }` Default Response
-   */
-  namespace New {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = never;
-    type RequestHeaders = {
-      authentication: string;
-    };
-    type ResponseBody = {
-      id: number;
-    };
   }
   /**
    * No description
@@ -271,6 +271,19 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags ad
+     * @name New
+     * @request POST:/ad/new/
+     * @response `201` `{ id: number }` Default Response
+     */
+    new: (params?: RequestParams) => Promise<
+      AxiosResponse<{
+        id: number;
+      }>
+    >;
+    /**
+     * No description
+     *
+     * @tags ad
      * @name PreviewList
      * @request GET:/ad/preview-list/
      * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
@@ -297,19 +310,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
           price: number;
         }[]
       >
-    >;
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name New
-     * @request POST:/ad/new/
-     * @response `201` `{ id: number }` Default Response
-     */
-    new: (params?: RequestParams) => Promise<
-      AxiosResponse<{
-        id: number;
-      }>
     >;
     /**
      * No description
