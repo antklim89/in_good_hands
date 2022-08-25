@@ -36,6 +36,8 @@ describe('GET /ad/update-data', () => {
         expect(data).toHaveProperty('email');
         expect(data).toHaveProperty('tel');
         expect(data).toHaveProperty('price');
+
+        expect(data).toHaveProperty('images');
     });
 
     it('should not find update ad data another user', async () => {

@@ -85,7 +85,7 @@ export declare namespace Ad {
    * @tags ad
    * @name UpdateData
    * @request GET:/ad/update-data/
-   * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, isPublished: boolean, id: number }` Default Response
+   * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
    */
   namespace UpdateData {
     type RequestParams = {};
@@ -104,6 +104,11 @@ export declare namespace Ad {
       price: number;
       isPublished: boolean;
       id: number;
+      images: {
+        id: number;
+        src: string;
+        thumbnail: string;
+      }[];
     };
   }
 }
@@ -337,7 +342,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags ad
      * @name UpdateData
      * @request GET:/ad/update-data/
-     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, isPublished: boolean, id: number }` Default Response
+     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
      */
     updateData: (
       query: {
@@ -355,6 +360,11 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         price: number;
         isPublished: boolean;
         id: number;
+        images: {
+          id: number;
+          src: string;
+          thumbnail: string;
+        }[];
       }>
     >;
   };

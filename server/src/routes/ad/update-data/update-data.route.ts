@@ -14,7 +14,10 @@ export default async function updateDataAdRoute(app: FastifyInstance) {
         async handler(req: FastifyRequest<{Querystring: Ad.UpdateData.RequestQuery}>) {
             const { query } = req;
             const user = req.getUser();
-            const updateData = await app.prisma.ad.findUnique({ where: { id: query.adId } });
+            const updateData = await app.prisma.ad.findUnique({
+                where: { id: query.adId },
+                include: { images: true },
+            });
 
             if (!updateData) throw new ClientException('Ad not found.', 404);
             if (updateData.ownerId !== user.id) throw new ClientException('Ad not found.', 404);
