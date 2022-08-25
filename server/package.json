@@ -8,7 +8,7 @@
     "dev:nodemon": "nodemon ./output/server.js --ignore swagger/",
     "dev:swc": "swc ./src -d ./output -w",
     "dev:typecheck": "tsc --noEmit -w --preserveWatchOutput",
-    "test": "jest -i",
+    "test": "jest --watchAll -i",
     "migrate": "run-s migrate:**",
     "migrate:dev": "prisma migrate dev",
     "migrate:test": "DATABASE_URL=\"postgresql://anton@localhost:5432/test?schema=public\" prisma migrate dev",
