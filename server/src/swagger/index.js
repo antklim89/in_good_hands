@@ -233,10 +233,11 @@ export class Api extends HttpClient {
      * @request POST:/image/upload/
      * @response `201` `number` Default Response
      */
-    upload: (data, params = {}) =>
+    upload: (query, data, params = {}) =>
       this.request({
         path: `/image/upload/`,
         method: "POST",
+        query: query,
         body: data,
         type: ContentType.FormData,
         format: "json",

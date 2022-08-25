@@ -1,25 +1,28 @@
+import { FastifySchema } from 'fastify';
 
-const schema = {
+
+const schema: FastifySchema = {
     tags: ['image'],
     operationId: 'Upload',
     consumes: ['multipart/form-data'],
     response: {
         201: { type: 'number' },
     },
-    // querystring: {
-    //     type: 'object',
-    //     properties: {
-    //         adId: { type: 'number' },
-    //     },
-    // },
-    // body: {
-    //     type: 'object',
-    //     properties: {
-    //         file: {
-    //             type: 'string', format: 'binary',
-    //         },
-    //     },
-    // },
+    querystring: {
+        type: 'object',
+        required: ['adId'],
+        properties: {
+            adId: { type: 'number', nullable: false },
+        },
+    },
+    body: {
+        type: 'object',
+        properties: {
+            image: {
+                type: 'string', format: 'binary', nullable: false,
+            },
+        },
+    },
 };
 
 export default schema;

@@ -30,12 +30,15 @@ describe('POST /image/upload', () => {
 
         const form = formAutoContent({
             image: image(),
-            adId: db().ads[0].id,
         });
+
+        const query = {
+            adId: String(db().ads[0].id),
+        };
 
         form.headers.authentication = generateJWT(db().users[0]).token;
 
-        const response = await app.inject({ ...defaultOptions, ...form });
+        const response = await app.inject({ ...defaultOptions, ...form, query });
         const uploadedImageId = response.json();
 
         const uploadedImage = await prisma.image.findUnique({
@@ -51,11 +54,14 @@ describe('POST /image/upload', () => {
     it('should not upload image from wrong user', async () => {
         const form = formAutoContent({
             image: image(),
-            adId: db().ads[0].id,
         });
 
+        const query = {
+            adId: String(db().ads[0].id),
+        };
+
         form.headers.authentication = generateJWT(db().users[1]).token;
-        const response = await app.inject({ ...defaultOptions, ...form });
+        const response = await app.inject({ ...defaultOptions, ...form, query });
 
         expect(response.statusCode).toEqual(403);
 

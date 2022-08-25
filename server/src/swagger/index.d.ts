@@ -186,8 +186,12 @@ export declare namespace Image {
    */
   namespace Upload {
     type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = any;
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = {
+      image: File;
+    };
     type RequestHeaders = {};
     type ResponseBody = number;
   }
@@ -430,6 +434,14 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @request POST:/image/upload/
      * @response `201` `number` Default Response
      */
-    upload: (data?: any, params?: RequestParams) => Promise<AxiosResponse<number>>;
+    upload: (
+      query: {
+        adId: number;
+      },
+      data: {
+        image: File;
+      },
+      params?: RequestParams,
+    ) => Promise<AxiosResponse<number>>;
   };
 }
