@@ -187,7 +187,7 @@ export declare namespace Image {
    * @tags image
    * @name Upload
    * @request POST:/image/upload/
-   * @response `201` `number` Default Response
+   * @response `201` `{ id: number, src: string, thumbnail: string }` Default Response
    */
   namespace Upload {
     type RequestParams = {};
@@ -198,7 +198,11 @@ export declare namespace Image {
       image: File;
     };
     type RequestHeaders = {};
-    type ResponseBody = number;
+    type ResponseBody = {
+      id: number;
+      src: string;
+      thumbnail: string;
+    };
   }
 }
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType } from "axios";
@@ -442,7 +446,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags image
      * @name Upload
      * @request POST:/image/upload/
-     * @response `201` `number` Default Response
+     * @response `201` `{ id: number, src: string, thumbnail: string }` Default Response
      */
     upload: (
       query: {
@@ -452,6 +456,12 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         image: File;
       },
       params?: RequestParams,
-    ) => Promise<AxiosResponse<number>>;
+    ) => Promise<
+      AxiosResponse<{
+        id: number;
+        src: string;
+        thumbnail: string;
+      }>
+    >;
   };
 }

@@ -4,6 +4,7 @@ import { resolve } from 'path';
 import formAutoContent from 'form-auto-content';
 
 import { UPLOAD_IMAGES_BASE_PATH } from '@/constants';
+import { Image } from '@/swagger';
 import { init } from '@/test';
 import { generateJWT } from '@/utils';
 
@@ -39,13 +40,13 @@ describe('POST /image/upload', () => {
         form.headers.authentication = generateJWT(db().users[0]).token;
 
         const response = await app.inject({ ...defaultOptions, ...form, query });
-        const uploadedImageId = response.json();
+        const uploadedImageResponse: Image.Upload.ResponseBody = response.json();
 
         const uploadedImage = await prisma.image.findUnique({
-            where: { id: uploadedImageId },
+            where: { id: uploadedImageResponse.id },
         });
 
-        expect(uploadedImage).toHaveProperty('id', uploadedImageId);
+        expect(uploadedImage).toHaveProperty('id', uploadedImageResponse.id);
         expect(uploadedImage).toHaveProperty('src');
         expect(uploadedImage).toHaveProperty('thumbnail');
         expect(uploadedImage).toHaveProperty('adId', db().ads[0].id);

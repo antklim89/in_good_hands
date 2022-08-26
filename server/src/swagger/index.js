@@ -231,7 +231,7 @@ export class Api extends HttpClient {
      * @tags image
      * @name Upload
      * @request POST:/image/upload/
-     * @response `201` `number` Default Response
+     * @response `201` `{ id: number, src: string, thumbnail: string }` Default Response
      */
     upload: (query, data, params = {}) =>
       this.request({

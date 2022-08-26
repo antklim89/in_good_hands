@@ -1,12 +1,14 @@
 import { FastifySchema } from 'fastify';
 
+import { imageSchema } from '@/schemas';
+
 
 const schema: FastifySchema = {
     tags: ['image'],
     operationId: 'Upload',
     consumes: ['multipart/form-data'],
     response: {
-        201: { type: 'number' },
+        201: imageSchema,
     },
     querystring: {
         type: 'object',

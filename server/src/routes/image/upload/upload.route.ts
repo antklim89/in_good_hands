@@ -48,10 +48,13 @@ export default async function newAdRoute(app: FastifyInstance) {
                 },
                 select: {
                     id: true,
+                    src: true,
+                    thumbnail: true,
                 },
             });
 
-            return repl.status(201).send(result.id);
+            repl.status(201);
+            return result;
         },
     });
 }
