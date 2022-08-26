@@ -24,6 +24,14 @@ export const api = (req?: IncomingMessage) => {
         headers,
     });
 
+    apiInstance.instance.interceptors.response.use(
+        (response) => response,
+        (error) => {
+            error.message = error.response?.data?.message || error.message || 'Unexpected Error. Try again later.';
+            return Promise.reject(error);
+        },
+    );
+
     return apiInstance;
 };
 
