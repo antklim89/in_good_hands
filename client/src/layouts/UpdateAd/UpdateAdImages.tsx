@@ -4,25 +4,26 @@ import {
 } from '@chakra-ui/react';
 import { ChangeEventHandler, FC, useCallback, useState } from 'react';
 
-import { requestUploadAdImage } from '~/utils';
+import { UpdateAdProps } from './UpdateAd.types';
+import UpdateAdImage from './UpdateAdImage';
 
-import { UpdateAdImagesProps } from './UpdateAd.types';
-import UpdateAdImage from './UpdateAdImage.tsx.off';
+import { api } from '~/utils';
 
 
-const UpdateAdImages: FC<UpdateAdImagesProps> = ({ images, id: adId }) => {
+const UpdateAdImages: FC<UpdateAdProps> = ({ ad }) => {
     const toast = useToast();
-    const [uploadedImages, setUploadedImages] = useState(images.data);
+    const [uploadedImages, setUploadedImages] = useState(ad.images);
     const [loading, setLoading] = useState(false);
 
     const handleUpload: ChangeEventHandler<HTMLInputElement> = useCallback(async (e) => {
         if (!e.target.files) return;
-        const files = Array.from(e.target.files).filter((file) => (/image\/(jpeg|jpg|png|webp)/).test(file.type));
-        if (files.length === 0) return;
+        const [imageFile] = Array.from(e.target.files);
+        if (!imageFile) return;
+        if (!(/image\/(jpeg|jpg|png|webp)/).test(imageFile.type)) return;
         try {
             setLoading(true);
-            const newImages = await requestUploadAdImage(files, adId);
-            setUploadedImages((prevImages) => [...prevImages, ...newImages]);
+            const { data: newImage } = await api().image.upload({ adId: ad.id }, { image: imageFile });
+            setUploadedImages((prevImages) => [...prevImages, newImage]);
         } catch (error) {
             toast({ title: 'Failed to upload images', status: 'error' });
         } finally {
@@ -37,7 +38,11 @@ const UpdateAdImages: FC<UpdateAdImagesProps> = ({ images, id: adId }) => {
             </Text>
             <HStack>
                 {uploadedImages.map((uploadedImage) => (
-                    <UpdateAdImage key={uploadedImage.id} {...uploadedImage} setUploadedImages={setUploadedImages} />
+                    <UpdateAdImage
+                        image={uploadedImage}
+                        key={uploadedImage.id}
+                        // setUploadedImages={setUploadedImages}
+                    />
                 ))}
                 <IconButton
                     aria-label="upload new image"

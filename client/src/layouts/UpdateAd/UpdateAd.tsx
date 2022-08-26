@@ -8,6 +8,7 @@ import { ZodError } from 'zod';
 
 import { UpdateAdSchema, updateAdSchema } from './UpdateAd.schema';
 import { UpdateAdProps } from './UpdateAd.types';
+import UpdateAdImages from './UpdateAdImages';
 
 import InputField from '~/components/InputField';
 import { api } from '~/utils';
@@ -67,7 +68,7 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
                         name="description"
                         resize="none"
                     />
-                    {/* <UpdateAdImages id={id} images={images} /> */}
+                    <UpdateAdImages ad={ad} />
                     <InputField
                         as="select"
                         formik={formik}

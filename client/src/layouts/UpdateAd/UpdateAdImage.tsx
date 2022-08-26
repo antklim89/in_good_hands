@@ -3,26 +3,26 @@ import { Box, IconButton, useToast, Spinner } from '@chakra-ui/react';
 import Image from 'next/image';
 import { FC, MouseEventHandler, useCallback, useState } from 'react';
 
-import { getApiURL, requestDeleteAdImage } from '~/utils';
-
 import { UpdateAdImageProps } from './UpdateAd.types';
 
+import { getApiURL } from '~/utils';
 
-const UpdateAdImage: FC<UpdateAdImageProps> = ({ attributes, id: imgId, setUploadedImages }) => {
+
+const UpdateAdImage: FC<UpdateAdImageProps> = ({ image }) => {
     const toast = useToast();
     const [loading, setLoading] = useState(false);
 
-    const handleDelete: MouseEventHandler<HTMLElement> = useCallback(async () => {
-        try {
-            setLoading(true);
-            const deletedImgId = await requestDeleteAdImage(imgId);
-            setUploadedImages((prevImages) => prevImages.filter((img) => String(img.id) !== String(deletedImgId)));
-        } catch (error) {
-            toast({ title: 'Failed to delete image', status: 'error' });
-        } finally {
-            setLoading(false);
-        }
-    }, []);
+    // const handleDelete: MouseEventHandler<HTMLElement> = useCallback(async () => {
+    //     try {
+    //         setLoading(true);
+    //         const deletedImgId = await requestDeleteAdImage(imgId);
+    //         setUploadedImages((prevImages) => prevImages.filter((img) => String(img.id) !== String(deletedImgId)));
+    //     } catch (error) {
+    //         toast({ title: 'Failed to delete image', status: 'error' });
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // }, []);
 
     return (
         <IconButton
@@ -39,7 +39,7 @@ const UpdateAdImage: FC<UpdateAdImageProps> = ({ attributes, id: imgId, setUploa
                         <Image
                             alt="uploaded image"
                             height={75}
-                            src={getApiURL(attributes.url)}
+                            src={getApiURL(image.src)}
                             width={75}
                         />
                     </Box>
@@ -57,10 +57,9 @@ const UpdateAdImage: FC<UpdateAdImageProps> = ({ attributes, id: imgId, setUploa
                         )}
                 </>
             }
-            key={imgId}
             variant="outline"
             width={90}
-            onClick={handleDelete}
+            // onClick={handleDelete}
         />
     );
 };
