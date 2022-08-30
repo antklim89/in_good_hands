@@ -13,6 +13,22 @@ export declare namespace Ad {
   /**
    * No description
    * @tags ad
+   * @name New
+   * @request POST:/ad/new/
+   * @response `201` `{ id: number }` Default Response
+   */
+  namespace New {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+    };
+  }
+  /**
+   * No description
+   * @tags ad
    * @name PreviewList
    * @request GET:/ad/preview-list/
    * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
@@ -42,18 +58,27 @@ export declare namespace Ad {
   /**
    * No description
    * @tags ad
-   * @name New
-   * @request POST:/ad/new/
-   * @response `201` `{ id: number }` Default Response
+   * @name Update
+   * @request PATCH:/ad/update/
+   * @response `200` `void` Default Response
    */
-  namespace New {
+  namespace Update {
     type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
+    type RequestQuery = {
       id: number;
     };
+    type RequestBody = {
+      name: string;
+      type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+      breed: string;
+      description: string;
+      email: string;
+      tel: string;
+      price: number;
+      isPublished: boolean;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = void;
   }
   /**
    * No description
@@ -85,31 +110,6 @@ export declare namespace Ad {
         thumbnail: string;
       }[];
     };
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name Update
-   * @request PATCH:/ad/update/
-   * @response `200` `void` Default Response
-   */
-  namespace Update {
-    type RequestParams = {};
-    type RequestQuery = {
-      id: number;
-    };
-    type RequestBody = {
-      name: string;
-      type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-      breed: string;
-      description: string;
-      email: string;
-      tel: string;
-      price: number;
-      isPublished: boolean;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = void;
   }
 }
 export declare namespace Auth {
@@ -276,6 +276,19 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags ad
+     * @name New
+     * @request POST:/ad/new/
+     * @response `201` `{ id: number }` Default Response
+     */
+    new: (params?: RequestParams) => Promise<
+      AxiosResponse<{
+        id: number;
+      }>
+    >;
+    /**
+     * No description
+     *
+     * @tags ad
      * @name PreviewList
      * @request GET:/ad/preview-list/
      * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
@@ -307,15 +320,26 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags ad
-     * @name New
-     * @request POST:/ad/new/
-     * @response `201` `{ id: number }` Default Response
+     * @name Update
+     * @request PATCH:/ad/update/
+     * @response `200` `void` Default Response
      */
-    new: (params?: RequestParams) => Promise<
-      AxiosResponse<{
+    update: (
+      query: {
         id: number;
-      }>
-    >;
+      },
+      body: {
+        name: string;
+        type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+        breed: string;
+        description: string;
+        email: string;
+        tel: string;
+        price: number;
+        isPublished: boolean;
+      },
+      params?: RequestParams,
+    ) => Promise<AxiosResponse<void>>;
     /**
      * No description
      *
@@ -347,30 +371,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         }[];
       }>
     >;
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name Update
-     * @request PATCH:/ad/update/
-     * @response `200` `void` Default Response
-     */
-    update: (
-      query: {
-        id: number;
-      },
-      body: {
-        name: string;
-        type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-        breed: string;
-        description: string;
-        email: string;
-        tel: string;
-        price: number;
-        isPublished: boolean;
-      },
-      params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
   };
   auth: {
     /**
