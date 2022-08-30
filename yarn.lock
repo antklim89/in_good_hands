@@ -1320,7 +1320,7 @@
     type-is "^1.6.18"
     vary "^1.1.2"
 
-"@fastify/static@^6.0.0":
+"@fastify/static@^6.0.0", "@fastify/static@^6.5.0":
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/@fastify/static/-/static-6.5.0.tgz#004fdb487ddf0ee5fdf7541e56bfcb493d7a1060"
   integrity sha512-WEk6iqgejA6ivjkvbJ47A+uMci225z5lZwLXCXZS3ZYR/kYje1gzzarkKKGL6TWpBw6smkOzxA7dfEoY0347Nw==
@@ -3506,6 +3506,11 @@ core-js-pure@^3.20.2:
   version "3.25.0"
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.25.0.tgz#f8d1f176ff29abbfeb610110de891d5ae5a361d4"
   integrity sha512-IeHpLwk3uoci37yoI2Laty59+YqH9x5uR65/yiA0ARAJrTrN4YU0rmauLWfvqOuk77SlNJXj2rM6oT/dBD87+A==
+
+core-js@^3.25.0:
+  version "3.25.0"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.25.0.tgz#be71d9e0dd648ffd70c44a7ec2319d039357eceb"
+  integrity sha512-CVU1xvJEfJGhyCpBrzzzU1kjCfgsGUxhEvwUV2e/cOedYWHdmluamx+knDnmhqALddMG16fZvIqvs9aijsHHaA==
 
 core-util-is@~1.0.0:
   version "1.0.3"

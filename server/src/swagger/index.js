@@ -111,6 +111,22 @@ export class Api extends HttpClient {
      * No description
      *
      * @tags ad
+     * @name PreviewList
+     * @request GET:/ad/preview-list/
+     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
+     */
+    previewList: (query, params = {}) =>
+      this.request({
+        path: `/ad/preview-list/`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
      * @name New
      * @request POST:/ad/new/
      * @response `201` `{ id: number }` Default Response
@@ -126,13 +142,13 @@ export class Api extends HttpClient {
      * No description
      *
      * @tags ad
-     * @name PreviewList
-     * @request GET:/ad/preview-list/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number })[]` Default Response
+     * @name UpdateData
+     * @request GET:/ad/update-data/
+     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
      */
-    previewList: (query, params = {}) =>
+    updateData: (query, params = {}) =>
       this.request({
-        path: `/ad/preview-list/`,
+        path: `/ad/update-data/`,
         method: "GET",
         query: query,
         format: "json",
@@ -153,22 +169,6 @@ export class Api extends HttpClient {
         query: query,
         body: body,
         type: ContentType.Json,
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name UpdateData
-     * @request GET:/ad/update-data/
-     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-     */
-    updateData: (query, params = {}) =>
-      this.request({
-        path: `/ad/update-data/`,
-        method: "GET",
-        query: query,
-        format: "json",
         ...params,
       }),
   };
