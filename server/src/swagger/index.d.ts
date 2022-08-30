@@ -185,6 +185,22 @@ export declare namespace Image {
   /**
    * No description
    * @tags image
+   * @name Delete
+   * @request DELETE:/image/delete/
+   * @response `201` `void` Default Response
+   */
+  namespace Delete {
+    type RequestParams = {};
+    type RequestQuery = {
+      imageId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @tags image
    * @name Upload
    * @request POST:/image/upload/
    * @response `201` `{ id: number, src: string, thumbnail: string }` Default Response
@@ -440,6 +456,20 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
     ) => Promise<AxiosResponse<void>>;
   };
   image: {
+    /**
+     * No description
+     *
+     * @tags image
+     * @name Delete
+     * @request DELETE:/image/delete/
+     * @response `201` `void` Default Response
+     */
+    delete: (
+      query: {
+        imageId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<AxiosResponse<void>>;
     /**
      * No description
      *

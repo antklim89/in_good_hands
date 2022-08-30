@@ -229,6 +229,21 @@ export class Api extends HttpClient {
      * No description
      *
      * @tags image
+     * @name Delete
+     * @request DELETE:/image/delete/
+     * @response `201` `void` Default Response
+     */
+    delete: (query, params = {}) =>
+      this.request({
+        path: `/image/delete/`,
+        method: "DELETE",
+        query: query,
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags image
      * @name Upload
      * @request POST:/image/upload/
      * @response `201` `{ id: number, src: string, thumbnail: string }` Default Response
