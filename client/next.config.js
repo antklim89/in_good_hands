@@ -1,12 +1,7 @@
-const { readdirSync } = require('fs');
-
 const nextTranspile = require('next-transpile-modules');
 
 
-const withTM = nextTranspile([
-    '@in-good-hands/server',
-    ...readdirSync('../node_modules/@chakra-ui').map((mod) => `@chakra-ui/${mod}`),
-]);
+const withTM = nextTranspile(['@in-good-hands/server']);
 
 
 /** @type {import('next').NextConfig} */
