@@ -11,6 +11,7 @@ const config = {
     transform: { '^.+\\.(t|j)sx?$': ['@swc/jest'] },
     watchPathIgnorePatterns: ['/swagger/'],
     testTimeout: 50000,
+    setupFiles: ['./test/setup.ts'],
 };
 
 module.exports = config;
