@@ -1,3 +1,4 @@
+import { imageSchema } from './image.schema';
 
 
 export const animalsTypes = ['cat', 'dog', 'bird', 'aquarium', 'rodent'] as const;
@@ -48,14 +49,16 @@ export const adInputSchema = {
 
 export const adsPreviewListItemResponseSchema = {
     type: 'object',
+    required: ['id', 'createdAt', 'updatedAt', 'name', 'type', 'breed', 'price', 'images'],
     properties: {
-        id: { type: 'number', nullable: false },
-        createdAt: { type: 'string', nullable: false },
-        updatedAt: { type: 'string', nullable: false },
-        name: { type: 'string', nullable: false },
-        type: { type: 'string', nullable: false },
-        breed: { type: 'string', nullable: false },
-        price: { type: 'number', nullable: false },
+        id: { type: 'number' },
+        createdAt: { type: 'string' },
+        updatedAt: { type: 'string' },
+        name: { type: 'string' },
+        type: { type: 'string' },
+        breed: { type: 'string' },
+        price: { type: 'number' },
+        images: { type: 'array', items: imageSchema },
     },
 } as const;
 

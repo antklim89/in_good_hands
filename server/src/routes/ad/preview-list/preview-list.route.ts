@@ -35,9 +35,10 @@ export default async function adPreviewListRoute(app: FastifyInstance) {
                         } }
                         : {}),
                 },
-
                 ...(cursor ? { cursor: { id: cursor } } : {}),
-
+                include: {
+                    images: true,
+                },
             });
 
             return ads;

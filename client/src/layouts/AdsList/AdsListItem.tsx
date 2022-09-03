@@ -1,15 +1,18 @@
 import {
-    Flex, Heading, Button,
+    Flex, Heading, Button, Box, Center, Text,
 } from '@chakra-ui/react';
+import Image from 'next/image';
 import Link from 'next/link';
+import Carousel from 'nuka-carousel';
 import { FC } from 'react';
-
-import Price from '~/components/Price';
 
 import { AdsListItemProps } from './AdsList.types';
 
+import Price from '~/components/Price';
+import { getApiURL } from '~/utils';
 
-const AdsListItem: FC<AdsListItemProps> = ({ id, type, breed, price }) => {
+
+const AdsListItem: FC<AdsListItemProps> = ({ id, type, breed, price, images }) => {
     return (
         <Flex
             as="section"
@@ -20,16 +23,18 @@ const AdsListItem: FC<AdsListItemProps> = ({ id, type, breed, price }) => {
             p={4}
             width="full"
         >
-            {/* <Box flexBasis={200} flexGrow={1} mr={8}>
-                {images.data.length > 0
+            <Box flexBasis={200} flexGrow={1} mr={8}>
+                {images.length > 0
                     ? (
                         <Carousel>
-                            {images.data.map((image) => (
+                            {images.map((image) => (
                                 <Image
                                     alt={`${type} ${breed}`}
+                                    blurDataURL={image.thumbnail}
                                     height={270}
                                     key={image.id}
-                                    src={getApiURL(image.attributes.url)}
+                                    placeholder="blur"
+                                    src={getApiURL(image.src)}
                                     width={400}
                                 />
                             ))}
@@ -42,7 +47,7 @@ const AdsListItem: FC<AdsListItemProps> = ({ id, type, breed, price }) => {
                             </Text>
                         </Center>
                     )}
-            </Box> */}
+            </Box>
             <Flex flexBasis={200} flexDirection="column" flexGrow={5} >
                 <Heading>
                     {type} {breed}
