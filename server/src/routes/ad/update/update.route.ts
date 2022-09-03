@@ -15,6 +15,7 @@ export default async function updateAdRoute(app: FastifyInstance) {
             const user = req.getUser();
 
             const { body, query } = req;
+            body.birthday = new Date(body.birthday).toISOString();
 
             const updatedAd = await this.prisma.ad.updateMany({
                 data: body,

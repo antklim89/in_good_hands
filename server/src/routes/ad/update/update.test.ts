@@ -20,6 +20,7 @@ const payload: Ad.Update.RequestBody & Record<string, string|number|boolean> = {
     type: 'dog',
     breed: 'labrador',
     tel: '5559988',
+    birthday: '2022-09-03',
 
     createdAt: 'YYY',
     isPublished: false,

@@ -27,6 +27,7 @@ model Ad {
   email       String
   tel         String
   price       Int
+  birthday    DateTime   @default(now())
   isPublished Boolean
   owner       User       @relation(fields: [ownerId], references: [id])
   ownerId     String

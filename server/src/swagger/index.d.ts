@@ -31,7 +31,7 @@ export declare namespace Ad {
    * @tags ad
    * @name PreviewList
    * @request GET:/ad/preview-list/
-   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
+   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
    */
   namespace PreviewList {
     type RequestParams = {};
@@ -53,6 +53,7 @@ export declare namespace Ad {
       type: string;
       breed: string;
       price: number;
+      birthday: string;
       images: {
         id: number;
         src: string;
@@ -80,6 +81,7 @@ export declare namespace Ad {
       email: string;
       tel: string;
       price: number;
+      birthday: string;
       isPublished: boolean;
     };
     type RequestHeaders = {};
@@ -90,7 +92,7 @@ export declare namespace Ad {
    * @tags ad
    * @name UpdateData
    * @request GET:/ad/update-data/
-   * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+   * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
    */
   namespace UpdateData {
     type RequestParams = {};
@@ -107,6 +109,7 @@ export declare namespace Ad {
       email: string;
       tel: string;
       price: number;
+      birthday: string;
       isPublished: boolean;
       id: number;
       images: {
@@ -312,7 +315,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags ad
      * @name PreviewList
      * @request GET:/ad/preview-list/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
+     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
      */
     previewList: (
       query?: {
@@ -334,6 +337,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
           type: string;
           breed: string;
           price: number;
+          birthday: string;
           images: {
             id: number;
             src: string;
@@ -362,6 +366,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         email: string;
         tel: string;
         price: number;
+        birthday: string;
         isPublished: boolean;
       },
       params?: RequestParams,
@@ -372,7 +377,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags ad
      * @name UpdateData
      * @request GET:/ad/update-data/
-     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
      */
     updateData: (
       query: {
@@ -388,6 +393,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         email: string;
         tel: string;
         price: number;
+        birthday: string;
         isPublished: boolean;
         id: number;
         images: {

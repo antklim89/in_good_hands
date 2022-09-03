@@ -5,7 +5,7 @@ export const animalsTypes = ['cat', 'dog', 'bird', 'aquarium', 'rodent'] as cons
 
 export const adInputSchema = {
     type: 'object',
-    required: ['name', 'type', 'breed', 'description', 'email', 'tel', 'price', 'isPublished'],
+    required: ['name', 'type', 'breed', 'description', 'email', 'tel', 'price', 'isPublished', 'birthday'],
     properties: {
         name: {
             type: 'string',
@@ -41,6 +41,10 @@ export const adInputSchema = {
             minimum: 0,
             maximum: 99999,
         },
+        birthday: {
+            type: 'string',
+            format: 'date',
+        },
         isPublished: {
             type: 'boolean',
         },
@@ -49,7 +53,7 @@ export const adInputSchema = {
 
 export const adsPreviewListItemResponseSchema = {
     type: 'object',
-    required: ['id', 'createdAt', 'updatedAt', 'name', 'type', 'breed', 'price', 'images'],
+    required: ['id', 'createdAt', 'updatedAt', 'name', 'type', 'breed', 'price', 'images', 'birthday'],
     properties: {
         id: { type: 'number' },
         createdAt: { type: 'string' },
@@ -58,6 +62,7 @@ export const adsPreviewListItemResponseSchema = {
         type: { type: 'string' },
         breed: { type: 'string' },
         price: { type: 'number' },
+        birthday: { type: 'string' },
         images: { type: 'array', items: imageSchema },
     },
 } as const;

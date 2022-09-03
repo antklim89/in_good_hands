@@ -25,6 +25,7 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
             name: ad.name || '',
             price: ad.price || 0,
             tel: ad.tel || '',
+            birthday: new Date(ad.birthday || '').toISOString().split('T')[0],
             type: ad.type || 'cat',
             isPublished: ad.isPublished || false,
         },
@@ -109,12 +110,15 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
                         name="tel"
                         type="tel"
                     />
-                    {/* <InputField
+                    <InputField
                         formik={formik}
                         label="Pet birthday"
+                        max="2023-06-30T16:30"
+                        min="2017-06-01T08:30"
                         name="birthday"
+                        pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
                         type="date"
-                    /> */}
+                    />
                     <InputField
                         as="switch"
                         formik={formik}

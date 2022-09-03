@@ -25,7 +25,7 @@ export const updateAdSchema = z.object({
         .email()
         .min(props.email.minLength)
         .max(props.email.maxLength),
-    // birthday: z.string(),
+    birthday: z.string(),
     isPublished: z.boolean(),
 });
 

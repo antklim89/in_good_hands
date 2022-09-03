@@ -8,11 +8,14 @@ import { FC } from 'react';
 
 import { AdsListItemProps } from './AdsList.types';
 
+import PetAge from '~/components/PetAge';
 import Price from '~/components/Price';
 import { getApiURL } from '~/utils';
 
 
-const AdsListItem: FC<AdsListItemProps> = ({ id, type, breed, price, images }) => {
+const AdsListItem: FC<AdsListItemProps> = ({
+    id, type, breed, price, images, birthday,
+}) => {
     return (
         <Flex
             as="section"
@@ -52,7 +55,7 @@ const AdsListItem: FC<AdsListItemProps> = ({ id, type, breed, price, images }) =
                 <Heading>
                     {type} {breed}
                 </Heading>
-                {/* <PetAge birthday={birthday} /> */}
+                <PetAge birthday={birthday} />
                 <Price flexGrow={1} fontSize="2xl" price={price} />
                 <Flex justifyContent="flex-end">
                     <Link passHref href={`/ads/${id}`}>

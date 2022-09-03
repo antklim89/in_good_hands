@@ -128,7 +128,7 @@ export class Api extends HttpClient {
      * @tags ad
      * @name PreviewList
      * @request GET:/ad/preview-list/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
+     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
      */
     previewList: (query, params = {}) =>
       this.request({
@@ -161,7 +161,7 @@ export class Api extends HttpClient {
      * @tags ad
      * @name UpdateData
      * @request GET:/ad/update-data/
-     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
      */
     updateData: (query, params = {}) =>
       this.request({
