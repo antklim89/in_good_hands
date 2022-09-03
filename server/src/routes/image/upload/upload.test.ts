@@ -1,7 +1,7 @@
-import fs from 'fs';
 import { resolve } from 'path';
 
 import formAutoContent from 'form-auto-content';
+import fs from 'fs-extra';
 
 import { UPLOAD_IMAGES_BASE_PATH } from '@/constants';
 import { Image } from '@/swagger';
@@ -21,7 +21,7 @@ const image = () => fs.createReadStream(resolve(process.cwd(), './src/test/test.
 
 describe('POST /image/upload', () => {
     it('should upload new image', async () => {
-        fs.rmSync(UPLOAD_IMAGES_BASE_PATH, { recursive: true, force: true });
+        await fs.rm(UPLOAD_IMAGES_BASE_PATH, { recursive: true, force: true });
 
         const form = formAutoContent({
             image: image(),
