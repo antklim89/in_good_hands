@@ -3,8 +3,11 @@ import {
 } from '@chakra-ui/react';
 import { FC } from 'react';
 
+
 import { ProfileProps } from './Profile.types';
 import ProfileCredentials from './ProfileCredentials';
+
+import MyAdsList from '~/layouts/MyAdsList';
 
 
 const Profile: FC<ProfileProps> = () => {
@@ -21,7 +24,7 @@ const Profile: FC<ProfileProps> = () => {
                         <ProfileCredentials />
                     </TabPanel>
                     <TabPanel>
-                        Ads
+                        <MyAdsList />
                     </TabPanel>
                 </TabPanels>
             </Tabs>
