@@ -1,26 +1,29 @@
 import { Container, VStack } from '@chakra-ui/react';
-import { FC, useEffect, useState } from 'react';
-
+import { FC, useEffect } from 'react';
+import useSWR from 'swr';
 
 import AdsListItem from './AdsList.Item';
-import { AdsListProps } from './AdsList.types';
 
 import { api, useInfinityScroll } from '~/utils';
 
 
-const AdsList: FC<AdsListProps> = ({ ads: propsAds }) => {
-    const [ads, setAds] = useState(propsAds);
+const AdsList: FC = () => {
+    const { data: ads = [], mutate } = useSWR('ads-preview-list', () => api().ad.previewList().then((d) => d.data));
+
     const { addEvent } = useInfinityScroll(async () => {
         const { data: newAds } = await api().ad.previewList({
             cursor: ads.slice().pop()?.id,
         });
 
-        setAds((prevAds) => [...prevAds, ...newAds]);
+        mutate([...ads, ...newAds], { revalidate: false });
 
         if (newAds.length > 0) addEvent();
     });
 
-    useEffect(addEvent, []);
+    useEffect(() => {
+        if (ads.length > 0) addEvent();
+    }, []);
+
 
     return (
         <Container>
