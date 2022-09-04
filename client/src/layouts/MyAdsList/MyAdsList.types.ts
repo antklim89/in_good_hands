@@ -1,5 +1,4 @@
+import { Ad } from '@in-good-hands/server/src/swagger';
 
 
-export interface MyAdsListProps {
-
-}
+export type MyAdsListItemProps = Ad.MyAds.ResponseBody[number]
