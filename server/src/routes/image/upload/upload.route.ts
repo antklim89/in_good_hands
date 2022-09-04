@@ -41,7 +41,7 @@ export default async function newAdRoute(app: FastifyInstance) {
                 const result = await app.prisma.image.create({
                     data: {
                         src: imageFullUrl,
-                        thumbnail: thumbnail.toString('base64'),
+                        thumbnail,
                         adId,
                     },
                     select: {
