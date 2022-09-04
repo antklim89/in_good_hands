@@ -6,7 +6,7 @@ import { animalsTypes } from '@/schemas/ad.schema';
 
 const schema: FastifySchema = {
     tags: ['ad'],
-    operationId: 'PreviewList',
+    operationId: 'FindMany',
     querystring: {
         type: 'object',
         properties: {

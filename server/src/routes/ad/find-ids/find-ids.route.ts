@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
 
-import schema from './ads-ids.schema';
+import schema from './find-ids.schema';
 
 
 export default async function adsIdsRoute(app: FastifyInstance) {

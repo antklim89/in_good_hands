@@ -6,18 +6,18 @@ import { generateJWT } from '@/utils';
 const { app, db, prisma } = init();
 
 const defaultOptions: import('light-my-request').InjectOptions = {
-    url: '/ad/new',
+    url: '/ad/create-new',
     method: 'POST',
 };
 
 
-describe('POST /add/new', () => {
+describe('POST /add/create-new', () => {
     it('should create new ad', async () => {
         const headers = {
             authentication: generateJWT(db().users[0]).token,
         };
         const response = await app.inject({ ...defaultOptions, headers });
-        const data: Ad.New.ResponseBody = response.json();
+        const data: Ad.CreateNew.ResponseBody = response.json();
 
         expect(response.statusCode).toEqual(201);
         expect(data).toHaveProperty('id');

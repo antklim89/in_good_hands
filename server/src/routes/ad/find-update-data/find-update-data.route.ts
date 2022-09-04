@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
 
-import schema from './update-data.schema';
+import schema from './find-update-data.schema';
 
 import { Ad } from '@/swagger';
 import { ClientException } from '@/utils';
@@ -11,7 +11,7 @@ export default async function updateDataAdRoute(app: FastifyInstance) {
         method: 'GET',
         url: '/',
         schema,
-        async handler(req: FastifyRequest<{Querystring: Ad.UpdateData.RequestQuery}>) {
+        async handler(req: FastifyRequest<{Querystring: Ad.FindUpdateData.RequestQuery}>) {
             const { query } = req;
             const user = req.getUser();
             const updateData = await app.prisma.ad.findUnique({

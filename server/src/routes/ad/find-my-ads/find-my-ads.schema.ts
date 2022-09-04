@@ -2,7 +2,7 @@
 
 const schema = {
     tags: ['ad'],
-    operationId: 'MyAds',
+    operationId: 'FindMyAds',
     querystring: {
         type: 'object',
         properties: {

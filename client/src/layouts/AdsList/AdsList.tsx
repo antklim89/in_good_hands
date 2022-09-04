@@ -8,10 +8,10 @@ import { api, useInfinityScroll } from '~/utils';
 
 
 const AdsList: FC = () => {
-    const { data: ads = [], mutate } = useSWR('ads-preview-list', () => api().ad.previewList().then((d) => d.data));
+    const { data: ads = [], mutate } = useSWR('ads-preview-list', () => api().ad.findMany().then((d) => d.data));
 
     const { addEvent } = useInfinityScroll(async () => {
-        const { data: newAds } = await api().ad.previewList({
+        const { data: newAds } = await api().ad.findMany({
             cursor: ads.slice().pop()?.id,
         });
 

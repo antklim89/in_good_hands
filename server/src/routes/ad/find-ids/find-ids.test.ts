@@ -5,15 +5,15 @@ import { init } from '@/test';
 const { app } = init();
 
 const defaultOptions: import('light-my-request').InjectOptions = {
-    url: '/ad/ads-ids',
+    url: '/ad/find-ids',
     method: 'GET',
 };
 
 
-describe('GET /ad/ads-ids', () => {
+describe('GET /ad/find-ids', () => {
     it('should return ads ids', async () => {
         const response = await app.inject({ ...defaultOptions });
-        const data: Ad.MyAds.ResponseBody = response.json();
+        const data: Ad.FindIds.ResponseBody = response.json();
 
         expect(data.length).toBeGreaterThan(0);
     });

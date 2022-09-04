@@ -2,7 +2,7 @@
 
 const schema = {
     tags: ['ad'],
-    operationId: 'AdsIds',
+    operationId: 'FindIds',
     response: {
         200: {
             type: 'array',

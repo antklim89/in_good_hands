@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 
 export interface UpdateAdProps {
-     ad: Ad.UpdateData.ResponseBody;
+     ad: Ad.FindUpdateData.ResponseBody;
 }
 
 export interface UpdateAdImageProps {

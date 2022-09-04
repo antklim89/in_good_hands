@@ -12,12 +12,12 @@ import { api } from '~/utils';
 
 const MyAdsList: FC = () => {
     const [hasNext, setHasNext] = useState(true);
-    const { data = [], mutate } = useSWR('my-ads', () => api().ad.myAds().then((d) => d.data));
+    const { data = [], mutate } = useSWR('my-ads', () => api().ad.findMyAds().then((d) => d.data));
 
     const lastAdId = data?.slice?.().pop()?.id;
 
     const handleFetchMore = useCallback(async () => {
-        const nextAds = await api().ad.myAds({ cursor: lastAdId }).then((d) => d.data);
+        const nextAds = await api().ad.findMyAds({ cursor: lastAdId }).then((d) => d.data);
         if (nextAds.length <= 1) setHasNext(false);
         mutate([...data || [], ...nextAds], { revalidate: false });
     }, [lastAdId]);

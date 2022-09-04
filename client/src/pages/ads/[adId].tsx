@@ -23,7 +23,7 @@ export default AdPage;
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const { data: adsIds } = await api().ad.adsIds();
+    const { data: adsIds } = await api().ad.findIds();
     const paths = adsIds.map(({ id }) => ({ params: { adId: String(id) } }));
 
     return {

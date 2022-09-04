@@ -6,20 +6,20 @@ import { generateJWT } from '@/utils';
 const { app, db } = init();
 
 const defaultOptions: import('light-my-request').InjectOptions = {
-    url: '/ad/update-data',
+    url: '/ad/find-update-data',
     method: 'GET',
     headers: { 'content-type': 'application/json' },
 };
 
 
-describe('GET /ad/update-data', () => {
+describe('GET /ad/find-update-data', () => {
     it('should find update ad data', async () => {
         const [ad] = db().ads;
 
         const headers = {
             authentication: generateJWT(db().users[0]).token,
         };
-        const query: {[P in keyof Ad.UpdateData.RequestQuery]: string} = {
+        const query: {[P in keyof Ad.FindUpdateData.RequestQuery]: string} = {
             adId: String(ad.id),
         };
 
@@ -46,7 +46,7 @@ describe('GET /ad/update-data', () => {
         const headers = {
             authentication: generateJWT(db().users[1]).token,
         };
-        const query: {[P in keyof Ad.UpdateData.RequestQuery]: string} = {
+        const query: {[P in keyof Ad.FindUpdateData.RequestQuery]: string} = {
             adId: String(ad.id),
         };
 

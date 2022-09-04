@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
 
-import schema from './preview-list.schema';
+import schema from './find-many.schema';
 
 import { Ad } from '@/swagger';
 
@@ -12,7 +12,7 @@ export default async function adPreviewListRoute(app: FastifyInstance) {
         method: 'GET',
         url: '/',
         schema,
-        async handler(req: FastifyRequest<{Querystring: Ad.PreviewList.RequestQuery}>) {
+        async handler(req: FastifyRequest<{Querystring: Ad.FindMany.RequestQuery}>) {
             const {
                 cursor, searchName, searchBreed, searchType, ltePrice, gtePrice,
             } = req.query;

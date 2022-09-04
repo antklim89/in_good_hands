@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
 
-import schema from './my-ads.schema';
+import schema from './find-my-ads.schema';
 
 import { Ad } from '@/swagger';
 
@@ -10,7 +10,7 @@ export default async function newAdRoute(app: FastifyInstance) {
         method: 'GET',
         url: '/',
         schema,
-        async handler(req: FastifyRequest<{Querystring: Ad.MyAds.RequestQuery}>) {
+        async handler(req: FastifyRequest<{Querystring: Ad.FindMyAds.RequestQuery}>) {
             const user = req.getUser();
             const { cursor } = req.query;
 

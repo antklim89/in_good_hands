@@ -3,7 +3,7 @@ import { adInputSchema, imageSchema } from '@/schemas';
 
 const schema = {
     tags: ['ad'],
-    operationId: 'UpdateData',
+    operationId: 'FindUpdateData',
     response: {
         200: {
             ...adInputSchema,

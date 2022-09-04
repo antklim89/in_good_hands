@@ -18,7 +18,7 @@ describe('POST /ad/find-one', () => {
 
 
         const response = await app.inject({ ...defaultOptions, query });
-        const data: Ad.PreviewList.ResponseBody = response.json();
+        const data: Ad.FindOne.ResponseBody = response.json();
 
         expect(data).toHaveProperty('id', db().ads[0].id);
     });

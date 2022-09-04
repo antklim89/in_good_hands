@@ -2,7 +2,7 @@
 
 const schema = {
     tags: ['ad'],
-    operationId: 'New',
+    operationId: 'CreateNew',
     response: {
         201: {
             type: 'object',

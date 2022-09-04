@@ -28,7 +28,7 @@ const HeaderLinks: FC<HeaderLinksProps> = ({ onClose, ...props }) => {
     const { push } = useRouter();
 
     const handleCreateNewAd = useCallback(async () => {
-        const { data: ad } = await api().ad.new();
+        const { data: ad } = await api().ad.createNew();
         onClose?.();
         await push(`/ads/update/${ad.id}`);
     }, []);

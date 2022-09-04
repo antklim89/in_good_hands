@@ -8,7 +8,7 @@ import { api, getUserCookie } from '~/utils';
 
 
 interface Props {
-    ad: Ad.UpdateData.ResponseBody
+    ad: Ad.FindUpdateData.ResponseBody
 }
 
 
@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ params, re
 
         if (!params || !(typeof params.id === 'string')) return { notFound: true };
 
-        const { data: ad } = await api(req).ad.updateData({ adId: Number(params.id) });
+        const { data: ad } = await api(req).ad.findUpdateData({ adId: Number(params.id) });
         if (!ad) return { notFound: true };
 
 
