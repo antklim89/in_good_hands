@@ -23,6 +23,7 @@ export default async function newAdRoute(app: FastifyInstance) {
                 },
                 ...(cursor ? { cursor: { id: cursor } } : {}),
                 take: 20,
+                skip: cursor ? 1 : 0,
             });
             return myAds;
         },
