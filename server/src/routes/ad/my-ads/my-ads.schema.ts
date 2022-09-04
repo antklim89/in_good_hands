@@ -14,13 +14,14 @@ const schema = {
             type: 'array',
             items: {
                 type: 'object',
-                required: ['id', 'createdAt', 'name', 'type', 'breed'],
+                required: ['id', 'createdAt', 'name', 'type', 'breed', 'isPublished'],
                 properties: {
                     id: { type: 'number' },
                     createdAt: { type: 'string' },
                     name: { type: 'string' },
                     type: { type: 'string' },
                     breed: { type: 'string' },
+                    isPublished: { type: 'boolean' },
                 },
             },
         },
