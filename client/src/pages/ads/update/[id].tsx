@@ -1,5 +1,6 @@
 import { Ad } from '@in-good-hands/server/src/swagger';
 import type { GetServerSideProps, NextPage } from 'next';
+import { useRouter } from 'next/router';
 
 import Seo from '~/components/Seo';
 import UpdateAd from '~/layouts/UpdateAd';
@@ -12,10 +13,12 @@ interface Props {
 
 
 const UpdateAdPage: NextPage<Props> = ({ ad }) => {
+    const { query } = useRouter();
+
     return (
         <>
             <Seo title="Create new ad" />
-            <UpdateAd ad={ad} />
+            <UpdateAd ad={ad} key={query.id as string} />
         </>
     );
 };
