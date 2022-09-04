@@ -52,11 +52,12 @@ const AdsListItem: FC<AdsListItemProps> = ({
                     )}
             </Box>
             <Flex flexBasis={200} flexDirection="column" flexGrow={5} >
-                <Heading>
+                <Heading textTransform="uppercase">
                     {type} {breed}
                 </Heading>
                 <PetAge birthday={birthday} />
                 <Price flexGrow={1} fontSize="2xl" price={price} />
+
                 <Flex justifyContent="flex-end">
                     <Link passHref href={`/ads/${id}`}>
                         <Button as="a" variant="outline">

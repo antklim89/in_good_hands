@@ -1,18 +1,20 @@
-import { Container, HStack } from '@chakra-ui/react';
+import { Container, Grid, GridItem } from '@chakra-ui/react';
 import { FC } from 'react';
 
+import AdsListItem from './AdsList.Item';
 import { AdsListProps } from './AdsList.types';
-import AdsListItem from './AdsListItem';
 
 
 const AdsList: FC<AdsListProps> = ({ ads }) => {
     return (
         <Container>
-            <HStack>
+            <Grid gap={5} gridTemplateColumns="repeat(2, 1fr)">
                 {ads.map((ad) => (
-                    <AdsListItem key={ad.id} {...ad} />
+                    <GridItem key={ad.id}>
+                        <AdsListItem {...ad} />
+                    </GridItem>
                 ))}
-            </HStack>
+            </Grid>
         </Container>
     );
 };
