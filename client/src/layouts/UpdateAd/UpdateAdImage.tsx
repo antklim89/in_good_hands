@@ -5,24 +5,24 @@ import { FC, MouseEventHandler, useCallback, useState } from 'react';
 
 import { UpdateAdImageProps } from './UpdateAd.types';
 
-import { getApiURL } from '~/utils';
+import { api, getApiURL } from '~/utils';
 
 
-const UpdateAdImage: FC<UpdateAdImageProps> = ({ image }) => {
+const UpdateAdImage: FC<UpdateAdImageProps> = ({ image, setUploadedImages }) => {
     const toast = useToast();
     const [loading, setLoading] = useState(false);
 
-    // const handleDelete: MouseEventHandler<HTMLElement> = useCallback(async () => {
-    //     try {
-    //         setLoading(true);
-    //         const deletedImgId = await requestDeleteAdImage(imgId);
-    //         setUploadedImages((prevImages) => prevImages.filter((img) => String(img.id) !== String(deletedImgId)));
-    //     } catch (error) {
-    //         toast({ title: 'Failed to delete image', status: 'error' });
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // }, []);
+    const handleDelete: MouseEventHandler<HTMLElement> = useCallback(async () => {
+        try {
+            setLoading(true);
+            await api().image.delete({ imageId: image.id });
+            setUploadedImages((prevImgs) => prevImgs.filter((prevImg) => String(prevImg.id) !== String(image.id)));
+        } catch (error) {
+            toast({ title: 'Failed to delete image', status: 'error' });
+        } finally {
+            setLoading(false);
+        }
+    }, []);
 
     return (
         <IconButton
@@ -59,7 +59,7 @@ const UpdateAdImage: FC<UpdateAdImageProps> = ({ image }) => {
             }
             variant="outline"
             width={90}
-            // onClick={handleDelete}
+            onClick={handleDelete}
         />
     );
 };

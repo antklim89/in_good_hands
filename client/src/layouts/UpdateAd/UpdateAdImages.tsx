@@ -41,7 +41,7 @@ const UpdateAdImages: FC<UpdateAdProps> = ({ ad }) => {
                     <UpdateAdImage
                         image={uploadedImage}
                         key={uploadedImage.id}
-                        // setUploadedImages={setUploadedImages}
+                        setUploadedImages={setUploadedImages}
                     />
                 ))}
                 <IconButton
