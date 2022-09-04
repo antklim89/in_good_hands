@@ -111,6 +111,22 @@ export class Api extends HttpClient {
      * No description
      *
      * @tags ad
+     * @name MyAds
+     * @request GET:/ad/my-ads/
+     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string })[]` Default Response
+     */
+    myAds: (query, params = {}) =>
+      this.request({
+        path: `/ad/my-ads/`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
      * @name New
      * @request POST:/ad/new/
      * @response `201` `{ id: number }` Default Response
@@ -142,6 +158,22 @@ export class Api extends HttpClient {
      * No description
      *
      * @tags ad
+     * @name UpdateData
+     * @request GET:/ad/update-data/
+     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     */
+    updateData: (query, params = {}) =>
+      this.request({
+        path: `/ad/update-data/`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
      * @name Update
      * @request PATCH:/ad/update/
      * @response `200` `void` Default Response
@@ -153,22 +185,6 @@ export class Api extends HttpClient {
         query: query,
         body: body,
         type: ContentType.Json,
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name UpdateData
-     * @request GET:/ad/update-data/
-     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-     */
-    updateData: (query, params = {}) =>
-      this.request({
-        path: `/ad/update-data/`,
-        method: "GET",
-        query: query,
-        format: "json",
         ...params,
       }),
   };

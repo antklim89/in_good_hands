@@ -13,6 +13,28 @@ export declare namespace Ad {
   /**
    * No description
    * @tags ad
+   * @name MyAds
+   * @request GET:/ad/my-ads/
+   * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string })[]` Default Response
+   */
+  namespace MyAds {
+    type RequestParams = {};
+    type RequestQuery = {
+      cursor?: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+      createdAt: string;
+      name: string;
+      type: string;
+      breed: string;
+    }[];
+  }
+  /**
+   * No description
+   * @tags ad
    * @name New
    * @request POST:/ad/new/
    * @response `201` `{ id: number }` Default Response
@@ -64,32 +86,6 @@ export declare namespace Ad {
   /**
    * No description
    * @tags ad
-   * @name Update
-   * @request PATCH:/ad/update/
-   * @response `200` `void` Default Response
-   */
-  namespace Update {
-    type RequestParams = {};
-    type RequestQuery = {
-      id: number;
-    };
-    type RequestBody = {
-      name: string;
-      type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-      breed: string;
-      description: string;
-      email: string;
-      tel: string;
-      price: number;
-      birthday: string;
-      isPublished: boolean;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = void;
-  }
-  /**
-   * No description
-   * @tags ad
    * @name UpdateData
    * @request GET:/ad/update-data/
    * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
@@ -118,6 +114,32 @@ export declare namespace Ad {
         thumbnail: string;
       }[];
     };
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name Update
+   * @request PATCH:/ad/update/
+   * @response `200` `void` Default Response
+   */
+  namespace Update {
+    type RequestParams = {};
+    type RequestQuery = {
+      id: number;
+    };
+    type RequestBody = {
+      name: string;
+      type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+      breed: string;
+      description: string;
+      email: string;
+      tel: string;
+      price: number;
+      birthday: string;
+      isPublished: boolean;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = void;
   }
 }
 export declare namespace Auth {
@@ -300,6 +322,30 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags ad
+     * @name MyAds
+     * @request GET:/ad/my-ads/
+     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string })[]` Default Response
+     */
+    myAds: (
+      query?: {
+        cursor?: number;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      AxiosResponse<
+        {
+          id: number;
+          createdAt: string;
+          name: string;
+          type: string;
+          breed: string;
+        }[]
+      >
+    >;
+    /**
+     * No description
+     *
+     * @tags ad
      * @name New
      * @request POST:/ad/new/
      * @response `201` `{ id: number }` Default Response
@@ -350,31 +396,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags ad
-     * @name Update
-     * @request PATCH:/ad/update/
-     * @response `200` `void` Default Response
-     */
-    update: (
-      query: {
-        id: number;
-      },
-      body: {
-        name: string;
-        type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-        breed: string;
-        description: string;
-        email: string;
-        tel: string;
-        price: number;
-        birthday: string;
-        isPublished: boolean;
-      },
-      params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
-    /**
-     * No description
-     *
-     * @tags ad
      * @name UpdateData
      * @request GET:/ad/update-data/
      * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
@@ -403,6 +424,31 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         }[];
       }>
     >;
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name Update
+     * @request PATCH:/ad/update/
+     * @response `200` `void` Default Response
+     */
+    update: (
+      query: {
+        id: number;
+      },
+      body: {
+        name: string;
+        type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+        breed: string;
+        description: string;
+        email: string;
+        tel: string;
+        price: number;
+        birthday: string;
+        isPublished: boolean;
+      },
+      params?: RequestParams,
+    ) => Promise<AxiosResponse<void>>;
   };
   auth: {
     /**
