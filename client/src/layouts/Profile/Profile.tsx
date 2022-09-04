@@ -3,14 +3,11 @@ import {
 } from '@chakra-ui/react';
 import { FC } from 'react';
 
-
-import { ProfileProps } from './Profile.types';
-import ProfileCredentials from './ProfileCredentials';
-
 import MyAdsList from '~/layouts/MyAdsList';
+import UpdateCredentials from '~/layouts/UpdateCredentials';
 
 
-const Profile: FC<ProfileProps> = () => {
+const Profile: FC = () => {
     return (
         <Container maxWidth="container.lg" my={8} shadow="lg">
             <Tabs>
@@ -21,7 +18,7 @@ const Profile: FC<ProfileProps> = () => {
 
                 <TabPanels>
                     <TabPanel>
-                        <ProfileCredentials />
+                        <UpdateCredentials />
                     </TabPanel>
                     <TabPanel>
                         <MyAdsList />

@@ -1,12 +1,12 @@
 import { Button, Flex, Heading, useToast, Box } from '@chakra-ui/react';
 import { useFormik } from 'formik';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import InputField from '~/components/InputField';
 import { api, useAuthContext } from '~/utils';
 
 
-const ProfileCredentials: FC = () => {
+const UpdateCredentials: FC = () => {
     const { user } = useAuthContext();
     const toast = useToast();
 
@@ -57,4 +57,4 @@ const ProfileCredentials: FC = () => {
     );
 };
 
-export default ProfileCredentials;
+export default UpdateCredentials;
