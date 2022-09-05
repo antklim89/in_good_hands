@@ -261,7 +261,7 @@ export declare namespace Auth {
    * @tags auth
    * @name Me
    * @request GET:/auth/me/
-   * @response `200` `{ id?: string, email: string, name: string, tel?: string, whatsup?: string, telegram?: string }` Default Response
+   * @response `200` `{ id?: string, email?: string, name?: string, tel?: string, whatsapp?: string, telegram?: string }` Default Response
    */
   namespace Me {
     type RequestParams = {};
@@ -270,10 +270,10 @@ export declare namespace Auth {
     type RequestHeaders = {};
     type ResponseBody = {
       id?: string;
-      email: string;
-      name: string;
+      email?: string;
+      name?: string;
       tel?: string;
-      whatsup?: string;
+      whatsapp?: string;
       telegram?: string;
     };
   }
@@ -316,7 +316,7 @@ export declare namespace Auth {
       email?: string;
       name?: string;
       tel?: string;
-      whatsup?: string;
+      whatsapp?: string;
       telegram?: string;
     };
     type RequestHeaders = {};
@@ -677,15 +677,15 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags auth
      * @name Me
      * @request GET:/auth/me/
-     * @response `200` `{ id?: string, email: string, name: string, tel?: string, whatsup?: string, telegram?: string }` Default Response
+     * @response `200` `{ id?: string, email?: string, name?: string, tel?: string, whatsapp?: string, telegram?: string }` Default Response
      */
     me: (params?: RequestParams) => Promise<
       AxiosResponse<{
         id?: string;
-        email: string;
-        name: string;
+        email?: string;
+        name?: string;
         tel?: string;
-        whatsup?: string;
+        whatsapp?: string;
         telegram?: string;
       }>
     >;
@@ -727,7 +727,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         email?: string;
         name?: string;
         tel?: string;
-        whatsup?: string;
+        whatsapp?: string;
         telegram?: string;
       },
       params?: RequestParams,

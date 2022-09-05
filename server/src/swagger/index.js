@@ -274,7 +274,7 @@ export class Api extends HttpClient {
      * @tags auth
      * @name Me
      * @request GET:/auth/me/
-     * @response `200` `{ id?: string, email: string, name: string, tel?: string, whatsup?: string, telegram?: string }` Default Response
+     * @response `200` `{ id?: string, email?: string, name?: string, tel?: string, whatsapp?: string, telegram?: string }` Default Response
      */
     me: (params = {}) =>
       this.request({
