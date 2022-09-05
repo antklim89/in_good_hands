@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import Seo from '~/components/Seo';
 import UpdateAd from '~/layouts/UpdateAd';
-import { api, getUserCookie } from '~/utils';
+import { api } from '~/utils';
 
 
 interface Props {
