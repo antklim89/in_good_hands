@@ -31,6 +31,18 @@ export const registerSchema = {
     },
 };
 
+export const userProfileSchema = {
+    type: 'object',
+    required: ['email', 'name'],
+    properties: {
+        email: registerSchema.properties.email,
+        name: registerSchema.properties.name,
+        tel: { type: 'string', minLength: 3, maxLength: 50 },
+        whatsup: { type: 'string', minLength: 3, maxLength: 50 },
+        telegram: { type: 'string', minLength: 3, maxLength: 50 },
+    },
+};
+
 export const userResponseSchema = {
     type: 'object',
     required: ['email', 'name', 'id'],

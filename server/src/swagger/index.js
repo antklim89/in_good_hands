@@ -188,22 +188,6 @@ export class Api extends HttpClient {
      * No description
      *
      * @tags ad
-     * @name FindOne
-     * @request GET:/ad/find-one/
-     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-     */
-    findOne: (query, params = {}) =>
-      this.request({
-        path: `/ad/find-one/`,
-        method: "GET",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags ad
      * @name FindUpdateData
      * @request GET:/ad/find-update-data/
      * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
@@ -233,6 +217,22 @@ export class Api extends HttpClient {
         type: ContentType.Json,
         ...params,
       }),
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name FindOne
+     * @request GET:/ad/find-one/
+     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     */
+    findOne: (query, params = {}) =>
+      this.request({
+        path: `/ad/find-one/`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
   };
   auth = {
     /**
@@ -256,16 +256,15 @@ export class Api extends HttpClient {
      * No description
      *
      * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
+     * @name Me
+     * @request GET:/auth/me/
+     * @response `200` `{ id?: string, email: string, name: string, tel?: string, whatsup?: string, telegram?: string }` Default Response
      */
-    update: (body, params = {}) =>
+    me: (params = {}) =>
       this.request({
-        path: `/auth/update/`,
-        method: "PATCH",
-        body: body,
-        type: ContentType.Json,
+        path: `/auth/me/`,
+        method: "GET",
+        format: "json",
         ...params,
       }),
     /**
@@ -283,6 +282,22 @@ export class Api extends HttpClient {
         body: body,
         type: ContentType.Json,
         format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (body, params = {}) =>
+      this.request({
+        path: `/auth/update/`,
+        method: "PATCH",
+        body: body,
+        type: ContentType.Json,
         ...params,
       }),
   };

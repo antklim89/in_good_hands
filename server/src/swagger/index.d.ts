@@ -119,39 +119,6 @@ export declare namespace Ad {
   /**
    * No description
    * @tags ad
-   * @name FindOne
-   * @request GET:/ad/find-one/
-   * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-   */
-  namespace FindOne {
-    type RequestParams = {};
-    type RequestQuery = {
-      adId: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-      createdAt: string;
-      updatedAt: string;
-      name: string;
-      type: string;
-      breed: string;
-      price: number;
-      birthday: string;
-      description: string;
-      tel: string;
-      email: string;
-      images: {
-        id: number;
-        src: string;
-        thumbnail: string;
-      }[];
-    };
-  }
-  /**
-   * No description
-   * @tags ad
    * @name FindUpdateData
    * @request GET:/ad/find-update-data/
    * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
@@ -207,6 +174,39 @@ export declare namespace Ad {
     type RequestHeaders = {};
     type ResponseBody = void;
   }
+  /**
+   * No description
+   * @tags ad
+   * @name FindOne
+   * @request GET:/ad/find-one/
+   * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+   */
+  namespace FindOne {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+      createdAt: string;
+      updatedAt: string;
+      name: string;
+      type: string;
+      breed: string;
+      price: number;
+      birthday: string;
+      description: string;
+      tel: string;
+      email: string;
+      images: {
+        id: number;
+        src: string;
+        thumbnail: string;
+      }[];
+    };
+  }
 }
 export declare namespace Auth {
   /**
@@ -222,6 +222,52 @@ export declare namespace Auth {
     type RequestBody = {
       password: string;
       email: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = {
+      user: {
+        email: string;
+        name: string;
+        id: string;
+      };
+      token: string;
+    };
+  }
+  /**
+   * No description
+   * @tags auth
+   * @name Me
+   * @request GET:/auth/me/
+   * @response `200` `{ id?: string, email: string, name: string, tel?: string, whatsup?: string, telegram?: string }` Default Response
+   */
+  namespace Me {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id?: string;
+      email: string;
+      name: string;
+      tel?: string;
+      whatsup?: string;
+      telegram?: string;
+    };
+  }
+  /**
+   * No description
+   * @tags auth
+   * @name Register
+   * @request POST:/auth/register/
+   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
+   */
+  namespace Register {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      password: string;
+      email: string;
+      name: string;
     };
     type RequestHeaders = {};
     type ResponseBody = {
@@ -252,31 +298,6 @@ export declare namespace Auth {
     };
     type RequestHeaders = {};
     type ResponseBody = void;
-  }
-  /**
-   * No description
-   * @tags auth
-   * @name Register
-   * @request POST:/auth/register/
-   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-   */
-  namespace Register {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      password: string;
-      email: string;
-      name: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = {
-      user: {
-        email: string;
-        name: string;
-        id: string;
-      };
-      token: string;
-    };
   }
 }
 export declare namespace Image {
@@ -494,39 +515,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags ad
-     * @name FindOne
-     * @request GET:/ad/find-one/
-     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-     */
-    findOne: (
-      query: {
-        adId: number;
-      },
-      params?: RequestParams,
-    ) => Promise<
-      AxiosResponse<{
-        id: number;
-        createdAt: string;
-        updatedAt: string;
-        name: string;
-        type: string;
-        breed: string;
-        price: number;
-        birthday: string;
-        description: string;
-        tel: string;
-        email: string;
-        images: {
-          id: number;
-          src: string;
-          thumbnail: string;
-        }[];
-      }>
-    >;
-    /**
-     * No description
-     *
-     * @tags ad
      * @name FindUpdateData
      * @request GET:/ad/find-update-data/
      * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
@@ -580,6 +568,39 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<AxiosResponse<void>>;
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name FindOne
+     * @request GET:/ad/find-one/
+     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     */
+    findOne: (
+      query: {
+        adId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      AxiosResponse<{
+        id: number;
+        createdAt: string;
+        updatedAt: string;
+        name: string;
+        type: string;
+        breed: string;
+        price: number;
+        birthday: string;
+        description: string;
+        tel: string;
+        email: string;
+        images: {
+          id: number;
+          src: string;
+          thumbnail: string;
+        }[];
+      }>
+    >;
   };
   auth: {
     /**
@@ -610,20 +631,20 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
+     * @name Me
+     * @request GET:/auth/me/
+     * @response `200` `{ id?: string, email: string, name: string, tel?: string, whatsup?: string, telegram?: string }` Default Response
      */
-    update: (
-      body: {
-        email?: string;
-        name?: string;
+    me: (params?: RequestParams) => Promise<
+      AxiosResponse<{
+        id?: string;
+        email: string;
+        name: string;
         tel?: string;
         whatsup?: string;
         telegram?: string;
-      },
-      params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
+      }>
+    >;
     /**
      * No description
      *
@@ -649,6 +670,24 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         token: string;
       }>
     >;
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (
+      body: {
+        email?: string;
+        name?: string;
+        tel?: string;
+        whatsup?: string;
+        telegram?: string;
+      },
+      params?: RequestParams,
+    ) => Promise<AxiosResponse<void>>;
   };
   image: {
     /**
