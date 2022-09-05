@@ -10,7 +10,7 @@ const Home: NextPage = () => {
         <>
             <Seo title="Home" />
             <Hero />
-            <AdsList />
+            <AdsList ads={[]} />
         </>
     );
 };

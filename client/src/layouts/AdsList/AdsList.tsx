@@ -1,30 +1,37 @@
 import { Container, Flex, VStack } from '@chakra-ui/react';
-import { FC, useEffect } from 'react';
-import useSWR from 'swr';
+import { useRouter } from 'next/router';
+import { FC, useEffect, useState } from 'react';
 
 import AdsListItem from './AdsList.Item';
+import { AdsListProps } from './AdsList.types';
 
 import PetSearch from '~/components/PetSearch';
 import PetTypeSelect from '~/components/PetTypeSelect';
-import { api, useInfinityScroll } from '~/utils';
+import { api, useInfinityScroll, useUpdate } from '~/utils';
 
 
-const AdsList: FC = () => {
-    const { data: ads = [], mutate } = useSWR('ads-preview-list', () => api().ad.findMany().then((d) => d.data));
+const AdsList: FC<AdsListProps> = ({ ads: initAds }) => {
+    const { query } = useRouter();
+    const [ads, setAds] = useState(initAds);
+
 
     const { addEvent } = useInfinityScroll(async () => {
         const { data: newAds } = await api().ad.findMany({
             cursor: ads.slice().pop()?.id,
+            searchType: query.type as 'cat' | 'dog' | 'bird' | 'aquarium' | 'rodent' | undefined,
+            searchBreed: query.search as string,
         });
-
-        mutate([...ads, ...newAds], { revalidate: false });
-
+        setAds([...ads, ...newAds]);
         if (newAds.length > 0) addEvent();
     });
 
     useEffect(() => {
         if (ads.length > 0) addEvent();
     }, []);
+
+    useUpdate(() => {
+        setAds(initAds);
+    }, [query]);
 
 
     return (
