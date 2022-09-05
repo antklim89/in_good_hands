@@ -1,9 +1,11 @@
-import { Container, VStack } from '@chakra-ui/react';
+import { Container, Flex, VStack } from '@chakra-ui/react';
 import { FC, useEffect } from 'react';
 import useSWR from 'swr';
 
 import AdsListItem from './AdsList.Item';
 
+import PetSearch from '~/components/PetSearch';
+import PetTypeSelect from '~/components/PetTypeSelect';
 import { api, useInfinityScroll } from '~/utils';
 
 
@@ -26,8 +28,12 @@ const AdsList: FC = () => {
 
 
     return (
-        <Container>
-            <VStack mb={8}>
+        <Container my={8}>
+            <Flex flexDirection={['column', 'row']}>
+                <PetTypeSelect flexBasis={['auto', 0]} flexGrow={[0, 1]} mb={[1, 4]} />
+                <PetSearch flexBasis={['auto', 0]} flexGrow={[0, 2]} mb={[1, 4]} />
+            </Flex>
+            <VStack>
                 {ads.map((ad) => (
                     <AdsListItem key={ad.id} {...ad} />
                 ))}
