@@ -1,6 +1,3 @@
-import { randomUUID } from 'crypto';
-import { join } from 'path';
-
 import { FastifyInstance, FastifyRequest } from 'fastify';
 import { rm } from 'fs-extra';
 import Jimp from 'jimp';
@@ -9,8 +6,8 @@ import Jimp from 'jimp';
 import schema from './upload.schema';
 import { saveImage, saveThumnail } from './upload.services';
 
-import { UPLOAD_IMAGES_BASE_PATH, UPLOAD_IMAGES_BASE_URL } from '@/constants';
 import { Image } from '@/swagger';
+import { getImageFullPath, getImageFullUrl, getImagePath } from '@/utils';
 
 
 export default async function newAdRoute(app: FastifyInstance) {
@@ -26,9 +23,9 @@ export default async function newAdRoute(app: FastifyInstance) {
             const { adId } = req.query;
             const { user } = await req.getAdOwner(adId);
 
-            const imagePath = join(`${user.id}`, `${adId}`, `${randomUUID()}.jpg`);
-            const imageFullPath = join(UPLOAD_IMAGES_BASE_PATH, imagePath);
-            const imageFullUrl = join(UPLOAD_IMAGES_BASE_URL, imagePath);
+            const imagePath = getImagePath(user.id, adId);
+            const imageFullPath = getImageFullPath(imagePath);
+            const imageFullUrl = getImageFullUrl(imagePath);
 
             try {
                 const [{ filepath }] = await req.saveRequestFiles();

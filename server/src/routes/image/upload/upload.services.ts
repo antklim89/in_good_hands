@@ -17,6 +17,3 @@ export async function saveImage(jimpFile: Jimp, imageFullPath: string) {
         .quality(90)
         .writeAsync(imageFullPath);
 }
-
-
-// data:image/jpg;base64,
