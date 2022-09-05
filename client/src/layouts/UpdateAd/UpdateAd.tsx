@@ -25,6 +25,8 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
             name: ad.name || '',
             price: ad.price || 0,
             tel: ad.tel || '',
+            telegram: ad.telegram || '',
+            whatsapp: ad.whatsapp || '',
             birthday: new Date(ad.birthday || '').toISOString().split('T')[0],
             type: ad.type || 'cat',
             isPublished: ad.isPublished || false,
@@ -109,6 +111,16 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
                         label="Pone number"
                         name="tel"
                         type="tel"
+                    />
+                    <InputField
+                        formik={formik}
+                        label="Telegram"
+                        name="telegram"
+                    />
+                    <InputField
+                        formik={formik}
+                        label="WhatsApp"
+                        name="whatsapp"
                     />
                     <InputField
                         formik={formik}

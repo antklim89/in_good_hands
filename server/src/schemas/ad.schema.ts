@@ -36,6 +36,16 @@ export const adInputSchema = {
             minLength: 3,
             maxLength: 100,
         },
+        whatsapp: {
+            type: 'string',
+            minLength: 3,
+            maxLength: 50,
+        },
+        telegram: {
+            type: 'string',
+            minLength: 3,
+            maxLength: 50,
+        },
         price: {
             type: 'number',
             minimum: 0,
@@ -65,6 +75,8 @@ export const adResponseSchema = {
         birthday: { type: 'string' },
         description: { type: 'string' },
         tel: { type: 'string' },
+        telegram: { type: 'string' },
+        whatsapp: { type: 'string' },
         email: { type: 'string' },
         images: { type: 'array', items: imageSchema },
     },

@@ -119,9 +119,44 @@ export declare namespace Ad {
   /**
    * No description
    * @tags ad
+   * @name FindOne
+   * @request GET:/ad/find-one/
+   * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, telegram?: string, whatsapp?: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+   */
+  namespace FindOne {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+      createdAt: string;
+      updatedAt: string;
+      name: string;
+      type: string;
+      breed: string;
+      price: number;
+      birthday: string;
+      description: string;
+      tel: string;
+      telegram?: string;
+      whatsapp?: string;
+      email: string;
+      images: {
+        id: number;
+        src: string;
+        thumbnail: string;
+      }[];
+    };
+  }
+  /**
+   * No description
+   * @tags ad
    * @name FindUpdateData
    * @request GET:/ad/find-update-data/
-   * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+   * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, whatsapp?: string, telegram?: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
    */
   namespace FindUpdateData {
     type RequestParams = {};
@@ -137,6 +172,8 @@ export declare namespace Ad {
       description: string;
       email: string;
       tel: string;
+      whatsapp?: string;
+      telegram?: string;
       price: number;
       birthday: string;
       isPublished: boolean;
@@ -167,45 +204,14 @@ export declare namespace Ad {
       description: string;
       email: string;
       tel: string;
+      whatsapp?: string;
+      telegram?: string;
       price: number;
       birthday: string;
       isPublished: boolean;
     };
     type RequestHeaders = {};
     type ResponseBody = void;
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name FindOne
-   * @request GET:/ad/find-one/
-   * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-   */
-  namespace FindOne {
-    type RequestParams = {};
-    type RequestQuery = {
-      adId: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-      createdAt: string;
-      updatedAt: string;
-      name: string;
-      type: string;
-      breed: string;
-      price: number;
-      birthday: string;
-      description: string;
-      tel: string;
-      email: string;
-      images: {
-        id: number;
-        src: string;
-        thumbnail: string;
-      }[];
-    };
   }
 }
 export declare namespace Auth {
@@ -532,9 +538,44 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags ad
+     * @name FindOne
+     * @request GET:/ad/find-one/
+     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, telegram?: string, whatsapp?: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     */
+    findOne: (
+      query: {
+        adId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      AxiosResponse<{
+        id: number;
+        createdAt: string;
+        updatedAt: string;
+        name: string;
+        type: string;
+        breed: string;
+        price: number;
+        birthday: string;
+        description: string;
+        tel: string;
+        telegram?: string;
+        whatsapp?: string;
+        email: string;
+        images: {
+          id: number;
+          src: string;
+          thumbnail: string;
+        }[];
+      }>
+    >;
+    /**
+     * No description
+     *
+     * @tags ad
      * @name FindUpdateData
      * @request GET:/ad/find-update-data/
-     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, whatsapp?: string, telegram?: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
      */
     findUpdateData: (
       query: {
@@ -549,6 +590,8 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         description: string;
         email: string;
         tel: string;
+        whatsapp?: string;
+        telegram?: string;
         price: number;
         birthday: string;
         isPublished: boolean;
@@ -579,45 +622,14 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         description: string;
         email: string;
         tel: string;
+        whatsapp?: string;
+        telegram?: string;
         price: number;
         birthday: string;
         isPublished: boolean;
       },
       params?: RequestParams,
     ) => Promise<AxiosResponse<void>>;
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name FindOne
-     * @request GET:/ad/find-one/
-     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-     */
-    findOne: (
-      query: {
-        adId: number;
-      },
-      params?: RequestParams,
-    ) => Promise<
-      AxiosResponse<{
-        id: number;
-        createdAt: string;
-        updatedAt: string;
-        name: string;
-        type: string;
-        breed: string;
-        price: number;
-        birthday: string;
-        description: string;
-        tel: string;
-        email: string;
-        images: {
-          id: number;
-          src: string;
-          thumbnail: string;
-        }[];
-      }>
-    >;
   };
   auth: {
     /**

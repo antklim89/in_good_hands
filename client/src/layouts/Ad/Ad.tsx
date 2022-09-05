@@ -10,26 +10,22 @@ import { getApiURL } from '~/utils';
 
 
 const Ad: FC<Ad.FindOne.ResponseBody> = ({
-    name, breed, type, description, birthday, images, price, tel, email,
+    name, breed, type, description, birthday, images, price, tel, email, telegram, whatsapp,
 }) => {
     return (
         <Container as="section" my={8}>
             <HStack justifyContent="space-between" mb={4}>
-                <Text fontSize="xl" lineHeight={2}>
-                    Type: <Text as="span" textTransform="capitalize">{type}</Text>
-                    <br />
-                    Breed: <Text as="span" textTransform="capitalize">{breed}</Text>
-                    <br />
-                    Name: <Text as="span" textTransform="capitalize">{name}</Text>
-                    <br />
-                    Birthday: <PetAge birthday={birthday} />
-                    <br />
-                    Telephone: <Text as="a" color="blue" href={`tel:${tel}`}>{tel}</Text>
-                    <br />
-                    E-mail: <Text as="a" color="blue" href={`email:${email}`}>{email}</Text>
-                    <br />
+                <Box>
+                    <Text>Type: <Text as="span" textTransform="capitalize">{type}</Text></Text>
+                    <Text>Breed: <Text as="span" textTransform="capitalize">{breed}</Text></Text>
+                    <Text>Name: <Text as="span" textTransform="capitalize">{name}</Text></Text>
+                    <Text>Birthday: <PetAge birthday={birthday} /></Text>
+                    <Text>Telephone: <Text as="a" color="blue" href={`tel:${tel}`}>{tel}</Text></Text>
+                    <Text>E-mail: <Text as="a" color="blue" href={`email:${email}`}>{email}</Text></Text>
+                    {telegram ? <Text>Telegram: <Text as="a" color="blue" href={`https://telegram.me/share/url?url=${telegram}`}>{telegram}</Text></Text> : null}
+                    {whatsapp ? <Text>WhatsUp: <Text as="a" color="blue" href={`https://api.whatsapp.com/send?phone=${whatsapp}`}>{whatsapp}</Text></Text> : null}
                     <Price fontSize="4xl" fontWeight="bold" price={price} />
-                </Text>
+                </Box>
                 {images.length > 0
                     ? (
                         <Carousel >

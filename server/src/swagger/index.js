@@ -188,9 +188,25 @@ export class Api extends HttpClient {
      * No description
      *
      * @tags ad
+     * @name FindOne
+     * @request GET:/ad/find-one/
+     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, telegram?: string, whatsapp?: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     */
+    findOne: (query, params = {}) =>
+      this.request({
+        path: `/ad/find-one/`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
      * @name FindUpdateData
      * @request GET:/ad/find-update-data/
-     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, whatsapp?: string, telegram?: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
      */
     findUpdateData: (query, params = {}) =>
       this.request({
@@ -215,22 +231,6 @@ export class Api extends HttpClient {
         query: query,
         body: body,
         type: ContentType.Json,
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name FindOne
-     * @request GET:/ad/find-one/
-     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-     */
-    findOne: (query, params = {}) =>
-      this.request({
-        path: `/ad/find-one/`,
-        method: "GET",
-        query: query,
-        format: "json",
         ...params,
       }),
   };

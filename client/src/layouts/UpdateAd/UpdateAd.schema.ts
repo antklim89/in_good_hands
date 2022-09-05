@@ -21,6 +21,14 @@ export const updateAdSchema = z.object({
     tel: z.string()
         .min(props.tel.minLength)
         .max(props.tel.maxLength),
+    telegram: z.string()
+        .min(props.telegram.minLength)
+        .max(props.telegram.maxLength)
+        .optional(),
+    whatsapp: z.string()
+        .min(props.whatsapp.minLength)
+        .max(props.whatsapp.maxLength)
+        .optional(),
     email: z.string()
         .email()
         .min(props.email.minLength)

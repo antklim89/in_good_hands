@@ -13,7 +13,7 @@ model User {
   name     String
   hash     String
   tel      String? @default("")
-  whatsup  String? @default("")
+  whatsapp String? @default("")
   telegram String? @default("")
   ads      Ad[]
 }
@@ -28,6 +28,8 @@ model Ad {
   description String
   email       String
   tel         String
+  whatsapp    String?    @default("")
+  telegram    String?    @default("")
   price       Int
   birthday    DateTime   @default(now())
   images      Image[]
