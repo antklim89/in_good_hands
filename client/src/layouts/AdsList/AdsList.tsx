@@ -19,7 +19,7 @@ const AdsList: FC<AdsListProps> = ({ ads: initAds }) => {
         const { data: newAds } = await api().ad.findMany({
             cursor: ads.slice().pop()?.id,
             searchType: query.type as 'cat' | 'dog' | 'bird' | 'aquarium' | 'rodent' | undefined,
-            searchBreed: query.search as string,
+            search: query.search as string,
         });
         setAds([...ads, ...newAds]);
         if (newAds.length > 0) addEvent();

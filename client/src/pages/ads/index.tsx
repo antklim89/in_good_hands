@@ -20,10 +20,9 @@ const AllAdsPage: NextPage<Props> = ({ ads }) => {
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({ query }) => {
-    console.log('==== \n query', query);
     const { data: ads } = await api().ad.findMany({
         searchType: query.type as 'cat' | 'dog' | 'bird' | 'aquarium' | 'rodent' | undefined,
-        searchBreed: query.search as string,
+        search: query.search as string,
     });
 
     return { props: { ads } };
