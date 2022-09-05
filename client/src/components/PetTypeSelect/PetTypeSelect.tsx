@@ -16,7 +16,7 @@ const PetTypeSelect: FC<SelectProps> = (props) => {
     }, [router.query]);
 
     return (
-        <Select onChange={handleChange} {...props}>
+        <Select onChange={handleChange} {...props} defaultValue={router.query.type}>
             <option value={ALL}>{ALL}</option>
             {animalsTypes.map((animalsType) => (
                 <option key={animalsType} value={animalsType}>{animalsType}</option>

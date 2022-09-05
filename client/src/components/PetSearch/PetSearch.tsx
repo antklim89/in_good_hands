@@ -23,6 +23,7 @@ const PetSearch: FC<InputProps> = (props) => {
 
     return (
         <Input
+            defaultValue={router.query.search}
             {...props}
             placeholder="Enter search query..."
             onChange={handleChange}
