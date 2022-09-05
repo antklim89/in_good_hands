@@ -236,6 +236,26 @@ export declare namespace Auth {
   /**
    * No description
    * @tags auth
+   * @name Update
+   * @request PATCH:/auth/update/
+   * @response `200` `void` Default Response
+   */
+  namespace Update {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      email?: string;
+      name?: string;
+      tel?: string;
+      whatsup?: string;
+      telegram?: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @tags auth
    * @name Register
    * @request POST:/auth/register/
    * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
@@ -257,24 +277,6 @@ export declare namespace Auth {
       };
       token: string;
     };
-  }
-  /**
-   * No description
-   * @tags auth
-   * @name Update
-   * @request PATCH:/auth/update/
-   * @response `200` `void` Default Response
-   */
-  namespace Update {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      email?: string;
-      name?: string;
-      tel?: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = void;
   }
 }
 export declare namespace Image {
@@ -608,6 +610,24 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (
+      body: {
+        email?: string;
+        name?: string;
+        tel?: string;
+        whatsup?: string;
+        telegram?: string;
+      },
+      params?: RequestParams,
+    ) => Promise<AxiosResponse<void>>;
+    /**
+     * No description
+     *
+     * @tags auth
      * @name Register
      * @request POST:/auth/register/
      * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
@@ -629,22 +649,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         token: string;
       }>
     >;
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
-     */
-    update: (
-      body: {
-        email?: string;
-        name?: string;
-        tel?: string;
-      },
-      params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
   };
   image: {
     /**

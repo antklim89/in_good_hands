@@ -8,12 +8,14 @@ datasource db {
 }
 
 model User {
-  id    String  @id @default(uuid())
-  email String  @unique
-  name  String
-  hash  String
-  tel   String?
-  ads   Ad[]
+  id       String  @id @default(uuid())
+  email    String  @unique
+  name     String
+  hash     String
+  tel      String? @default("")
+  whatsup  String? @default("")
+  telegram String? @default("")
+  ads      Ad[]
 }
 
 model Ad {
@@ -28,10 +30,10 @@ model Ad {
   tel         String
   price       Int
   birthday    DateTime   @default(now())
+  images      Image[]
   isPublished Boolean
   owner       User       @relation(fields: [ownerId], references: [id])
   ownerId     String
-  images      Image[]
 }
 
 model Image {

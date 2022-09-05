@@ -256,6 +256,22 @@ export class Api extends HttpClient {
      * No description
      *
      * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (body, params = {}) =>
+      this.request({
+        path: `/auth/update/`,
+        method: "PATCH",
+        body: body,
+        type: ContentType.Json,
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags auth
      * @name Register
      * @request POST:/auth/register/
      * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
@@ -267,22 +283,6 @@ export class Api extends HttpClient {
         body: body,
         type: ContentType.Json,
         format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
-     */
-    update: (body, params = {}) =>
-      this.request({
-        path: `/auth/update/`,
-        method: "PATCH",
-        body: body,
-        type: ContentType.Json,
         ...params,
       }),
   };
