@@ -4,3 +4,4 @@ export * from './getCookies';
 export * from './api';
 export * from './useInfinityScroll';
 export * from './setSearchParams';
+export * from './useUpdate';
