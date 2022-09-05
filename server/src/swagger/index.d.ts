@@ -69,8 +69,7 @@ export declare namespace Ad {
     type RequestParams = {};
     type RequestQuery = {
       cursor?: number;
-      searchName?: string;
-      searchBreed?: string;
+      search?: string;
       searchType?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
       ltePrice?: number;
       gtePrice?: number;
@@ -483,8 +482,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
     findMany: (
       query?: {
         cursor?: number;
-        searchName?: string;
-        searchBreed?: string;
+        search?: string;
         searchType?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
         ltePrice?: number;
         gtePrice?: number;

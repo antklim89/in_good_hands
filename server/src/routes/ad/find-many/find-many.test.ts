@@ -49,6 +49,17 @@ describe('POST /ad/find-many', () => {
         expect(data.every((ad) => ad.type === query.searchType)).toBeTruthy();
     });
 
+    it('should finds ads filtered by breed', async () => {
+        const query = {
+            search: 'BEnGaL',
+        };
+
+        const response = await app.inject({ ...defaultOptions, query });
+        const data: Ad.FindMany.ResponseBody = response.json();
+        expect(data.every((ad) => new RegExp(query.search, 'i').test(ad.breed))).toBeTruthy();
+
+    });
+
     it('should finds ads filtered by lte price', async () => {
         const query: {[P in keyof Ad.FindMany.RequestQuery]: string} = {
             ltePrice: '500',

@@ -22,6 +22,8 @@ export async function populateDb(prisma: PrismaClient) {
         owner: { connect: { id: users[0].id } },
         price: (i + 1) * 100,
         type: (i % 2 === 0) ? 'cat' : 'dog',
+        breed: (i % 2 === 0) ? 'bengal' : 'husky',
+        description: (i % 2 === 0) ? 'lorem' : 'ipsum',
     }) })));
 
     const images = await Promise.all(_.times(ADS_QTY, () => prisma.image.create({ data: createImage({

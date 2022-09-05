@@ -14,7 +14,7 @@ export default async function adPreviewListRoute(app: FastifyInstance) {
         schema,
         async handler(req: FastifyRequest<{Querystring: Ad.FindMany.RequestQuery}>) {
             const {
-                cursor, searchName, searchBreed, searchType, ltePrice, gtePrice,
+                cursor, search, searchType, ltePrice, gtePrice,
             } = req.query;
 
             const ads = await app.prisma.ad.findMany({
@@ -24,8 +24,8 @@ export default async function adPreviewListRoute(app: FastifyInstance) {
 
                 where: {
                     isPublished: true,
-                    ...(searchName ? { name: searchName } : {}),
-                    ...(searchBreed ? { breed: searchBreed } : {}),
+                    ...(search ? { description: { search: search.replace(/\s/ig, ' | ') } } : {}),
+                    ...(search ? { breed: { search: search.replace(/\s/ig, ' | ') } } : {}),
                     ...(searchType ? { type: { equals: searchType } } : {}),
 
                     ...((ltePrice || gtePrice)

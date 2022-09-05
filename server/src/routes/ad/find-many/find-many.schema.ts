@@ -11,8 +11,7 @@ const schema: FastifySchema = {
         type: 'object',
         properties: {
             cursor: { type: 'number' },
-            searchName: { type: 'string' },
-            searchBreed: { type: 'string' },
+            search: { type: 'string' },
             searchType: { type: 'string', enum: animalsTypes },
             ltePrice: { type: 'number' },
             gtePrice: { type: 'number' },
