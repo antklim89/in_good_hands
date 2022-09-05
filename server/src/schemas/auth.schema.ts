@@ -38,7 +38,7 @@ export const userProfileSchema = {
         email: registerSchema.properties.email,
         name: registerSchema.properties.name,
         tel: { type: 'string', minLength: 3, maxLength: 50 },
-        whatsup: { type: 'string', minLength: 3, maxLength: 50 },
+        whatsapp: { type: 'string', minLength: 3, maxLength: 50 },
         telegram: { type: 'string', minLength: 3, maxLength: 50 },
     },
 };
