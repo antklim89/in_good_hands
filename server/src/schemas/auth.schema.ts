@@ -33,7 +33,7 @@ export const registerSchema = {
 
 export const userProfileSchema = {
     type: 'object',
-    required: ['email', 'name'],
+    required: [],
     properties: {
         email: registerSchema.properties.email,
         name: registerSchema.properties.name,
