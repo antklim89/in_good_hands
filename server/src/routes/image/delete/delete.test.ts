@@ -1,14 +1,10 @@
-import { randomUUID } from 'crypto';
-import { mkdirSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
+import { mkdir, pathExists, writeFile } from 'fs-extra';
 
-import { getImagePathBySrc } from './delete.services';
-
-import { UPLOAD_IMAGES_BASE_URL } from '@/constants';
 import { Image } from '@/swagger';
 import { init } from '@/test';
-import { generateJWT } from '@/utils';
+import { generateJWT, getImagePathBySrc } from '@/utils';
 
 
 const { app, db, prisma } = init();
@@ -19,21 +15,15 @@ const defaultOptions: import('light-my-request').InjectOptions = {
 };
 
 
-describe('POST /image/upload', () => {
-    it('should upload new image', async () => {
-        const imageToDelete = await prisma.image.create({
-            data: {
-                src: join(UPLOAD_IMAGES_BASE_URL, randomUUID()),
-                thumbnail: '',
-                adId: db().ads[0].id,
-            },
-        });
-
+describe('POST /image/delete', () => {
+    it('should delete image', async () => {
+        const [imageToDelete] = db().images;
         const imageToDeletePath = getImagePathBySrc(imageToDelete.src);
-        mkdirSync(join(imageToDeletePath, '..'), { recursive: true });
-        writeFileSync(imageToDeletePath, 'test');
 
-        expect(existsSync(imageToDeletePath)).toBeTruthy();
+        await mkdir(join(imageToDeletePath, '..'), { recursive: true });
+        await writeFile(imageToDeletePath, 'test');
+
+        expect(await pathExists(imageToDeletePath)).toBeTruthy();
 
         const query: {[P in keyof Image.Delete.RequestQuery]: string} = {
             imageId: String(imageToDelete.id),
@@ -52,23 +42,22 @@ describe('POST /image/upload', () => {
             where: { id: imageToDelete.id },
         });
 
-        expect(existsSync(imageToDeletePath)).toBeFalsy();
+        expect(await pathExists(imageToDeletePath)).toBeFalsy();
         expect(deletedFile).toBeNull();
     });
 
-    // it('should not upload image from wrong user', async () => {
-    //     const form = formAutoContent({
-    //         image: image(),
-    //     });
+    it('should not delete image from wrong user', async () => {
+        const [, imageToDelete] = db().images;
 
-    //     const query = {
-    //         adId: String(db().ads[0].id),
-    //     };
+        const query: {[P in keyof Image.Delete.RequestQuery]: string} = {
+            imageId: String(imageToDelete.id),
+        };
 
-    //     form.headers.authentication = generateJWT(db().users[1]).token;
-    //     const response = await app.inject({ ...defaultOptions, ...form, query });
+        const headers = {
+            authentication: generateJWT(db().users[1]).token,
+        };
 
-    //     expect(response.statusCode).toEqual(403);
-
-    // });
+        const response = await app.inject({ ...defaultOptions, query, headers });
+        expect(response.statusCode).toEqual(403);
+    });
 });

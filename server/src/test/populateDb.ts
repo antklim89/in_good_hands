@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import _ from 'lodash';
 
-import { createAd, createUser } from './dbCreators';
+import { createAd, createImage, createUser } from './dbCreators';
 
 
 const USERS_QTY = 3;
@@ -24,8 +24,13 @@ export async function populateDb(prisma: PrismaClient) {
         type: (i % 2 === 0) ? 'cat' : 'dog',
     }) })));
 
+    const images = await Promise.all(_.times(ADS_QTY, () => prisma.image.create({ data: createImage({
+        ad: { connect: { id: ads[0].id } },
+    }) })));
+
     return {
         users,
         ads,
+        images,
     };
 }
