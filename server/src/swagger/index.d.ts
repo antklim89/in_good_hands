@@ -119,6 +119,39 @@ export declare namespace Ad {
   /**
    * No description
    * @tags ad
+   * @name FindOne
+   * @request GET:/ad/find-one/
+   * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+   */
+  namespace FindOne {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+      createdAt: string;
+      updatedAt: string;
+      name: string;
+      type: string;
+      breed: string;
+      price: number;
+      birthday: string;
+      description: string;
+      tel: string;
+      email: string;
+      images: {
+        id: number;
+        src: string;
+        thumbnail: string;
+      }[];
+    };
+  }
+  /**
+   * No description
+   * @tags ad
    * @name FindUpdateData
    * @request GET:/ad/find-update-data/
    * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
@@ -174,41 +207,25 @@ export declare namespace Ad {
     type RequestHeaders = {};
     type ResponseBody = void;
   }
-  /**
-   * No description
-   * @tags ad
-   * @name FindOne
-   * @request GET:/ad/find-one/
-   * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-   */
-  namespace FindOne {
-    type RequestParams = {};
-    type RequestQuery = {
-      adId: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-      createdAt: string;
-      updatedAt: string;
-      name: string;
-      type: string;
-      breed: string;
-      price: number;
-      birthday: string;
-      description: string;
-      tel: string;
-      email: string;
-      images: {
-        id: number;
-        src: string;
-        thumbnail: string;
-      }[];
-    };
-  }
 }
 export declare namespace Auth {
+  /**
+   * No description
+   * @tags auth
+   * @name ChangePassword
+   * @request PATCH:/auth/change-password/
+   * @response `201` `void` Default Response
+   */
+  namespace ChangePassword {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      newPassword: string;
+      oldPassword: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  }
   /**
    * No description
    * @tags auth
@@ -515,6 +532,39 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags ad
+     * @name FindOne
+     * @request GET:/ad/find-one/
+     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     */
+    findOne: (
+      query: {
+        adId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      AxiosResponse<{
+        id: number;
+        createdAt: string;
+        updatedAt: string;
+        name: string;
+        type: string;
+        breed: string;
+        price: number;
+        birthday: string;
+        description: string;
+        tel: string;
+        email: string;
+        images: {
+          id: number;
+          src: string;
+          thumbnail: string;
+        }[];
+      }>
+    >;
+    /**
+     * No description
+     *
+     * @tags ad
      * @name FindUpdateData
      * @request GET:/ad/find-update-data/
      * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
@@ -568,41 +618,23 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<AxiosResponse<void>>;
+  };
+  auth: {
     /**
      * No description
      *
-     * @tags ad
-     * @name FindOne
-     * @request GET:/ad/find-one/
-     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     * @tags auth
+     * @name ChangePassword
+     * @request PATCH:/auth/change-password/
+     * @response `201` `void` Default Response
      */
-    findOne: (
-      query: {
-        adId: number;
+    changePassword: (
+      body: {
+        newPassword: string;
+        oldPassword: string;
       },
       params?: RequestParams,
-    ) => Promise<
-      AxiosResponse<{
-        id: number;
-        createdAt: string;
-        updatedAt: string;
-        name: string;
-        type: string;
-        breed: string;
-        price: number;
-        birthday: string;
-        description: string;
-        tel: string;
-        email: string;
-        images: {
-          id: number;
-          src: string;
-          thumbnail: string;
-        }[];
-      }>
-    >;
-  };
-  auth: {
+    ) => Promise<AxiosResponse<void>>;
     /**
      * No description
      *
