@@ -1,4 +1,4 @@
-import { Container, HStack, Text } from '@chakra-ui/react';
+import { Box, Container, HStack, Text } from '@chakra-ui/react';
 import { Ad } from '@in-good-hands/server/src/swagger';
 import Image from 'next/image';
 import Carousel from 'nuka-carousel';
@@ -30,19 +30,27 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                     <br />
                     <Price fontSize="4xl" fontWeight="bold" price={price} />
                 </Text>
-                <Carousel >
-                    {images.map((image) => (
-                        <Image
-                            alt={`${type} ${breed}`}
-                            blurDataURL={image.thumbnail}
-                            height={270}
-                            key={image.id}
-                            placeholder="blur"
-                            src={getApiURL(image.src)}
-                            width={400}
-                        />
-                    ))}
-                </Carousel>
+                {images.length > 0
+                    ? (
+                        <Carousel >
+                            {images.map((image) => (
+                                <Image
+                                    alt={`${type} ${breed}`}
+                                    blurDataURL={image.thumbnail}
+                                    height={270}
+                                    key={image.id}
+                                    placeholder="blur"
+                                    src={getApiURL(image.src)}
+                                    width={400}
+                                />
+                            ))}
+                        </Carousel>
+                    )
+                    : (
+                        <Box>
+                            No Image
+                        </Box>
+                    )}
             </HStack>
             <Text>
                 {description}
