@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC, useCallback } from 'react';
 
+import { HeaderLinksProps } from './Header.types';
+
 import Protected from '~/components/Protected';
 import { api } from '~/utils';
-
-import { HeaderLinksProps } from './Header.types';
 
 
 const LINKS = [

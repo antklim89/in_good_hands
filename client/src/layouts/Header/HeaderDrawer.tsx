@@ -30,7 +30,7 @@ const HeaderDrawer: FC = () => {
                 variant="link"
                 onClick={onToggle}
             >
-                <HamburgerIcon />
+                <HamburgerIcon color="primary.textLight" />
             </Button>
             <Drawer
                 finalFocusRef={btnRef}
@@ -43,9 +43,9 @@ const HeaderDrawer: FC = () => {
                     <DrawerBody
                         bg="primary.600"
                         pt={12}
-                        sx={{ 'a': { color: 'primary.text' } }}
+                        sx={{ 'a': { color: 'primary.textLight' } }}
                     >
-                        <DrawerCloseButton />
+                        <DrawerCloseButton color="primary.textLight" />
                         <HeaderLinks flexDirection="column" onClose={onClose} />
                         <Divider bg="primary.text" my={4} />
                         <HeaderAuth />

@@ -1,6 +1,6 @@
-import type { FlexboxProps } from '@chakra-ui/styled-system';
+import type { FlexboxProps, SystemProps } from '@chakra-ui/styled-system';
 
 
-export interface HeaderLinksProps extends FlexboxProps {
+export interface HeaderLinksProps extends FlexboxProps, SystemProps {
     onClose?: () => void;
 }
