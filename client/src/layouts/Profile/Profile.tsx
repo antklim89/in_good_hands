@@ -4,6 +4,7 @@ import {
 import { FC } from 'react';
 
 import MyAdsList from '~/layouts/MyAdsList';
+import MyFavorites from '~/layouts/MyFavorites';
 import UpdateCredentials from '~/layouts/UpdateCredentials';
 
 
@@ -14,6 +15,7 @@ const Profile: FC = () => {
                 <TabList>
                     <Tab>Credentials</Tab>
                     <Tab>Ads</Tab>
+                    <Tab>Favorites</Tab>
                 </TabList>
 
                 <TabPanels>
@@ -22,6 +24,9 @@ const Profile: FC = () => {
                     </TabPanel>
                     <TabPanel>
                         <MyAdsList />
+                    </TabPanel>
+                    <TabPanel>
+                        <MyFavorites />
                     </TabPanel>
                 </TabPanels>
             </Tabs>
