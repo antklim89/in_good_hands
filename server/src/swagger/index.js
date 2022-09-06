@@ -234,6 +234,54 @@ export class Api extends HttpClient {
         ...params,
       }),
   };
+  favorites = {
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name Create
+     * @request POST:/favorites/create/
+     * @response `200` `number` Default Response
+     */
+    create: (query, params = {}) =>
+      this.request({
+        path: `/favorites/create/`,
+        method: "POST",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name Delete
+     * @request DELETE:/favorites/delete/
+     * @response `200` `void` Default Response
+     */
+    delete: (query, params = {}) =>
+      this.request({
+        path: `/favorites/delete/`,
+        method: "DELETE",
+        query: query,
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name FindMany
+     * @request GET:/favorites/find-many/
+     * @response `200` `({ id: number, ad: { id: number, name: string, type: string, breed: string, price: number } })[]` Default Response
+     */
+    findMany: (params = {}) =>
+      this.request({
+        path: `/favorites/find-many/`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+  };
   auth = {
     /**
      * No description
@@ -314,54 +362,6 @@ export class Api extends HttpClient {
         method: "PATCH",
         body: body,
         type: ContentType.Json,
-        ...params,
-      }),
-  };
-  favorites = {
-    /**
-     * No description
-     *
-     * @tags favorites
-     * @name Create
-     * @request POST:/favorites/create/
-     * @response `200` `number` Default Response
-     */
-    create: (query, params = {}) =>
-      this.request({
-        path: `/favorites/create/`,
-        method: "POST",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags favorites
-     * @name Delete
-     * @request DELETE:/favorites/delete/
-     * @response `200` `void` Default Response
-     */
-    delete: (query, params = {}) =>
-      this.request({
-        path: `/favorites/delete/`,
-        method: "DELETE",
-        query: query,
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags favorites
-     * @name FindMany
-     * @request GET:/favorites/find-many/
-     * @response `200` `({ id: number, ad: { id: number, name: string, type: string, breed: string, price: number } })[]` Default Response
-     */
-    findMany: (params = {}) =>
-      this.request({
-        path: `/favorites/find-many/`,
-        method: "GET",
-        format: "json",
         ...params,
       }),
   };

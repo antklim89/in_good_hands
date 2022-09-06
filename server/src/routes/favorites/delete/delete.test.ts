@@ -15,12 +15,12 @@ describe('POST /favorites/delete', () => {
     it('should delete favorites', async () => {
         const favoriteToDelete = await prisma.favorites.create({
             data: {
-                adId: db().ads[0].id,
+                adId: db().ads[1].id,
                 ownerId: db().users[0].id,
             },
         });
         const query: {[P in keyof Favorites.Delete.RequestQuery]: string} = {
-            favoritesId: String(favoriteToDelete.id),
+            adId: String(db().ads[1].id),
         };
 
         const headers = {
@@ -41,12 +41,12 @@ describe('POST /favorites/delete', () => {
     it('should not delete favorites from wrong user', async () => {
         const favoriteToDelete = await prisma.favorites.create({
             data: {
-                adId: db().ads[0].id,
+                adId: db().ads[1].id,
                 ownerId: db().users[0].id,
             },
         });
         const query: {[P in keyof Favorites.Delete.RequestQuery]: string} = {
-            favoritesId: String(favoriteToDelete.id),
+            adId: String(db().ads[1].id),
         };
 
         const headers = {

@@ -56,8 +56,8 @@ model Favorites {
   owner   User   @relation(fields: [ownerId], references: [id])
   ownerId String
 
-  @@unique([id, ownerId])
-  @@index([id, ownerId])
+  @@unique([adId, ownerId])
+  @@index([adId, ownerId])
 }
 
 enum AnimalType {

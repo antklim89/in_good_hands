@@ -215,6 +215,63 @@ export declare namespace Ad {
     type ResponseBody = void;
   }
 }
+export declare namespace Favorites {
+  /**
+   * No description
+   * @tags favorites
+   * @name Create
+   * @request POST:/favorites/create/
+   * @response `200` `number` Default Response
+   */
+  namespace Create {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = number;
+  }
+  /**
+   * No description
+   * @tags favorites
+   * @name Delete
+   * @request DELETE:/favorites/delete/
+   * @response `200` `void` Default Response
+   */
+  namespace Delete {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @tags favorites
+   * @name FindMany
+   * @request GET:/favorites/find-many/
+   * @response `200` `({ id: number, ad: { id: number, name: string, type: string, breed: string, price: number } })[]` Default Response
+   */
+  namespace FindMany {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+      ad: {
+        id: number;
+        name: string;
+        type: string;
+        breed: string;
+        price: number;
+      };
+    }[];
+  }
+}
 export declare namespace Auth {
   /**
    * No description
@@ -322,63 +379,6 @@ export declare namespace Auth {
     };
     type RequestHeaders = {};
     type ResponseBody = void;
-  }
-}
-export declare namespace Favorites {
-  /**
-   * No description
-   * @tags favorites
-   * @name Create
-   * @request POST:/favorites/create/
-   * @response `200` `number` Default Response
-   */
-  namespace Create {
-    type RequestParams = {};
-    type RequestQuery = {
-      adId: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = number;
-  }
-  /**
-   * No description
-   * @tags favorites
-   * @name Delete
-   * @request DELETE:/favorites/delete/
-   * @response `200` `void` Default Response
-   */
-  namespace Delete {
-    type RequestParams = {};
-    type RequestQuery = {
-      favoritesId: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = void;
-  }
-  /**
-   * No description
-   * @tags favorites
-   * @name FindMany
-   * @request GET:/favorites/find-many/
-   * @response `200` `({ id: number, ad: { id: number, name: string, type: string, breed: string, price: number } })[]` Default Response
-   */
-  namespace FindMany {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-      ad: {
-        id: number;
-        name: string;
-        type: string;
-        breed: string;
-        price: number;
-      };
-    }[];
   }
 }
 export declare namespace Image {
@@ -690,6 +690,58 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       params?: RequestParams,
     ) => Promise<AxiosResponse<void>>;
   };
+  favorites: {
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name Create
+     * @request POST:/favorites/create/
+     * @response `200` `number` Default Response
+     */
+    create: (
+      query: {
+        adId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<AxiosResponse<number>>;
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name Delete
+     * @request DELETE:/favorites/delete/
+     * @response `200` `void` Default Response
+     */
+    delete: (
+      query: {
+        adId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<AxiosResponse<void>>;
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name FindMany
+     * @request GET:/favorites/find-many/
+     * @response `200` `({ id: number, ad: { id: number, name: string, type: string, breed: string, price: number } })[]` Default Response
+     */
+    findMany: (params?: RequestParams) => Promise<
+      AxiosResponse<
+        {
+          id: number;
+          ad: {
+            id: number;
+            name: string;
+            type: string;
+            breed: string;
+            price: number;
+          };
+        }[]
+      >
+    >;
+  };
   auth: {
     /**
      * No description
@@ -791,58 +843,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<AxiosResponse<void>>;
-  };
-  favorites: {
-    /**
-     * No description
-     *
-     * @tags favorites
-     * @name Create
-     * @request POST:/favorites/create/
-     * @response `200` `number` Default Response
-     */
-    create: (
-      query: {
-        adId: number;
-      },
-      params?: RequestParams,
-    ) => Promise<AxiosResponse<number>>;
-    /**
-     * No description
-     *
-     * @tags favorites
-     * @name Delete
-     * @request DELETE:/favorites/delete/
-     * @response `200` `void` Default Response
-     */
-    delete: (
-      query: {
-        favoritesId: number;
-      },
-      params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
-    /**
-     * No description
-     *
-     * @tags favorites
-     * @name FindMany
-     * @request GET:/favorites/find-many/
-     * @response `200` `({ id: number, ad: { id: number, name: string, type: string, breed: string, price: number } })[]` Default Response
-     */
-    findMany: (params?: RequestParams) => Promise<
-      AxiosResponse<
-        {
-          id: number;
-          ad: {
-            id: number;
-            name: string;
-            type: string;
-            breed: string;
-            price: number;
-          };
-        }[]
-      >
-    >;
   };
   image: {
     /**

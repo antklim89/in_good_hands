@@ -9,9 +9,9 @@ const schema: FastifySchema = {
     },
     querystring: {
         type: 'object',
-        required: ['favoritesId'],
+        required: ['adId'],
         properties: {
-            favoritesId: { type: 'number' },
+            adId: { type: 'number' },
         },
     },
 };

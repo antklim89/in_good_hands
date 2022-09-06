@@ -58,10 +58,10 @@ CREATE TABLE "Favorites" (
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE INDEX "Favorites_id_ownerId_idx" ON "Favorites"("id", "ownerId");
+CREATE INDEX "Favorites_adId_ownerId_idx" ON "Favorites"("adId", "ownerId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Favorites_id_ownerId_key" ON "Favorites"("id", "ownerId");
+CREATE UNIQUE INDEX "Favorites_adId_ownerId_key" ON "Favorites"("adId", "ownerId");
 
 -- AddForeignKey
 ALTER TABLE "Ad" ADD CONSTRAINT "Ad_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

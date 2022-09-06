@@ -11,14 +11,14 @@ export default async function newAdRoute(app: FastifyInstance) {
         url: '/',
         schema,
         async handler(req: FastifyRequest<{Querystring: Favorites.Delete.RequestQuery}>, res) {
-            const { favoritesId } = req.query;
+            const { adId } = req.query;
             const user = req.getUser();
 
             try {
                 await app.prisma.favorites.delete({
                     where: {
-                        id_ownerId: {
-                            id: favoritesId,
+                        adId_ownerId: {
+                            adId,
                             ownerId: user.id,
                         },
                     },
