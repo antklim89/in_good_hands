@@ -12,7 +12,8 @@
     "migrate": "run-s migrate:**",
     "migrate:dev": "prisma migrate dev",
     "migrate:test": "DATABASE_URL=\"postgresql://anton@localhost:5432/test?schema=public\" prisma migrate dev",
-    "studio": "prisma studio --browser none"
+    "studio": "prisma studio --browser none",
+    "generate": "swc ./src/generate-data.ts -d ./output && node ./output/generate-data.js"
   },
   "keywords": [],
   "author": "",
