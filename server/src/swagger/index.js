@@ -190,7 +190,7 @@ export class Api extends HttpClient {
      * @tags ad
      * @name FindOne
      * @request GET:/ad/find-one/
-     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, telegram?: string, whatsapp?: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, telegram?: string, whatsapp?: string, email: string, images: ({ id: number, src: string, thumbnail: string })[], inFavorites?: boolean }` Default Response
      */
     findOne: (query, params = {}) =>
       this.request({

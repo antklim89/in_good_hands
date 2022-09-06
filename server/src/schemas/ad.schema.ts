@@ -79,6 +79,7 @@ export const adResponseSchema = {
         whatsapp: { type: 'string' },
         email: { type: 'string' },
         images: { type: 'array', items: imageSchema },
+        inFavorites: { type: 'boolean' },
     },
 } as const;
 

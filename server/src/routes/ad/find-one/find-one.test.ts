@@ -1,8 +1,9 @@
 import { Ad } from '@/swagger';
 import { init } from '@/test';
+import { generateJWT } from '@/utils';
 
 
-const { app, db } = init();
+const { app, db, prisma } = init();
 
 const defaultOptions: import('light-my-request').InjectOptions = {
     url: '/ad/find-one',
@@ -12,15 +13,26 @@ const defaultOptions: import('light-my-request').InjectOptions = {
 
 describe('POST /ad/find-one', () => {
     it('should find one ad', async () => {
+        await prisma.favorites.create({
+            data: {
+                adId: db().ads[0].id,
+                ownerId: db().users[0].id,
+            },
+        });
+
+        const headers = {
+            authentication: generateJWT(db().users[0]).token,
+        };
+
         const query: {[P in keyof Ad.FindOne.RequestQuery]: string} = {
             adId: String(db().ads[0].id),
         };
 
-
-        const response = await app.inject({ ...defaultOptions, query });
+        const response = await app.inject({ ...defaultOptions, query, headers });
         const data: Ad.FindOne.ResponseBody = response.json();
 
         expect(data).toHaveProperty('id', db().ads[0].id);
+        expect(data.inFavorites).toBeTruthy();
     });
 
     it('should not find ad by wrong id', async () => {

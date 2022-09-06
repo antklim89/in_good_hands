@@ -121,7 +121,7 @@ export declare namespace Ad {
    * @tags ad
    * @name FindOne
    * @request GET:/ad/find-one/
-   * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, telegram?: string, whatsapp?: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+   * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, telegram?: string, whatsapp?: string, email: string, images: ({ id: number, src: string, thumbnail: string })[], inFavorites?: boolean }` Default Response
    */
   namespace FindOne {
     type RequestParams = {};
@@ -149,6 +149,7 @@ export declare namespace Ad {
         src: string;
         thumbnail: string;
       }[];
+      inFavorites?: boolean;
     };
   }
   /**
@@ -597,7 +598,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags ad
      * @name FindOne
      * @request GET:/ad/find-one/
-     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, telegram?: string, whatsapp?: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, telegram?: string, whatsapp?: string, email: string, images: ({ id: number, src: string, thumbnail: string })[], inFavorites?: boolean }` Default Response
      */
     findOne: (
       query: {
@@ -624,6 +625,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
           src: string;
           thumbnail: string;
         }[];
+        inFavorites?: boolean;
       }>
     >;
     /**
