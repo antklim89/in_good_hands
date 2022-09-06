@@ -12,11 +12,17 @@ import { FC, useCallback } from 'react';
 import { ConfirmDialogProps } from './ConfirmDialog.types';
 
 
-const ConfirmDialog: FC<ConfirmDialogProps> = ({ renderButton, confirmText = 'confirm', cancelText = 'cancel', onConfirm }) => {
+const ConfirmDialog: FC<ConfirmDialogProps> = ({
+    renderButton,
+    confirmText = 'confirm',
+    cancelText = 'cancel',
+    message,
+    onConfirm,
+}) => {
     const { isOpen, onToggle, onClose } = useDisclosure();
 
     const handleConfirm = useCallback(async () => {
-        await onConfirm();
+        await onConfirm(onToggle);
         onToggle();
     }, [onConfirm]);
 
@@ -29,7 +35,7 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({ renderButton, confirmText = 'co
                 {renderButton(onToggle)}
             </PopoverTrigger>
             <PopoverContent>
-                <PopoverBody>Are you sure you want<br />to delete this ad?</PopoverBody>
+                {message ? <PopoverBody>{message}</PopoverBody> : null}
                 <PopoverFooter
                     display="flex"
                     justifyContent="flex-end"

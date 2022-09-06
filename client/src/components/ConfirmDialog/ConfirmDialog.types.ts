@@ -5,5 +5,6 @@ export interface ConfirmDialogProps {
     renderButton: (onToggle: () => void) => ReactNode;
     confirmText?: string;
     cancelText?: string;
-    onConfirm: () => Promise<void>;
+    message?: string;
+    onConfirm: (onToggle: () => void) => Promise<void>;
 }
