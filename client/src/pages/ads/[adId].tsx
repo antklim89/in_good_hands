@@ -1,6 +1,7 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 import Seo from '~/components/Seo';
+import { api } from '~/utils';
 
 
 interface Props {
@@ -18,15 +19,11 @@ export default AdPage;
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
+    const { data: adsIds } = await api().ad.adsIds();
+    const paths = adsIds.map(({ id }) => ({ params: { adId: String(id) } }));
 
     return {
-        paths: [
-            {
-                params: {
-                    adId: '6',
-                },
-            },
-        ],
+        paths,
         fallback: false,
     };
 };
