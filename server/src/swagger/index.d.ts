@@ -326,6 +326,22 @@ export declare namespace Favorites {
   /**
    * No description
    * @tags favorites
+   * @name Create
+   * @request POST:/favorites/create/
+   * @response `200` `number` Default Response
+   */
+  namespace Create {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = number;
+  }
+  /**
+   * No description
+   * @tags favorites
    * @name Delete
    * @request DELETE:/favorites/delete/
    * @response `200` `void` Default Response
@@ -341,6 +357,22 @@ export declare namespace Favorites {
   }
 }
 export declare namespace Image {
+  /**
+   * No description
+   * @tags image
+   * @name Delete
+   * @request DELETE:/image/delete/
+   * @response `201` `void` Default Response
+   */
+  namespace Delete {
+    type RequestParams = {};
+    type RequestQuery = {
+      imageId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  }
   /**
    * No description
    * @tags image
@@ -738,6 +770,20 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags favorites
+     * @name Create
+     * @request POST:/favorites/create/
+     * @response `200` `number` Default Response
+     */
+    create: (
+      query: {
+        adId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<AxiosResponse<number>>;
+    /**
+     * No description
+     *
+     * @tags favorites
      * @name Delete
      * @request DELETE:/favorites/delete/
      * @response `200` `void` Default Response
@@ -750,6 +796,20 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
     ) => Promise<AxiosResponse<void>>;
   };
   image: {
+    /**
+     * No description
+     *
+     * @tags image
+     * @name Delete
+     * @request DELETE:/image/delete/
+     * @response `201` `void` Default Response
+     */
+    delete: (
+      query: {
+        imageId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<AxiosResponse<void>>;
     /**
      * No description
      *

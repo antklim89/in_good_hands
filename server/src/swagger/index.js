@@ -322,6 +322,22 @@ export class Api extends HttpClient {
      * No description
      *
      * @tags favorites
+     * @name Create
+     * @request POST:/favorites/create/
+     * @response `200` `number` Default Response
+     */
+    create: (query, params = {}) =>
+      this.request({
+        path: `/favorites/create/`,
+        method: "POST",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags favorites
      * @name Delete
      * @request DELETE:/favorites/delete/
      * @response `200` `void` Default Response
@@ -335,6 +351,21 @@ export class Api extends HttpClient {
       }),
   };
   image = {
+    /**
+     * No description
+     *
+     * @tags image
+     * @name Delete
+     * @request DELETE:/image/delete/
+     * @response `201` `void` Default Response
+     */
+    delete: (query, params = {}) =>
+      this.request({
+        path: `/image/delete/`,
+        method: "DELETE",
+        query: query,
+        ...params,
+      }),
     /**
      * No description
      *
