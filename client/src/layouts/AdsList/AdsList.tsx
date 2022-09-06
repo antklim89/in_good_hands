@@ -8,7 +8,7 @@ import { AdsListProps } from './AdsList.types';
 const AdsList: FC<AdsListProps> = ({ ads }) => {
     return (
         <Container>
-            <VStack>
+            <VStack mb={8}>
                 {ads.map((ad) => (
                     <AdsListItem key={ad.id} {...ad} />
                 ))}
