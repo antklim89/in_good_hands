@@ -2,9 +2,10 @@ import { ADS_LIMIT } from './find-many.route';
 
 import { Ad } from '@/swagger';
 import { init } from '@/test';
+import { generateJWT } from '@/utils';
 
 
-const { app, db } = init();
+const { app, db, prisma } = init();
 
 const defaultOptions: import('light-my-request').InjectOptions = {
     url: '/ad/find-many',
@@ -18,6 +19,26 @@ describe('POST /ad/find-many', () => {
         const data: Ad.FindMany.ResponseBody = response.json();
 
         expect(data.length).toBeGreaterThan(0);
+        expect(data.length).toBeLessThanOrEqual(ADS_LIMIT);
+    });
+
+    it('should show favorites', async () => {
+        await prisma.favorites.create({
+            data: {
+                adId: db().ads[db().ads.length - 1].id,
+                ownerId: db().users[0].id,
+            },
+        });
+
+        const headers = {
+            authentication: generateJWT(db().users[0]).token,
+        };
+
+        const response = await app.inject({ ...defaultOptions, headers });
+        const data: Ad.FindMany.ResponseBody = response.json();
+
+        expect(data.length).toBeGreaterThan(0);
+        expect(data.filter((i) => i.inFavorites).length).toBeGreaterThan(0);
         expect(data.length).toBeLessThanOrEqual(ADS_LIMIT);
     });
 

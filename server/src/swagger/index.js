@@ -158,7 +158,7 @@ export class Api extends HttpClient {
      * @tags ad
      * @name FindMany
      * @request GET:/ad/find-many/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
+     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[], inFavorites?: boolean })[]` Default Response
      */
     findMany: (query, params = {}) =>
       this.request({

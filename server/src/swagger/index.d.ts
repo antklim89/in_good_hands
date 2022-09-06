@@ -63,7 +63,7 @@ export declare namespace Ad {
    * @tags ad
    * @name FindMany
    * @request GET:/ad/find-many/
-   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
+   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[], inFavorites?: boolean })[]` Default Response
    */
   namespace FindMany {
     type RequestParams = {};
@@ -90,6 +90,7 @@ export declare namespace Ad {
         src: string;
         thumbnail: string;
       }[];
+      inFavorites?: boolean;
     }[];
   }
   /**
@@ -534,7 +535,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags ad
      * @name FindMany
      * @request GET:/ad/find-many/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
+     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[], inFavorites?: boolean })[]` Default Response
      */
     findMany: (
       query?: {
@@ -561,6 +562,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
             src: string;
             thumbnail: string;
           }[];
+          inFavorites?: boolean;
         }[]
       >
     >;

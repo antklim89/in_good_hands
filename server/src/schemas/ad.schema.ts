@@ -95,6 +95,7 @@ export const adsPreviewListItemResponseSchema = {
         price: { type: 'number' },
         birthday: { type: 'string' },
         images: { type: 'array', items: imageSchema },
+        inFavorites: { type: 'boolean' },
     },
 } as const;
 

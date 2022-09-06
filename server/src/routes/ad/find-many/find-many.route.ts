@@ -3,6 +3,7 @@ import { FastifyInstance, FastifyRequest } from 'fastify';
 import schema from './find-many.schema';
 
 import { Ad } from '@/swagger';
+import type { JWTUser } from '@/types';
 
 
 export const ADS_LIMIT = 10;
@@ -13,6 +14,8 @@ export default async function adPreviewListRoute(app: FastifyInstance) {
         url: '/',
         schema,
         async handler(req: FastifyRequest<{Querystring: Ad.FindMany.RequestQuery}>) {
+            const user: JWTUser|null = req.checkUser();
+
             const {
                 cursor, search, searchType, ltePrice, gtePrice,
             } = req.query;
@@ -38,10 +41,21 @@ export default async function adPreviewListRoute(app: FastifyInstance) {
                 ...(cursor ? { cursor: { id: cursor } } : {}),
                 include: {
                     images: true,
+                    favorites: {
+                        where: {
+                            ownerId: user?.id,
+                        },
+                        select: {
+                            ownerId: true,
+                        },
+                    },
                 },
             });
 
-            return ads;
+            return ads.map((ad) => ({
+                ...ad,
+                inFavorites: user ? ad.favorites.findIndex((fav) => fav.ownerId === user.id) >= 0 : false,
+            }));
         },
     });
 }
