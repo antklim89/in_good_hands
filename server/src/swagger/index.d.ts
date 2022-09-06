@@ -355,6 +355,29 @@ export declare namespace Favorites {
     type RequestHeaders = {};
     type ResponseBody = void;
   }
+  /**
+   * No description
+   * @tags favorites
+   * @name FindMany
+   * @request GET:/favorites/find-many/
+   * @response `200` `({ id: number, ad: { id: number, name: string, type: string, breed: string, price: number } })[]` Default Response
+   */
+  namespace FindMany {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+      ad: {
+        id: number;
+        name: string;
+        type: string;
+        breed: string;
+        price: number;
+      };
+    }[];
+  }
 }
 export declare namespace Image {
   /**
@@ -794,6 +817,28 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<AxiosResponse<void>>;
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name FindMany
+     * @request GET:/favorites/find-many/
+     * @response `200` `({ id: number, ad: { id: number, name: string, type: string, breed: string, price: number } })[]` Default Response
+     */
+    findMany: (params?: RequestParams) => Promise<
+      AxiosResponse<
+        {
+          id: number;
+          ad: {
+            id: number;
+            name: string;
+            type: string;
+            breed: string;
+            price: number;
+          };
+        }[]
+      >
+    >;
   };
   image: {
     /**

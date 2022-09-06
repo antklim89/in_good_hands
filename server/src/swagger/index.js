@@ -349,6 +349,21 @@ export class Api extends HttpClient {
         query: query,
         ...params,
       }),
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name FindMany
+     * @request GET:/favorites/find-many/
+     * @response `200` `({ id: number, ad: { id: number, name: string, type: string, breed: string, price: number } })[]` Default Response
+     */
+    findMany: (params = {}) =>
+      this.request({
+        path: `/favorites/find-many/`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
   };
   image = {
     /**

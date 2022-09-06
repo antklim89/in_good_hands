@@ -10,6 +10,7 @@ const ADS_QTY = 20;
 
 export async function populateDb(prisma: PrismaClient) {
     await prisma.image.deleteMany();
+    await prisma.favorites.deleteMany();
     await prisma.ad.deleteMany();
     await prisma.user.deleteMany();
 
@@ -30,9 +31,15 @@ export async function populateDb(prisma: PrismaClient) {
         ad: { connect: { id: ads[0].id } },
     }) })));
 
+    const favorites = await Promise.all(_.times(1, () => prisma.favorites.create({ data: {
+        ad: { connect: { id: ads[0].id } },
+        owner: { connect: { id: users[0].id } },
+    } })));
+
     return {
         users,
         ads,
         images,
+        favorites,
     };
 }
