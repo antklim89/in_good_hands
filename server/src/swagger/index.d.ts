@@ -13,11 +13,52 @@ export declare namespace Ad {
   /**
    * No description
    * @tags ad
+   * @name AdsIds
+   * @request GET:/ad/ads-ids/
+   * @response `200` `({ id: number })[]` Default Response
+   */
+  namespace AdsIds {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+    }[];
+  }
+  /**
+   * No description
+   * @tags ad
    * @name MyAds
    * @request GET:/ad/my-ads/
    * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
    */
   namespace MyAds {
+    type RequestParams = {};
+    type RequestQuery = {
+      cursor?: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+      createdAt: string;
+      name: string;
+      type: string;
+      breed: string;
+      isPublished: boolean;
+    }[];
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name MyAds2
+   * @request GET:/ad/my-ads copy/
+   * @originalName myAds
+   * @duplicate
+   * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
+   */
+  namespace MyAds2 {
     type RequestParams = {};
     type RequestQuery = {
       cursor?: number;
@@ -323,11 +364,53 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags ad
+     * @name AdsIds
+     * @request GET:/ad/ads-ids/
+     * @response `200` `({ id: number })[]` Default Response
+     */
+    adsIds: (params?: RequestParams) => Promise<
+      AxiosResponse<
+        {
+          id: number;
+        }[]
+      >
+    >;
+    /**
+     * No description
+     *
+     * @tags ad
      * @name MyAds
      * @request GET:/ad/my-ads/
      * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
      */
     myAds: (
+      query?: {
+        cursor?: number;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      AxiosResponse<
+        {
+          id: number;
+          createdAt: string;
+          name: string;
+          type: string;
+          breed: string;
+          isPublished: boolean;
+        }[]
+      >
+    >;
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name MyAds2
+     * @request GET:/ad/my-ads copy/
+     * @originalName myAds
+     * @duplicate
+     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
+     */
+    myAds2: (
       query?: {
         cursor?: number;
       },

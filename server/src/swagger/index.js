@@ -111,6 +111,21 @@ export class Api extends HttpClient {
      * No description
      *
      * @tags ad
+     * @name AdsIds
+     * @request GET:/ad/ads-ids/
+     * @response `200` `({ id: number })[]` Default Response
+     */
+    adsIds: (params = {}) =>
+      this.request({
+        path: `/ad/ads-ids/`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
      * @name MyAds
      * @request GET:/ad/my-ads/
      * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
@@ -118,6 +133,24 @@ export class Api extends HttpClient {
     myAds: (query, params = {}) =>
       this.request({
         path: `/ad/my-ads/`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name MyAds2
+     * @request GET:/ad/my-ads copy/
+     * @originalName myAds
+     * @duplicate
+     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
+     */
+    myAds2: (query, params = {}) =>
+      this.request({
+        path: `/ad/my-ads copy/`,
         method: "GET",
         query: query,
         format: "json",
