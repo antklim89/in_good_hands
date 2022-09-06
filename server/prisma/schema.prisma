@@ -9,34 +9,36 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(uuid())
-  email    String  @unique
-  name     String
-  hash     String
-  tel      String? @default("")
-  whatsapp String? @default("")
-  telegram String? @default("")
-  ads      Ad[]
+  id        String      @id @default(uuid())
+  email     String      @unique
+  name      String
+  hash      String
+  tel       String?     @default("")
+  whatsapp  String?     @default("")
+  telegram  String?     @default("")
+  ads       Ad[]
+  favorites Favorites[]
 }
 
 model Ad {
-  id          Int        @id @default(autoincrement())
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id          Int         @id @default(autoincrement())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
   name        String?
-  type        AnimalType @default(cat)
+  type        AnimalType  @default(cat)
   breed       String
   description String
   email       String
   tel         String
-  whatsapp    String?    @default("")
-  telegram    String?    @default("")
+  whatsapp    String?     @default("")
+  telegram    String?     @default("")
   price       Int
-  birthday    DateTime   @default(now())
+  birthday    DateTime    @default(now())
   images      Image[]
   isPublished Boolean
-  owner       User       @relation(fields: [ownerId], references: [id])
+  owner       User        @relation(fields: [ownerId], references: [id])
   ownerId     String
+  favorites   Favorites[]
 }
 
 model Image {
@@ -45,6 +47,14 @@ model Image {
   thumbnail String
   ad        Ad     @relation(fields: [adId], references: [id], onDelete: Cascade)
   adId      Int
+}
+
+model Favorites {
+  id      Int    @id @default(autoincrement())
+  ad      Ad     @relation(fields: [adId], references: [id], onDelete: Cascade)
+  adId    Int
+  owner   User   @relation(fields: [ownerId], references: [id])
+  ownerId String
 }
 
 enum AnimalType {
