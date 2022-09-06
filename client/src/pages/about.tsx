@@ -1,21 +1,16 @@
-import type { GetStaticProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 
 import Seo from '~/components/Seo';
+import About from '~/layouts/About';
 
 
 const AboutPage: NextPage = () => {
     return (
         <>
             <Seo title="About" />
-            <h1>ABOUT</h1>
+            <About />
         </>
     );
 };
 
 export default AboutPage;
-
-
-export const getStaticProps: GetStaticProps = async () => {
-
-    return { props: { } };
-};
