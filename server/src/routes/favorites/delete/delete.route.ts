@@ -3,6 +3,7 @@ import { FastifyInstance, FastifyRequest } from 'fastify';
 import schema from './delete.schema';
 
 import { Favorites } from '@/swagger';
+import { ClientException } from '@/utils';
 
 
 export default async function newAdRoute(app: FastifyInstance) {
@@ -10,7 +11,7 @@ export default async function newAdRoute(app: FastifyInstance) {
         method: 'DELETE',
         url: '/',
         schema,
-        async handler(req: FastifyRequest<{Querystring: Favorites.Delete.RequestQuery}>, res) {
+        async handler(req: FastifyRequest<{Querystring: Favorites.Delete.RequestQuery}>) {
             const { adId } = req.query;
             const user = req.getUser();
 
@@ -23,11 +24,11 @@ export default async function newAdRoute(app: FastifyInstance) {
                         },
                     },
                 });
-            } catch (error) {
-                res.status(404);
-            }
 
-            return null;
+                return null;
+            } catch (error) {
+                throw new ClientException('Unable to delete ad from favorites', 400);
+            }
         },
     });
 }

@@ -3,6 +3,8 @@ import path from 'path';
 import { fastifyAutoload } from '@fastify/autoload';
 import fastify from 'fastify';
 
+import { ClientException } from './utils';
+
 
 const app = fastify({
     disableRequestLogging: true,
@@ -37,8 +39,7 @@ app.register(fastifyAutoload, {
 
 
 app.setErrorHandler((error, req, repl) => {
-    if ((error?.statusCode || 0) < 500) return error;
-    repl.status(500);
+    if (error instanceof ClientException) return error;
     return repl.status(500).send({ message: 'Unexpected server error. Try again later.' });
 });
 

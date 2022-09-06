@@ -60,7 +60,7 @@ describe('POST /favorites/delete', () => {
                 id: favoriteToDelete.id,
             },
         });
-        expect(response.statusCode).toBe(404);
+        expect(response.statusCode).toBe(400);
         expect(deletedFavorites).not.toBeNull();
     });
 });

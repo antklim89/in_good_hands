@@ -3,6 +3,7 @@ import { FastifyInstance, FastifyRequest } from 'fastify';
 import schema from './create.schema';
 
 import { Favorites } from '@/swagger';
+import { ClientException } from '@/utils';
 
 
 export default async function newAdRoute(app: FastifyInstance) {
@@ -14,14 +15,18 @@ export default async function newAdRoute(app: FastifyInstance) {
             const { adId } = req.query;
             const user = req.getUser();
 
-            const newFavorite = await app.prisma.favorites.create({
-                data: {
-                    adId,
-                    ownerId: user.id,
-                },
-            });
+            try {
+                const newFavorite = await app.prisma.favorites.create({
+                    data: {
+                        adId,
+                        ownerId: user.id,
+                    },
+                });
 
-            return newFavorite.id;
+                return newFavorite.id;
+            } catch (error) {
+                throw new ClientException('Unable to add ad to favorites', 400);
+            }
         },
     });
 }
