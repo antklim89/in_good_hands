@@ -322,23 +322,25 @@ export declare namespace Auth {
     type ResponseBody = void;
   }
 }
-export declare namespace Image {
+export declare namespace Favorites {
   /**
    * No description
-   * @tags image
+   * @tags favorites
    * @name Delete
-   * @request DELETE:/image/delete/
-   * @response `201` `void` Default Response
+   * @request DELETE:/favorites/delete/
+   * @response `200` `void` Default Response
    */
   namespace Delete {
     type RequestParams = {};
     type RequestQuery = {
-      imageId: number;
+      favoritesId: number;
     };
     type RequestBody = never;
     type RequestHeaders = {};
     type ResponseBody = void;
   }
+}
+export declare namespace Image {
   /**
    * No description
    * @tags image
@@ -731,21 +733,23 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       params?: RequestParams,
     ) => Promise<AxiosResponse<void>>;
   };
-  image: {
+  favorites: {
     /**
      * No description
      *
-     * @tags image
+     * @tags favorites
      * @name Delete
-     * @request DELETE:/image/delete/
-     * @response `201` `void` Default Response
+     * @request DELETE:/favorites/delete/
+     * @response `200` `void` Default Response
      */
     delete: (
       query: {
-        imageId: number;
+        favoritesId: number;
       },
       params?: RequestParams,
     ) => Promise<AxiosResponse<void>>;
+  };
+  image: {
     /**
      * No description
      *

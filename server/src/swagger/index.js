@@ -317,22 +317,24 @@ export class Api extends HttpClient {
         ...params,
       }),
   };
-  image = {
+  favorites = {
     /**
      * No description
      *
-     * @tags image
+     * @tags favorites
      * @name Delete
-     * @request DELETE:/image/delete/
-     * @response `201` `void` Default Response
+     * @request DELETE:/favorites/delete/
+     * @response `200` `void` Default Response
      */
     delete: (query, params = {}) =>
       this.request({
-        path: `/image/delete/`,
+        path: `/favorites/delete/`,
         method: "DELETE",
         query: query,
         ...params,
       }),
+  };
+  image = {
     /**
      * No description
      *
