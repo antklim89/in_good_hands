@@ -1,54 +1,58 @@
-import { CheckCircleIcon, DeleteIcon, EditIcon, LinkIcon } from '@chakra-ui/icons';
-import { IconButton, Td, Text, Tr } from '@chakra-ui/react';
+import { CheckCircleIcon, EditIcon, LinkIcon } from '@chakra-ui/icons';
+import {
+    Divider, Flex, HStack, IconButton, Text, Tooltip,
+} from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC } from 'react';
 
 import { MyAdsListItemProps } from './MyAdsList.types';
 
-import ConfirmDialog from '~/components/ConfirmDialog';
-
 
 const MyAdsListItem: FC<MyAdsListItemProps> = ({ id, breed, name, type, isPublished }) => {
     return (
-        <Tr>
-            <Td>
-                <Text textTransform="uppercase">{type}</Text>
-            </Td>
-            <Td>
-                <Text textTransform="uppercase">{breed}</Text>
-            </Td>
-            <Td>
-                <Text textTransform="uppercase">{name}</Text>
-            </Td>
-            <Td>{isPublished ? <CheckCircleIcon color="green.500" /> : <CheckCircleIcon />}</Td>
-            <Td>
-                <Link href={`/ads/${id}`}>
-                    <IconButton
-                        aria-label="Show Ad"
-                        icon={<LinkIcon />}
-                        variant="link"
-                    />
-                </Link>
-                <Link href={`/ads/update/${id}`}>
-                    <IconButton
-                        aria-label="Show Ad"
-                        icon={<EditIcon />}
-                        variant="link"
-                    />
-                </Link>
-                <ConfirmDialog
-                    renderButton={(toggle) => (
+        <>
+            <HStack flexDir={['column', null, 'row']} py={4}>
+                <HStack alignSelf={['flex-start', null, 'center']}>
+                    <Flex textTransform="uppercase">
+                        <Text px={4} py={0}>{type}</Text>
+                        <Text px={4} py={0}>{breed}</Text>
+                        <Text px={4} py={0}>{name}</Text>
+                    </Flex>
+                </HStack>
+
+                <Flex grow={1} />
+
+
+                <HStack alignSelf="flex-end">
+                    <IconButton aria-label={isPublished ? 'Published' : 'Not published'} as="div" variant="link">
+                        <Tooltip label={isPublished ? 'Published' : 'Not published'}>
+                            {isPublished
+                                ? <CheckCircleIcon color="green.500" />
+                                : <CheckCircleIcon color="black" />}
+                        </Tooltip>
+                    </IconButton>
+
+                    <Link href={`/ads/${id}`}>
                         <IconButton
-                            aria-label="Delete Ad"
-                            icon={<DeleteIcon color="red" />}
+                            aria-label="Show Ad"
+                            as="a"
+                            icon={<LinkIcon />}
                             variant="link"
-                            onClick={toggle}
                         />
-                    )}
-                    onConfirm={async () => { /* */ }}
-                />
-            </Td>
-        </Tr>
+                    </Link>
+
+                    <Link href={`/ads/update/${id}`}>
+                        <IconButton
+                            aria-label="Show Ad"
+                            as="a"
+                            icon={<EditIcon />}
+                            variant="link"
+                        />
+                    </Link>
+                </HStack>
+            </HStack>
+            <Divider />
+        </>
     );
 };
 

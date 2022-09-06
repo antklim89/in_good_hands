@@ -1,5 +1,6 @@
 import {
-    Button, Flex, Spinner, Table, TableCaption, TableContainer, Tbody, Th, Thead, Tr,
+    Box,
+    Button, Flex, Spinner,
 } from '@chakra-ui/react';
 import { FC, useCallback, useState } from 'react';
 import useSWR from 'swr';
@@ -24,25 +25,11 @@ const MyAdsList: FC = () => {
     if (!data) return <Spinner display="flex" justifyContent="center" />;
     return (
         <div>
-            <TableContainer>
-                <Table size="sm" variant="simple">
-                    <TableCaption>Imperial to metric conversion factors</TableCaption>
-                    <Thead>
-                        <Tr>
-                            <Th>Type</Th>
-                            <Th>Bread</Th>
-                            <Th>Name</Th>
-                            <Th>Is published</Th>
-                            <Th>Actions</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {data.map((ad) => (
-                            <MyAdsListItem {...ad} key={ad.id} />
-                        ))}
-                    </Tbody>
-                </Table>
-            </TableContainer>
+            <Box>
+                {data.map((ad) => (
+                    <MyAdsListItem {...ad} key={ad.id} />
+                ))}
+            </Box>
 
             {hasNext
                 ? (
