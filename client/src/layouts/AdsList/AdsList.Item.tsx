@@ -1,6 +1,4 @@
-import {
-    Flex, Heading, Button, Box, Center, Text,
-} from '@chakra-ui/react';
+import { Flex, Heading, Button, Box } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Carousel from 'nuka-carousel';
@@ -21,12 +19,13 @@ const AdsListItem: FC<AdsListItemProps> = ({
             as="section"
             border="1px solid lightgrey"
             borderRadius="md"
-            boxShadow="xl"
+            boxShadow="sm"
+            flexDir={['column', 'row']}
             my={8}
             p={4}
             width="full"
         >
-            <Box flexBasis={200} flexGrow={1} mr={8}>
+            <Box flexBasis={[0, 200]} flexGrow={1} mr={8}>
                 {images.length > 0
                     ? (
                         <Carousel>
@@ -43,13 +42,7 @@ const AdsListItem: FC<AdsListItemProps> = ({
                             ))}
                         </Carousel>
                     )
-                    : (
-                        <Center height="100%">
-                            <Text textAlign="center">
-                                No<br />Image
-                            </Text>
-                        </Center>
-                    )}
+                    : null}
             </Box>
             <Flex flexBasis={200} flexDirection="column" flexGrow={5} >
                 <Heading textTransform="uppercase">
