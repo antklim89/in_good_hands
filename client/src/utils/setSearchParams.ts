@@ -14,5 +14,7 @@ export function setSearchParams({
     const params = new URLSearchParams(router.query as Record<string, string>);
     if (value === deleteValue) params.delete(queryName);
     else params.set(queryName, value);
-    router.push(`${path}?${params}`);
+
+    if (params.toString().length === 0) router.push(path);
+    else router.push(`${path}?${params}`);
 }
