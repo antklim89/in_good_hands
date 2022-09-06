@@ -1,7 +1,7 @@
+import { Ad } from '@in-good-hands/server/src/swagger';
 import type { GetServerSideProps, NextPage } from 'next';
 
 import Seo from '~/components/Seo';
-import { Ad } from '@in-good-hands/server/src/swagger';
 import UpdateAd from '~/layouts/UpdateAd';
 import { api, getUserCookie } from '~/utils';
 
@@ -31,7 +31,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ params, re
         const { data: ad } = await api(req).ad.updateData({ adId: Number(params.id) });
         if (!ad) return { notFound: true };
 
-        ad.email = (ad.email && ad.email.length === 0) ? user.email : ad.email;
+
+        if (ad.email.length === 0) ad.email = user.email;
 
         return { props: { ad } };
     } catch (error) {
