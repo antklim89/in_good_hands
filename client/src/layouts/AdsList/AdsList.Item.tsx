@@ -6,13 +6,14 @@ import { FC } from 'react';
 
 import { AdsListItemProps } from './AdsList.types';
 
+import FavoriteButton from '~/components/FavoriteButton';
 import PetAge from '~/components/PetAge';
 import Price from '~/components/Price';
 import { getApiURL } from '~/utils';
 
 
 const AdsListItem: FC<AdsListItemProps> = ({
-    id, type, breed, price, images, birthday,
+    id, type, breed, price, images, birthday, inFavorites,
 }) => {
     return (
         <Flex
@@ -44,14 +45,21 @@ const AdsListItem: FC<AdsListItemProps> = ({
                     )
                     : null}
             </Box>
-            <Flex flexBasis={200} flexDirection="column" flexGrow={5} >
-                <Heading textTransform="uppercase">
-                    {type} {breed}
-                </Heading>
-                <PetAge birthday={birthday} />
-                <Price flexGrow={1} fontSize="2xl" price={price} />
+            <Flex flexBasis={200} flexDirection="row" flexGrow={5} >
+                <Flex flexDirection="column">
+                    <Heading textTransform="uppercase">
+                        {type} {breed}
+                    </Heading>
+                    <PetAge birthday={birthday} />
+                    <Price flexGrow={1} fontSize="2xl" price={price} />
+                </Flex>
 
-                <Flex justifyContent="flex-end">
+                <Flex
+                    flexDirection="column"
+                    justifyContent="space-between"
+                    ml="auto"
+                >
+                    <FavoriteButton adId={id} inFavorites={inFavorites} />
                     <Link passHref href={`/ads/${id}`}>
                         <Button as="a" variant="outline">
                             Show more...

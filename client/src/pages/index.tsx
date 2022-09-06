@@ -21,8 +21,8 @@ const Home: NextPage<Props> = ({ ads }) => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
-    const { data: ads } = await api().ad.findMany();
+export const getServerSideProps: GetServerSideProps<Props> = async ({ req }) => {
+    const { data: ads } = await api(req).ad.findMany();
 
     return { props: { ads } };
 };

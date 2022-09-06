@@ -4,16 +4,20 @@ import Image from 'next/image';
 import Carousel from 'nuka-carousel';
 import { FC } from 'react';
 
+import FavoriteButton from '~/components/FavoriteButton';
 import PetAge from '~/components/PetAge';
 import Price from '~/components/Price';
 import { getApiURL } from '~/utils';
 
 
 const Ad: FC<Ad.FindOne.ResponseBody> = ({
-    name, breed, type, description, birthday, images, price, tel, email, telegram, whatsapp,
+    id, name, breed, type, description, birthday, images, price, tel, email, telegram, whatsapp, inFavorites,
 }) => {
     return (
         <Container as="section" my={8}>
+            <Flex justifyContent="flex-end" my={4}>
+                <FavoriteButton adId={id} inFavorites={inFavorites} mx={4} />
+            </Flex>
             <Flex flexDir={['column-reverse', null, 'row']} mb={4}>
                 <Box flex="1 1 0">
                     <Text>Type: <Text as="span" textTransform="capitalize">{type}</Text></Text>

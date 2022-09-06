@@ -1,5 +1,5 @@
 import type * as Swagger from '@in-good-hands/server/src/swagger';
-import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 
 import Seo from '~/components/Seo';
 import Ad from '~/layouts/Ad';
@@ -21,20 +21,9 @@ const AdPage: NextPage<Props> = ({ ad }) => {
 
 export default AdPage;
 
-
-export const getStaticPaths: GetStaticPaths = async () => {
-    const { data: adsIds } = await api().ad.findIds();
-    const paths = adsIds.map(({ id }) => ({ params: { adId: String(id) } }));
-
-    return {
-        paths,
-        fallback: false,
-    };
-};
-
-export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps<Props> = async ({ params, req }) => {
     if (!params || typeof params.adId !== 'string') return { notFound: true };
-    const { data: ad } = await api().ad.findOne({ adId: Number(params.adId) });
+    const { data: ad } = await api(req).ad.findOne({ adId: Number(params.adId) });
 
     return { props: { ad } };
 };
