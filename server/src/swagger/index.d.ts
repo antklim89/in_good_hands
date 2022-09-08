@@ -9,6 +9,75 @@
  * ---------------------------------------------------------------
  */
 
+export declare namespace Auth {
+  /**
+   * No description
+   * @tags auth
+   * @name Login
+   * @request POST:/auth/login/
+   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
+   */
+  namespace Login {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      password: string;
+      email: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = {
+      user: {
+        email: string;
+        name: string;
+        id: string;
+      };
+      token: string;
+    };
+  }
+  /**
+   * No description
+   * @tags auth
+   * @name Register
+   * @request POST:/auth/register/
+   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
+   */
+  namespace Register {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      password: string;
+      email: string;
+      name: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = {
+      user: {
+        email: string;
+        name: string;
+        id: string;
+      };
+      token: string;
+    };
+  }
+  /**
+   * No description
+   * @tags auth
+   * @name Update
+   * @request PATCH:/auth/update/
+   * @response `200` `void` Default Response
+   */
+  namespace Update {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      email?: string;
+      name?: string;
+      tel?: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  }
+}
 export declare namespace Ad {
   /**
    * No description
@@ -25,22 +94,6 @@ export declare namespace Ad {
     type ResponseBody = {
       id: number;
     }[];
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name Delete
-   * @request DELETE:/ad/delete/
-   * @response `200` `void` Default Response
-   */
-  namespace Delete {
-    type RequestParams = {};
-    type RequestQuery = {
-      adId: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = void;
   }
   /**
    * No description
@@ -77,36 +130,27 @@ export declare namespace Ad {
   /**
    * No description
    * @tags ad
-   * @name MyAds
-   * @request GET:/ad/my-ads copy/
-   * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
+   * @name Delete
+   * @request DELETE:/ad/delete/
+   * @response `200` `void` Default Response
    */
-  namespace MyAds {
+  namespace Delete {
     type RequestParams = {};
     type RequestQuery = {
-      cursor?: number;
+      adId: number;
     };
     type RequestBody = never;
     type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-      createdAt: string;
-      name: string;
-      type: string;
-      breed: string;
-      isPublished: boolean;
-    }[];
+    type ResponseBody = void;
   }
   /**
    * No description
    * @tags ad
-   * @name MyAds2
+   * @name MyAds
    * @request GET:/ad/my-ads/
-   * @originalName myAds
-   * @duplicate
    * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
    */
-  namespace MyAds2 {
+  namespace MyAds {
     type RequestParams = {};
     type RequestQuery = {
       cursor?: number;
@@ -232,75 +276,6 @@ export declare namespace Ad {
     };
   }
 }
-export declare namespace Auth {
-  /**
-   * No description
-   * @tags auth
-   * @name Login
-   * @request POST:/auth/login/
-   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-   */
-  namespace Login {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      password: string;
-      email: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = {
-      user: {
-        email: string;
-        name: string;
-        id: string;
-      };
-      token: string;
-    };
-  }
-  /**
-   * No description
-   * @tags auth
-   * @name Register
-   * @request POST:/auth/register/
-   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-   */
-  namespace Register {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      password: string;
-      email: string;
-      name: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = {
-      user: {
-        email: string;
-        name: string;
-        id: string;
-      };
-      token: string;
-    };
-  }
-  /**
-   * No description
-   * @tags auth
-   * @name Update
-   * @request PATCH:/auth/update/
-   * @response `200` `void` Default Response
-   */
-  namespace Update {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      email?: string;
-      name?: string;
-      tel?: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = void;
-  }
-}
 export declare namespace Image {
   /**
    * No description
@@ -407,6 +382,73 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
    * @response `200` `void` Default Response
    */
   getRoot: (params?: RequestParams) => Promise<AxiosResponse<void>>;
+  auth: {
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Login
+     * @request POST:/auth/login/
+     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
+     */
+    login: (
+      body: {
+        password: string;
+        email: string;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      AxiosResponse<{
+        user: {
+          email: string;
+          name: string;
+          id: string;
+        };
+        token: string;
+      }>
+    >;
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Register
+     * @request POST:/auth/register/
+     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
+     */
+    register: (
+      body: {
+        password: string;
+        email: string;
+        name: string;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      AxiosResponse<{
+        user: {
+          email: string;
+          name: string;
+          id: string;
+        };
+        token: string;
+      }>
+    >;
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (
+      body: {
+        email?: string;
+        name?: string;
+        tel?: string;
+      },
+      params?: RequestParams,
+    ) => Promise<AxiosResponse<void>>;
+  };
   ad: {
     /**
      * No description
@@ -423,20 +465,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         }[]
       >
     >;
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name Delete
-     * @request DELETE:/ad/delete/
-     * @response `200` `void` Default Response
-     */
-    delete: (
-      query: {
-        adId: number;
-      },
-      params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
     /**
      * No description
      *
@@ -473,38 +501,25 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags ad
-     * @name MyAds
-     * @request GET:/ad/my-ads copy/
-     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
+     * @name Delete
+     * @request DELETE:/ad/delete/
+     * @response `200` `void` Default Response
      */
-    myAds: (
-      query?: {
-        cursor?: number;
+    delete: (
+      query: {
+        adId: number;
       },
       params?: RequestParams,
-    ) => Promise<
-      AxiosResponse<
-        {
-          id: number;
-          createdAt: string;
-          name: string;
-          type: string;
-          breed: string;
-          isPublished: boolean;
-        }[]
-      >
-    >;
+    ) => Promise<AxiosResponse<void>>;
     /**
      * No description
      *
      * @tags ad
-     * @name MyAds2
+     * @name MyAds
      * @request GET:/ad/my-ads/
-     * @originalName myAds
-     * @duplicate
      * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
      */
-    myAds2: (
+    myAds: (
       query?: {
         cursor?: number;
       },
@@ -628,73 +643,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         }[];
       }>
     >;
-  };
-  auth: {
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Login
-     * @request POST:/auth/login/
-     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-     */
-    login: (
-      body: {
-        password: string;
-        email: string;
-      },
-      params?: RequestParams,
-    ) => Promise<
-      AxiosResponse<{
-        user: {
-          email: string;
-          name: string;
-          id: string;
-        };
-        token: string;
-      }>
-    >;
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Register
-     * @request POST:/auth/register/
-     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-     */
-    register: (
-      body: {
-        password: string;
-        email: string;
-        name: string;
-      },
-      params?: RequestParams,
-    ) => Promise<
-      AxiosResponse<{
-        user: {
-          email: string;
-          name: string;
-          id: string;
-        };
-        token: string;
-      }>
-    >;
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
-     */
-    update: (
-      body: {
-        email?: string;
-        name?: string;
-        tel?: string;
-      },
-      params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
   };
   image: {
     /**
