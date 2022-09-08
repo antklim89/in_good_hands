@@ -1,7 +1,7 @@
 import { join } from 'path';
 
 import { FastifyInstance, FastifyRequest } from 'fastify';
-import { rm } from 'fs-extra';
+import { pathExists, rm } from 'fs-extra';
 
 import schema from './delete.schema';
 
@@ -24,7 +24,7 @@ export default async function updateAdRoute(app: FastifyInstance) {
             });
 
             const imagesDir = join(UPLOAD_IMAGES_BASE_PATH, `${user.id}`, `${adId}`);
-            await rm(imagesDir, { recursive: true });
+            if (await pathExists(imagesDir)) await rm(imagesDir, { recursive: true }).catch();
 
             return null;
         },
