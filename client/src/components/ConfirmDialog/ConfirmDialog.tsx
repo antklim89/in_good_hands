@@ -18,6 +18,7 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
     cancelText = 'cancel',
     message,
     onConfirm,
+    isLoading = false,
 }) => {
     const { isOpen, onToggle, onClose } = useDisclosure();
 
@@ -42,6 +43,7 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
                 >
                     <Button
                         colorScheme="red"
+                        isLoading={isLoading}
                         size="sm"
                         textTransform="uppercase"
                         onClick={onToggle}
@@ -50,6 +52,7 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
                     </Button>
                     <Button
                         colorScheme="green"
+                        isLoading={isLoading}
                         size="sm"
                         textTransform="uppercase"
                         onClick={handleConfirm}

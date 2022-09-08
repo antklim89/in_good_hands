@@ -7,4 +7,5 @@ export interface ConfirmDialogProps {
     cancelText?: string;
     message?: string;
     onConfirm: (onToggle: () => void) => Promise<void>;
+    isLoading?: boolean;
 }
