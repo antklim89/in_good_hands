@@ -1,14 +1,35 @@
-import { CheckCircleIcon, EditIcon, LinkIcon } from '@chakra-ui/icons';
+import { CheckCircleIcon, DeleteIcon, EditIcon, LinkIcon } from '@chakra-ui/icons';
 import {
     Divider, Flex, HStack, IconButton, Text, Tooltip,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { FC } from 'react';
+import { FC, useCallback, useState } from 'react';
+import { useSWRConfig } from 'swr';
 
 import { MyAdsListItemProps } from './MyAdsList.types';
 
+import ConfirmDialog from '~/components/ConfirmDialog';
+import { api } from '~/utils';
+
 
 const MyAdsListItem: FC<MyAdsListItemProps> = ({ id, breed, name, type, isPublished }) => {
+    const [deleting, setDeleting] = useState(false);
+    const { mutate } = useSWRConfig();
+    const handleDeleteAd = useCallback(async () => {
+        setDeleting(true);
+        try {
+            await api().ad.delete({ adId: id });
+            await mutate('my-ads', (prevAds: MyAdsListItemProps[]) => {
+                return prevAds.filter((prevAd) => prevAd.id !== id);
+            }, { revalidate: false });
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setDeleting(false);
+        }
+    }, []);
+
+
     return (
         <>
             <HStack flexDir={['column', null, 'row']} py={4}>
@@ -49,6 +70,20 @@ const MyAdsListItem: FC<MyAdsListItemProps> = ({ id, breed, name, type, isPublis
                             variant="link"
                         />
                     </Link>
+
+                    <ConfirmDialog
+                        isLoading={deleting}
+                        message="Are you sure you want to delete this ad?"
+                        renderButton={(toggle) => (
+                            <IconButton
+                                aria-label="Delete Ad"
+                                icon={<DeleteIcon color="red" />}
+                                variant="link"
+                                onClick={toggle}
+                            />
+                        )}
+                        onConfirm={handleDeleteAd}
+                    />
                 </HStack>
             </HStack>
             <Divider />
