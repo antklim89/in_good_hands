@@ -106,58 +106,6 @@ export class Api extends HttpClient {
       method: "GET",
       ...params,
     });
-  auth = {
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Login
-     * @request POST:/auth/login/
-     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-     */
-    login: (body, params = {}) =>
-      this.request({
-        path: `/auth/login/`,
-        method: "POST",
-        body: body,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Register
-     * @request POST:/auth/register/
-     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-     */
-    register: (body, params = {}) =>
-      this.request({
-        path: `/auth/register/`,
-        method: "POST",
-        body: body,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
-     */
-    update: (body, params = {}) =>
-      this.request({
-        path: `/auth/update/`,
-        method: "PATCH",
-        body: body,
-        type: ContentType.Json,
-        ...params,
-      }),
-  };
   ad = {
     /**
      * No description
@@ -172,6 +120,21 @@ export class Api extends HttpClient {
         path: `/ad/ads-ids/`,
         method: "GET",
         format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name Delete
+     * @request DELETE:/ad/delete/
+     * @response `200` `void` Default Response
+     */
+    delete: (query, params = {}) =>
+      this.request({
+        path: `/ad/delete/`,
+        method: "DELETE",
+        query: query,
         ...params,
       }),
     /**
@@ -268,6 +231,58 @@ export class Api extends HttpClient {
         method: "GET",
         query: query,
         format: "json",
+        ...params,
+      }),
+  };
+  auth = {
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Login
+     * @request POST:/auth/login/
+     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
+     */
+    login: (body, params = {}) =>
+      this.request({
+        path: `/auth/login/`,
+        method: "POST",
+        body: body,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Register
+     * @request POST:/auth/register/
+     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
+     */
+    register: (body, params = {}) =>
+      this.request({
+        path: `/auth/register/`,
+        method: "POST",
+        body: body,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (body, params = {}) =>
+      this.request({
+        path: `/auth/update/`,
+        method: "PATCH",
+        body: body,
+        type: ContentType.Json,
         ...params,
       }),
   };
