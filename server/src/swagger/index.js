@@ -106,121 +106,6 @@ export class Api extends HttpClient {
       method: "GET",
       ...params,
     });
-  ad = {
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name AdsIds
-     * @request GET:/ad/ads-ids/
-     * @response `200` `({ id: number })[]` Default Response
-     */
-    adsIds: (params = {}) =>
-      this.request({
-        path: `/ad/ads-ids/`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name MyAds
-     * @request GET:/ad/my-ads/
-     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
-     */
-    myAds: (query, params = {}) =>
-      this.request({
-        path: `/ad/my-ads/`,
-        method: "GET",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name MyAds2
-     * @request GET:/ad/my-ads copy/
-     * @originalName myAds
-     * @duplicate
-     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
-     */
-    myAds2: (query, params = {}) =>
-      this.request({
-        path: `/ad/my-ads copy/`,
-        method: "GET",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name New
-     * @request POST:/ad/new/
-     * @response `201` `{ id: number }` Default Response
-     */
-    new: (params = {}) =>
-      this.request({
-        path: `/ad/new/`,
-        method: "POST",
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name PreviewList
-     * @request GET:/ad/preview-list/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
-     */
-    previewList: (query, params = {}) =>
-      this.request({
-        path: `/ad/preview-list/`,
-        method: "GET",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name Update
-     * @request PATCH:/ad/update/
-     * @response `200` `void` Default Response
-     */
-    update: (query, body, params = {}) =>
-      this.request({
-        path: `/ad/update/`,
-        method: "PATCH",
-        query: query,
-        body: body,
-        type: ContentType.Json,
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name UpdateData
-     * @request GET:/ad/update-data/
-     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-     */
-    updateData: (query, params = {}) =>
-      this.request({
-        path: `/ad/update-data/`,
-        method: "GET",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-  };
   auth = {
     /**
      * No description
@@ -270,6 +155,119 @@ export class Api extends HttpClient {
         method: "PATCH",
         body: body,
         type: ContentType.Json,
+        ...params,
+      }),
+  };
+  ad = {
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name AdsIds
+     * @request GET:/ad/ads-ids/
+     * @response `200` `({ id: number })[]` Default Response
+     */
+    adsIds: (params = {}) =>
+      this.request({
+        path: `/ad/ads-ids/`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name FindOne
+     * @request GET:/ad/find-one/
+     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     */
+    findOne: (query, params = {}) =>
+      this.request({
+        path: `/ad/find-one/`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name MyAds
+     * @request GET:/ad/my-ads/
+     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
+     */
+    myAds: (query, params = {}) =>
+      this.request({
+        path: `/ad/my-ads/`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name New
+     * @request POST:/ad/new/
+     * @response `201` `{ id: number }` Default Response
+     */
+    new: (params = {}) =>
+      this.request({
+        path: `/ad/new/`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name PreviewList
+     * @request GET:/ad/preview-list/
+     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
+     */
+    previewList: (query, params = {}) =>
+      this.request({
+        path: `/ad/preview-list/`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name Update
+     * @request PATCH:/ad/update/
+     * @response `200` `void` Default Response
+     */
+    update: (query, body, params = {}) =>
+      this.request({
+        path: `/ad/update/`,
+        method: "PATCH",
+        query: query,
+        body: body,
+        type: ContentType.Json,
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name UpdateData
+     * @request GET:/ad/update-data/
+     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     */
+    updateData: (query, params = {}) =>
+      this.request({
+        path: `/ad/update-data/`,
+        method: "GET",
+        query: query,
+        format: "json",
         ...params,
       }),
   };

@@ -51,6 +51,24 @@ export const adInputSchema = {
     },
 } as const;
 
+export const adResponseSchema = {
+    type: 'object',
+    required: ['id', 'createdAt', 'updatedAt', 'name', 'type', 'breed', 'price', 'images', 'birthday', 'description', 'tel'],
+    properties: {
+        id: { type: 'number' },
+        createdAt: { type: 'string' },
+        updatedAt: { type: 'string' },
+        name: { type: 'string' },
+        type: { type: 'string' },
+        breed: { type: 'string' },
+        price: { type: 'number' },
+        birthday: { type: 'string' },
+        description: { type: 'string' },
+        tel: { type: 'string' },
+        images: { type: 'array', items: imageSchema },
+    },
+} as const;
+
 export const adsPreviewListItemResponseSchema = {
     type: 'object',
     required: ['id', 'createdAt', 'updatedAt', 'name', 'type', 'breed', 'price', 'images', 'birthday'],
@@ -61,11 +79,10 @@ export const adsPreviewListItemResponseSchema = {
         name: { type: 'string' },
         type: { type: 'string' },
         breed: { type: 'string' },
-        price: { type: 'number' },
-        birthday: { type: 'string' },
         images: { type: 'array', items: imageSchema },
     },
 } as const;
+
 
 export const adsPreviewListResponseSchema = {
     type: 'array',

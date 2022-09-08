@@ -9,181 +9,6 @@
  * ---------------------------------------------------------------
  */
 
-export declare namespace Ad {
-  /**
-   * No description
-   * @tags ad
-   * @name AdsIds
-   * @request GET:/ad/ads-ids/
-   * @response `200` `({ id: number })[]` Default Response
-   */
-  namespace AdsIds {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-    }[];
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name MyAds
-   * @request GET:/ad/my-ads/
-   * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
-   */
-  namespace MyAds {
-    type RequestParams = {};
-    type RequestQuery = {
-      cursor?: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-      createdAt: string;
-      name: string;
-      type: string;
-      breed: string;
-      isPublished: boolean;
-    }[];
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name MyAds2
-   * @request GET:/ad/my-ads copy/
-   * @originalName myAds
-   * @duplicate
-   * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
-   */
-  namespace MyAds2 {
-    type RequestParams = {};
-    type RequestQuery = {
-      cursor?: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-      createdAt: string;
-      name: string;
-      type: string;
-      breed: string;
-      isPublished: boolean;
-    }[];
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name New
-   * @request POST:/ad/new/
-   * @response `201` `{ id: number }` Default Response
-   */
-  namespace New {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-    };
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name PreviewList
-   * @request GET:/ad/preview-list/
-   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
-   */
-  namespace PreviewList {
-    type RequestParams = {};
-    type RequestQuery = {
-      cursor?: number;
-      searchName?: string;
-      searchBreed?: string;
-      searchType?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-      ltePrice?: number;
-      gtePrice?: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-      createdAt: string;
-      updatedAt: string;
-      name: string;
-      type: string;
-      breed: string;
-      price: number;
-      birthday: string;
-      images: {
-        id: number;
-        src: string;
-        thumbnail: string;
-      }[];
-    }[];
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name Update
-   * @request PATCH:/ad/update/
-   * @response `200` `void` Default Response
-   */
-  namespace Update {
-    type RequestParams = {};
-    type RequestQuery = {
-      id: number;
-    };
-    type RequestBody = {
-      name: string;
-      type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-      breed: string;
-      description: string;
-      email: string;
-      tel: string;
-      price: number;
-      birthday: string;
-      isPublished: boolean;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = void;
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name UpdateData
-   * @request GET:/ad/update-data/
-   * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-   */
-  namespace UpdateData {
-    type RequestParams = {};
-    type RequestQuery = {
-      adId: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      name: string;
-      type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-      breed: string;
-      description: string;
-      email: string;
-      tel: string;
-      price: number;
-      birthday: string;
-      isPublished: boolean;
-      id: number;
-      images: {
-        id: number;
-        src: string;
-        thumbnail: string;
-      }[];
-    };
-  }
-}
 export declare namespace Auth {
   /**
    * No description
@@ -251,6 +76,186 @@ export declare namespace Auth {
     };
     type RequestHeaders = {};
     type ResponseBody = void;
+  }
+}
+export declare namespace Ad {
+  /**
+   * No description
+   * @tags ad
+   * @name AdsIds
+   * @request GET:/ad/ads-ids/
+   * @response `200` `({ id: number })[]` Default Response
+   */
+  namespace AdsIds {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+    }[];
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name FindOne
+   * @request GET:/ad/find-one/
+   * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+   */
+  namespace FindOne {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+      createdAt: string;
+      updatedAt: string;
+      name: string;
+      type: string;
+      breed: string;
+      price: number;
+      birthday: string;
+      description: string;
+      tel: string;
+      images: {
+        id: number;
+        src: string;
+        thumbnail: string;
+      }[];
+    };
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name MyAds
+   * @request GET:/ad/my-ads/
+   * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
+   */
+  namespace MyAds {
+    type RequestParams = {};
+    type RequestQuery = {
+      cursor?: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+      createdAt: string;
+      name: string;
+      type: string;
+      breed: string;
+      isPublished: boolean;
+    }[];
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name New
+   * @request POST:/ad/new/
+   * @response `201` `{ id: number }` Default Response
+   */
+  namespace New {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+    };
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name PreviewList
+   * @request GET:/ad/preview-list/
+   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
+   */
+  namespace PreviewList {
+    type RequestParams = {};
+    type RequestQuery = {
+      cursor?: number;
+      searchName?: string;
+      searchBreed?: string;
+      searchType?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+      ltePrice?: number;
+      gtePrice?: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+      createdAt: string;
+      updatedAt: string;
+      name: string;
+      type: string;
+      breed: string;
+      images: {
+        id: number;
+        src: string;
+        thumbnail: string;
+      }[];
+    }[];
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name Update
+   * @request PATCH:/ad/update/
+   * @response `200` `void` Default Response
+   */
+  namespace Update {
+    type RequestParams = {};
+    type RequestQuery = {
+      id: number;
+    };
+    type RequestBody = {
+      name: string;
+      type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+      breed: string;
+      description: string;
+      email: string;
+      tel: string;
+      price: number;
+      birthday: string;
+      isPublished: boolean;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name UpdateData
+   * @request GET:/ad/update-data/
+   * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+   */
+  namespace UpdateData {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      name: string;
+      type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+      breed: string;
+      description: string;
+      email: string;
+      tel: string;
+      price: number;
+      birthday: string;
+      isPublished: boolean;
+      id: number;
+      images: {
+        id: number;
+        src: string;
+        thumbnail: string;
+      }[];
+    };
   }
 }
 export declare namespace Image {
@@ -359,182 +364,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
    * @response `200` `void` Default Response
    */
   getRoot: (params?: RequestParams) => Promise<AxiosResponse<void>>;
-  ad: {
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name AdsIds
-     * @request GET:/ad/ads-ids/
-     * @response `200` `({ id: number })[]` Default Response
-     */
-    adsIds: (params?: RequestParams) => Promise<
-      AxiosResponse<
-        {
-          id: number;
-        }[]
-      >
-    >;
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name MyAds
-     * @request GET:/ad/my-ads/
-     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
-     */
-    myAds: (
-      query?: {
-        cursor?: number;
-      },
-      params?: RequestParams,
-    ) => Promise<
-      AxiosResponse<
-        {
-          id: number;
-          createdAt: string;
-          name: string;
-          type: string;
-          breed: string;
-          isPublished: boolean;
-        }[]
-      >
-    >;
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name MyAds2
-     * @request GET:/ad/my-ads copy/
-     * @originalName myAds
-     * @duplicate
-     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
-     */
-    myAds2: (
-      query?: {
-        cursor?: number;
-      },
-      params?: RequestParams,
-    ) => Promise<
-      AxiosResponse<
-        {
-          id: number;
-          createdAt: string;
-          name: string;
-          type: string;
-          breed: string;
-          isPublished: boolean;
-        }[]
-      >
-    >;
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name New
-     * @request POST:/ad/new/
-     * @response `201` `{ id: number }` Default Response
-     */
-    new: (params?: RequestParams) => Promise<
-      AxiosResponse<{
-        id: number;
-      }>
-    >;
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name PreviewList
-     * @request GET:/ad/preview-list/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
-     */
-    previewList: (
-      query?: {
-        cursor?: number;
-        searchName?: string;
-        searchBreed?: string;
-        searchType?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-        ltePrice?: number;
-        gtePrice?: number;
-      },
-      params?: RequestParams,
-    ) => Promise<
-      AxiosResponse<
-        {
-          id: number;
-          createdAt: string;
-          updatedAt: string;
-          name: string;
-          type: string;
-          breed: string;
-          price: number;
-          birthday: string;
-          images: {
-            id: number;
-            src: string;
-            thumbnail: string;
-          }[];
-        }[]
-      >
-    >;
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name Update
-     * @request PATCH:/ad/update/
-     * @response `200` `void` Default Response
-     */
-    update: (
-      query: {
-        id: number;
-      },
-      body: {
-        name: string;
-        type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-        breed: string;
-        description: string;
-        email: string;
-        tel: string;
-        price: number;
-        birthday: string;
-        isPublished: boolean;
-      },
-      params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name UpdateData
-     * @request GET:/ad/update-data/
-     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-     */
-    updateData: (
-      query: {
-        adId: number;
-      },
-      params?: RequestParams,
-    ) => Promise<
-      AxiosResponse<{
-        name: string;
-        type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-        breed: string;
-        description: string;
-        email: string;
-        tel: string;
-        price: number;
-        birthday: string;
-        isPublished: boolean;
-        id: number;
-        images: {
-          id: number;
-          src: string;
-          thumbnail: string;
-        }[];
-      }>
-    >;
-  };
   auth: {
     /**
      * No description
@@ -601,6 +430,185 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<AxiosResponse<void>>;
+  };
+  ad: {
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name AdsIds
+     * @request GET:/ad/ads-ids/
+     * @response `200` `({ id: number })[]` Default Response
+     */
+    adsIds: (params?: RequestParams) => Promise<
+      AxiosResponse<
+        {
+          id: number;
+        }[]
+      >
+    >;
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name FindOne
+     * @request GET:/ad/find-one/
+     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     */
+    findOne: (
+      query: {
+        adId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      AxiosResponse<{
+        id: number;
+        createdAt: string;
+        updatedAt: string;
+        name: string;
+        type: string;
+        breed: string;
+        price: number;
+        birthday: string;
+        description: string;
+        tel: string;
+        images: {
+          id: number;
+          src: string;
+          thumbnail: string;
+        }[];
+      }>
+    >;
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name MyAds
+     * @request GET:/ad/my-ads/
+     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
+     */
+    myAds: (
+      query?: {
+        cursor?: number;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      AxiosResponse<
+        {
+          id: number;
+          createdAt: string;
+          name: string;
+          type: string;
+          breed: string;
+          isPublished: boolean;
+        }[]
+      >
+    >;
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name New
+     * @request POST:/ad/new/
+     * @response `201` `{ id: number }` Default Response
+     */
+    new: (params?: RequestParams) => Promise<
+      AxiosResponse<{
+        id: number;
+      }>
+    >;
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name PreviewList
+     * @request GET:/ad/preview-list/
+     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
+     */
+    previewList: (
+      query?: {
+        cursor?: number;
+        searchName?: string;
+        searchBreed?: string;
+        searchType?: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+        ltePrice?: number;
+        gtePrice?: number;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      AxiosResponse<
+        {
+          id: number;
+          createdAt: string;
+          updatedAt: string;
+          name: string;
+          type: string;
+          breed: string;
+          images: {
+            id: number;
+            src: string;
+            thumbnail: string;
+          }[];
+        }[]
+      >
+    >;
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name Update
+     * @request PATCH:/ad/update/
+     * @response `200` `void` Default Response
+     */
+    update: (
+      query: {
+        id: number;
+      },
+      body: {
+        name: string;
+        type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+        breed: string;
+        description: string;
+        email: string;
+        tel: string;
+        price: number;
+        birthday: string;
+        isPublished: boolean;
+      },
+      params?: RequestParams,
+    ) => Promise<AxiosResponse<void>>;
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name UpdateData
+     * @request GET:/ad/update-data/
+     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     */
+    updateData: (
+      query: {
+        adId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      AxiosResponse<{
+        name: string;
+        type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+        breed: string;
+        description: string;
+        email: string;
+        tel: string;
+        price: number;
+        birthday: string;
+        isPublished: boolean;
+        id: number;
+        images: {
+          id: number;
+          src: string;
+          thumbnail: string;
+        }[];
+      }>
+    >;
   };
   image: {
     /**
