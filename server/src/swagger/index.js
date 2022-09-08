@@ -158,10 +158,28 @@ export class Api extends HttpClient {
      *
      * @tags ad
      * @name MyAds
-     * @request GET:/ad/my-ads/
+     * @request GET:/ad/my-ads copy/
      * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
      */
     myAds: (query, params = {}) =>
+      this.request({
+        path: `/ad/my-ads copy/`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name MyAds2
+     * @request GET:/ad/my-ads/
+     * @originalName myAds
+     * @duplicate
+     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
+     */
+    myAds2: (query, params = {}) =>
       this.request({
         path: `/ad/my-ads/`,
         method: "GET",
@@ -190,7 +208,7 @@ export class Api extends HttpClient {
      * @tags ad
      * @name PreviewList
      * @request GET:/ad/preview-list/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
+     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
      */
     previewList: (query, params = {}) =>
       this.request({

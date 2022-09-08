@@ -78,10 +78,35 @@ export declare namespace Ad {
    * No description
    * @tags ad
    * @name MyAds
-   * @request GET:/ad/my-ads/
+   * @request GET:/ad/my-ads copy/
    * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
    */
   namespace MyAds {
+    type RequestParams = {};
+    type RequestQuery = {
+      cursor?: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+      createdAt: string;
+      name: string;
+      type: string;
+      breed: string;
+      isPublished: boolean;
+    }[];
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name MyAds2
+   * @request GET:/ad/my-ads/
+   * @originalName myAds
+   * @duplicate
+   * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
+   */
+  namespace MyAds2 {
     type RequestParams = {};
     type RequestQuery = {
       cursor?: number;
@@ -118,7 +143,7 @@ export declare namespace Ad {
    * @tags ad
    * @name PreviewList
    * @request GET:/ad/preview-list/
-   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
+   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
    */
   namespace PreviewList {
     type RequestParams = {};
@@ -139,6 +164,8 @@ export declare namespace Ad {
       name: string;
       type: string;
       breed: string;
+      price: number;
+      birthday: string;
       images: {
         id: number;
         src: string;
@@ -447,10 +474,37 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      *
      * @tags ad
      * @name MyAds
-     * @request GET:/ad/my-ads/
+     * @request GET:/ad/my-ads copy/
      * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
      */
     myAds: (
+      query?: {
+        cursor?: number;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      AxiosResponse<
+        {
+          id: number;
+          createdAt: string;
+          name: string;
+          type: string;
+          breed: string;
+          isPublished: boolean;
+        }[]
+      >
+    >;
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name MyAds2
+     * @request GET:/ad/my-ads/
+     * @originalName myAds
+     * @duplicate
+     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
+     */
+    myAds2: (
       query?: {
         cursor?: number;
       },
@@ -486,7 +540,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags ad
      * @name PreviewList
      * @request GET:/ad/preview-list/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
+     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[] })[]` Default Response
      */
     previewList: (
       query?: {
@@ -507,6 +561,8 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
           name: string;
           type: string;
           breed: string;
+          price: number;
+          birthday: string;
           images: {
             id: number;
             src: string;
