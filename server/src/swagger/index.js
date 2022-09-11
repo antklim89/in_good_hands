@@ -106,58 +106,6 @@ export class Api extends HttpClient {
       method: "GET",
       ...params,
     });
-  auth = {
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Login
-     * @request POST:/auth/login/
-     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-     */
-    login: (body, params = {}) =>
-      this.request({
-        path: `/auth/login/`,
-        method: "POST",
-        body: body,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Register
-     * @request POST:/auth/register/
-     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-     */
-    register: (body, params = {}) =>
-      this.request({
-        path: `/auth/register/`,
-        method: "POST",
-        body: body,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
-     */
-    update: (body, params = {}) =>
-      this.request({
-        path: `/auth/update/`,
-        method: "PATCH",
-        body: body,
-        type: ContentType.Json,
-        ...params,
-      }),
-  };
   ad = {
     /**
      * No description
@@ -171,22 +119,6 @@ export class Api extends HttpClient {
       this.request({
         path: `/ad/ads-ids/`,
         method: "GET",
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name FindOne
-     * @request GET:/ad/find-one/
-     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-     */
-    findOne: (query, params = {}) =>
-      this.request({
-        path: `/ad/find-one/`,
-        method: "GET",
-        query: query,
         format: "json",
         ...params,
       }),
@@ -209,6 +141,22 @@ export class Api extends HttpClient {
      * No description
      *
      * @tags ad
+     * @name FindOne
+     * @request GET:/ad/find-one/
+     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, email: string, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
+     */
+    findOne: (query, params = {}) =>
+      this.request({
+        path: `/ad/find-one/`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
      * @name MyAds
      * @request GET:/ad/my-ads/
      * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
@@ -216,6 +164,24 @@ export class Api extends HttpClient {
     myAds: (query, params = {}) =>
       this.request({
         path: `/ad/my-ads/`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name MyAds2
+     * @request GET:/ad/my-ads copy/
+     * @originalName myAds
+     * @duplicate
+     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
+     */
+    myAds2: (query, params = {}) =>
+      this.request({
+        path: `/ad/my-ads copy/`,
         method: "GET",
         query: query,
         format: "json",
@@ -283,6 +249,58 @@ export class Api extends HttpClient {
         method: "GET",
         query: query,
         format: "json",
+        ...params,
+      }),
+  };
+  auth = {
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Login
+     * @request POST:/auth/login/
+     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
+     */
+    login: (body, params = {}) =>
+      this.request({
+        path: `/auth/login/`,
+        method: "POST",
+        body: body,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Register
+     * @request POST:/auth/register/
+     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
+     */
+    register: (body, params = {}) =>
+      this.request({
+        path: `/auth/register/`,
+        method: "POST",
+        body: body,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (body, params = {}) =>
+      this.request({
+        path: `/auth/update/`,
+        method: "PATCH",
+        body: body,
+        type: ContentType.Json,
         ...params,
       }),
   };

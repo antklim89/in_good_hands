@@ -53,7 +53,7 @@ export const adInputSchema = {
 
 export const adResponseSchema = {
     type: 'object',
-    required: ['id', 'createdAt', 'updatedAt', 'name', 'type', 'breed', 'price', 'images', 'birthday', 'description', 'tel'],
+    required: ['id', 'createdAt', 'updatedAt', 'name', 'type', 'breed', 'price', 'images', 'birthday', 'description', 'tel', 'email'],
     properties: {
         id: { type: 'number' },
         createdAt: { type: 'string' },
@@ -65,6 +65,7 @@ export const adResponseSchema = {
         birthday: { type: 'string' },
         description: { type: 'string' },
         tel: { type: 'string' },
+        email: { type: 'string' },
         images: { type: 'array', items: imageSchema },
     },
 } as const;
