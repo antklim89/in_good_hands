@@ -17,18 +17,21 @@ const UpdateAdImages: FC<UpdateAdProps> = ({ ad }) => {
 
     const handleUpload: ChangeEventHandler<HTMLInputElement> = useCallback(async (e) => {
         if (!e.target.files) return;
-        const [imageFile] = Array.from(e.target.files);
-        if (!imageFile) return;
-        if (!(/image\/(jpeg|jpg|png|webp)/).test(imageFile.type)) return;
-        try {
-            setLoading(true);
-            const { data: newImage } = await api().image.upload({ adId: ad.id }, { image: imageFile });
-            setUploadedImages((prevImages) => [...prevImages, newImage]);
-        } catch (error) {
-            toast({ title: 'Failed to upload images', status: 'error' });
-        } finally {
-            setLoading(false);
-        }
+        const images = Array.from(e.target.files);
+        if (images.length === 0) return;
+
+        images.forEach(async (imageFile) => {
+            if (!(/image\/(jpeg|jpg|png|webp)/).test(imageFile.type)) return;
+            try {
+                setLoading(true);
+                const { data: newImage } = await api().image.upload({ adId: ad.id }, { image: imageFile });
+                setUploadedImages((prevImages) => [...prevImages, newImage]);
+            } catch (error) {
+                toast({ title: 'Failed to upload images', status: 'error' });
+            } finally {
+                setLoading(false);
+            }
+        });
     }, []);
 
     return (
