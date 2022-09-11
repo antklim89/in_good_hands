@@ -9,7 +9,7 @@ const PetAge: FC<PetAgeProps> = ({ birthday, ...props }) => {
     const monthOld = new Date().getMonth() - new Date(birthday).getMonth();
 
     return (
-        <Text {...props}>
+        <Text as="span" {...props}>
             {yearsOld} years and {monthOld} month old
         </Text>
     );
