@@ -48,7 +48,10 @@ const AdsListItem: FC<AdsListItemProps> = ({
             <Flex flexBasis={200} flexDirection="row" flexGrow={5} >
                 <Flex flexDirection="column">
                     <Heading textTransform="uppercase">
-                        {type} {breed}
+                        {type}
+                    </Heading>
+                    <Heading textTransform="uppercase">
+                        {breed}
                     </Heading>
                     <PetAge birthday={birthday} />
                     <Price flexGrow={1} fontSize="2xl" price={price} />
