@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 
+import { faker } from '@faker-js/faker';
 import { Ad, PrismaClient, User } from '@prisma/client';
 import { readdir } from 'fs-extra';
 import _ from 'lodash';
@@ -8,42 +9,58 @@ import _ from 'lodash';
 const prisma = new PrismaClient();
 
 
-const ADS_NUMBER = 50;
+const USERS_NUMBER = 20;
+const ADS_NUMBER = 200;
 const IMAGES_IN_AD_NUMBER = 3;
 
 
 const animals = [
     {
         type: 'cat',
-        breeds: ['abyssinian', 'arabian mau', 'balinese', 'bengal', 'british shorthair', 'british longhair', 'siamese'],
+        breeds: _.times(20, faker.animal.cat),
     },
     {
         type: 'dog',
-        breeds: ['akita', 'borzoi', 'boxer', 'chow chow', 'dobermann', 'miniature fox terrier', 'poodle', 'shar pei'],
+        breeds: _.times(20, faker.animal.dog),
     },
     {
         type: 'rodent',
-        breeds: ['hamster', 'guinea pig', 'fancy rat', 'fancy mice', 'chinchilla'],
+        breeds: _.times(20, faker.animal.rodent),
     },
     {
         type: 'bird',
-        breeds: ['budgerigar', 'cockatiel', 'cockatoo', 'dove'],
+        breeds: _.times(20, faker.animal.bird),
     },
     {
         type: 'aquarium',
-        breeds: ['guppies', 'tiger barb', 'gold barb'],
+        breeds: _.times(20, faker.animal.fish),
     },
 
 ] as const;
 
 async function generateUsers() {
-    return Promise.all(_.times(1, () => prisma.user.create({
+    const admin = await prisma.user.create({
         data: {
             email: 'anton@mail.ru',
             name: 'anton',
             hash: '$2a$08$6hQB/nrqA0ZI1LkUu0dBVuRWQFTOjMW9qOt2BbHPs6f1n9Fj/tLM6',
+            tel: faker.phone.number(),
         },
-    })));
+    });
+    const users = await Promise.all(_.times(USERS_NUMBER, () => {
+        const name = faker.name.firstName();
+        return prisma.user.create({
+            data: {
+                email: faker.internet.email(name),
+                name,
+                hash: '$2a$08$6hQB/nrqA0ZI1LkUu0dBVuRWQFTOjMW9qOt2BbHPs6f1n9Fj/tLM6',
+                tel: faker.phone.number(),
+            },
+        });
+    }));
+
+    users.push(admin);
+    return users;
 }
 
 async function generateAds(user: User[]) {
@@ -54,15 +71,16 @@ async function generateAds(user: User[]) {
             data: {
                 breed: _.sample(animal?.breeds) || 'ordinary',
                 type: animal?.type || 'cat',
-                birthday: new Date(_.random(1667143159944, 1567143159944, false)),
-                description: 'lorem ipsum',
+                birthday: faker.date.birthdate({ max: 7, min: 0, mode: 'age' }),
+                description: faker.lorem.sentences(5),
                 email,
-                tel: tel || '555-55-55',
+                tel: tel || faker.phone.number(),
                 telegram,
                 whatsapp,
                 isPublished: true,
-                price: 500,
+                price: Number(faker.finance.amount(100, 5000)),
                 ownerId: id,
+                name: faker.name.lastName(),
             },
         });
     }));
