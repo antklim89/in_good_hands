@@ -23,7 +23,7 @@ const AdsList: FC<AdsListProps> = ({ ads: initAds }) => {
         });
         setAds([...ads, ...newAds]);
         if (newAds.length > 0) addEvent();
-    });
+    }, 2000);
 
     useEffect(() => {
         if (ads.length > 0) addEvent();
