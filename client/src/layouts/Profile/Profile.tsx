@@ -1,6 +1,7 @@
 import {
     Tabs, TabList, Tab, TabPanels, TabPanel, Container,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 
 import MyAdsList from '~/layouts/MyAdsList';
@@ -9,9 +10,16 @@ import UpdateCredentials from '~/layouts/UpdateCredentials';
 
 
 const Profile: FC = () => {
+    const { replace, query } = useRouter();
+
     return (
         <Container maxWidth="container.lg" my={8} shadow="lg">
-            <Tabs>
+            <Tabs
+                isFitted
+                isLazy
+                defaultIndex={Number(query.tab || 0)}
+                onChange={(index) => replace(`?tab=${index}`)}
+            >
                 <TabList>
                     <Tab>Credentials</Tab>
                     <Tab>Ads</Tab>
@@ -19,13 +27,13 @@ const Profile: FC = () => {
                 </TabList>
 
                 <TabPanels>
-                    <TabPanel>
+                    <TabPanel px={0}>
                         <UpdateCredentials />
                     </TabPanel>
-                    <TabPanel>
+                    <TabPanel px={0}>
                         <MyAdsList />
                     </TabPanel>
-                    <TabPanel>
+                    <TabPanel px={0}>
                         <MyFavorites />
                     </TabPanel>
                 </TabPanels>
