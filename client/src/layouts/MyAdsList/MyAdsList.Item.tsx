@@ -34,9 +34,8 @@ const MyAdsListItem: FC<MyAdsListItemProps> = ({ id, breed, name, type, isPublis
         <>
             <HStack flexDir={['column', null, 'row']} py={4}>
                 <HStack alignSelf={['flex-start', null, 'center']}>
-                    <Flex textTransform="uppercase">
-                        <Text px={4} py={0}>{type}</Text>
-                        <Text px={4} py={0}>{breed}</Text>
+                    <Flex alignItems="center" textTransform="uppercase">
+                        <Text px={4} py={0}>{type} <br /> {breed}</Text>
                         <Text px={4} py={0}>{name}</Text>
                     </Flex>
                 </HStack>
