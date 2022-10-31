@@ -32,7 +32,7 @@ model Ad {
   tel         String
   whatsapp    String?     @default("")
   telegram    String?     @default("")
-  price       Int
+  price       Float
   birthday    DateTime    @default(now())
   images      Image[]
   isPublished Boolean
