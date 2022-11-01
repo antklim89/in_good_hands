@@ -1,4 +1,4 @@
-import { Container, Box, Text } from '@chakra-ui/react';
+import { Container, Box, Text, Heading } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import { FC } from 'react';
 
@@ -28,11 +28,19 @@ const Hero: FC = () => {
                 />
             </Box>
 
-            <Container >
-                <Text width="50%">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Repudiandae magnam architecto dolores ex? Hic iste rerum dolorum omnis corporis voluptas!
-                </Text>
+            <Container
+                alignItems="center"
+                display="flex"
+                height="100%"
+            >
+                <Box width="50%">
+                    <Heading as="h1" color="primary.600" fontSize="5xl">
+                        <Text as="span" color="blue.600" textDecoration="underline">Kindness</Text> can change everything
+                    </Heading>
+                    <Text color="primary.600" fontSize="xl">
+                        Turning dreams into reality.
+                    </Text>
+                </Box>
             </Container>
         </Box>
     );
