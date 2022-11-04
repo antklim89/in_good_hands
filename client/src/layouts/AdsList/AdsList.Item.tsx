@@ -43,7 +43,15 @@ const AdsListItem: FC<AdsListItemProps> = ({
                             ))}
                         </Carousel>
                     )
-                    : null}
+                    : (
+                        <Image
+                            alt={`${type} placeholder`}
+                            height={720}
+                            objectFit="contain"
+                            src={`/placeholders/${type}-ph.jpg`}
+                            width={1280}
+                        />
+                    )}
             </Box>
             <Flex flexBasis={200} flexDirection="row" flexGrow={5} >
                 <Flex flexDirection="column">

@@ -50,9 +50,13 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                             </Carousel>
                         )
                         : (
-                            <Box>
-                                No Image
-                            </Box>
+                            <Image
+                                alt={`${type} placeholder`}
+                                height={720}
+                                objectFit="contain"
+                                src={`/placeholders/${type}-ph.jpg`}
+                                width={1280}
+                            />
                         )}
                 </Box>
             </Flex>
