@@ -40,6 +40,7 @@ app.register(fastifyAutoload, {
 
 app.setErrorHandler((error, req, repl) => {
     if (error instanceof ClientException) return error;
+    console.error(error);
     return repl.status(500).send({ message: 'Unexpected server error. Try again later.' });
 });
 
