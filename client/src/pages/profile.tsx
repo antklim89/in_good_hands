@@ -10,7 +10,7 @@ interface Props {
 const ProfilePage: NextPage<Props> = () => {
     return (
         <>
-            <Seo title="ProfilePage" />
+            <Seo title="Profile" />
             <Profile />
         </>
     );
