@@ -1,5 +1,5 @@
 import {
-    Center, Container, Heading, Flex, Button, useToast,
+    Center, Container, Flex, Button, useToast, FormControl, FormLabel, Switch,
 } from '@chakra-ui/react';
 import { adInputSchema } from '@in-good-hands/server/src/schemas/ad.schema';
 import { useFormik } from 'formik';
@@ -60,10 +60,24 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
                 my={8}
                 p={[1, 4, 10]}
             >
-                <Heading pb={4} textAlign="center" textTransform="uppercase">
-                    {ad ? 'Update ad' : 'Create ad'}
-                </Heading>
                 <form onSubmit={formik.handleSubmit}>
+                    <FormControl
+                        alignItems="center"
+                        display="flex"
+                        justifyContent="space-between"
+                        mb={8}
+                    >
+                        <FormLabel htmlFor="is-ad-published" mb="0">
+                            Published
+                        </FormLabel>
+                        <Switch
+                            checked={formik.values.isPublished}
+                            id="is-ad-published"
+                            name="isPublished"
+                            size="lg"
+                            onChange={formik.handleChange}
+                        />
+                    </FormControl>
                     <InputField
                         as="textarea"
                         formik={formik}
@@ -114,11 +128,13 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
                     />
                     <InputField
                         formik={formik}
+                        isRequired={false}
                         label="Telegram"
                         name="telegram"
                     />
                     <InputField
                         formik={formik}
+                        isRequired={false}
                         label="WhatsApp"
                         name="whatsapp"
                     />
@@ -130,14 +146,6 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
                         name="birthday"
                         pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
                         type="date"
-                    />
-                    <InputField
-                        as="switch"
-                        formik={formik}
-                        isRequired={false}
-                        label="Published"
-                        name="isPublished"
-                        size="lg"
                     />
                     <Flex justify="flex-end" mt={16}>
                         <Button
