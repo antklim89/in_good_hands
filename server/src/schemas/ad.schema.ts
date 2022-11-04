@@ -9,7 +9,6 @@ export const adInputSchema = {
     properties: {
         name: {
             type: 'string',
-            minLength: 3,
             maxLength: 100,
         },
         type: {
@@ -38,12 +37,10 @@ export const adInputSchema = {
         },
         whatsapp: {
             type: 'string',
-            minLength: 3,
             maxLength: 50,
         },
         telegram: {
             type: 'string',
-            minLength: 3,
             maxLength: 50,
         },
         price: {

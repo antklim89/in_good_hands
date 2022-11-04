@@ -13,7 +13,6 @@ export const updateAdSchema = z.object({
         .min(props.breed.minLength)
         .max(props.breed.maxLength),
     name: z.string()
-        .min(props.name.minLength)
         .max(props.name.maxLength),
     price: z.number()
         .min(props.price.minimum)
@@ -22,11 +21,9 @@ export const updateAdSchema = z.object({
         .min(props.tel.minLength)
         .max(props.tel.maxLength),
     telegram: z.string()
-        .min(props.telegram.minLength)
         .max(props.telegram.maxLength)
         .optional(),
     whatsapp: z.string()
-        .min(props.whatsapp.minLength)
         .max(props.whatsapp.maxLength)
         .optional(),
     email: z.string()
