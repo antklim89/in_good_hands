@@ -13,7 +13,7 @@ interface Props {
 const AdPage: NextPage<Props> = ({ ad }) => {
     return (
         <>
-            <Seo title={ad.breed} />
+            <Seo description={ad.description} keywords={[ad.breed, ad.name, ad.type]} title={ad.breed} />
             <Ad {...ad} />
         </>
     );
