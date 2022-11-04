@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Spinner, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { FC, useCallback, useState } from 'react';
 import useSWR from 'swr';
 
@@ -14,7 +14,7 @@ const MyAdsList: FC = () => {
         const { data } = await api().ad.findMyAds();
         if (data.length > 0) setHasNext(true);
         return data;
-    });
+    }, {});
 
     const lastAdId = ads?.slice?.().pop()?.id;
 
@@ -24,7 +24,6 @@ const MyAdsList: FC = () => {
         mutate([...ads || [], ...nextAds], { revalidate: false });
     }, [lastAdId]);
 
-    if (!ads) return <Spinner display="flex" justifyContent="center" />;
     return (
         <div>
             <Box>
