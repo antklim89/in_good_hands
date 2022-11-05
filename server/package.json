@@ -8,6 +8,8 @@
     "dev:nodemon": "nodemon ./output/server.js --ignore swagger/",
     "dev:swc": "swc ./src -d ./output -w",
     "dev:typecheck": "tsc --noEmit -w --preserveWatchOutput",
+    "build": "swc ./src -d ./output",
+    "start": "node ./output/server.js",
     "test": "jest --watchAll -i",
     "migrate": "run-s migrate:**",
     "migrate:dev": "prisma migrate dev",
