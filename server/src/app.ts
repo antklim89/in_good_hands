@@ -39,9 +39,12 @@ app.register(fastifyAutoload, {
 
 
 app.setErrorHandler((error, req, repl) => {
+    const { statusCode } = error;
     if (error instanceof ClientException) return error;
+
     console.error(error);
-    return repl.status(500).send({ message: 'Unexpected server error. Try again later.' });
+    if (statusCode && statusCode >= 400 && statusCode < 499) return repl.status(statusCode).send({ message: 'Bad request. Try again later.' });
+    return repl.status(statusCode || 500).send({ message: 'Unexpected server error. Try again later.' });
 });
 
 
