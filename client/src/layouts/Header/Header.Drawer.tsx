@@ -6,8 +6,8 @@ import {
 import { useTheme } from '@emotion/react';
 import { FC, useRef } from 'react';
 
-import HeaderAuth from './HeaderAuth';
-import HeaderLinks from './HeaderLinks';
+import HeaderAuth from './Header.Auth';
+import HeaderLinks from './Header.Links';
 
 
 const HeaderDrawer: FC = () => {

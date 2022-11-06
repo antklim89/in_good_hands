@@ -3,32 +3,16 @@ import {
     Divider, Flex, HStack, IconButton, Text, Tooltip,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { FC, useCallback, useState } from 'react';
-import { useSWRConfig } from 'swr';
+import { FC } from 'react';
 
 import { MyAdsListItemProps } from './MyAdsList.types';
+import { useMyAdsListItem } from './MyAdsList.use';
 
 import ConfirmDialog from '~/components/ConfirmDialog';
-import { api } from '~/utils';
 
 
 const MyAdsListItem: FC<MyAdsListItemProps> = ({ id, breed, name, type, isPublished }) => {
-    const [deleting, setDeleting] = useState(false);
-    const { mutate } = useSWRConfig();
-    const handleDeleteAd = useCallback(async () => {
-        setDeleting(true);
-        try {
-            await api().ad.delete({ adId: id });
-            await mutate('my-ads', (prevAds: MyAdsListItemProps[]) => {
-                return prevAds.filter((prevAd) => prevAd.id !== id);
-            }, { revalidate: false });
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setDeleting(false);
-        }
-    }, []);
-
+    const { deleting, handleDeleteAd } = useMyAdsListItem(id);
 
     return (
         <>
@@ -41,7 +25,6 @@ const MyAdsListItem: FC<MyAdsListItemProps> = ({ id, breed, name, type, isPublis
                 </HStack>
 
                 <Flex grow={1} />
-
 
                 <HStack alignSelf="flex-end">
                     <IconButton aria-label={isPublished ? 'Published' : 'Not published'} as="div" variant="link">

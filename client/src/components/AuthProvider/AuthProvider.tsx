@@ -2,10 +2,10 @@ import {
     createContext, FC, useCallback, useEffect, useMemo, useState,
 } from 'react';
 
+import { AuthProviderProps, IAuthContext } from './AuthProvider.types';
+
 import { IUser } from '~/types';
 import { api, clearUserCookie, getUserCookie, setUserCookie } from '~/utils';
-
-import { AuthProviderProps, IAuthContext } from './AuthProvider.types';
 
 
 export const AuthContext = createContext({} as IAuthContext);

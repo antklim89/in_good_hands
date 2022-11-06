@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { FC, memo } from 'react';
 
-import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from '~/constants';
-
 import { SeoProps } from './Seo.types';
+
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from '~/constants';
 
 
 const Seo: FC<SeoProps> = ({

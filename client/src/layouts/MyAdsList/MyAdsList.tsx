@@ -1,28 +1,12 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
-import { FC, useCallback, useState } from 'react';
-import useSWR from 'swr';
+import { FC } from 'react';
 
 import MyAdsListItem from './MyAdsList.Item';
-
-import { api } from '~/utils';
+import { useMyAdsList } from './MyAdsList.use';
 
 
 const MyAdsList: FC = () => {
-    const [hasNext, setHasNext] = useState(false);
-
-    const { data: ads = [], mutate } = useSWR('my-ads', async () => {
-        const { data } = await api().ad.findMyAds();
-        if (data.length > 0) setHasNext(true);
-        return data;
-    }, {});
-
-    const lastAdId = ads?.slice?.().pop()?.id;
-
-    const handleFetchMore = useCallback(async () => {
-        const nextAds = await api().ad.findMyAds({ cursor: lastAdId }).then((d) => d.data);
-        if (nextAds.length <= 1) setHasNext(false);
-        mutate([...ads || [], ...nextAds], { revalidate: false });
-    }, [lastAdId]);
+    const { ads, hasNext, handleFetchMore } = useMyAdsList();
 
     return (
         <div>

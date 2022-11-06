@@ -1,28 +1,16 @@
 import { DeleteIcon } from '@chakra-ui/icons';
-import { Box, IconButton, useToast, Spinner } from '@chakra-ui/react';
+import { Box, IconButton, Spinner } from '@chakra-ui/react';
 import Image from 'next/image';
-import { FC, MouseEventHandler, useCallback, useState } from 'react';
+import { FC } from 'react';
 
 import { UpdateAdImageProps } from './UpdateAd.types';
+import { useUpdateAdImage } from './UpdateAd.use';
 
-import { api, getApiURL } from '~/utils';
+import { getApiURL } from '~/utils';
 
 
 const UpdateAdImage: FC<UpdateAdImageProps> = ({ image, setUploadedImages }) => {
-    const toast = useToast();
-    const [loading, setLoading] = useState(false);
-
-    const handleDelete: MouseEventHandler<HTMLElement> = useCallback(async () => {
-        try {
-            setLoading(true);
-            await api().image.delete({ imageId: image.id });
-            setUploadedImages((prevImgs) => prevImgs.filter((prevImg) => String(prevImg.id) !== String(image.id)));
-        } catch (error) {
-            toast({ title: 'Failed to delete image', status: 'error' });
-        } finally {
-            setLoading(false);
-        }
-    }, []);
+    const { handleDelete, loading } = useUpdateAdImage({ image, setUploadedImages });
 
     return (
         <IconButton

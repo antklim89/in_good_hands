@@ -2,7 +2,7 @@ import { Box, Text, Container } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC } from 'react';
 
-import HeaderDrawer from './HeaderDrawer';
+import HeaderDrawer from './Header.Drawer';
 
 
 const Header: FC = () => {

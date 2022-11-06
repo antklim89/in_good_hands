@@ -1,54 +1,18 @@
 import {
-    Center, Container, Flex, Button, useToast, FormControl, FormLabel, Switch,
+    Center, Container, Flex, Button, FormControl, FormLabel, Switch,
 } from '@chakra-ui/react';
 import { adInputSchema } from '@in-good-hands/server/src/schemas/ad.schema';
-import { useFormik } from 'formik';
 import { FC } from 'react';
-import { ZodError } from 'zod';
 
-import { UpdateAdSchema, updateAdSchema } from './UpdateAd.schema';
+import UpdateAdImages from './UpdateAd.Images';
 import { UpdateAdProps } from './UpdateAd.types';
-import UpdateAdImages from './UpdateAdImages';
+import { useUpdateAd } from './UpdateAd.use';
 
 import InputField from '~/components/InputField';
-import { api } from '~/utils';
 
 
 const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
-    const toast = useToast();
-
-    const formik = useFormik<UpdateAdSchema>({
-        initialValues: {
-            breed: ad.breed || '',
-            description: ad.description || '',
-            email: ad.email || '',
-            name: ad.name || '',
-            price: ad.price || 0,
-            tel: ad.tel || '',
-            telegram: ad.telegram || '',
-            whatsapp: ad.whatsapp || '',
-            birthday: new Date(ad.birthday || '').toISOString().split('T')[0],
-            type: ad.type || 'cat',
-            isPublished: ad.isPublished || false,
-        },
-        async onSubmit(data) {
-            try {
-                await api().ad.update({ id: ad.id }, data);
-                toast({ title: 'Ad updated successfully!', status: 'success' });
-            } catch (error) {
-                if (error instanceof Error) toast({ title: error.message, status: 'error' });
-            }
-        },
-        async validate(data) {
-            try {
-                await updateAdSchema.parseAsync(data);
-            } catch (error) {
-                if (error instanceof ZodError) return error.formErrors.fieldErrors;
-            }
-            return {};
-        },
-        validateOnMount: true,
-    });
+    const { formik } = useUpdateAd({ ad });
 
     return (
         <Center height="100%">

@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
-import { useAuthContext } from '~/utils';
-
 import { ProtectedProps } from './Protected.types';
+
+import { useAuthContext } from '~/utils';
 
 
 const Protected: FC<ProtectedProps> = ({
