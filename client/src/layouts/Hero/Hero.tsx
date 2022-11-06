@@ -1,49 +1,39 @@
-import { Container, Box, Text, Heading } from '@chakra-ui/react';
+import { Container, Box, Text } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import { FC } from 'react';
 
-import heroImage from './Hero.image.jpg';
+import heroImage from './Hero.image.svg';
 
 
 const Hero: FC = () => {
     return (
-        <Box as="section" position="relative">
-            <Box bg="hsla(34, 100%, 15%, 0.5)" >
-                <Container
-                    maxWidth="container.xl"
-                    minHeight={320}
-                >
-                    <Heading as="h1" color="white" py={8} >
-                        Welcome
-                    </Heading>
-                    <Text color="white" >
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Omnis eius et quidem, id in ipsam aperiam quia hic dolorum
-                        assumenda placeat, itaque qui reprehenderit provident consectetur vel.
-                        Fugit, accusamus esse.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Repellat eveniet sint dignissimos earum sequi tempora fugit
-                        asperiores quod exercitationem et. Veritatis.
-                    </Text>
-                </Container>
-            </Box>
+        <Box
+            as="section"
+            height={[100, 200, 300, 400, 500]}
+            overflow="hidden"
+            position="relative"
+        >
             <Box
-                bottom={0}
-                left={0}
-                objectFit="cover"
+                height="100%"
+                left="50%"
                 position="absolute"
-                right={0}
-                top={0}
+                transform="translateX(-50%)"
+                width={2560}
                 zIndex={-1}
             >
                 <NextImage
                     alt="hero"
                     layout="fill"
-                    objectFit="cover"
-                    objectPosition="center"
-                    src={heroImage}
+                    src={heroImage.src}
                 />
             </Box>
+
+            <Container >
+                <Text width="50%">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Repudiandae magnam architecto dolores ex? Hic iste rerum dolorum omnis corporis voluptas!
+                </Text>
+            </Container>
         </Box>
     );
 };
