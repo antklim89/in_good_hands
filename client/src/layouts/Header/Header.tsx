@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 
 import HeaderDrawer from './Header.Drawer';
+import HeaderLogo from './Header.Logo';
 
 
 const Header: FC = () => {
@@ -16,7 +17,7 @@ const Header: FC = () => {
             <Container alignItems="center" display="flex" maxWidth="container.xl">
                 <Link passHref href="/">
                     <Text as="a" color="primary.textLight" fontSize="2xl">
-                        In Good Hands
+                        <HeaderLogo color="white" />
                     </Text>
                 </Link>
                 <Box flexGrow={1} />
