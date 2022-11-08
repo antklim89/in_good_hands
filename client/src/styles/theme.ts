@@ -7,9 +7,9 @@ const SECONDARY_LIGHT = 60;
 export default extendTheme({
     colors: {
         primary: {
-            50: `hsl(206, 80%, ${PRIMARY_LIGHT - 35}%)`,
-            100: `hsl(206, 80%, ${PRIMARY_LIGHT - 30}%)`,
-            200: `hsl(206, 80%, ${PRIMARY_LIGHT - 25}%)`,
+            50: `hsl(206, 80%, ${PRIMARY_LIGHT - 30}%)`,
+            100: `hsl(206, 80%, ${PRIMARY_LIGHT - 25}%)`,
+            200: `hsl(206, 80%, ${PRIMARY_LIGHT - 20}%)`,
             300: `hsl(206, 80%, ${PRIMARY_LIGHT - 15}%)`,
             400: `hsl(206, 80%, ${PRIMARY_LIGHT - 10}%)`,
             500: `hsl(206, 80%, ${PRIMARY_LIGHT - 5}%)`,
@@ -50,6 +50,14 @@ export default extendTheme({
             baseStyle: { cursor: 'pointer' },
             defaultProps: { colorScheme: 'primary' },
         },
-        Container: { baseStyle: { maxWidth: 'container.xl' } },
+        Container: {
+            baseStyle: { maxWidth: 'container.xl' },
+        },
+        Text: {
+            baseStyle: { color: 'primary.50' },
+        },
+        Heading: {
+            baseStyle: { color: 'primary.50' },
+        },
     },
 });
