@@ -29,7 +29,10 @@ const AdsListItem: FC<AdsListItemProps> = ({
             <Box flexBasis={[0, 200]} flexGrow={1} mr={8}>
                 {images.length > 0
                     ? (
-                        <Carousel>
+                        <Carousel
+                            defaultControlsConfig={{ nextButtonText: '>', prevButtonText: '<' }}
+                            renderBottomCenterControls={null}
+                        >
                             {images.map((image) => (
                                 <Image
                                     alt={`${type} ${breed}`}

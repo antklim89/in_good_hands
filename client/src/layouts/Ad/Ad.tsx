@@ -79,7 +79,10 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                 <Box flex="1 1 0">
                     {images.length > 0
                         ? (
-                            <Carousel>
+                            <Carousel
+                                defaultControlsConfig={{ nextButtonText: '>', prevButtonText: '<' }}
+                                renderBottomCenterControls={null}
+                            >
                                 {images.map((image) => (
                                     <Image
                                         alt={`${type} ${breed}`}
