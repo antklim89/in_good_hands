@@ -1,8 +1,9 @@
-import { Box, Container, Flex, Text } from '@chakra-ui/react';
+import { Box, Button, Container, Flex, Text } from '@chakra-ui/react';
 import { Ad } from '@in-good-hands/server/src/swagger';
 import Image from 'next/image';
 import Carousel from 'nuka-carousel';
 import { FC } from 'react';
+import { FaTelegramPlane, FaWhatsapp, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 
 import FavoriteButton from '~/components/FavoriteButton';
 import PetAge from '~/components/PetAge';
@@ -19,16 +20,60 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                 <FavoriteButton adId={id} inFavorites={inFavorites} mx={4} />
             </Flex>
             <Flex flexDir={['column-reverse', null, 'row']} mb={4}>
-                <Box flex="1 1 0">
+                <Box
+                    alignItems="flex-start" display="flex" flex="1 1 0"
+                    flexDirection="column"
+                >
                     <Text>Type: <Text as="span" textTransform="capitalize">{type}</Text></Text>
                     <Text>Breed: <Text as="span" textTransform="capitalize">{breed}</Text></Text>
                     {name.length > 0 && <Text>Name: <Text as="span" textTransform="capitalize">{name}</Text></Text>}
                     <Text>Birthday: <PetAge birthday={birthday} /></Text>
-                    <Text>Telephone: <Text as="a" color="blue" href={`tel:${tel}`}>{tel}</Text></Text>
-                    <Text>E-mail: <Text as="a" color="blue" href={`email:${email}`}>{email}</Text></Text>
-                    {telegram ? <Text>Telegram: <Text as="a" color="blue" href={`https://telegram.me/share/url?url=${telegram}`}>{telegram}</Text></Text> : null}
-                    {whatsapp ? <Text>WhatsUp: <Text as="a" color="blue" href={`https://api.whatsapp.com/send?phone=${whatsapp}`}>{whatsapp}</Text></Text> : null}
-                    <Price fontSize="4xl" fontWeight="bold" price={price} />
+
+                    <Button
+                        as="a"
+                        href={`email:${email}`}
+                        mb={4}
+                    >
+                        <FaEnvelope />&emsp;{email}
+                    </Button>
+
+                    <Button
+                        as="a"
+                        href={`tel:${tel}`}
+                        mb={4}
+                    >
+                        <FaPhoneAlt />&emsp;{tel}
+                    </Button>
+
+                    {telegram
+                        ? (
+                            <Button
+                                as="a"
+                                href={`https://telegram.me/share/url?url=${telegram}`}
+                                mb={4}
+                            >
+                                <FaTelegramPlane />&emsp;{telegram}
+                            </Button>
+                        )
+                        : null}
+
+                    {whatsapp
+                        ? (
+                            <Button
+                                as="a"
+                                href={`https://api.whatsapp.com/send?phone=${whatsapp}`}
+                                mb={4}
+                            >
+                                <FaWhatsapp />&emsp;{whatsapp}
+                            </Button>
+                        )
+                        : null}
+                    <Price
+                        color="primary.50"
+                        fontSize="6xl"
+                        fontWeight="bold"
+                        price={price}
+                    />
                 </Box>
 
                 <Box flex="1 1 0">
