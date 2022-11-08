@@ -12,6 +12,7 @@ const Hero: FC = () => {
             height={[100, 200, 300, 400, 500]}
             overflow="hidden"
             position="relative"
+            zIndex={-1}
         >
             <Box
                 height="100%"
@@ -35,10 +36,11 @@ const Hero: FC = () => {
             >
                 <Box width="50%">
                     <Heading as="h1" color="primary.600" fontSize="5xl">
-                        <Text as="span" color="blue.600" textDecoration="underline">Kindness</Text> can change everything
+
+                        Turning <Text as="span" color="secondary.600" textDecoration="underline">dreams</Text> into reality.
                     </Heading>
                     <Text color="primary.600" fontSize="xl">
-                        Turning dreams into reality.
+                        Website of ads for the sale of pets
                     </Text>
                 </Box>
             </Container>
