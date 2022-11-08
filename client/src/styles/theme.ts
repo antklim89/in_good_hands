@@ -1,33 +1,36 @@
 import { extendTheme } from '@chakra-ui/react';
 
 
+const PRIMARY_LIGHT = 57;
+const SECONDARY_LIGHT = 60;
+
 export default extendTheme({
     colors: {
         primary: {
-            50: 'hsl(34, 100%, 60%)',
-            100: 'hsl(34, 100%, 55%)',
-            200: 'hsl(34, 100%, 50%)',
-            300: 'hsl(34, 100%, 45%)',
-            400: 'hsl(34, 100%, 40%)',
-            500: 'hsl(34, 100%, 35%)',
-            600: 'hsl(34, 100%, 30%)',
-            700: 'hsl(34, 100%, 25%)',
-            800: 'hsl(34, 100%, 20%)',
-            900: 'hsl(34, 100%, 15%)',
-            text: 'hsl(34, 100%, 15%)',
+            50: `hsl(206, 80%, ${PRIMARY_LIGHT - 35}%)`,
+            100: `hsl(206, 80%, ${PRIMARY_LIGHT - 30}%)`,
+            200: `hsl(206, 80%, ${PRIMARY_LIGHT - 25}%)`,
+            300: `hsl(206, 80%, ${PRIMARY_LIGHT - 15}%)`,
+            400: `hsl(206, 80%, ${PRIMARY_LIGHT - 10}%)`,
+            500: `hsl(206, 80%, ${PRIMARY_LIGHT - 5}%)`,
+            600: `hsl(206, 80%, ${PRIMARY_LIGHT}%)`,
+            700: `hsl(206, 80%, ${PRIMARY_LIGHT + 5}%)`,
+            800: `hsl(206, 80%, ${PRIMARY_LIGHT + 10}%)`,
+            900: `hsl(206, 80%, ${PRIMARY_LIGHT + 15}%)`,
+            text: `hsl(206, 80%, ${PRIMARY_LIGHT - 20}%)`,
             textLight: 'white',
         },
         secondary: {
-            50: 'hsl(34, 100%, 60%)',
-            100: 'hsl(34, 100%, 64%)',
-            200: 'hsl(34, 100%, 68%)',
-            300: 'hsl(34, 100%, 72%)',
-            400: 'hsl(34, 100%, 76%)',
-            500: 'hsl(34, 100%, 82%)',
-            600: 'hsl(176, 63%, 87%)',
-            700: 'hsl(34, 100%, 85%)',
-            800: 'hsl(34, 100%, 82%)',
-            900: 'hsl(34, 100%, 80%)',
+            50: `hsl(29, 100%, ${SECONDARY_LIGHT - 30}%)`,
+            100: `hsl(29, 100%, ${SECONDARY_LIGHT - 25}%)`,
+            200: `hsl(29, 100%, ${SECONDARY_LIGHT - 20}%)`,
+            300: `hsl(29, 100%, ${SECONDARY_LIGHT - 15}%)`,
+            400: `hsl(29, 100%, ${SECONDARY_LIGHT - 10}%)`,
+            500: `hsl(29, 100%, ${SECONDARY_LIGHT - 5}%)`,
+            600: `hsl(29, 100%, ${SECONDARY_LIGHT}%)`,
+            700: `hsl(29, 100%, ${SECONDARY_LIGHT - 5}%)`,
+            800: `hsl(29, 100%, ${SECONDARY_LIGHT - 10}%)`,
+            900: `hsl(29, 100%, ${SECONDARY_LIGHT - 15}%)`,
             text: 'black',
             textLight: 'white',
         },
