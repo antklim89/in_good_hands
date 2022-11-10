@@ -87,7 +87,7 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                                     <Image
                                         alt={`${type} ${breed}`}
                                         blurDataURL={image.thumbnail}
-                                        height={720}
+                                        height={768}
                                         key={image.id}
                                         objectFit="contain"
                                         placeholder="blur"
@@ -100,7 +100,7 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                         : (
                             <Image
                                 alt={`${type} placeholder`}
-                                height={720}
+                                height={768}
                                 objectFit="contain"
                                 src={`/placeholders/${type}-ph.jpg`}
                                 width={1280}

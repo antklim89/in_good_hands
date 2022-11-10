@@ -37,11 +37,12 @@ const AdsListItem: FC<AdsListItemProps> = ({
                                 <Image
                                     alt={`${type} ${breed}`}
                                     blurDataURL={image.thumbnail}
-                                    height={270}
+                                    height={384}
                                     key={image.id}
+                                    objectFit="cover"
                                     placeholder="blur"
                                     src={getApiURL(image.src)}
-                                    width={400}
+                                    width={640}
                                 />
                             ))}
                         </Carousel>
