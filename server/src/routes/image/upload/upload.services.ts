@@ -2,15 +2,13 @@ import Jimp from 'jimp';
 
 
 export async function saveThumnail(jimpFile: Jimp): Promise<string> {
-    const buffer = await jimpFile
+    const base64 = await jimpFile
         .quality(1)
         .cover(1024, 768)
         .scale(0.33)
-        .getBufferAsync(Jimp.MIME_JPEG);
+        .getBase64Async(Jimp.MIME_JPEG);
 
-    const base64 = buffer.toString('base64');
-    const thumbnail = `data:${Jimp.MIME_JPEG};base64 ${base64}`;
-    return thumbnail;
+    return base64;
 }
 
 export async function saveImage(jimpFile: Jimp, imageFullPath: string) {
