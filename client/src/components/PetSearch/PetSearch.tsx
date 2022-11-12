@@ -1,18 +1,31 @@
-import { Input, InputProps } from '@chakra-ui/react';
+import { Input, InputGroup, InputRightElement, InputProps } from '@chakra-ui/react';
 import { FC } from 'react';
+import { FaTimes } from 'react-icons/fa';
 
 import { usePetSearch } from './PetSearch.use';
 
 
 const PetSearch: FC<InputProps> = (props) => {
-    const { router, handleChange } = usePetSearch();
+    const { handleChange, value, handleClear } = usePetSearch();
+
     return (
-        <Input
-            defaultValue={router.query.search}
-            {...props}
-            placeholder="Enter search query..."
-            onChange={handleChange}
-        />
+        <InputGroup>
+            {value.length > 0 && (
+                <InputRightElement
+                    as="button"
+                    type="button"
+                    onClick={handleClear}
+                >
+                    <FaTimes />
+                </InputRightElement>
+            )}
+            <Input
+                placeholder="Enter search query..."
+                {...props}
+                value={value}
+                onChange={handleChange}
+            />
+        </InputGroup>
     );
 };
 
