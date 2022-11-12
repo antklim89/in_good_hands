@@ -15,8 +15,8 @@ const AdsList: FC<AdsListProps> = (props) => {
     return (
         <Container my={8}>
             <Flex flexDirection={['column', 'row']}>
-                <PetTypeSelect flexBasis={['auto', 0]} flexGrow={[0, 1]} mb={[1, 4]} />
-                <PetSearch flexBasis={['auto', 0]} flexGrow={[0, 2]} mb={[1, 4]} />
+                <PetTypeSelect flex="1 1 0" mb={[1, 4]} />
+                <PetSearch flex="3 1 0" mb={[1, 4]} />
             </Flex>
             <VStack>
                 {ads.map((ad) => (
