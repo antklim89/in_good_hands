@@ -48,7 +48,7 @@ const HeaderDrawer: FC = () => {
                         <DrawerCloseButton color="primary.textLight" />
                         <HeaderLinks flexDirection="column" onClose={onClose} />
                         <Divider bg="primary.text" my={4} />
-                        <HeaderAuth />
+                        <HeaderAuth onClose={onClose} />
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>

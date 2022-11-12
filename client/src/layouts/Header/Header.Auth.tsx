@@ -2,10 +2,12 @@ import { Box, Button, Progress } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC } from 'react';
 
+import { HeaderAuthProps } from './Header.types';
+
 import { useAuthContext } from '~/utils';
 
 
-const HeaderAuth: FC = () => {
+const HeaderAuth: FC<HeaderAuthProps> = ({ onClose }) => {
     const { user, logout, authInited } = useAuthContext();
 
     if (!authInited) return (
@@ -30,6 +32,7 @@ const HeaderAuth: FC = () => {
                                         as="a"
                                         color="primary.textLight"
                                         variant="ghost"
+                                        onClick={onClose}
                                     >
                                         {user.name}
                                     </Button>
@@ -54,6 +57,7 @@ const HeaderAuth: FC = () => {
                                         as="a"
                                         color="primary.textLight"
                                         variant="ghost"
+                                        onClick={onClose}
                                     >
                                         Log In
                                     </Button>
@@ -65,6 +69,7 @@ const HeaderAuth: FC = () => {
                                         as="a"
                                         color="primary.textLight"
                                         variant="ghost"
+                                        onClick={onClose}
                                     >
                                         Register
                                     </Button>
