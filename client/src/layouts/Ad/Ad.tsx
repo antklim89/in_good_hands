@@ -31,7 +31,7 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
 
                     <Button
                         as="a"
-                        href={`email:${email}`}
+                        href={`mailto:${email}`}
                         mb={4}
                     >
                         <FaEnvelope />&emsp;{email}
