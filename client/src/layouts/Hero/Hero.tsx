@@ -9,7 +9,7 @@ const Hero: FC = () => {
     return (
         <Box
             as="section"
-            height={[100, 200, 300, 400, 500]}
+            height={[150, 200, 300, 400, 500]}
             overflow="hidden"
             position="relative"
             zIndex={-1}
@@ -35,11 +35,10 @@ const Hero: FC = () => {
                 height="100%"
             >
                 <Box width="50%">
-                    <Heading as="h1" color="primary.600" fontSize="5xl">
-
+                    <Heading as="h1" color="primary.600" fontSize={['xl', '2xl', '5xl']}>
                         Turning <Text as="span" color="secondary.600" textDecoration="underline">dreams</Text> into reality.
                     </Heading>
-                    <Text color="primary.600" fontSize="xl">
+                    <Text color="primary.600" fontSize={['md', 'lg', 'xl']}>
                         Website of ads for the sale of pets
                     </Text>
                 </Box>
