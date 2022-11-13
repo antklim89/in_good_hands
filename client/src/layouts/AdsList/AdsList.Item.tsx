@@ -21,12 +21,12 @@ const AdsListItem: FC<AdsListItemProps> = ({
             border="1px solid lightgrey"
             borderRadius="md"
             boxShadow="sm"
-            flexDir={['column', 'row']}
+            flexDir={['column', 'column', 'row']}
             my={8}
             p={4}
             width="full"
         >
-            <Box flexBasis={[0, 200]} flexGrow={1} mr={8}>
+            <Box flex="1 1 200px" mr={[0, 0, 8]}>
                 {images.length > 0
                     ? (
                         <Carousel
@@ -39,9 +39,11 @@ const AdsListItem: FC<AdsListItemProps> = ({
                                     blurDataURL={image.thumbnail}
                                     height={384}
                                     key={image.id}
+                                    layout="responsive"
                                     objectFit="cover"
                                     placeholder="blur"
                                     src={getApiURL(image.src)}
+                                    style={{ display: 'flex' }}
                                     width={640}
                                 />
                             ))}
@@ -57,16 +59,17 @@ const AdsListItem: FC<AdsListItemProps> = ({
                         />
                     )}
             </Box>
-            <Flex flexBasis={200} flexDirection="row" flexGrow={5} >
+
+            <Flex flex="5 1 0" flexDirection="row" >
                 <Flex flexDirection="column">
-                    <Heading textTransform="uppercase">
+                    <Heading fontSize={['xl', '3xl', 'xl', '3xl']} textTransform="uppercase">
                         {type}
                     </Heading>
-                    <Heading textTransform="uppercase">
+                    <Heading fontSize={['xl', '3xl', 'xl', '3xl']} textTransform="uppercase">
                         {breed}
                     </Heading>
                     <PetAge birthday={birthday} />
-                    <Price flexGrow={1} fontSize="2xl" price={price} />
+                    <Price flexGrow={1} fontSize={['2xl', '2xl', '3xl']} price={price} />
                 </Flex>
 
                 <Flex
