@@ -9,10 +9,6 @@ import CreateAdButton from '~/components/CreateAdButton';
 
 const LINKS = [
     {
-        href: '/',
-        title: 'home',
-    },
-    {
         href: '/ads',
         title: 'all ads',
     },
