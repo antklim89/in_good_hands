@@ -55,5 +55,5 @@ export function useUpdateCredentials() {
         });
     }, []);
 
-    return { formik };
+    return { formik, user };
 }

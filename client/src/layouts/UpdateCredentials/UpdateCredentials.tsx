@@ -7,12 +7,12 @@ import InputField from '~/components/InputField';
 
 
 const UpdateCredentials: FC = () => {
-    const { formik } = useUpdateCredentials();
+    const { formik, user } = useUpdateCredentials();
 
     return (
         <Box>
             <Heading pb={4} textAlign="center" textTransform="uppercase">
-                Credentials
+                {`${user?.name}'s credentials`}
             </Heading>
             <form onSubmit={formik.handleSubmit}>
                 <InputField
