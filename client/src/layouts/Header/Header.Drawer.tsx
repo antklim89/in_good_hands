@@ -1,27 +1,22 @@
 import { HamburgerIcon } from '@chakra-ui/icons';
 import {
     Button, Drawer, DrawerOverlay, DrawerContent, DrawerBody, useMediaQuery, useDisclosure,
-    DrawerCloseButton, Divider,
+    DrawerCloseButton, Theme,
 } from '@chakra-ui/react';
 import { useTheme } from '@emotion/react';
 import { FC, useRef } from 'react';
 
-import HeaderAuth from './Header.Auth';
 import HeaderLinks from './Header.Links';
 
 
 const HeaderDrawer: FC = () => {
     const { isOpen, onClose, onToggle } = useDisclosure();
     const btnRef = useRef<HTMLButtonElement>(null);
-    const { breakpoints } = useTheme() as {breakpoints: {md: string}};
+    const { breakpoints } = useTheme() as Theme;
     const [isLargerThen] = useMediaQuery(`(min-width: ${breakpoints.md})`);
 
-    if (isLargerThen) return (
-        <>
-            <HeaderLinks />
-            <HeaderAuth />
-        </>
-    );
+    if (isLargerThen) return <HeaderLinks />;
+
     return (
         <>
             <Button
@@ -47,8 +42,6 @@ const HeaderDrawer: FC = () => {
                     >
                         <DrawerCloseButton color="primary.textLight" />
                         <HeaderLinks flexDirection="column" onClose={onClose} />
-                        <Divider bg="primary.text" my={4} />
-                        <HeaderAuth onClose={onClose} />
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>

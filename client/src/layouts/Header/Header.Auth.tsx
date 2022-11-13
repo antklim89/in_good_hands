@@ -1,6 +1,9 @@
-import { Box, Button, Progress } from '@chakra-ui/react';
+import {
+    Button, Menu, MenuButton, MenuItem, MenuList, Progress,
+} from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC } from 'react';
+import { FaUserCircle } from 'react-icons/fa';
 
 import { HeaderAuthProps } from './Header.types';
 
@@ -21,64 +24,40 @@ const HeaderAuth: FC<HeaderAuthProps> = ({ onClose }) => {
     );
 
     return (
-        <nav>
-            <Box as="ul" display="flex" listStyleType="none">
+        <Menu>
+            <MenuButton as={Button}>
+                <FaUserCircle />
+            </MenuButton>
+            <MenuList>
                 {user
                     ? (
                         <>
-                            <Box as="li" >
-                                <Link passHref href="/profile">
-                                    <Button
-                                        as="a"
-                                        color="primary.textLight"
-                                        variant="ghost"
-                                        onClick={onClose}
-                                    >
-                                        {user.name}
-                                    </Button>
-                                </Link>
-                            </Box>
-                            <Box as="li" >
-                                <Button
-                                    as="a"
-                                    color="primary.textLight"
-                                    variant="ghost"
-                                    onClick={logout}
-                                >
-                                    Logout
-                                </Button>
-                            </Box>
+                            <Link passHref href="/profile">
+                                <MenuItem as="a" onClick={onClose} >
+                                    Profile
+                                </MenuItem>
+                            </Link>
+                            <MenuItem as="a" onClick={logout} >
+                                Logout
+                            </MenuItem>
                         </>)
                     : (
                         <>
-                            <Box as="li" >
-                                <Link passHref href="/login">
-                                    <Button
-                                        as="a"
-                                        color="primary.textLight"
-                                        variant="ghost"
-                                        onClick={onClose}
-                                    >
-                                        Log In
-                                    </Button>
-                                </Link>
-                            </Box>
-                            <Box as="li" >
-                                <Link passHref href="/register">
-                                    <Button
-                                        as="a"
-                                        color="primary.textLight"
-                                        variant="ghost"
-                                        onClick={onClose}
-                                    >
-                                        Register
-                                    </Button>
-                                </Link>
-                            </Box>
+                            <Link passHref href="/login">
+                                <MenuItem as="a" onClick={onClose} >
+                                    Log In
+                                </MenuItem>
+                            </Link>
+                            <Link passHref href="/register">
+                                <MenuItem as="a" onClick={onClose} >
+                                    Register
+                                </MenuItem>
+                            </Link>
                         </>
                     )}
-            </Box>
-        </nav>
+            </MenuList>
+        </Menu>
+
     );
 };
 
