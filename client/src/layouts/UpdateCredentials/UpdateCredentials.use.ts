@@ -1,8 +1,9 @@
 import { useToast } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
+import { ZodError } from 'zod';
 
-import { UpdateCredentialsSchema } from './UpdateCredentials.schema';
+import { updateCredentialsSchema, UpdateCredentialsSchema } from './UpdateCredentials.schema';
 
 import { useAuthContext, api } from '~/utils';
 
@@ -31,6 +32,14 @@ export function useUpdateCredentials() {
             } catch (error) {
                 if (error instanceof Error) toast({ title: error.message, status: 'error' });
             }
+        },
+        async validate(val) {
+            try {
+                await updateCredentialsSchema.parseAsync(val);
+            } catch (error) {
+                if (error instanceof ZodError) return error.formErrors.fieldErrors;
+            }
+            return {};
         },
     });
 

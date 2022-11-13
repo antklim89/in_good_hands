@@ -26,7 +26,7 @@ export const registerSchema = {
         name: {
             type: 'string',
             minLength: 3,
-            maxLength: 50,
+            maxLength: 30,
         },
     },
 };
