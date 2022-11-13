@@ -35,6 +35,13 @@ export default extendTheme({
             textLight: 'white',
         },
     },
+    breakpoints: {
+        'sm': '30em',
+        'md': '44em',
+        'lg': '62em',
+        'xl': '80em',
+        '2xl': '96em',
+    },
     styles: {
         global: {
             'p': {
