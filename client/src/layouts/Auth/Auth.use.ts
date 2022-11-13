@@ -36,7 +36,7 @@ export function useAuth({ type }: AuthProps) {
                 if (type === 'login') {
                     await authSchema.pick({ email: true, password: true }).parseAsync(val);
                 } else {
-                    await authSchema.pick({ email: true, password: true, username: true }).parseAsync(val);
+                    await authSchema.pick({ email: true, password: true, name: true }).parseAsync(val);
                     if (val.confirm !== val.password) return { confirm: 'Passwords do not match.' };
                 }
             } catch (error) {
