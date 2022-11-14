@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 
 import NotFoundPage from './404';
 
@@ -17,9 +17,3 @@ const LoginPage: NextPage = () => {
 };
 
 export default LoginPage;
-
-
-export const getStaticProps: GetStaticProps = async () => {
-
-    return { props: { } };
-};

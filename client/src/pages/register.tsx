@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 
 import Seo from '~/components/Seo';
 import Auth from '~/layouts/Auth';
@@ -14,9 +14,3 @@ const RegisterPage: NextPage = () => {
 };
 
 export default RegisterPage;
-
-
-export const getStaticProps: GetStaticProps = async () => {
-
-    return { props: { } };
-};
