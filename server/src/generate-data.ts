@@ -104,9 +104,11 @@ async function generateImages(ads: Ad[]) {
 }
 
 (async () => {
-    await prisma.image.deleteMany({});
-    await prisma.ad.deleteMany({});
-    await prisma.user.deleteMany({});
+    const adsCount = await prisma.ad.count();
+    if (adsCount > 0) return;
+    // await prisma.image.deleteMany({});
+    // await prisma.ad.deleteMany({});
+    // await prisma.user.deleteMany({});
 
     const users = await generateUsers();
     const ads = await generateAds(users);

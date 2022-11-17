@@ -27,7 +27,7 @@ CREATE TABLE "Ad" (
     "tel" TEXT NOT NULL,
     "whatsapp" TEXT DEFAULT '',
     "telegram" TEXT DEFAULT '',
-    "price" INTEGER NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL,
     "birthday" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "isPublished" BOOLEAN NOT NULL,
     "ownerId" TEXT NOT NULL,
