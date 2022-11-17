@@ -43,7 +43,6 @@ const AdsListItem: FC<AdsListItemProps> = ({
                                     objectFit="cover"
                                     placeholder="blur"
                                     src={getApiURL(image.src)}
-                                    style={{ display: 'flex' }}
                                     width={640}
                                 />
                             ))}
