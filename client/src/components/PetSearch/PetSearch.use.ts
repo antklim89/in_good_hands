@@ -11,20 +11,19 @@ export function usePetSearch() {
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
         setValue(e.target.value);
+
+        if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
+        if (e.target.value.length < 3 && e.target.value.length !== 0) return;
+
+        timeoutIdRef.current = setTimeout(() => {
+            setSearchParams({ router, queryName: 'search', value: e.target.value, deleteValue: '' });
+        }, 700);
     }, []);
 
     const handleClear = useCallback(() => {
         setValue('');
+        setSearchParams({ router, queryName: 'search', value: '', deleteValue: '' });
     }, []);
-
-    useEffect(() => {
-        if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
-        if (value.length < 3 && value.length !== 0) return;
-
-        timeoutIdRef.current = setTimeout(() => {
-            setSearchParams({ router, queryName: 'search', value, deleteValue: '' });
-        }, 700);
-    }, [value, router.query.search]);
 
     useEffect(() => () => {
         if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
