@@ -11,14 +11,13 @@
     "build": "run-s build:**",
     "build:swr": "swc ./src -d ./output",
     "build:migrate": "prisma migrate deploy",
-    "build:generate": "yarn generate",
+    "build:generate": "swc ./src/generate-data.ts -d ./output && node ./output/generate-data.js",
     "start": "node ./output/server.js",
     "test": "jest --watchAll -i",
     "migrate": "run-s migrate:**",
     "migrate:dev": "prisma migrate dev",
     "migrate:test": "DATABASE_URL=\"postgresql://anton@localhost:5432/test?schema=public\" prisma migrate deploy",
-    "studio": "prisma studio --browser none",
-    "generate": "swc ./src/generate-data.ts -d ./output && node ./output/generate-data.js"
+    "studio": "prisma studio --browser none"
   },
   "keywords": [],
   "author": "",
