@@ -12,7 +12,7 @@ app.prisma = prisma;
 
 app.listen({ port: Number(PORT), host: HOST }, (err, address) => {
     if (err) {
-        app.log.info('Error', err);
+        console.error(err);
         process.exit(1);
     }
     if (process.env.NODE_ENV !== 'production') generateSwaggerTypes(app);
