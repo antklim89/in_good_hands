@@ -4,6 +4,8 @@ const nextTranspile = require('next-transpile-modules');
 const withTM = nextTranspile(['@in-good-hands/server']);
 
 
+const { NEXT_PUBLIC_API_URL = 'http://localhost' } = process.env;
+
 /** @type {import('next').NextConfig} */
 const nextConfig = withTM({
     reactStrictMode: true,
@@ -11,7 +13,7 @@ const nextConfig = withTM({
     images: {
         domains: [
             '192.168.90.19',
-            'localhost',
+            new URL(NEXT_PUBLIC_API_URL).hostname,
         ],
     },
 });
