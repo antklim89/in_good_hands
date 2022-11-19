@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "This project was bootstrapped with Fastify-CLI.",
   "main": "./src/server.ts",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
   "scripts": {
     "dev": "run-p dev:**",
     "dev:nodemon": "nodemon ./output/server.js --ignore swagger/",

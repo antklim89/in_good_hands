@@ -3,6 +3,8 @@
   "description": "In good hands",
   "version": "0.1.0",
   "private": true,
+  "npmClient": "yarn",
+  "useWorkspaces": true,
   "scripts": {
     "dev": "run-p dev:**",
     "dev:next": "next dev -H 0.0.0.0",
@@ -15,7 +17,7 @@
     "@chakra-ui/react": "^2.1.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@in-good-hands/server": "1.0.0",
+    "@in-good-hands/server": "*",
     "@netlify/plugin-nextjs": "^4.29.1",
     "axios": "^0.27.2",
     "cookie": "^0.5.0",
@@ -24,6 +26,7 @@
     "framer-motion": "^6",
     "lodash": "^4.17.21",
     "next": "12.1.6",
+    "node-gyp": "^9.3.0",
     "nuka-carousel": "^5.1.1",
     "react": "18.1.0",
     "react-dom": "18.1.0",
@@ -39,5 +42,5 @@
     "npm-run-all": "^4.1.5",
     "typescript": "4.7.2"
   },
-  "packageManager": "yarn@3.3.0"
+  "packageManager": "yarn@1.22.19"
 }

@@ -3,6 +3,8 @@
   "description": "In good hands",
   "version": "1.0.0",
   "private": true,
+  "npmClient": "yarn",
+  "useWorkspaces": true,
   "workspaces": [
     "server",
     "client"
@@ -26,20 +28,20 @@
   "devDependencies": {
     "@netlify/plugin-nextjs": "^4.25.0",
     "@types/bcryptjs": "^2.4.2",
-    "@types/jsonwebtoken": "^8.5.9",
+    "@types/cookie": "^0.5.1",
     "@types/jest": "^28.1.6",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/node": "17.0.36",
+    "@types/react": "18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
+    "eslint": "^8.16.0",
+    "eslint-config-next": "^12.1.6",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
-    "@types/cookie": "^0.5.1",
-    "@types/node": "17.0.36",
-    "@types/react": "18.0.9",
-    "eslint": "^8.16.0",
-    "eslint-config-next": "^12.1.6",
     "npm-run-all": "^4.1.5",
     "typescript": "4.7.2"
   },
@@ -49,5 +51,6 @@
   },
   "bugs": {
     "url": "https://github.com/antklim89/in_good_hands.git/issues"
-  }
+  },
+  "packageManager": "yarn@3.3.0"
 }
