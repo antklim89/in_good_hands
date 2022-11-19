@@ -21,6 +21,7 @@
     "migrate": "yarn --cwd server migrate"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^4.25.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/jest": "^28.1.6",
