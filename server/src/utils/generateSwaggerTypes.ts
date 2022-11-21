@@ -17,14 +17,12 @@ export async function generateSwaggerTypes(app: FastifyInstance): Promise<void> 
             toJS: true,
             extractRequestParams: false,
             extractRequestBody: false,
-            defaultResponseType: false,
             singleHttpClient: false,
             cleanOutput: false,
             enumNamesAsValues: false,
             moduleNameFirstTag: false,
             generateUnionEnums: false,
             silent: true,
-
         });
     } catch (error) {
         if (error instanceof Error) console.error('Swagger typescript gen error: \n', error.message);
