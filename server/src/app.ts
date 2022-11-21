@@ -2,6 +2,7 @@ import path from 'path';
 
 import { fastifyAutoload } from '@fastify/autoload';
 import fastify from 'fastify';
+import { has } from 'lodash';
 
 import { ClientException } from './utils';
 
@@ -41,6 +42,10 @@ app.register(fastifyAutoload, {
 app.setErrorHandler((error, req, repl) => {
     const { statusCode } = error;
     if (error instanceof ClientException) return error;
+
+    if (has(error, 'validation')) {
+        return repl.status(400).send({ message: error.message });
+    }
 
     console.error(error);
     if (statusCode && statusCode >= 400 && statusCode < 499) return repl.status(statusCode).send({ message: 'Bad request. Try again later.' });
