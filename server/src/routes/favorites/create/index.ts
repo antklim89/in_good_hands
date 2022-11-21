@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
 
-import schema from './create.schema';
+import schema from './schema';
 
 import { Favorites } from '@/swagger';
 import { ClientException } from '@/utils';

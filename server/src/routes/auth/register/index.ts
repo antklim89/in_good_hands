@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
 
-import schema from './register.schema';
+import schema from './schema';
 
 import { Auth } from '@/swagger';
 import { ClientException, generateJWT, hashPassword } from '@/utils';

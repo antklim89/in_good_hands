@@ -2,7 +2,7 @@ import { FastifyInstance, FastifyRequest } from 'fastify';
 import { rm } from 'fs-extra';
 
 
-import schema from './delete.schema';
+import schema from './schema';
 
 import { Image } from '@/swagger';
 import { ClientException, getImagePathBySrc } from '@/utils';

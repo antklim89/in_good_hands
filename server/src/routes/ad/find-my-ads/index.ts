@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
 
-import schema from './find-my-ads.schema';
+import schema from './schema';
 
 import { Ad } from '@/swagger';
 

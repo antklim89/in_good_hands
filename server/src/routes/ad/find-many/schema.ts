@@ -1,7 +1,7 @@
 import { FastifySchema } from 'fastify';
 
 import { adsPreviewListResponseSchema } from '@/schemas';
-import { animalsTypes } from '@/schemas/ad.schema';
+import { animalsTypes } from '@/schemas/adSchemas';
 
 
 const schema: FastifySchema = {

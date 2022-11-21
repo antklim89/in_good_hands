@@ -1,4 +1,4 @@
-import { ADS_LIMIT } from './find-many.route';
+import { ADS_LIMIT } from './index';
 
 import { Ad } from '@/swagger';
 import { init } from '@/test';

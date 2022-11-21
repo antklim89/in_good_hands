@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
 
-import schema from './find-one.schema';
+import schema from './schema';
 
 import { Ad } from '@/swagger';
 import { JWTUser } from '@/types';

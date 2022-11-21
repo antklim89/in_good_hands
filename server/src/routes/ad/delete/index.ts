@@ -3,7 +3,7 @@ import { join } from 'path';
 import { FastifyInstance, FastifyRequest } from 'fastify';
 import { pathExists, rm } from 'fs-extra';
 
-import schema from './delete.schema';
+import schema from './schema';
 
 import { UPLOAD_IMAGES_BASE_PATH } from '@/constants';
 import { Ad } from '@/swagger';

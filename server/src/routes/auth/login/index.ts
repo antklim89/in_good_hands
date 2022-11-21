@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { FastifyInstance, FastifyRequest } from 'fastify';
 
-import schema from './login.schema';
+import schema from './schema';
 
 import { Auth } from '@/swagger';
 import { ClientException, generateJWT } from '@/utils';

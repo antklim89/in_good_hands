@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
 
-import schema from './update.schema';
+import schema from './schema';
 
 import { Ad } from '@/swagger';
 import { ClientException } from '@/utils';

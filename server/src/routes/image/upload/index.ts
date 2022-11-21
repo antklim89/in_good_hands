@@ -3,8 +3,8 @@ import { rm } from 'fs-extra';
 import Jimp from 'jimp';
 
 
-import schema from './upload.schema';
-import { saveImage, saveThumnail } from './upload.services';
+import schema from './schema';
+import { saveImage, saveThumnail } from './services';
 
 import { Image } from '@/swagger';
 import { getImageFullPath, getImageFullUrl, getImagePath } from '@/utils';

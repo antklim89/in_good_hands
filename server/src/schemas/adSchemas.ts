@@ -1,4 +1,4 @@
-import { imageSchema } from './image.schema';
+import { imageSchema } from './imageSchemas';
 
 
 export const animalsTypes = ['cat', 'dog', 'bird', 'aquarium', 'rodent'] as const;
