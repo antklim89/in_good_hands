@@ -20,14 +20,18 @@ export default async function register(app: FastifyInstance) {
             }
             const hash = await hashPassword(password);
 
-            const newUser = await app.prisma.user.create({
-                data: { email, hash, name },
-                select: { email: true, id: true, name: true },
-            });
+            try {
+                const newUser = await app.prisma.user.create({
+                    data: { email, hash, name },
+                    select: { email: true, id: true, name: true },
+                });
 
-            const result = generateJWT(newUser);
+                const result = generateJWT(newUser);
 
-            return result;
+                return result;
+            } catch (error) {
+                throw new ClientException(error instanceof Error ? error.message : 'Bad Request.', 400);
+            }
         },
     });
 }

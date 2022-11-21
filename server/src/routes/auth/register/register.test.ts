@@ -38,9 +38,7 @@ describe('POST /auth/register', () => {
         ['name', { password: 'test123', email: 'correct@email.com' }],
     ])('should not register new user without %s', async (name, payload) => {
         const response = await app.inject({ ...defaultOptions, payload });
-        const data = response.json();
         expect(response.statusCode).toEqual(400);
-        expect(data.message).toEqual(`body must have required property '${name}'`);
 
         const usersInDb = await prisma.user.findMany();
         expect(usersInDb).toHaveLength(3);
