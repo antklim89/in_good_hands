@@ -3,7 +3,7 @@ import { init } from '@/test';
 import { generateJWT } from '@/utils';
 
 
-const { app, db, prisma } = init();
+const { app, db } = init();
 
 const defaultOptions: import('light-my-request').InjectOptions = {
     url: '/ad/find-one',
@@ -13,13 +13,6 @@ const defaultOptions: import('light-my-request').InjectOptions = {
 
 describe('POST /ad/find-one', () => {
     it('should find one ad', async () => {
-        await prisma.favorites.create({
-            data: {
-                adId: db().ads[0].id,
-                ownerId: db().users[0].id,
-            },
-        });
-
         const headers = {
             authentication: generateJWT(db().users[0]).token,
         };
