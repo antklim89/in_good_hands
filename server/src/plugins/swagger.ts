@@ -3,7 +3,7 @@ import fp from 'fastify-plugin';
 
 export default fp(async (app) => {
     app.register(import('@fastify/swagger'), {
-        routePrefix: '/docs',
+        // routePrefix: '/docs',
         swagger: {
             info: {
                 title: 'In Good Hands API',
@@ -28,10 +28,10 @@ export default fp(async (app) => {
                 },
             },
         },
-        uiConfig: {
-            docExpansion: 'none',
-            deepLinking: false,
-        },
-        exposeRoute: true,
+        // uiConfig: {
+        //     docExpansion: 'none',
+        //     deepLinking: false,
+        // },
+        // exposeRoute: true,
     });
 });
