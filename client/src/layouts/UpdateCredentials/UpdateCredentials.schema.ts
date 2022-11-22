@@ -13,11 +13,9 @@ export const updateCredentialsSchema = z.object({
         .max(props.tel.maxLength)
         .optional(),
     telegram: z.string()
-        .min(props.telegram.minLength)
         .max(props.telegram.maxLength)
         .optional(),
     whatsapp: z.string()
-        .min(props.whatsapp.minLength)
         .max(props.whatsapp.maxLength)
         .optional(),
     email: z.string()
