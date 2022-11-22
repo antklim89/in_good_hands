@@ -35,8 +35,8 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
                             Published
                         </FormLabel>
                         <Switch
-                            checked={formik.values.isPublished}
                             id="is-ad-published"
+                            isChecked={formik.values.isPublished}
                             name="isPublished"
                             size="lg"
                             onChange={formik.handleChange}
