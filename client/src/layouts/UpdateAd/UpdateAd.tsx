@@ -1,7 +1,7 @@
 import {
     Center, Container, Flex, Button, FormControl, FormLabel, Switch,
 } from '@chakra-ui/react';
-import { adInputSchema } from '@in-good-hands/server/src/schemas/ad.schema';
+import { adInputSchema } from '@in-good-hands/server/src/schemas/adSchemas';
 import { FC } from 'react';
 
 import UpdateAdImages from './UpdateAd.Images';

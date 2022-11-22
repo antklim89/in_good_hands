@@ -1,4 +1,4 @@
-import { userProfileSchema } from '@in-good-hands/server/src/schemas/auth.schema';
+import { userProfileSchema } from '@in-good-hands/server/src/schemas/authSchemas';
 import { z } from 'zod';
 
 

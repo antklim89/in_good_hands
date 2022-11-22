@@ -1,5 +1,5 @@
 import { Select, SelectProps } from '@chakra-ui/react';
-import { animalsTypes } from '@in-good-hands/server/src/schemas/ad.schema';
+import { animalsTypes } from '@in-good-hands/server/src/schemas/adSchemas';
 import { FC } from 'react';
 
 import { ALL, usePetTypeSelect } from './PetTypeSelect.use';

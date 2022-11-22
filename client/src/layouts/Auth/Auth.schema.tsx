@@ -1,4 +1,4 @@
-import { registerSchema } from '@in-good-hands/server/src/schemas/auth.schema';
+import { registerSchema } from '@in-good-hands/server/src/schemas/authSchemas';
 import zod from 'zod';
 
 

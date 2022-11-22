@@ -1,4 +1,4 @@
-import { adInputSchema } from '@in-good-hands/server/src/schemas/ad.schema';
+import { adInputSchema } from '@in-good-hands/server/src/schemas/adSchemas';
 import { z } from 'zod';
 
 
