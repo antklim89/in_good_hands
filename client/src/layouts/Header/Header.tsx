@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 
 import HeaderAuth from './Header.Auth';
-import HeaderDrawer from './Header.Drawer';
+import HeaderLinks from './Header.Links';
 import HeaderLogo from './Header.Logo';
 
 
@@ -27,7 +27,7 @@ const Header: FC = () => {
                     </Text>
                 </Link>
                 <Box flexGrow={1} />
-                <HeaderDrawer />
+                <HeaderLinks />
                 <HeaderAuth />
             </Container>
         </Box>
