@@ -42,16 +42,15 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
                     justifyContent="flex-end"
                 >
                     <Button
-                        colorScheme="red"
                         isLoading={isLoading}
                         size="sm"
                         textTransform="uppercase"
+                        variant="ghost"
                         onClick={onToggle}
                     >
                         {cancelText}
                     </Button>
                     <Button
-                        colorScheme="green"
                         isLoading={isLoading}
                         size="sm"
                         textTransform="uppercase"

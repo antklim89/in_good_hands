@@ -19,8 +19,8 @@ const AllAdsPage: NextPage<Props> = ({ ads }) => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ query }) => {
-    const { data: ads } = await api().ad.findMany({
+export const getServerSideProps: GetServerSideProps<Props> = async ({ req, query }) => {
+    const { data: ads } = await api(req).ad.findMany({
         searchType: query.type as 'cat' | 'dog' | 'bird' | 'aquarium' | 'rodent' | undefined,
         search: query.search as string,
     });

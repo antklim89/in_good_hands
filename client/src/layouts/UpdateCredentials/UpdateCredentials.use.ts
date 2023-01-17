@@ -28,7 +28,7 @@ export function useUpdateCredentials() {
 
             try {
                 await api().auth.update(filtredData);
-                toast({ title: 'Credentials successfully updated.', status: 'error' });
+                toast({ title: 'Credentials successfully updated.', status: 'success' });
             } catch (error) {
                 if (error instanceof Error) toast({ title: error.message, status: 'error' });
             }
