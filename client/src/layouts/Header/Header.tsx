@@ -16,16 +16,15 @@ const Header: FC = () => {
             shadow="md"
         >
             <Container alignItems="center" display="flex" maxWidth="container.xl">
-                <Link passHref href="/">
-                    <Text
-                        aria-label="logo"
-                        as="a"
-                        color="primary.textLight"
-                        fontSize="2xl"
-                    >
-                        <HeaderLogo color="white" />
-                    </Text>
-                </Link>
+                <Text
+                    aria-label="logo"
+                    as={Link}
+                    color="primary.textLight"
+                    fontSize="2xl"
+                    href="/"
+                >
+                    <HeaderLogo color="white" />
+                </Text>
                 <Box flexGrow={1} />
                 <HeaderLinks />
                 <HeaderAuth />

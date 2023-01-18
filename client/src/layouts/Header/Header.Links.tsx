@@ -21,17 +21,16 @@ const HeaderLinks: FC<HeaderLinksProps> = ({ onClose, ...props }) => {
                 {...props}
             >
                 <li>
-                    <Link passHref href="/about">
-                        <Button
-                            as="a"
-                            color="primary.textLight"
-                            textTransform="uppercase"
-                            variant="ghost"
-                            onClick={onClose}
-                        >
-                            {isLargerThen ? 'about' : <InfoIcon />}
-                        </Button>
-                    </Link>
+                    <Button
+                        as={Link}
+                        color="primary.textLight"
+                        href="/about"
+                        textTransform="uppercase"
+                        variant="ghost"
+                        onClick={onClose}
+                    >
+                        {isLargerThen ? 'about' : <InfoIcon />}
+                    </Button>
                 </li>
                 <li>
                     <CreateAdButton onCreate={onClose} />

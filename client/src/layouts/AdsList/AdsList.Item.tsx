@@ -77,11 +77,9 @@ const AdsListItem: FC<AdsListItemProps> = ({
                     ml="auto"
                 >
                     <FavoriteButton adId={id} inFavorites={inFavorites} />
-                    <Link passHref href={`/ads/${id}`}>
-                        <Button as="a" variant="outline">
-                            Show more...
-                        </Button>
-                    </Link>
+                    <Button as={Link} href={`/ads/${id}`} variant="outline">
+                        Show more...
+                    </Button>
                 </Flex>
             </Flex>
         </Flex>

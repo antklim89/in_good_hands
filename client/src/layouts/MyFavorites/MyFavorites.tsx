@@ -24,19 +24,18 @@ const MyFavorites: FC = () => {
             {favorites.map(({ id, ad }) => (
                 <Box key={id}>
                     <HStack flexDir={['column', null, 'row']} py={4}>
-                        <Link href={`/ads/${ad.id}`}>
-                            <Flex
-                                alignItems="center"
-                                as="a"
-                                cursor="pointer"
-                                mr="auto"
-                                textTransform="uppercase"
-                            >
-                                <Text px={4} py={0}>{ad.type} <br /> {ad.breed}</Text>
-                                <Text px={4} py={0}>{ad.name}</Text>
-                                <Text px={4} py={0}>{ad.price}$</Text>
-                            </Flex>
-                        </Link>
+                        <Flex
+                            alignItems="center"
+                            as={Link}
+                            cursor="pointer"
+                            href={`/ads/${ad.id}`}
+                            mr="auto"
+                            textTransform="uppercase"
+                        >
+                            <Text px={4} py={0}>{ad.type} <br /> {ad.breed}</Text>
+                            <Text px={4} py={0}>{ad.name}</Text>
+                            <Text px={4} py={0}>{ad.price}$</Text>
+                        </Flex>
                         <FavoriteButton
                             inFavorites
                             adId={ad.id}

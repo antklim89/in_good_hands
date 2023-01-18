@@ -32,27 +32,21 @@ const HeaderAuth: FC<HeaderAuthProps> = ({ onClose }) => {
                 {user
                     ? (
                         <>
-                            <Link passHref href="/profile">
-                                <MenuItem as="a" onClick={onClose} >
-                                    Profile
-                                </MenuItem>
-                            </Link>
-                            <MenuItem as="a" onClick={logout} >
+                            <MenuItem as={Link} href="/profile" onClick={onClose} >
+                                Profile
+                            </MenuItem>
+                            <MenuItem onClick={logout} >
                                 Logout
                             </MenuItem>
                         </>)
                     : (
                         <>
-                            <Link passHref href="/login">
-                                <MenuItem as="a" onClick={onClose} >
-                                    Log In
-                                </MenuItem>
-                            </Link>
-                            <Link passHref href="/register">
-                                <MenuItem as="a" onClick={onClose} >
-                                    Register
-                                </MenuItem>
-                            </Link>
+                            <MenuItem as={Link} href="/login" onClick={onClose} >
+                                Log In
+                            </MenuItem>
+                            <MenuItem as={Link} href="/register" onClick={onClose} >
+                                Register
+                            </MenuItem>
                         </>
                     )}
             </MenuList>

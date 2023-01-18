@@ -35,23 +35,21 @@ const MyAdsListItem: FC<MyAdsListItemProps> = ({ id, breed, name, type, isPublis
                         </Tooltip>
                     </IconButton>
 
-                    <Link href={`/ads/${id}`}>
-                        <IconButton
-                            aria-label="Show Ad"
-                            as="a"
-                            icon={<LinkIcon />}
-                            variant="link"
-                        />
-                    </Link>
+                    <IconButton
+                        aria-label="Show Ad"
+                        as={Link}
+                        href={`/ads/${id}`}
+                        icon={<LinkIcon />}
+                        variant="link"
+                    />
 
-                    <Link href={`/ads/update/${id}`}>
-                        <IconButton
-                            aria-label="Show Ad"
-                            as="a"
-                            icon={<EditIcon />}
-                            variant="link"
-                        />
-                    </Link>
+                    <IconButton
+                        aria-label="Update Ad"
+                        as={Link}
+                        href={`/ads/update/${id}`}
+                        icon={<EditIcon />}
+                        variant="link"
+                    />
 
                     <ConfirmDialog
                         isLoading={deleting}
