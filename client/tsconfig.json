@@ -28,8 +28,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", 
-    "layouts/UpdateAd/UpdateAdImage.tsx.off"
+    "**/*.tsx"
   ],
   "exclude": [
     "node_modules",
