@@ -34,9 +34,13 @@ export function useMyAdsListItem(id: number) {
         setDeleting(true);
         try {
             await api().ad.delete({ adId: id });
-            await mutate('my-ads', (prevAds: MyAdsListItemProps[]) => {
-                return prevAds.filter((prevAd) => prevAd.id !== id);
-            }, { revalidate: false });
+            await mutate<MyAdsListItemProps[]>(
+                'my-ads',
+                (prevAds) => {
+                    return prevAds?.filter((prevAd) => prevAd.id !== id);
+                },
+                { revalidate: false },
+            );
         } catch (error) {
             console.error(error);
         } finally {

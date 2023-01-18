@@ -11,12 +11,15 @@
 
 export declare namespace Ad {
   /**
-   * No description
-   * @tags ad
-   * @name CreateNew
-   * @request POST:/ad/create-new/
-   * @response `201` `{ id: number }` Default Response
-   */
+* No description
+* @tags ad
+* @name CreateNew
+* @request POST:/ad/create-new/
+* @response `201` `{
+id: number,
+
+}` Default Response
+*/
   namespace CreateNew {
     type RequestParams = {};
     type RequestQuery = {};
@@ -41,30 +44,30 @@ export declare namespace Ad {
     type RequestBody = never;
     type RequestHeaders = {};
     type ResponseBody = void;
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name FindIds
-   * @request GET:/ad/find-ids/
-   * @response `200` `({ id: number })[]` Default Response
-   */
-  namespace FindIds {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-    }[];
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name FindMany
-   * @request GET:/ad/find-many/
-   * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[], inFavorites?: boolean })[]` Default Response
-   */
+  } /**
+     * No description
+     * @tags ad
+     * @name FindMany
+     * @request GET:/ad/find-many/
+     * @response `200` `({
+        id: number,
+        createdAt: string,
+        updatedAt: string,
+        name: string,
+        type: string,
+        breed: string,
+        price: number,
+        birthday: string,
+        images: ({
+        id: number,
+        src: string,
+        thumbnail: string,
+    
+    })[],
+        inFavorites?: boolean,
+    
+    })[]` Default Response
+    */
   namespace FindMany {
     type RequestParams = {};
     type RequestQuery = {
@@ -92,14 +95,39 @@ export declare namespace Ad {
       }[];
       inFavorites?: boolean;
     }[];
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name FindMyAds
-   * @request GET:/ad/find-my-ads/
-   * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
-   */
+  } /**
+     * No description
+     * @tags ad
+     * @name FindIds
+     * @request GET:/ad/find-ids/
+     * @response `200` `({
+        id: number,
+    
+    })[]` Default Response
+    */
+  namespace FindIds {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+    }[];
+  } /**
+     * No description
+     * @tags ad
+     * @name FindMyAds
+     * @request GET:/ad/find-my-ads/
+     * @response `200` `({
+        id: number,
+        createdAt: string,
+        name: string,
+        type: string,
+        breed: string,
+        isPublished: boolean,
+    
+    })[]` Default Response
+    */
   namespace FindMyAds {
     type RequestParams = {};
     type RequestQuery = {
@@ -115,14 +143,35 @@ export declare namespace Ad {
       breed: string;
       isPublished: boolean;
     }[];
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name FindOne
-   * @request GET:/ad/find-one/
-   * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, telegram?: string, whatsapp?: string, email: string, images: ({ id: number, src: string, thumbnail: string })[], inFavorites?: boolean }` Default Response
-   */
+  } /**
+     * No description
+     * @tags ad
+     * @name FindOne
+     * @request GET:/ad/find-one/
+     * @response `200` `{
+        id: number,
+        createdAt: string,
+        updatedAt: string,
+        name: string,
+        type: string,
+        breed: string,
+        price: number,
+        birthday: string,
+        description: string,
+        tel: string,
+        telegram?: string,
+        whatsapp?: string,
+        email: string,
+        images: ({
+        id: number,
+        src: string,
+        thumbnail: string,
+    
+    })[],
+        inFavorites?: boolean,
+    
+    }` Default Response
+    */
   namespace FindOne {
     type RequestParams = {};
     type RequestQuery = {
@@ -151,14 +200,57 @@ export declare namespace Ad {
       }[];
       inFavorites?: boolean;
     };
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name FindUpdateData
-   * @request GET:/ad/find-update-data/
-   * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, whatsapp?: string, telegram?: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-   */
+  } /**
+     * No description
+     * @tags ad
+     * @name FindUpdateData
+     * @request GET:/ad/find-update-data/
+     * @response `200` `{
+      \** @maxLength 100 *\
+        name: string,
+        type: "cat" | "dog" | "bird" | "aquarium" | "rodent",
+      \**
+       * @minLength 3
+       * @maxLength 100
+       *\
+        breed: string,
+      \**
+       * @minLength 3
+       * @maxLength 4000
+       *\
+        description: string,
+      \**
+       * @minLength 3
+       * @maxLength 100
+       *\
+        email: string,
+      \**
+       * @minLength 3
+       * @maxLength 100
+       *\
+        tel: string,
+      \** @maxLength 50 *\
+        whatsapp?: string,
+      \** @maxLength 50 *\
+        telegram?: string,
+      \**
+       * @min 0
+       * @max 99999
+       *\
+        price: number,
+      \** @format date *\
+        birthday: string,
+        isPublished: boolean,
+        id: number,
+        images: ({
+        id: number,
+        src: string,
+        thumbnail: string,
+    
+    })[],
+    
+    }` Default Response
+    */
   namespace FindUpdateData {
     type RequestParams = {};
     type RequestQuery = {
@@ -167,15 +259,39 @@ export declare namespace Ad {
     type RequestBody = never;
     type RequestHeaders = {};
     type ResponseBody = {
+      /** @maxLength 100 */
       name: string;
       type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+      /**
+       * @minLength 3
+       * @maxLength 100
+       */
       breed: string;
+      /**
+       * @minLength 3
+       * @maxLength 4000
+       */
       description: string;
+      /**
+       * @minLength 3
+       * @maxLength 100
+       */
       email: string;
+      /**
+       * @minLength 3
+       * @maxLength 100
+       */
       tel: string;
+      /** @maxLength 50 */
       whatsapp?: string;
+      /** @maxLength 50 */
       telegram?: string;
+      /**
+       * @min 0
+       * @max 99999
+       */
       price: number;
+      /** @format date */
       birthday: string;
       isPublished: boolean;
       id: number;
@@ -199,17 +315,243 @@ export declare namespace Ad {
       id: number;
     };
     type RequestBody = {
+      /** @maxLength 100 */
       name: string;
       type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+      /**
+       * @minLength 3
+       * @maxLength 100
+       */
       breed: string;
+      /**
+       * @minLength 3
+       * @maxLength 4000
+       */
       description: string;
+      /**
+       * @minLength 3
+       * @maxLength 100
+       */
       email: string;
+      /**
+       * @minLength 3
+       * @maxLength 100
+       */
       tel: string;
+      /** @maxLength 50 */
       whatsapp?: string;
+      /** @maxLength 50 */
       telegram?: string;
+      /**
+       * @min 0
+       * @max 99999
+       */
       price: number;
+      /** @format date */
       birthday: string;
       isPublished: boolean;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  }
+}
+export declare namespace Auth {
+  /**
+   * No description
+   * @tags auth
+   * @name ChangePassword
+   * @request PATCH:/auth/change-password/
+   * @response `201` `void` Default Response
+   */
+  namespace ChangePassword {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      newPassword: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      oldPassword: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  } /**
+     * No description
+     * @tags auth
+     * @name Login
+     * @request POST:/auth/login/
+     * @response `200` `{
+        user: {
+        email: string,
+        name: string,
+        id: string,
+    
+    },
+        token: string,
+    
+    }` Default Response
+    */
+  namespace Login {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      password: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      email: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = {
+      user: {
+        email: string;
+        name: string;
+        id: string;
+      };
+      token: string;
+    };
+  } /**
+     * No description
+     * @tags auth
+     * @name Me
+     * @request GET:/auth/me/
+     * @response `200` `{
+        id?: string,
+      \**
+       * @minLength 3
+       * @maxLength 50
+       *\
+        email?: string,
+      \**
+       * @minLength 3
+       * @maxLength 30
+       *\
+        name?: string,
+      \**
+       * @minLength 3
+       * @maxLength 50
+       *\
+        tel?: string,
+      \** @maxLength 50 *\
+        whatsapp?: string,
+      \** @maxLength 50 *\
+        telegram?: string,
+    
+    }` Default Response
+    */
+  namespace Me {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id?: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      email?: string;
+      /**
+       * @minLength 3
+       * @maxLength 30
+       */
+      name?: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      tel?: string;
+      /** @maxLength 50 */
+      whatsapp?: string;
+      /** @maxLength 50 */
+      telegram?: string;
+    };
+  } /**
+     * No description
+     * @tags auth
+     * @name Register
+     * @request POST:/auth/register/
+     * @response `200` `{
+        user: {
+        email: string,
+        name: string,
+        id: string,
+    
+    },
+        token: string,
+    
+    }` Default Response
+    */
+  namespace Register {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      password: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      email: string;
+      /**
+       * @minLength 3
+       * @maxLength 30
+       */
+      name: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = {
+      user: {
+        email: string;
+        name: string;
+        id: string;
+      };
+      token: string;
+    };
+  }
+  /**
+   * No description
+   * @tags auth
+   * @name Update
+   * @request PATCH:/auth/update/
+   * @response `200` `void` Default Response
+   */
+  namespace Update {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      email?: string;
+      /**
+       * @minLength 3
+       * @maxLength 30
+       */
+      name?: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      tel?: string;
+      /** @maxLength 50 */
+      whatsapp?: string;
+      /** @maxLength 50 */
+      telegram?: string;
     };
     type RequestHeaders = {};
     type ResponseBody = void;
@@ -247,14 +589,24 @@ export declare namespace Favorites {
     type RequestBody = never;
     type RequestHeaders = {};
     type ResponseBody = void;
-  }
-  /**
-   * No description
-   * @tags favorites
-   * @name FindMany
-   * @request GET:/favorites/find-many/
-   * @response `200` `({ id: number, ad: { id: number, name: string, type: string, breed: string, price: number } })[]` Default Response
-   */
+  } /**
+     * No description
+     * @tags favorites
+     * @name FindMany
+     * @request GET:/favorites/find-many/
+     * @response `200` `({
+        id: number,
+        ad: {
+        id: number,
+        name: string,
+        type: string,
+        breed: string,
+        price: number,
+    
+    },
+    
+    })[]` Default Response
+    */
   namespace FindMany {
     type RequestParams = {};
     type RequestQuery = {};
@@ -270,115 +622,6 @@ export declare namespace Favorites {
         price: number;
       };
     }[];
-  }
-}
-export declare namespace Auth {
-  /**
-   * No description
-   * @tags auth
-   * @name ChangePassword
-   * @request PATCH:/auth/change-password/
-   * @response `201` `void` Default Response
-   */
-  namespace ChangePassword {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      newPassword: string;
-      oldPassword: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = void;
-  }
-  /**
-   * No description
-   * @tags auth
-   * @name Login
-   * @request POST:/auth/login/
-   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-   */
-  namespace Login {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      password: string;
-      email: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = {
-      user: {
-        email: string;
-        name: string;
-        id: string;
-      };
-      token: string;
-    };
-  }
-  /**
-   * No description
-   * @tags auth
-   * @name Me
-   * @request GET:/auth/me/
-   * @response `200` `{ id?: string, email?: string, name?: string, tel?: string, whatsapp?: string, telegram?: string }` Default Response
-   */
-  namespace Me {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id?: string;
-      email?: string;
-      name?: string;
-      tel?: string;
-      whatsapp?: string;
-      telegram?: string;
-    };
-  }
-  /**
-   * No description
-   * @tags auth
-   * @name Register
-   * @request POST:/auth/register/
-   * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-   */
-  namespace Register {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      password: string;
-      email: string;
-      name: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = {
-      user: {
-        email: string;
-        name: string;
-        id: string;
-      };
-      token: string;
-    };
-  }
-  /**
-   * No description
-   * @tags auth
-   * @name Update
-   * @request PATCH:/auth/update/
-   * @response `200` `void` Default Response
-   */
-  namespace Update {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      email?: string;
-      name?: string;
-      tel?: string;
-      whatsapp?: string;
-      telegram?: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = void;
   }
 }
 export declare namespace Image {
@@ -397,20 +640,25 @@ export declare namespace Image {
     type RequestBody = never;
     type RequestHeaders = {};
     type ResponseBody = void;
-  }
-  /**
-   * No description
-   * @tags image
-   * @name Upload
-   * @request POST:/image/upload/
-   * @response `201` `{ id: number, src: string, thumbnail: string }` Default Response
-   */
+  } /**
+     * No description
+     * @tags image
+     * @name Upload
+     * @request POST:/image/upload/
+     * @response `201` `{
+        id: number,
+        src: string,
+        thumbnail: string,
+    
+    }` Default Response
+    */
   namespace Upload {
     type RequestParams = {};
     type RequestQuery = {
       adId: number;
     };
     type RequestBody = {
+      /** @format binary */
       image: File;
     };
     type RequestHeaders = {};
@@ -449,6 +697,7 @@ export declare enum ContentType {
   Json = "application/json",
   FormData = "multipart/form-data",
   UrlEncoded = "application/x-www-form-urlencoded",
+  Text = "text/plain",
 }
 export declare class HttpClient<SecurityDataType = unknown> {
   instance: AxiosInstance;
@@ -458,8 +707,9 @@ export declare class HttpClient<SecurityDataType = unknown> {
   private format?;
   constructor({ securityWorker, secure, format, ...axiosConfig }?: ApiConfig<SecurityDataType>);
   setSecurityData: (data: SecurityDataType | null) => void;
-  private mergeRequestParams;
-  private createFormData;
+  protected mergeRequestParams(params1: AxiosRequestConfig, params2?: AxiosRequestConfig): AxiosRequestConfig;
+  protected stringifyFormItem(formItem: unknown): string;
+  protected createFormData(input: Record<string, unknown>): FormData;
   request: <T = any, _E = any>({
     secure,
     path,
@@ -489,13 +739,16 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
   getRoot: (params?: RequestParams) => Promise<AxiosResponse<void>>;
   ad: {
     /**
-     * No description
-     *
-     * @tags ad
-     * @name CreateNew
-     * @request POST:/ad/create-new/
-     * @response `201` `{ id: number }` Default Response
-     */
+ * No description
+ *
+ * @tags ad
+ * @name CreateNew
+ * @request POST:/ad/create-new/
+ * @response `201` `{
+    id: number,
+
+}` Default Response
+ */
     createNew: (params?: RequestParams) => Promise<
       AxiosResponse<{
         id: number;
@@ -516,28 +769,30 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       params?: RequestParams,
     ) => Promise<AxiosResponse<void>>;
     /**
-     * No description
-     *
-     * @tags ad
-     * @name FindIds
-     * @request GET:/ad/find-ids/
-     * @response `200` `({ id: number })[]` Default Response
-     */
-    findIds: (params?: RequestParams) => Promise<
-      AxiosResponse<
-        {
-          id: number;
-        }[]
-      >
-    >;
-    /**
-     * No description
-     *
-     * @tags ad
-     * @name FindMany
-     * @request GET:/ad/find-many/
-     * @response `200` `({ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, images: ({ id: number, src: string, thumbnail: string })[], inFavorites?: boolean })[]` Default Response
-     */
+ * No description
+ *
+ * @tags ad
+ * @name FindMany
+ * @request GET:/ad/find-many/
+ * @response `200` `({
+    id: number,
+    createdAt: string,
+    updatedAt: string,
+    name: string,
+    type: string,
+    breed: string,
+    price: number,
+    birthday: string,
+    images: ({
+    id: number,
+    src: string,
+    thumbnail: string,
+
+})[],
+    inFavorites?: boolean,
+
+})[]` Default Response
+ */
     findMany: (
       query?: {
         cursor?: number;
@@ -568,13 +823,39 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       >
     >;
     /**
-     * No description
-     *
-     * @tags ad
-     * @name FindMyAds
-     * @request GET:/ad/find-my-ads/
-     * @response `200` `({ id: number, createdAt: string, name: string, type: string, breed: string, isPublished: boolean })[]` Default Response
-     */
+ * No description
+ *
+ * @tags ad
+ * @name FindIds
+ * @request GET:/ad/find-ids/
+ * @response `200` `({
+    id: number,
+
+})[]` Default Response
+ */
+    findIds: (params?: RequestParams) => Promise<
+      AxiosResponse<
+        {
+          id: number;
+        }[]
+      >
+    >;
+    /**
+ * No description
+ *
+ * @tags ad
+ * @name FindMyAds
+ * @request GET:/ad/find-my-ads/
+ * @response `200` `({
+    id: number,
+    createdAt: string,
+    name: string,
+    type: string,
+    breed: string,
+    isPublished: boolean,
+
+})[]` Default Response
+ */
     findMyAds: (
       query?: {
         cursor?: number;
@@ -593,13 +874,35 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       >
     >;
     /**
-     * No description
-     *
-     * @tags ad
-     * @name FindOne
-     * @request GET:/ad/find-one/
-     * @response `200` `{ id: number, createdAt: string, updatedAt: string, name: string, type: string, breed: string, price: number, birthday: string, description: string, tel: string, telegram?: string, whatsapp?: string, email: string, images: ({ id: number, src: string, thumbnail: string })[], inFavorites?: boolean }` Default Response
-     */
+ * No description
+ *
+ * @tags ad
+ * @name FindOne
+ * @request GET:/ad/find-one/
+ * @response `200` `{
+    id: number,
+    createdAt: string,
+    updatedAt: string,
+    name: string,
+    type: string,
+    breed: string,
+    price: number,
+    birthday: string,
+    description: string,
+    tel: string,
+    telegram?: string,
+    whatsapp?: string,
+    email: string,
+    images: ({
+    id: number,
+    src: string,
+    thumbnail: string,
+
+})[],
+    inFavorites?: boolean,
+
+}` Default Response
+ */
     findOne: (
       query: {
         adId: number;
@@ -629,13 +932,57 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       }>
     >;
     /**
-     * No description
-     *
-     * @tags ad
-     * @name FindUpdateData
-     * @request GET:/ad/find-update-data/
-     * @response `200` `{ name: string, type: "cat" | "dog" | "bird" | "aquarium" | "rodent", breed: string, description: string, email: string, tel: string, whatsapp?: string, telegram?: string, price: number, birthday: string, isPublished: boolean, id: number, images: ({ id: number, src: string, thumbnail: string })[] }` Default Response
-     */
+ * No description
+ *
+ * @tags ad
+ * @name FindUpdateData
+ * @request GET:/ad/find-update-data/
+ * @response `200` `{
+  \** @maxLength 100 *\
+    name: string,
+    type: "cat" | "dog" | "bird" | "aquarium" | "rodent",
+  \**
+   * @minLength 3
+   * @maxLength 100
+   *\
+    breed: string,
+  \**
+   * @minLength 3
+   * @maxLength 4000
+   *\
+    description: string,
+  \**
+   * @minLength 3
+   * @maxLength 100
+   *\
+    email: string,
+  \**
+   * @minLength 3
+   * @maxLength 100
+   *\
+    tel: string,
+  \** @maxLength 50 *\
+    whatsapp?: string,
+  \** @maxLength 50 *\
+    telegram?: string,
+  \**
+   * @min 0
+   * @max 99999
+   *\
+    price: number,
+  \** @format date *\
+    birthday: string,
+    isPublished: boolean,
+    id: number,
+    images: ({
+    id: number,
+    src: string,
+    thumbnail: string,
+
+})[],
+
+}` Default Response
+ */
     findUpdateData: (
       query: {
         adId: number;
@@ -643,15 +990,39 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       params?: RequestParams,
     ) => Promise<
       AxiosResponse<{
+        /** @maxLength 100 */
         name: string;
         type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+        /**
+         * @minLength 3
+         * @maxLength 100
+         */
         breed: string;
+        /**
+         * @minLength 3
+         * @maxLength 4000
+         */
         description: string;
+        /**
+         * @minLength 3
+         * @maxLength 100
+         */
         email: string;
+        /**
+         * @minLength 3
+         * @maxLength 100
+         */
         tel: string;
+        /** @maxLength 50 */
         whatsapp?: string;
+        /** @maxLength 50 */
         telegram?: string;
+        /**
+         * @min 0
+         * @max 99999
+         */
         price: number;
+        /** @format date */
         birthday: string;
         isPublished: boolean;
         id: number;
@@ -675,17 +1046,239 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         id: number;
       },
       body: {
+        /** @maxLength 100 */
         name: string;
         type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+        /**
+         * @minLength 3
+         * @maxLength 100
+         */
         breed: string;
+        /**
+         * @minLength 3
+         * @maxLength 4000
+         */
         description: string;
+        /**
+         * @minLength 3
+         * @maxLength 100
+         */
         email: string;
+        /**
+         * @minLength 3
+         * @maxLength 100
+         */
         tel: string;
+        /** @maxLength 50 */
         whatsapp?: string;
+        /** @maxLength 50 */
         telegram?: string;
+        /**
+         * @min 0
+         * @max 99999
+         */
         price: number;
+        /** @format date */
         birthday: string;
         isPublished: boolean;
+      },
+      params?: RequestParams,
+    ) => Promise<AxiosResponse<void>>;
+  };
+  auth: {
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name ChangePassword
+     * @request PATCH:/auth/change-password/
+     * @response `201` `void` Default Response
+     */
+    changePassword: (
+      body: {
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        newPassword: string;
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        oldPassword: string;
+      },
+      params?: RequestParams,
+    ) => Promise<AxiosResponse<void>>;
+    /**
+ * No description
+ *
+ * @tags auth
+ * @name Login
+ * @request POST:/auth/login/
+ * @response `200` `{
+    user: {
+    email: string,
+    name: string,
+    id: string,
+
+},
+    token: string,
+
+}` Default Response
+ */
+    login: (
+      body: {
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        password: string;
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        email: string;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      AxiosResponse<{
+        user: {
+          email: string;
+          name: string;
+          id: string;
+        };
+        token: string;
+      }>
+    >;
+    /**
+ * No description
+ *
+ * @tags auth
+ * @name Me
+ * @request GET:/auth/me/
+ * @response `200` `{
+    id?: string,
+  \**
+   * @minLength 3
+   * @maxLength 50
+   *\
+    email?: string,
+  \**
+   * @minLength 3
+   * @maxLength 30
+   *\
+    name?: string,
+  \**
+   * @minLength 3
+   * @maxLength 50
+   *\
+    tel?: string,
+  \** @maxLength 50 *\
+    whatsapp?: string,
+  \** @maxLength 50 *\
+    telegram?: string,
+
+}` Default Response
+ */
+    me: (params?: RequestParams) => Promise<
+      AxiosResponse<{
+        id?: string;
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        email?: string;
+        /**
+         * @minLength 3
+         * @maxLength 30
+         */
+        name?: string;
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        tel?: string;
+        /** @maxLength 50 */
+        whatsapp?: string;
+        /** @maxLength 50 */
+        telegram?: string;
+      }>
+    >;
+    /**
+ * No description
+ *
+ * @tags auth
+ * @name Register
+ * @request POST:/auth/register/
+ * @response `200` `{
+    user: {
+    email: string,
+    name: string,
+    id: string,
+
+},
+    token: string,
+
+}` Default Response
+ */
+    register: (
+      body: {
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        password: string;
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        email: string;
+        /**
+         * @minLength 3
+         * @maxLength 30
+         */
+        name: string;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      AxiosResponse<{
+        user: {
+          email: string;
+          name: string;
+          id: string;
+        };
+        token: string;
+      }>
+    >;
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (
+      body: {
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        email?: string;
+        /**
+         * @minLength 3
+         * @maxLength 30
+         */
+        name?: string;
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        tel?: string;
+        /** @maxLength 50 */
+        whatsapp?: string;
+        /** @maxLength 50 */
+        telegram?: string;
       },
       params?: RequestParams,
     ) => Promise<AxiosResponse<void>>;
@@ -720,13 +1313,24 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       params?: RequestParams,
     ) => Promise<AxiosResponse<void>>;
     /**
-     * No description
-     *
-     * @tags favorites
-     * @name FindMany
-     * @request GET:/favorites/find-many/
-     * @response `200` `({ id: number, ad: { id: number, name: string, type: string, breed: string, price: number } })[]` Default Response
-     */
+ * No description
+ *
+ * @tags favorites
+ * @name FindMany
+ * @request GET:/favorites/find-many/
+ * @response `200` `({
+    id: number,
+    ad: {
+    id: number,
+    name: string,
+    type: string,
+    breed: string,
+    price: number,
+
+},
+
+})[]` Default Response
+ */
     findMany: (params?: RequestParams) => Promise<
       AxiosResponse<
         {
@@ -741,108 +1345,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         }[]
       >
     >;
-  };
-  auth: {
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name ChangePassword
-     * @request PATCH:/auth/change-password/
-     * @response `201` `void` Default Response
-     */
-    changePassword: (
-      body: {
-        newPassword: string;
-        oldPassword: string;
-      },
-      params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Login
-     * @request POST:/auth/login/
-     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-     */
-    login: (
-      body: {
-        password: string;
-        email: string;
-      },
-      params?: RequestParams,
-    ) => Promise<
-      AxiosResponse<{
-        user: {
-          email: string;
-          name: string;
-          id: string;
-        };
-        token: string;
-      }>
-    >;
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Me
-     * @request GET:/auth/me/
-     * @response `200` `{ id?: string, email?: string, name?: string, tel?: string, whatsapp?: string, telegram?: string }` Default Response
-     */
-    me: (params?: RequestParams) => Promise<
-      AxiosResponse<{
-        id?: string;
-        email?: string;
-        name?: string;
-        tel?: string;
-        whatsapp?: string;
-        telegram?: string;
-      }>
-    >;
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Register
-     * @request POST:/auth/register/
-     * @response `200` `{ user: { email: string, name: string, id: string }, token: string }` Default Response
-     */
-    register: (
-      body: {
-        password: string;
-        email: string;
-        name: string;
-      },
-      params?: RequestParams,
-    ) => Promise<
-      AxiosResponse<{
-        user: {
-          email: string;
-          name: string;
-          id: string;
-        };
-        token: string;
-      }>
-    >;
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
-     */
-    update: (
-      body: {
-        email?: string;
-        name?: string;
-        tel?: string;
-        whatsapp?: string;
-        telegram?: string;
-      },
-      params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
   };
   image: {
     /**
@@ -860,18 +1362,24 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       params?: RequestParams,
     ) => Promise<AxiosResponse<void>>;
     /**
-     * No description
-     *
-     * @tags image
-     * @name Upload
-     * @request POST:/image/upload/
-     * @response `201` `{ id: number, src: string, thumbnail: string }` Default Response
-     */
+ * No description
+ *
+ * @tags image
+ * @name Upload
+ * @request POST:/image/upload/
+ * @response `201` `{
+    id: number,
+    src: string,
+    thumbnail: string,
+
+}` Default Response
+ */
     upload: (
       query: {
         adId: number;
       },
       data: {
+        /** @format binary */
         image: File;
       },
       params?: RequestParams,

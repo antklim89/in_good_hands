@@ -19,8 +19,10 @@ export const api = (req?: IncomingMessage) => {
         if (cookieUser) headers.authentication = cookieUser.token;
     }
 
+    // TODO: fix type error
     const apiInstance = new Api({
         baseURL: API_URL,
+        // @ts-expect-error fix later
         headers,
     });
 

@@ -2,7 +2,7 @@ export const DEFAULT_DESCRIPTION = process.env.DEFAULT_DESCRIPTION || 'Lorem ips
 export const DEFAULT_TITLE = process.env.DEFAULT_TITLE || 'In Good Hands';
 
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
 
 export const USER_STORAGE_NAME = 'USER';
 export const JWT_STORAGE_NAME = 'JWT';

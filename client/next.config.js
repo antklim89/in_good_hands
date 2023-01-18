@@ -1,21 +1,13 @@
-const nextTranspile = require('next-transpile-modules');
-
-
-const withTM = nextTranspile(['@in-good-hands/server']);
-
-
-const { NEXT_PUBLIC_API_URL = 'http://localhost' } = process.env;
+const { NEXT_PUBLIC_API_URL } = process.env;
 
 /** @type {import('next').NextConfig} */
-const nextConfig = withTM({
+const nextConfig = {
     reactStrictMode: true,
     compress: true,
     images: {
-        domains: [
-            '192.168.90.19',
-            new URL(NEXT_PUBLIC_API_URL).hostname,
-        ],
+        domains: [new URL(NEXT_PUBLIC_API_URL).hostname],
     },
-});
+    transpilePackages: ['@in-good-hands/server'],
+};
 
 module.exports = nextConfig;
