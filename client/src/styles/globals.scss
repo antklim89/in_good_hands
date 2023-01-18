@@ -15,6 +15,20 @@ a {
     box-sizing: border-box;
 }
 
+img {
+    &.cover {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    &.contain {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
 
 .root {
     display: grid;

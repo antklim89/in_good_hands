@@ -22,6 +22,7 @@ const AdsListItem: FC<AdsListItemProps> = ({
             borderRadius="md"
             boxShadow="sm"
             flexDir={['column', 'column', 'row']}
+            maxHeight={380}
             my={8}
             p={4}
             width="full"
@@ -37,10 +38,9 @@ const AdsListItem: FC<AdsListItemProps> = ({
                                 <Image
                                     alt={`${type} ${breed}`}
                                     blurDataURL={image.thumbnail}
+                                    className="cover"
                                     height={384}
                                     key={image.id}
-                                    layout="responsive"
-                                    objectFit="cover"
                                     placeholder="blur"
                                     src={getApiURL(image.src)}
                                     width={640}
@@ -51,10 +51,10 @@ const AdsListItem: FC<AdsListItemProps> = ({
                     : (
                         <Image
                             alt={`${type} placeholder`}
-                            height={720}
-                            objectFit="contain"
+                            className="cover"
+                            height={384}
                             src={`/placeholders/${type}-ph.jpg`}
-                            width={1280}
+                            width={640}
                         />
                     )}
             </Box>
