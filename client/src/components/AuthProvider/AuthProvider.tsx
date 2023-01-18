@@ -11,7 +11,7 @@ import { api, clearUserCookie, getUserCookie, setUserCookie } from '~/utils';
 export const AuthContext = createContext({} as IAuthContext);
 
 const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-    const [user, setUser] = useState<IUser|null>(null);
+    const [user, setUser] = useState<IUser | null>(null);
     const [authInited, setAuthInited] = useState(false);
 
     const isAuth = useMemo(() => Boolean(user), [user]);
@@ -38,6 +38,7 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     const logout: IAuthContext['logout'] = useCallback(() => {
         setUser(null);
         clearUserCookie();
+        location.reload();
     }, []);
 
     return (

@@ -1,18 +1,16 @@
 import { useToast } from '@chakra-ui/react';
 import { useFormik } from 'formik';
-import { useRouter } from 'next/router';
 import { ZodError } from 'zod';
 
 import { authSchema } from './Auth.schema';
-import { AuthProps, AuthType } from './Auth.types';
+import { AuthFormProps, AuthType } from './Auth.types';
 
 import { useAuthContext } from '~/utils';
 
 
-export function useAuth({ type }: AuthProps) {
+export function useAuthFormik({ type }: AuthFormProps) {
     const { login, register } = useAuthContext();
     const toast = useToast();
-    const { back } = useRouter();
 
     const formik = useFormik<AuthType>({
         initialValues: { name: '', email: '', password: '', confirm: '' },
@@ -21,11 +19,11 @@ export function useAuth({ type }: AuthProps) {
                 if (type === 'login') {
                     await login(val);
                     toast({ title: 'You have successfully logged in!', status: 'success' });
-                    back();
+                    location.reload();
                 } else {
                     await register(val);
                     toast({ title: 'You have successfully registred!', status: 'success' });
-                    back();
+                    location.reload();
                 }
             } catch (error) {
                 if (error instanceof Error) toast({ title: error.message, status: 'error' });
@@ -48,5 +46,5 @@ export function useAuth({ type }: AuthProps) {
         },
     });
 
-    return { formik };
+    return formik;
 }

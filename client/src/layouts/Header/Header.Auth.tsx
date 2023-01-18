@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { FC } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 
+import Auth from '../Auth';
+
 import { HeaderAuthProps } from './Header.types';
 
 import { useAuthContext } from '~/utils';
@@ -41,12 +43,20 @@ const HeaderAuth: FC<HeaderAuthProps> = ({ onClose }) => {
                         </>)
                     : (
                         <>
-                            <MenuItem as={Link} href="/login" onClick={onClose} >
-                                Log In
-                            </MenuItem>
-                            <MenuItem as={Link} href="/register" onClick={onClose} >
-                                Register
-                            </MenuItem>
+                            <Auth type="login">
+                                {({ onOpen }) => (
+                                    <MenuItem onClick={onOpen}>
+                                        Log In
+                                    </MenuItem>
+                                )}
+                            </Auth>
+                            <Auth type="register">
+                                {({ onOpen }) => (
+                                    <MenuItem onClick={onOpen}>
+                                        Register
+                                    </MenuItem>
+                                )}
+                            </Auth>
                         </>
                     )}
             </MenuList>
