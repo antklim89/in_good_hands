@@ -2,9 +2,9 @@ import { AddIcon } from '@chakra-ui/icons';
 import { Box, IconButton, HStack, Text, Spinner } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import UpdateAdImage from './UpdateAd.Image';
 import { UpdateAdProps } from './UpdateAd.types';
-import { useUpdateAdImages } from './UpdateAd.use';
+import UpdateAdImage from './UpdateAdImage';
+import { useUpdateAdImages } from './UpdateAdImages.use';
 
 
 const UpdateAdImages: FC<UpdateAdProps> = ({ ad }) => {

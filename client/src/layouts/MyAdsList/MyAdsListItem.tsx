@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 
 import { MyAdsListItemProps } from './MyAdsList.types';
-import { useMyAdsListItem } from './MyAdsList.use';
+import { useMyAdsListItem } from './MyAdsListItem.use';
 
 import ConfirmDialog from '~/components/ConfirmDialog';
 

@@ -2,9 +2,9 @@ import { Box, Text, Container } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC } from 'react';
 
-import HeaderAuth from './Header.Auth';
-import HeaderLinks from './Header.Links';
-import HeaderLogo from './Header.Logo';
+import HeaderAuth from './HeaderAuth';
+import HeaderLinks from './HeaderLinks';
+import HeaderLogo from './HeaderLogo';
 
 
 const Header: FC = () => {

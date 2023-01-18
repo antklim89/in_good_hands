@@ -1,13 +1,15 @@
 import { Button, Flex, Heading, Box } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { useUpdateCredentials } from './UpdateCredentials.use';
+import { useUpdateCredentialsFormik } from './UpdateCredentials.formik';
 
 import InputField from '~/components/InputField';
+import { useAuthContext } from '~/utils';
 
 
 const UpdateCredentials: FC = () => {
-    const { formik, user } = useUpdateCredentials();
+    const { user } = useAuthContext();
+    const formik = useUpdateCredentialsFormik();
 
     return (
         <Box>

@@ -1,9 +1,9 @@
 import { Container, Flex, VStack } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import AdsListItem from './AdsList.Item';
 import { AdsListProps } from './AdsList.types';
 import { useAdsList } from './AdsList.use';
+import AdsListItem from './AdsListItem';
 
 import PetSearch from '~/components/PetSearch';
 import PetTypeSelect from '~/components/PetTypeSelect';

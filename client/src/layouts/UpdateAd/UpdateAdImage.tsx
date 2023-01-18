@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { FC } from 'react';
 
 import { UpdateAdImageProps } from './UpdateAd.types';
-import { useUpdateAdImage } from './UpdateAd.use';
+import { useUpdateAdImage } from './UpdateAdImage.use';
 
 import { getApiURL } from '~/utils';
 

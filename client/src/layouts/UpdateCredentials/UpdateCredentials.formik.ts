@@ -8,7 +8,7 @@ import { updateCredentialsSchema, UpdateCredentialsSchema } from './UpdateCreden
 import { useAuthContext, api } from '~/utils';
 
 
-export function useUpdateCredentials() {
+export function useUpdateCredentialsFormik() {
     const { user } = useAuthContext();
     const toast = useToast();
 
@@ -55,5 +55,5 @@ export function useUpdateCredentials() {
         });
     }, []);
 
-    return { formik, user };
+    return formik;
 }

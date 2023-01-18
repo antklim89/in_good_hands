@@ -4,15 +4,15 @@ import {
 import { adInputSchema } from '@in-good-hands/server/src/schemas/adSchemas';
 import { FC } from 'react';
 
-import UpdateAdImages from './UpdateAd.Images';
+import { useUpdateAdFormik } from './UpdateAd.formik';
 import { UpdateAdProps } from './UpdateAd.types';
-import { useUpdateAd } from './UpdateAd.use';
+import UpdateAdImages from './UpdateAdImages';
 
 import InputField from '~/components/InputField';
 
 
 const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
-    const { formik } = useUpdateAd({ ad });
+    const formik = useUpdateAdFormik({ ad });
 
     return (
         <Center height="100%">

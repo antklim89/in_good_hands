@@ -1,8 +1,8 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import MyAdsListItem from './MyAdsList.Item';
 import { useMyAdsList } from './MyAdsList.use';
+import MyAdsListItem from './MyAdsListItem';
 
 
 const MyAdsList: FC = () => {
