@@ -1,6 +1,7 @@
 import type { IncomingMessage } from 'http';
 
 import { Api } from '@in-good-hands/server/src/swagger';
+import { AxiosRequestHeaders } from 'axios';
 
 import { getUserCookie } from './getCookies';
 
@@ -8,7 +9,7 @@ import { API_URL } from '~/constants';
 
 
 export const api = (req?: IncomingMessage) => {
-    const headers: { authentication?: string } = {};
+    const headers = {} as AxiosRequestHeaders;
 
     if (req) {
         const cookieUser = getUserCookie(req.headers.cookie);
@@ -19,10 +20,9 @@ export const api = (req?: IncomingMessage) => {
         if (cookieUser) headers.authentication = cookieUser.token;
     }
 
-    // TODO: fix type error
+
     const apiInstance = new Api({
         baseURL: API_URL,
-        // @ts-expect-error fix later
         headers,
     });
 

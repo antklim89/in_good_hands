@@ -7,10 +7,7 @@ import Seo from '~/components/Seo';
 import Profile from '~/layouts/Profile';
 
 
-interface Props {
-}
-
-const ProfilePage: NextPage<Props> = () => {
+const ProfilePage: NextPage = () => {
     return (
         <>
             <Seo title="Profile" />
