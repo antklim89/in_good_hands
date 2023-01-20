@@ -1,9 +1,9 @@
 import { Ad } from '@in-good-hands/server/src/swagger';
-import type { GetServerSideProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 
 import Seo from '~/components/Seo';
 import AdsList from '~/layouts/AdsList';
-import { api } from '~/utils';
+import { api, withTimeout } from '~/utils';
 
 
 interface Props {
@@ -19,13 +19,13 @@ const AllAdsPage: NextPage<Props> = ({ ads }) => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ req, query }) => {
+export const getServerSideProps = withTimeout<Props>(async ({ req, query }) => {
     const { data: ads } = await api(req).ad.findMany({
         searchType: query.type as 'cat' | 'dog' | 'bird' | 'aquarium' | 'rodent' | undefined,
         search: query.search as string,
     });
 
     return { props: { ads } };
-};
+});
 
 export default AllAdsPage;
