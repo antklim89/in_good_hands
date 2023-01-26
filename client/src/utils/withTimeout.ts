@@ -21,7 +21,7 @@ export function withTimeout<
                             permanent: true,
                         },
                     });
-                }, 9000);
+                }, 7000);
             }),
         ]).finally(() => {
             if (id) clearTimeout(id);
