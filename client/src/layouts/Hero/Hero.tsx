@@ -23,8 +23,8 @@ const Hero: FC = () => {
                 zIndex={-1}
             >
                 <NextImage
+                    fill
                     alt="hero"
-                    layout="fill"
                     src={heroImage.src}
                 />
             </Box>
