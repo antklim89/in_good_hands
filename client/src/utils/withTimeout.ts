@@ -17,7 +17,7 @@ export function withTimeout<
                 id = setTimeout(() => {
                     resolve({
                         redirect: {
-                            destination: ctx.req.url || '/',
+                            destination: ctx.resolvedUrl || '/',
                             permanent: true,
                         },
                     });

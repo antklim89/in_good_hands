@@ -25,6 +25,7 @@ const Home: NextPage<Props> = ({ ads }) => {
 export const getServerSideProps = withTimeout<Props>(async ({ req }) => {
     const { data: ads } = await api(req).ad.findMany();
 
+
     return { props: { ads } };
 });
 
