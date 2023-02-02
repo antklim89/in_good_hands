@@ -87,11 +87,11 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                                     <Image
                                         alt={`${type} ${breed}`}
                                         blurDataURL={image.thumbnail}
-                                        className="cover"
                                         height={768}
                                         key={image.id}
                                         placeholder="blur"
                                         src={getApiURL(image.src)}
+                                        style={{ width: 1280, height: 768, objectFit: 'cover' }}
                                         width={1280}
                                     />
                                 ))}
@@ -103,6 +103,7 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                                 className="cover"
                                 height={768}
                                 src={`/placeholders/${type}-ph.jpg`}
+                                style={{ width: 1280, height: 768, objectFit: 'cover' }}
                                 width={1280}
                             />
                         )}

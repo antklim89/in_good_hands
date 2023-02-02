@@ -22,7 +22,6 @@ const AdsListItem: FC<AdsListItemProps> = ({
             borderRadius="md"
             boxShadow="sm"
             flexDir={['column', 'column', 'row']}
-            maxHeight={380}
             my={8}
             p={4}
             width="full"
@@ -38,11 +37,11 @@ const AdsListItem: FC<AdsListItemProps> = ({
                                 <Image
                                     alt={`${type} ${breed}`}
                                     blurDataURL={image.thumbnail}
-                                    className="cover"
                                     height={384}
                                     key={image.id}
                                     placeholder="blur"
                                     src={getApiURL(image.src)}
+                                    style={{ width: 640, height: 384, objectFit: 'cover' }}
                                     width={640}
                                 />
                             ))}
