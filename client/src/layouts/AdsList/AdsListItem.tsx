@@ -26,7 +26,7 @@ const AdsListItem: FC<AdsListItemProps> = ({
             p={4}
             width="full"
         >
-            <Box flex="1 1 200px" mr={[0, 0, 8]}>
+            <Box flex="1 1 200px" mr={[0, 0, 8]} sx={{ 'img': { width: 640, objectFit: 'cover', aspectRatio: '640 / 384' } }}>
                 {images.length > 0
                     ? (
                         <Carousel
@@ -41,7 +41,6 @@ const AdsListItem: FC<AdsListItemProps> = ({
                                     key={image.id}
                                     placeholder="blur"
                                     src={getApiURL(image.src)}
-                                    style={{ width: 640, height: 384, objectFit: 'cover' }}
                                     width={640}
                                 />
                             ))}
@@ -50,7 +49,6 @@ const AdsListItem: FC<AdsListItemProps> = ({
                     : (
                         <Image
                             alt={`${type} placeholder`}
-                            className="cover"
                             height={384}
                             src={`/placeholders/${type}-ph.jpg`}
                             width={640}

@@ -76,7 +76,7 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                     />
                 </Box>
 
-                <Box flex="1 1 0">
+                <Box flex="1 1 0" sx={{ 'img': { width: 1280, objectFit: 'cover', aspectRatio: '1280 / 768' } }}>
                     {images.length > 0
                         ? (
                             <Carousel
@@ -91,7 +91,6 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                                         key={image.id}
                                         placeholder="blur"
                                         src={getApiURL(image.src)}
-                                        style={{ width: 1280, height: 768, objectFit: 'cover' }}
                                         width={1280}
                                     />
                                 ))}
@@ -103,7 +102,6 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                                 className="cover"
                                 height={768}
                                 src={`/placeholders/${type}-ph.jpg`}
-                                style={{ width: 1280, height: 768, objectFit: 'cover' }}
                                 width={1280}
                             />
                         )}
