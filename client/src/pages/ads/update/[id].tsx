@@ -1,10 +1,10 @@
 import { Ad } from '@in-good-hands/server/src/swagger';
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 
 import Seo from '~/components/Seo';
 import UpdateAd from '~/layouts/UpdateAd';
-import { api, withTimeout } from '~/utils';
+import { api } from '~/utils';
 
 
 interface Props {
@@ -25,7 +25,7 @@ const UpdateAdPage: NextPage<Props> = ({ ad }) => {
 
 export default UpdateAdPage;
 
-export const getServerSideProps = withTimeout<Props>(async ({ params, req }) => {
+export const getServerSideProps: GetServerSideProps<Props> = async ({ params, req }) => {
     try {
         if (!params || !(typeof params.id === 'string')) return { notFound: true };
 
@@ -42,4 +42,4 @@ export const getServerSideProps = withTimeout<Props>(async ({ params, req }) => 
     } catch (error) {
         return { notFound: true };
     }
-});
+};

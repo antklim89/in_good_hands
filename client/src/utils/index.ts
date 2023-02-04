@@ -5,4 +5,3 @@ export * from './api';
 export * from './useInfinityScroll';
 export * from './setSearchParams';
 export * from './useUpdate';
-export * from './withTimeout';

@@ -1,10 +1,10 @@
 import { Ad } from '@in-good-hands/server/src/swagger';
-import type { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 
 import Seo from '~/components/Seo';
 import AdsList from '~/layouts/AdsList';
 import Hero from '~/layouts/Hero';
-import { api, withTimeout } from '~/utils';
+import { api } from '~/utils';
 
 
 interface Props {
@@ -22,12 +22,12 @@ const Home: NextPage<Props> = ({ ads }) => {
 };
 
 
-export const getServerSideProps = withTimeout<Props>(async ({ req }) => {
-    const { data: ads } = await api(req).ad.findMany();
+export const getServerSideProps: GetStaticProps<Props> = async () => {
+    const { data: ads } = await api().ad.findMany();
 
 
     return { props: { ads } };
-});
+};
 
 export default Home;
 

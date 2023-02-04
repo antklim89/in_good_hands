@@ -47,6 +47,24 @@ id: number,
   } /**
      * No description
      * @tags ad
+     * @name FindIds
+     * @request GET:/ad/find-ids/
+     * @response `200` `({
+        id: number,
+    
+    })[]` Default Response
+    */
+  namespace FindIds {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+    }[];
+  } /**
+     * No description
+     * @tags ad
      * @name FindMany
      * @request GET:/ad/find-many/
      * @response `200` `({
@@ -94,24 +112,6 @@ id: number,
         thumbnail: string;
       }[];
       inFavorites?: boolean;
-    }[];
-  } /**
-     * No description
-     * @tags ad
-     * @name FindIds
-     * @request GET:/ad/find-ids/
-     * @response `200` `({
-        id: number,
-    
-    })[]` Default Response
-    */
-  namespace FindIds {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
     }[];
   } /**
      * No description
@@ -772,6 +772,24 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
  * No description
  *
  * @tags ad
+ * @name FindIds
+ * @request GET:/ad/find-ids/
+ * @response `200` `({
+    id: number,
+
+})[]` Default Response
+ */
+    findIds: (params?: RequestParams) => Promise<
+      AxiosResponse<
+        {
+          id: number;
+        }[]
+      >
+    >;
+    /**
+ * No description
+ *
+ * @tags ad
  * @name FindMany
  * @request GET:/ad/find-many/
  * @response `200` `({
@@ -819,24 +837,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
             thumbnail: string;
           }[];
           inFavorites?: boolean;
-        }[]
-      >
-    >;
-    /**
- * No description
- *
- * @tags ad
- * @name FindIds
- * @request GET:/ad/find-ids/
- * @response `200` `({
-    id: number,
-
-})[]` Default Response
- */
-    findIds: (params?: RequestParams) => Promise<
-      AxiosResponse<
-        {
-          id: number;
         }[]
       >
     >;

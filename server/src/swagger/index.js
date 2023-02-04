@@ -150,6 +150,24 @@ export class Api extends HttpClient {
  * No description
  *
  * @tags ad
+ * @name FindIds
+ * @request GET:/ad/find-ids/
+ * @response `200` `({
+    id: number,
+
+})[]` Default Response
+ */
+    findIds: (params = {}) =>
+      this.request({
+        path: `/ad/find-ids/`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+    /**
+ * No description
+ *
+ * @tags ad
  * @name FindMany
  * @request GET:/ad/find-many/
  * @response `200` `({
@@ -176,24 +194,6 @@ export class Api extends HttpClient {
         path: `/ad/find-many/`,
         method: "GET",
         query: query,
-        format: "json",
-        ...params,
-      }),
-    /**
- * No description
- *
- * @tags ad
- * @name FindIds
- * @request GET:/ad/find-ids/
- * @response `200` `({
-    id: number,
-
-})[]` Default Response
- */
-    findIds: (params = {}) =>
-      this.request({
-        path: `/ad/find-ids/`,
-        method: "GET",
         format: "json",
         ...params,
       }),
