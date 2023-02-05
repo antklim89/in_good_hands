@@ -43,6 +43,7 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
                         />
                     </FormControl>
                     <InputField
+                        isRequired
                         as="textarea"
                         formik={formik}
                         label="Body"
@@ -51,6 +52,7 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
                     />
                     <UpdateAdImages ad={ad} />
                     <InputField
+                        isRequired
                         as="select"
                         formik={formik}
                         label="Pet Type"
@@ -61,6 +63,7 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
                         ))}
                     </InputField>
                     <InputField
+                        isRequired
                         formik={formik}
                         label="Breed"
                         name="breed"
@@ -72,12 +75,14 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
                         name="name"
                     />
                     <InputField
+                        isRequired
                         formik={formik}
                         label="Price"
                         name="price"
                         type="number"
                     />
                     <InputField
+                        isRequired
                         autoComplete="email"
                         formik={formik}
                         label="E-mail"
@@ -85,6 +90,7 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
                         type="email"
                     />
                     <InputField
+                        isRequired
                         formik={formik}
                         label="Pone number"
                         name="tel"
@@ -92,17 +98,16 @@ const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {
                     />
                     <InputField
                         formik={formik}
-                        isRequired={false}
                         label="Telegram"
                         name="telegram"
                     />
                     <InputField
                         formik={formik}
-                        isRequired={false}
                         label="WhatsApp"
                         name="whatsapp"
                     />
                     <InputField
+                        isRequired
                         formik={formik}
                         label="Pet birthday"
                         max="2023-06-30T16:30"
