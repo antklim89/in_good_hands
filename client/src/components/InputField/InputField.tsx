@@ -64,7 +64,7 @@ const InputField: InputFieldBaseFC = ({ formik, label, name, as, ...props }) => 
     }, [as, value, formik.handleChange, name]);
 
     return (
-        <FormControl isRequired isDisabled={formik.isSubmitting} mb={2}>
+        <FormControl isDisabled={formik.isSubmitting} isRequired={props.isRequired} mb={2}>
             {(label) ? <FormLabel>{label}</FormLabel> : null}
             {component}
             <Flex justifyContent="flex-end">
