@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
 import { rm } from 'fs-extra';
-import Jimp from 'jimp';
-
+// import Jimp from 'jimp';
+import sharp from 'sharp';
 
 import schema from './schema';
 import { saveImage, saveThumnail } from './services';
@@ -29,11 +29,13 @@ export default async function newAdRoute(app: FastifyInstance) {
 
             try {
                 const [{ filepath }] = await req.saveRequestFiles();
-                const jimpFile = await Jimp.read(filepath);
 
-                await saveImage(jimpFile, imageFullPath);
-                const thumbnail = await saveThumnail(jimpFile);
-                await req.cleanRequestFiles();
+                const sharpInstance = sharp(filepath);
+
+                await saveImage(sharpInstance, imageFullPath);
+                const thumbnail = await saveThumnail(sharpInstance);
+
+                await req.cleanRequestFiles().catch(() => null);
 
                 const result = await app.prisma.image.create({
                     data: {
@@ -51,7 +53,7 @@ export default async function newAdRoute(app: FastifyInstance) {
                 repl.status(201);
                 return result;
             } catch (error) {
-                await req.cleanRequestFiles();
+                await req.cleanRequestFiles().catch(() => null);
                 rm(imageFullPath);
                 throw error;
             }

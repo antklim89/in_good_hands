@@ -1,19 +1,19 @@
-import Jimp from 'jimp';
+import { Sharp } from 'sharp';
 
 
-export async function saveThumnail(jimpFile: Jimp): Promise<string> {
-    const base64 = await jimpFile
-        .quality(1)
-        .cover(1024, 768)
-        .scale(0.33)
-        .getBase64Async(Jimp.MIME_JPEG);
+export async function saveThumnail(sharpInstance: Sharp): Promise<string> {
+    const sharpResult = await sharpInstance
+        .resize(1024, 768, { fit: 'cover' })
+        .webp({ quality: 1 })
+        .toBuffer();
+    const thumbnail = `data:image/jpeg;base64, ${sharpResult.toString('base64')}`;
 
-    return base64;
+    return thumbnail;
 }
 
-export async function saveImage(jimpFile: Jimp, imageFullPath: string) {
-    await jimpFile
-        .quality(90)
-        .cover(1024, 768)
-        .writeAsync(imageFullPath);
+export async function saveImage(sharpInstance: Sharp, imageFullPath: string) {
+    await sharpInstance
+        .resize(1024, 768, { fit: 'cover' })
+        .webp({ quality: 1 })
+        .toFile(imageFullPath);
 }
