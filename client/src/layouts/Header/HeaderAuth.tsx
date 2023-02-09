@@ -1,5 +1,5 @@
 import {
-    Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerOverlay, Progress, useDisclosure,
+    Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerOverlay, Heading, Progress, useDisclosure,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC, useRef } from 'react';
@@ -38,6 +38,7 @@ const HeaderAuth: FC<HeaderAuthProps> = () => {
             <Drawer
                 isOpen={isOpen}
                 placement="right"
+                size="lg"
                 onClose={onClose}
             >
                 <DrawerOverlay />
@@ -53,32 +54,21 @@ const HeaderAuth: FC<HeaderAuthProps> = () => {
                         {user
                             ? (
                                 <>
-                                    <Button as={Link} href="/profile" onClick={onClose} >
+                                    <Heading mb={4} textAlign="center">
+                                        {user.name}
+                                    </Heading>
+                                    <Button
+                                        as={Link} href="/profile" variant="outline"
+                                        onClick={onClose}
+                                    >
                                         Profile
                                     </Button>
-                                    <Button onClick={logout} >
+                                    <Button variant="outline" onClick={logout} >
                                         Logout
                                     </Button>
                                 </>
                             )
-                            : (
-                                <>
-                                    <Auth type="login">
-                                        {({ onOpen: handleOpen }) => (
-                                            <Button onClick={handleOpen}>
-                                                Log In
-                                            </Button>
-                                        )}
-                                    </Auth>
-                                    <Auth type="register">
-                                        {({ onOpen: handleOpen }) => (
-                                            <Button onClick={handleOpen}>
-                                                Register
-                                            </Button>
-                                        )}
-                                    </Auth>
-                                </>
-                            )}
+                            : <Auth type="login" onClose={onClose} />}
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>

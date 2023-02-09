@@ -1,36 +1,25 @@
-import {
-    useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody,
-} from '@chakra-ui/react';
-import { FC } from 'react';
+import { Heading, Box, Button } from '@chakra-ui/react';
+import { FC, useState } from 'react';
 
 import { AuthProps } from './Auth.types';
 import AuthForm from './AuthForm';
 
 
-const Auth: FC<AuthProps> = ({ type = 'login', children }) => {
-    const { onOpen, isOpen, onClose } = useDisclosure();
+const Auth: FC<AuthProps> = ({ type: initType = 'login', onClose }) => {
+    const [type, setType] = useState<AuthProps['type']>(initType);
+
+    const oppositeType: AuthProps['type'] = type === 'login' ? 'register' : 'login';
 
     return (
-        <>
-            {children({ onOpen })}
-            <Modal
-                isCentered
-                isOpen={isOpen} size="2xl"
-                onClose={onClose}
-            >
-                <ModalOverlay />
-                <ModalContent px={4} py={8}>
-                    <ModalHeader textTransform="capitalize">
-                        {type}
-                    </ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        <AuthForm type={type} onClose={onClose} />
-                    </ModalBody>
-                </ModalContent>
-            </Modal>
-
-        </>
+        <Box>
+            <Heading textTransform="capitalize">
+                {type}
+            </Heading>
+            <Button variant="link" onClick={() => setType(oppositeType)} >
+                or {oppositeType}
+            </Button>
+            <AuthForm type={type} onClose={onClose} />
+        </Box>
     );
 };
 
