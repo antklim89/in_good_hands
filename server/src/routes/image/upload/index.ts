@@ -1,13 +1,12 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
-import { rm } from 'fs-extra';
-// import Jimp from 'jimp';
 import sharp from 'sharp';
 
 import schema from './schema';
 import { saveImage, saveThumnail } from './services';
 
+import { UPLOAD_IMAGES_LIMIT } from '@/constants';
 import { Image } from '@/swagger';
-import { getImageFullPath, getImageFullUrl, getImagePath } from '@/utils';
+import { ClientException, getImageFullPath, getImageFullUrl, getImagePath } from '@/utils';
 
 
 export default async function newAdRoute(app: FastifyInstance) {
@@ -23,40 +22,39 @@ export default async function newAdRoute(app: FastifyInstance) {
             const { adId } = req.query;
             const { user } = await req.getAdOwner(adId);
 
+            const imagesCount = await app.prisma.image.count({
+                where: { adId },
+            });
+            if (imagesCount > UPLOAD_IMAGES_LIMIT) {
+                throw new ClientException(`Too many images. The limit is ${UPLOAD_IMAGES_LIMIT} images`, 400);
+            }
+
             const imagePath = getImagePath(user.id, adId);
             const imageFullPath = getImageFullPath(imagePath);
             const imageFullUrl = getImageFullUrl(imagePath);
 
-            try {
-                const [{ filepath }] = await req.saveRequestFiles();
+            const [{ filepath }] = await req.saveRequestFiles();
 
-                const sharpInstance = sharp(filepath);
+            const sharpInstance = sharp(filepath);
 
-                await saveImage(sharpInstance, imageFullPath);
-                const thumbnail = await saveThumnail(sharpInstance);
+            await saveImage(sharpInstance, imageFullPath);
+            const thumbnail = await saveThumnail(sharpInstance);
 
-                await req.cleanRequestFiles().catch(() => null);
+            const result = await app.prisma.image.create({
+                data: {
+                    src: imageFullUrl,
+                    thumbnail,
+                    adId,
+                },
+                select: {
+                    id: true,
+                    src: true,
+                    thumbnail: true,
+                },
+            });
 
-                const result = await app.prisma.image.create({
-                    data: {
-                        src: imageFullUrl,
-                        thumbnail,
-                        adId,
-                    },
-                    select: {
-                        id: true,
-                        src: true,
-                        thumbnail: true,
-                    },
-                });
-
-                repl.status(201);
-                return result;
-            } catch (error) {
-                await req.cleanRequestFiles().catch(() => null);
-                rm(imageFullPath);
-                throw error;
-            }
+            repl.status(201);
+            return result;
         },
     });
 }
