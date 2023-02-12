@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 
 const USERS_NUMBER = 5;
 const ADS_NUMBER = 100;
-const IMAGES_IN_AD_NUMBER = 1;
+const IMAGES_IN_AD_NUMBER = 3;
 
 
 const animals = [
@@ -103,7 +103,7 @@ async function generateImages(ads: Ad[]) {
             const imageResult = await prisma.image.create({
                 data: {
                     src: `/upload/placeholders/${image || 'cat1.jpg'}`,
-                    thumbnail: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAP////////////////////////////////////////////////////////////////////////////////////8B///////////////////////////////////////////////////////////////////////////////////////AABEIADIAMgMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AI6AFwaADBoAMGgAwaAEoAKAFBxQA9TnNAD/AMKAEyfT9RQAvagCCgAoAKAJEoAcfpn8cUAJj1GPxoAM+n6mgBh4+tADaACgCRKAH0ANJ5+nT/GgA6ehP+elICMnJpgJQAUASJQA88UAJj3Oe9ABgCgCE0AFACg4oAXdigBd5/z/AProAN5/z/8AroAN5oAZQAUAFABQAUAFABQAUAFAH//Z',
+                    thumbnail: 'data:image/webp;base64, UklGRpoAAABXRUJQVlA4II4AAACwBgCdASpAADAAP83g42g/ua+nqrgM+/A5iUAaU+uQjGKOKGvBugQuGqIXQ9WBeLmjNjyMtfyzeyEABg43gAD+6sy9j2kK2/pd3kla4LZS8P828Gu2oLW9n+4XI9IYQRjcWR5HsGBPaF2b5xIszzJdsNU5lu1bYPxz+J4Hcm6RJilRJArCK/LBmW6IoAAA',
                     adId: id,
                 },
             });
@@ -115,11 +115,9 @@ async function generateImages(ads: Ad[]) {
 }
 
 (async () => {
-    const adsCount = await prisma.ad.count();
-    if (adsCount > 0) return;
-    // await prisma.image.deleteMany({});
-    // await prisma.ad.deleteMany({});
-    // await prisma.user.deleteMany({});
+    await prisma.image.deleteMany({});
+    await prisma.ad.deleteMany({});
+    await prisma.user.deleteMany({});
 
     const users = await generateUsers();
     const ads = await generateAds(users);
