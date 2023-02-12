@@ -24,10 +24,16 @@ export function useFavoriteButton({ adId, inFavorites: initInFavorites }:Favorit
         }
 
         if (timeout.current) clearTimeout(timeout.current);
-        timeout.current = setTimeout(() => {
+        timeout.current = setTimeout(async () => {
             if (prevInFaforites.current === inFavorites) return;
-            prevInFaforites.current = inFavorites;
-            toggleFavorites(inFavorites, adId);
+            try {
+                await toggleFavorites(inFavorites, adId).then(() => (prevInFaforites.current = inFavorites));
+            } catch (error) {
+                toast({
+                    title: error instanceof Error ? error.message : 'Unexpected error. Try again later.',
+                    status: 'error',
+                });
+            }
         }, 700);
 
         setInFavorites((p) => !p);
