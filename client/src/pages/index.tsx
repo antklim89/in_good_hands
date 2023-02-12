@@ -1,5 +1,5 @@
 import { Ad } from '@in-good-hands/server/src/swagger';
-import type { GetStaticProps, NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 
 import Seo from '~/components/Seo';
 import AdsList from '~/layouts/AdsList';
@@ -22,8 +22,8 @@ const Home: NextPage<Props> = ({ ads }) => {
 };
 
 
-export const getServerSideProps: GetStaticProps<Props> = async () => {
-    const { data: ads } = await api().ad.findMany();
+export const getServerSideProps: GetServerSideProps<Props> = async ({ req }) => {
+    const { data: ads } = await api(req).ad.findMany();
 
 
     return { props: { ads } };
