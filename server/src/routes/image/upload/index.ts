@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import schema from './schema';
 import { saveImage, saveThumnail } from './services';
 
-import { UPLOAD_IMAGES_LIMIT } from '@/constants';
+import { UPLOAD_IMAGES_LIMIT } from '@/shareConstants';
 import { Image } from '@/swagger';
 import { ClientException, getImageFullPath, getImageFullUrl, getImagePath } from '@/utils';
 
@@ -25,7 +25,7 @@ export default async function newAdRoute(app: FastifyInstance) {
             const imagesCount = await app.prisma.image.count({
                 where: { adId },
             });
-            if (imagesCount > UPLOAD_IMAGES_LIMIT) {
+            if (imagesCount >= UPLOAD_IMAGES_LIMIT) {
                 throw new ClientException(`Too many images. The limit is ${UPLOAD_IMAGES_LIMIT} images`, 400);
             }
 
