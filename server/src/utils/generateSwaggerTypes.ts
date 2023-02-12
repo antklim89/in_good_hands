@@ -10,7 +10,7 @@ export async function generateSwaggerTypes(app: FastifyInstance): Promise<void> 
             name: 'index.ts',
             output: resolve(process.cwd(), './src/swagger'),
             spec: app.swagger() as import('swagger-schema-official').Spec,
-            httpClientType: 'axios',
+            httpClientType: 'fetch',
             defaultResponseAsSuccess: true,
             generateRouteTypes: true,
             generateResponses: true,

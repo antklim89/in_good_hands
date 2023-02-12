@@ -1,7 +1,6 @@
 import type { IncomingMessage } from 'http';
 
 import { Api } from '@in-good-hands/server/src/swagger';
-import { AxiosRequestHeaders } from 'axios';
 
 import { getUserCookie } from './getCookies';
 
@@ -9,7 +8,7 @@ import { API_URL } from '~/constants';
 
 
 export const api = (req?: IncomingMessage) => {
-    const headers = {} as AxiosRequestHeaders;
+    const headers: HeadersInit = {};
 
     if (req) {
         const cookieUser = getUserCookie(req.headers.cookie);
@@ -22,17 +21,20 @@ export const api = (req?: IncomingMessage) => {
 
 
     const apiInstance = new Api({
-        baseURL: API_URL,
-        headers,
-    });
+        customFetch(input, init?) {
+            return fetch(input, init)
+                .then(async (data) => {
+                    if (data.ok) return data;
 
-    apiInstance.instance.interceptors.response.use(
-        (response) => response,
-        (error) => {
-            error.message = error.response?.data?.message || error.message || 'Unexpected Error. Try again later.';
-            return Promise.reject(error);
+                    const error = await data.json();
+                    throw new Error(error.message || 'Unexpected Error. Try again later.');
+                });
         },
-    );
+        baseUrl: API_URL,
+        baseApiParams: {
+            headers,
+        },
+    });
 
     return apiInstance;
 };

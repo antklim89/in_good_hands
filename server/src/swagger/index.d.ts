@@ -476,6 +476,40 @@ export declare namespace Auth {
       /** @maxLength 50 */
       telegram?: string;
     };
+  }
+  /**
+   * No description
+   * @tags auth
+   * @name Update
+   * @request PATCH:/auth/update/
+   * @response `200` `void` Default Response
+   */
+  namespace Update {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      email?: string;
+      /**
+       * @minLength 3
+       * @maxLength 30
+       */
+      name?: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      tel?: string;
+      /** @maxLength 50 */
+      whatsapp?: string;
+      /** @maxLength 50 */
+      telegram?: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = void;
   } /**
      * No description
      * @tags auth
@@ -521,40 +555,6 @@ export declare namespace Auth {
       };
       token: string;
     };
-  }
-  /**
-   * No description
-   * @tags auth
-   * @name Update
-   * @request PATCH:/auth/update/
-   * @response `200` `void` Default Response
-   */
-  namespace Update {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      email?: string;
-      /**
-       * @minLength 3
-       * @maxLength 30
-       */
-      name?: string;
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      tel?: string;
-      /** @maxLength 50 */
-      whatsapp?: string;
-      /** @maxLength 50 */
-      telegram?: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = void;
   }
 }
 export declare namespace Favorites {
@@ -669,9 +669,9 @@ export declare namespace Image {
     };
   }
 }
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType } from "axios";
 export declare type QueryParamsType = Record<string | number, any>;
-export interface FullRequestParams extends Omit<AxiosRequestConfig, "data" | "params" | "url" | "responseType"> {
+export declare type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
+export interface FullRequestParams extends Omit<RequestInit, "body"> {
   /** set parameter to `true` for call `securityWorker` for this request */
   secure?: boolean;
   /** request path */
@@ -681,18 +681,26 @@ export interface FullRequestParams extends Omit<AxiosRequestConfig, "data" | "pa
   /** query params */
   query?: QueryParamsType;
   /** format of response (i.e. response.json() -> format: "json") */
-  format?: ResponseType;
+  format?: ResponseFormat;
   /** request body */
   body?: unknown;
+  /** base url */
+  baseUrl?: string;
+  /** request cancellation token */
+  cancelToken?: CancelToken;
 }
 export declare type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
-export interface ApiConfig<SecurityDataType = unknown> extends Omit<AxiosRequestConfig, "data" | "cancelToken"> {
-  securityWorker?: (
-    securityData: SecurityDataType | null,
-  ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
-  secure?: boolean;
-  format?: ResponseType;
+export interface ApiConfig<SecurityDataType = unknown> {
+  baseUrl?: string;
+  baseApiParams?: Omit<RequestParams, "baseUrl" | "cancelToken" | "signal">;
+  securityWorker?: (securityData: SecurityDataType | null) => Promise<RequestParams | void> | RequestParams | void;
+  customFetch?: typeof fetch;
 }
+export interface HttpResponse<D extends unknown, E extends unknown = unknown> extends Response {
+  data: D;
+  error: E;
+}
+declare type CancelToken = Symbol | string | number;
 export declare enum ContentType {
   Json = "application/json",
   FormData = "multipart/form-data",
@@ -700,25 +708,34 @@ export declare enum ContentType {
   Text = "text/plain",
 }
 export declare class HttpClient<SecurityDataType = unknown> {
-  instance: AxiosInstance;
+  baseUrl: string;
   private securityData;
   private securityWorker?;
-  private secure?;
-  private format?;
-  constructor({ securityWorker, secure, format, ...axiosConfig }?: ApiConfig<SecurityDataType>);
+  private abortControllers;
+  private customFetch;
+  private baseApiParams;
+  constructor(apiConfig?: ApiConfig<SecurityDataType>);
   setSecurityData: (data: SecurityDataType | null) => void;
-  protected mergeRequestParams(params1: AxiosRequestConfig, params2?: AxiosRequestConfig): AxiosRequestConfig;
-  protected stringifyFormItem(formItem: unknown): string;
-  protected createFormData(input: Record<string, unknown>): FormData;
-  request: <T = any, _E = any>({
+  protected encodeQueryParam(key: string, value: any): string;
+  protected addQueryParam(query: QueryParamsType, key: string): string;
+  protected addArrayQueryParam(query: QueryParamsType, key: string): any;
+  protected toQueryString(rawQuery?: QueryParamsType): string;
+  protected addQueryParams(rawQuery?: QueryParamsType): string;
+  private contentFormatters;
+  protected mergeRequestParams(params1: RequestParams, params2?: RequestParams): RequestParams;
+  protected createAbortSignal: (cancelToken: CancelToken) => AbortSignal | undefined;
+  abortRequest: (cancelToken: CancelToken) => void;
+  request: <T = any, E = any>({
+    body,
     secure,
     path,
     type,
     query,
     format,
-    body,
+    baseUrl,
+    cancelToken,
     ...params
-  }: FullRequestParams) => Promise<AxiosResponse<T>>;
+  }: FullRequestParams) => Promise<HttpResponse<T, E>>;
 }
 /**
  * @title In Good Hands API
@@ -736,7 +753,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
    * @request GET:/
    * @response `200` `void` Default Response
    */
-  getRoot: (params?: RequestParams) => Promise<AxiosResponse<void>>;
+  getRoot: (params?: RequestParams) => Promise<HttpResponse<void, any>>;
   ad: {
     /**
  * No description
@@ -750,9 +767,12 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
 }` Default Response
  */
     createNew: (params?: RequestParams) => Promise<
-      AxiosResponse<{
-        id: number;
-      }>
+      HttpResponse<
+        {
+          id: number;
+        },
+        any
+      >
     >;
     /**
      * No description
@@ -767,7 +787,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         adId: number;
       },
       params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
+    ) => Promise<HttpResponse<void, any>>;
     /**
  * No description
  *
@@ -780,10 +800,11 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
 })[]` Default Response
  */
     findIds: (params?: RequestParams) => Promise<
-      AxiosResponse<
+      HttpResponse<
         {
           id: number;
-        }[]
+        }[],
+        any
       >
     >;
     /**
@@ -821,7 +842,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<
-      AxiosResponse<
+      HttpResponse<
         {
           id: number;
           createdAt: string;
@@ -837,7 +858,8 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
             thumbnail: string;
           }[];
           inFavorites?: boolean;
-        }[]
+        }[],
+        any
       >
     >;
     /**
@@ -862,7 +884,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<
-      AxiosResponse<
+      HttpResponse<
         {
           id: number;
           createdAt: string;
@@ -870,7 +892,8 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
           type: string;
           breed: string;
           isPublished: boolean;
-        }[]
+        }[],
+        any
       >
     >;
     /**
@@ -909,27 +932,30 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<
-      AxiosResponse<{
-        id: number;
-        createdAt: string;
-        updatedAt: string;
-        name: string;
-        type: string;
-        breed: string;
-        price: number;
-        birthday: string;
-        description: string;
-        tel: string;
-        telegram?: string;
-        whatsapp?: string;
-        email: string;
-        images: {
+      HttpResponse<
+        {
           id: number;
-          src: string;
-          thumbnail: string;
-        }[];
-        inFavorites?: boolean;
-      }>
+          createdAt: string;
+          updatedAt: string;
+          name: string;
+          type: string;
+          breed: string;
+          price: number;
+          birthday: string;
+          description: string;
+          tel: string;
+          telegram?: string;
+          whatsapp?: string;
+          email: string;
+          images: {
+            id: number;
+            src: string;
+            thumbnail: string;
+          }[];
+          inFavorites?: boolean;
+        },
+        any
+      >
     >;
     /**
  * No description
@@ -989,49 +1015,52 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<
-      AxiosResponse<{
-        /** @maxLength 100 */
-        name: string;
-        type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
-        /**
-         * @minLength 3
-         * @maxLength 100
-         */
-        breed: string;
-        /**
-         * @minLength 3
-         * @maxLength 4000
-         */
-        description: string;
-        /**
-         * @minLength 3
-         * @maxLength 100
-         */
-        email: string;
-        /**
-         * @minLength 3
-         * @maxLength 100
-         */
-        tel: string;
-        /** @maxLength 50 */
-        whatsapp?: string;
-        /** @maxLength 50 */
-        telegram?: string;
-        /**
-         * @min 0
-         * @max 99999
-         */
-        price: number;
-        /** @format date */
-        birthday: string;
-        isPublished: boolean;
-        id: number;
-        images: {
+      HttpResponse<
+        {
+          /** @maxLength 100 */
+          name: string;
+          type: "cat" | "dog" | "bird" | "aquarium" | "rodent";
+          /**
+           * @minLength 3
+           * @maxLength 100
+           */
+          breed: string;
+          /**
+           * @minLength 3
+           * @maxLength 4000
+           */
+          description: string;
+          /**
+           * @minLength 3
+           * @maxLength 100
+           */
+          email: string;
+          /**
+           * @minLength 3
+           * @maxLength 100
+           */
+          tel: string;
+          /** @maxLength 50 */
+          whatsapp?: string;
+          /** @maxLength 50 */
+          telegram?: string;
+          /**
+           * @min 0
+           * @max 99999
+           */
+          price: number;
+          /** @format date */
+          birthday: string;
+          isPublished: boolean;
           id: number;
-          src: string;
-          thumbnail: string;
-        }[];
-      }>
+          images: {
+            id: number;
+            src: string;
+            thumbnail: string;
+          }[];
+        },
+        any
+      >
     >;
     /**
      * No description
@@ -1083,7 +1112,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         isPublished: boolean;
       },
       params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
+    ) => Promise<HttpResponse<void, any>>;
   };
   auth: {
     /**
@@ -1108,7 +1137,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         oldPassword: string;
       },
       params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
+    ) => Promise<HttpResponse<void, any>>;
     /**
  * No description
  *
@@ -1141,14 +1170,17 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<
-      AxiosResponse<{
-        user: {
-          email: string;
-          name: string;
-          id: string;
-        };
-        token: string;
-      }>
+      HttpResponse<
+        {
+          user: {
+            email: string;
+            name: string;
+            id: string;
+          };
+          token: string;
+        },
+        any
+      >
     >;
     /**
  * No description
@@ -1181,8 +1213,42 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
 }` Default Response
  */
     me: (params?: RequestParams) => Promise<
-      AxiosResponse<{
-        id?: string;
+      HttpResponse<
+        {
+          id?: string;
+          /**
+           * @minLength 3
+           * @maxLength 50
+           */
+          email?: string;
+          /**
+           * @minLength 3
+           * @maxLength 30
+           */
+          name?: string;
+          /**
+           * @minLength 3
+           * @maxLength 50
+           */
+          tel?: string;
+          /** @maxLength 50 */
+          whatsapp?: string;
+          /** @maxLength 50 */
+          telegram?: string;
+        },
+        any
+      >
+    >;
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (
+      body: {
         /**
          * @minLength 3
          * @maxLength 50
@@ -1202,8 +1268,9 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         whatsapp?: string;
         /** @maxLength 50 */
         telegram?: string;
-      }>
-    >;
+      },
+      params?: RequestParams,
+    ) => Promise<HttpResponse<void, any>>;
     /**
  * No description
  *
@@ -1241,47 +1308,18 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<
-      AxiosResponse<{
-        user: {
-          email: string;
-          name: string;
-          id: string;
-        };
-        token: string;
-      }>
+      HttpResponse<
+        {
+          user: {
+            email: string;
+            name: string;
+            id: string;
+          };
+          token: string;
+        },
+        any
+      >
     >;
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
-     */
-    update: (
-      body: {
-        /**
-         * @minLength 3
-         * @maxLength 50
-         */
-        email?: string;
-        /**
-         * @minLength 3
-         * @maxLength 30
-         */
-        name?: string;
-        /**
-         * @minLength 3
-         * @maxLength 50
-         */
-        tel?: string;
-        /** @maxLength 50 */
-        whatsapp?: string;
-        /** @maxLength 50 */
-        telegram?: string;
-      },
-      params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
   };
   favorites: {
     /**
@@ -1297,7 +1335,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         adId: number;
       },
       params?: RequestParams,
-    ) => Promise<AxiosResponse<number>>;
+    ) => Promise<HttpResponse<number, any>>;
     /**
      * No description
      *
@@ -1311,7 +1349,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         adId: number;
       },
       params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
+    ) => Promise<HttpResponse<void, any>>;
     /**
  * No description
  *
@@ -1332,7 +1370,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
 })[]` Default Response
  */
     findMany: (params?: RequestParams) => Promise<
-      AxiosResponse<
+      HttpResponse<
         {
           id: number;
           ad: {
@@ -1342,7 +1380,8 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
             breed: string;
             price: number;
           };
-        }[]
+        }[],
+        any
       >
     >;
   };
@@ -1360,7 +1399,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         imageId: number;
       },
       params?: RequestParams,
-    ) => Promise<AxiosResponse<void>>;
+    ) => Promise<HttpResponse<void, any>>;
     /**
  * No description
  *
@@ -1384,11 +1423,15 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<
-      AxiosResponse<{
-        id: number;
-        src: string;
-        thumbnail: string;
-      }>
+      HttpResponse<
+        {
+          id: number;
+          src: string;
+          thumbnail: string;
+        },
+        any
+      >
     >;
   };
 }
+export {};
