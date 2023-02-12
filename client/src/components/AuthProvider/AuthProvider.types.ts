@@ -11,7 +11,6 @@ export interface AuthProviderProps {
 export interface IAuthContext {
     user: IUser|null
     isAuth: boolean;
-    authInited: boolean;
     login: (e: Auth.Login.RequestBody) => void;
     register: (e: Auth.Register.RequestBody) => void;
     logout: () => void;

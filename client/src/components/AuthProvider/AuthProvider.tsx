@@ -1,42 +1,30 @@
-import {
-    createContext, FC, useCallback, useEffect, useMemo, useState,
-} from 'react';
+import { createContext, FC, useCallback, useMemo } from 'react';
 
 import { AuthProviderProps, IAuthContext } from './AuthProvider.types';
 
-import { IUser } from '~/types';
 import { api, clearUserCookie, getUserCookie, setUserCookie } from '~/utils';
 
 
 export const AuthContext = createContext({} as IAuthContext);
 
 const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-    const [user, setUser] = useState<IUser | null>(null);
-    const [authInited, setAuthInited] = useState(false);
-
+    const { user } = useMemo(() => getUserCookie() || { user: null }, []);
     const isAuth = useMemo(() => Boolean(user), [user]);
-
-    useEffect(() => {
-        const userCookie = getUserCookie();
-        setUser(userCookie?.user || null);
-        setAuthInited(true);
-    }, []);
 
 
     const login: IAuthContext['login'] = useCallback(async (body) => {
         const { data } = await api().auth.login(body);
         setUserCookie(data);
-        setUser(data.user);
+        location.reload();
     }, []);
 
     const register: IAuthContext['register'] = useCallback(async (body) => {
         const { data } = await api().auth.register(body);
         setUserCookie(data);
-        setUser(data.user);
+        location.reload();
     }, []);
 
     const logout: IAuthContext['logout'] = useCallback(() => {
-        setUser(null);
         clearUserCookie();
         location.reload();
     }, []);
@@ -46,7 +34,6 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
             value={{
                 user,
                 isAuth,
-                authInited,
                 login,
                 register,
                 logout,
