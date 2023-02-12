@@ -1,4 +1,5 @@
 import { Box, Button, Container, Flex, Text } from '@chakra-ui/react';
+import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/server/src/shareConstants';
 import { Ad } from '@in-good-hands/server/src/swagger';
 import Image from 'next/image';
 import Carousel from 'nuka-carousel';
@@ -76,7 +77,7 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                     />
                 </Box>
 
-                <Box flex="1 1 0" sx={{ 'img': { width: 1280, objectFit: 'cover', aspectRatio: '1280 / 768' } }}>
+                <Box flex="1 1 0" sx={{ 'img': { width: IMAGE_WIDHT, objectFit: 'cover', aspectRatio: `${IMAGE_WIDHT} / ${IMAGE_HEIGHT}` } }}>
                     {images.length > 0
                         ? (
                             <Carousel
@@ -87,11 +88,11 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                                     <Image
                                         alt={`${type} ${breed}`}
                                         blurDataURL={image.thumbnail}
-                                        height={768}
+                                        height={IMAGE_HEIGHT}
                                         key={image.id}
                                         placeholder="blur"
                                         src={getApiURL(image.src)}
-                                        width={1280}
+                                        width={IMAGE_WIDHT}
                                     />
                                 ))}
                             </Carousel>
@@ -100,9 +101,9 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                             <Image
                                 alt={`${type} placeholder`}
                                 className="cover"
-                                height={768}
+                                height={IMAGE_HEIGHT}
                                 src={`/placeholders/${type}-ph.jpg`}
-                                width={1280}
+                                width={IMAGE_WIDHT}
                             />
                         )}
                 </Box>

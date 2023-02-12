@@ -1,4 +1,5 @@
 import { Flex, Heading, Button, Box } from '@chakra-ui/react';
+import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/server/src/shareConstants';
 import Image from 'next/image';
 import Link from 'next/link';
 import Carousel from 'nuka-carousel';
@@ -11,6 +12,10 @@ import PetAge from '~/components/PetAge';
 import Price from '~/components/Price';
 import { getApiURL } from '~/utils';
 
+
+const SCALE = 2;
+const imgWidth = IMAGE_WIDHT / SCALE;
+const imgHeight = IMAGE_HEIGHT / SCALE;
 
 const AdsListItem: FC<AdsListItemProps> = ({
     id, type, breed, price, images, birthday, inFavorites,
@@ -26,7 +31,7 @@ const AdsListItem: FC<AdsListItemProps> = ({
             p={4}
             width="full"
         >
-            <Box flex="1 1 200px" mr={[0, 0, 8]} sx={{ 'img': { width: 640, objectFit: 'cover', aspectRatio: '640 / 384' } }}>
+            <Box flex="1 1 200px" mr={[0, 0, 8]} sx={{ 'img': { width: imgWidth, objectFit: 'cover', aspectRatio: `${imgWidth} / ${imgHeight}` } }}>
                 {images.length > 0
                     ? (
                         <Carousel
@@ -37,11 +42,11 @@ const AdsListItem: FC<AdsListItemProps> = ({
                                 <Image
                                     alt={`${type} ${breed}`}
                                     blurDataURL={image.thumbnail}
-                                    height={384}
+                                    height={imgHeight}
                                     key={image.id}
                                     placeholder="blur"
                                     src={getApiURL(image.src)}
-                                    width={640}
+                                    width={imgWidth}
                                 />
                             ))}
                         </Carousel>
@@ -49,9 +54,9 @@ const AdsListItem: FC<AdsListItemProps> = ({
                     : (
                         <Image
                             alt={`${type} placeholder`}
-                            height={384}
+                            height={imgHeight}
                             src={`/placeholders/${type}-ph.jpg`}
-                            width={640}
+                            width={imgWidth}
                         />
                     )}
             </Box>

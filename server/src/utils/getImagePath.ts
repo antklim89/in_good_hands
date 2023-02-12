@@ -10,7 +10,7 @@ export function getImagePathBySrc(imageSrc: string): string {
 
 
 export function getImagePath(userId: string, adId: number) {
-    return join(`${userId}`, `${adId}`, `${randomUUID()}.jpg`);
+    return join(`${userId}`, `${adId}`, `${randomUUID()}.webp`);
 }
 
 export function getImageFullPath(imagePath: string) {
