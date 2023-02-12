@@ -18,7 +18,7 @@
     "test": "jest --watchAll -i",
     "migrate": "run-s migrate:**",
     "migrate:dev": "prisma migrate dev",
-    "migrate:test": "DATABASE_URL=\"postgresql://anton@localhost:5432/test?schema=public\" prisma migrate deploy",
+    "migrate:test": "DATABASE_URL=\"postgresql://postgres@localhost:5432/test?schema=public\" prisma migrate deploy",
     "studio": "prisma studio --browser none"
   },
   "keywords": [],
