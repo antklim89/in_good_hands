@@ -1,5 +1,6 @@
 import { AddIcon } from '@chakra-ui/icons';
 import { Box, IconButton, SimpleGrid, Text, Spinner } from '@chakra-ui/react';
+import { UPLOAD_IMAGES_LIMIT } from '@in-good-hands/server/src/shareConstants';
 import { FC, useId } from 'react';
 
 import { UpdateAdProps } from './UpdateAd.types';
@@ -14,7 +15,7 @@ const UpdateAdImages: FC<UpdateAdProps> = ({ ad }) => {
     return (
         <Box mb={2}>
             <Text color="black" pb={2}>
-                Images
+                Images ({uploadedImages.length} / {UPLOAD_IMAGES_LIMIT})
             </Text>
             <SimpleGrid columns={[4, 6, 8]} gap={1}>
                 {uploadedImages.map((uploadedImage) => (
@@ -24,24 +25,29 @@ const UpdateAdImages: FC<UpdateAdProps> = ({ ad }) => {
                         setUploadedImages={setUploadedImages}
                     />
                 ))}
-                <IconButton
-                    aria-label="upload new image"
-                    as="label"
-                    disabled={loading}
-                    htmlFor={id}
-                    icon={loading ? <Spinner /> : <AddIcon />}
-                    variant="outline"
-                />
-                <Box
-                    multiple
-                    accept="image/*"
-                    as="input"
-                    height={0}
-                    id={id}
-                    type="file"
-                    width={0}
-                    onChange={handleUpload}
-                />
+                {(uploadedImages.length < UPLOAD_IMAGES_LIMIT)
+                && (
+                    <>
+                        <IconButton
+                            aria-label="upload new image"
+                            as="label"
+                            disabled={loading}
+                            htmlFor={id}
+                            icon={loading ? <Spinner /> : <AddIcon />}
+                            variant="outline"
+                        />
+                        <Box
+                            multiple
+                            accept="image/*"
+                            as="input"
+                            height={0}
+                            id={id}
+                            type="file"
+                            width={0}
+                            onChange={handleUpload}
+                        />
+                    </>
+                )}
             </SimpleGrid>
         </Box>
     );

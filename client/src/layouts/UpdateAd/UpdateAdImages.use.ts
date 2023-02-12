@@ -23,7 +23,7 @@ export function useUpdateAdImages({ ad }: UpdateAdProps) {
                 const { data: newImage } = await api().image.upload({ adId: ad.id }, { image: imageFile });
                 setUploadedImages((prevImages) => [...prevImages, newImage]);
             } catch (error) {
-                toast({ title: 'Failed to upload images', status: 'error' });
+                if (error instanceof Error) toast({ title: error.message, status: 'error' });
             } finally {
                 setLoading(false);
             }
