@@ -6,7 +6,7 @@ import { UpdateAdImageProps } from './UpdateAd.types';
 import { api } from '~/utils';
 
 
-export function useUpdateAdImage({ image, setUploadedImages }: UpdateAdImageProps) {
+export function useUpdateAdImage({ image, setUploadedImages }: Pick<UpdateAdImageProps, 'image'|'setUploadedImages'>) {
     const toast = useToast();
     const [loading, setLoading] = useState(false);
 

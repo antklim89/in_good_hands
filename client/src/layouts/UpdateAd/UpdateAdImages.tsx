@@ -1,5 +1,5 @@
 import { AddIcon } from '@chakra-ui/icons';
-import { Box, IconButton, HStack, Text, Spinner } from '@chakra-ui/react';
+import { Box, IconButton, SimpleGrid, Text, Spinner } from '@chakra-ui/react';
 import { FC, useId } from 'react';
 
 import { UpdateAdProps } from './UpdateAd.types';
@@ -16,7 +16,7 @@ const UpdateAdImages: FC<UpdateAdProps> = ({ ad }) => {
             <Text color="black" pb={2}>
                 Images
             </Text>
-            <HStack>
+            <SimpleGrid columns={[4, 6, 8]} gap={1}>
                 {uploadedImages.map((uploadedImage) => (
                     <UpdateAdImage
                         image={uploadedImage}
@@ -28,11 +28,9 @@ const UpdateAdImages: FC<UpdateAdProps> = ({ ad }) => {
                     aria-label="upload new image"
                     as="label"
                     disabled={loading}
-                    height={90}
                     htmlFor={id}
                     icon={loading ? <Spinner /> : <AddIcon />}
                     variant="outline"
-                    width={90}
                 />
                 <Box
                     multiple
@@ -44,7 +42,7 @@ const UpdateAdImages: FC<UpdateAdProps> = ({ ad }) => {
                     width={0}
                     onChange={handleUpload}
                 />
-            </HStack>
+            </SimpleGrid>
         </Box>
     );
 };

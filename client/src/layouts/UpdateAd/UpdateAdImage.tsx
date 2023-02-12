@@ -6,29 +6,29 @@ import { FC } from 'react';
 import { UpdateAdImageProps } from './UpdateAd.types';
 import { useUpdateAdImage } from './UpdateAdImage.use';
 
-import { getApiURL } from '~/utils';
 
+const SCALE = 15;
+const IMAGE_HEIGHT = 768 / SCALE;
+const IMAGE_WIDTH = 1280 / SCALE;
 
-const UpdateAdImage: FC<UpdateAdImageProps> = ({ image, setUploadedImages }) => {
+const UpdateAdImage: FC<UpdateAdImageProps> = ({ image, setUploadedImages, ...props }) => {
     const { handleDelete, loading } = useUpdateAdImage({ image, setUploadedImages });
 
     return (
         <IconButton
             _hover={{
                 '& .delete-icon': { display: 'block' },
-                '& .delete-image': { filter: 'blur(7px) opacity(0.4)' },
+                '& img': { filter: 'blur(2px) opacity(0.4)' },
             }}
             aria-label="delete image"
             disabled={loading}
-            height={90}
             icon={
                 <>
-                    <Box className="delete-image">
+                    <Box className="delete-image" sx={{ 'img': { width: '100%', objectFit: 'cover', aspectRatio: `${IMAGE_WIDTH} / ${IMAGE_HEIGHT}` } }}>
                         <Image
+                            fill
                             alt="uploaded image"
-                            height={75}
-                            src={getApiURL(image.src)}
-                            width={75}
+                            src={image.thumbnail}
                         />
                     </Box>
                     {loading
@@ -45,8 +45,9 @@ const UpdateAdImage: FC<UpdateAdImageProps> = ({ image, setUploadedImages }) => 
                         )}
                 </>
             }
+            overflow="hidden"
+            {...props}
             variant="outline"
-            width={90}
             onClick={handleDelete}
         />
     );
