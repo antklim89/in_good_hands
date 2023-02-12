@@ -2,10 +2,10 @@ import { Box, Button, Container, Flex, Text } from '@chakra-ui/react';
 import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/server/src/shareConstants';
 import { Ad } from '@in-good-hands/server/src/swagger';
 import Image from 'next/image';
-import Carousel from 'nuka-carousel';
 import { FC } from 'react';
 import { FaTelegramPlane, FaWhatsapp, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 
+import Carousel from '~/components/Carousel';
 import FavoriteButton from '~/components/FavoriteButton';
 import PetAge from '~/components/PetAge';
 import Price from '~/components/Price';

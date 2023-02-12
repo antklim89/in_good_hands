@@ -2,11 +2,11 @@ import { Flex, Heading, Button, Box } from '@chakra-ui/react';
 import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/server/src/shareConstants';
 import Image from 'next/image';
 import Link from 'next/link';
-import Carousel from 'nuka-carousel';
 import { FC } from 'react';
 
 import { AdsListItemProps } from './AdsList.types';
 
+import Carousel from '~/components/Carousel';
 import FavoriteButton from '~/components/FavoriteButton';
 import PetAge from '~/components/PetAge';
 import Price from '~/components/Price';
