@@ -1,29 +1,51 @@
-import { FC } from 'react';
+import { useRouter } from 'next/router';
+import { FC, useEffect, useState } from 'react';
 
 import { ProtectedProps } from './Protected.types';
 
+import NotFoundPage from '~/pages/404';
 import { useAuthContext } from '~/utils';
 
 
 const Protected: FC<ProtectedProps> = ({
     children,
-    protectIfAuth = false,
-    initPlaceholder = null,
-    disableProtection = false,
-    protectedComponent = 'PROTECTED',
+    redirect,
+    notFound,
+    render,
+    fallback,
+    authNeeded = true,
 }) => {
-    const { authInited, isAuth } = useAuthContext();
+    const { isAuth } = useAuthContext();
+    const router = useRouter();
 
-    if (disableProtection) return <>{children}</>;
+    const [isMounted, setIsMounted] = useState(false);
 
-    if (!authInited) return <>{initPlaceholder}</>;
+    const needProtect = authNeeded
+        ? !isAuth
+        : isAuth;
 
-    const isProtected = isAuth ? protectIfAuth : !protectIfAuth;
+    useEffect(() => {
+        setIsMounted(true);
 
-    if (isProtected) return <>{protectedComponent}</>;
+        if (needProtect && redirect === 'back') {
+            router.back();
+            return;
+        }
+        if (needProtect && redirect) {
+            router.replace(redirect);
+        }
+    }, [isAuth]);
+
+
+    if (!isMounted) return <>{fallback || null}</>;
+
+    if (needProtect && notFound) return <NotFoundPage />;
+
+    if (needProtect && render) return <>{render}</>;
+
+    if (needProtect) return null;
 
     return <>{children}</>;
 };
 
 export default Protected;
-

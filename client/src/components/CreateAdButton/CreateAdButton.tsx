@@ -18,7 +18,7 @@ const CreateAdButton: FC<CreateAdButtonProps> = (props) => {
     if (route.startsWith('/ads/update')) return null;
 
     return (
-        <Protected protectedComponent="">
+        <Protected fallback="">
             {isLargerThen
                 ? (
                     <Button
