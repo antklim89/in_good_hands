@@ -1,32 +1,38 @@
+import { animalsTypes } from '@in-good-hands/server/src/schemas/adSchemas';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import useSWR from 'swr';
+import { z } from 'zod';
 
-import { AdsListProps } from './AdsList.types';
-
-import { useInfinityScroll, api, useUpdate } from '~/utils';
+import { useInfinityScroll, api } from '~/utils';
 
 
-export function useAdsList({ ads: initAds }: AdsListProps) {
-    const { query } = useRouter();
-    const [ads, setAds] = useState(initAds);
+const adsQuerySchema = z.object({
+    search: z.string().optional(),
+    type: z.enum(animalsTypes).optional().catch(undefined),
+});
+
+
+export function useAdsList() {
+    const router = useRouter();
+    const { search, type } = adsQuerySchema.parse(router.query);
+
+    const { data: ads = [], mutate, isLoading } = useSWR(
+        ['ads', search, type],
+        () => api().ad.findMany({ search, searchType: type }).then((d) => d.data),
+    );
 
     const { addEvent } = useInfinityScroll(async () => {
-        const { data: newAds } = await api().ad.findMany({
-            cursor: ads.slice().pop()?.id,
-            searchType: query.type as 'cat' | 'dog' | 'bird' | 'aquarium' | 'rodent' | undefined,
-            search: query.search as string,
-        });
-        setAds([...ads, ...newAds]);
+        const lastId = ads.slice().pop()?.id;
+        const { data: newAds } = await api().ad.findMany({ search, searchType: type, cursor: lastId });
+
+        mutate([...ads || [], ...newAds], { revalidate: false });
         if (newAds.length > 0) addEvent();
     }, 2000);
 
     useEffect(() => {
-        if (ads.length > 0) addEvent();
-    }, []);
-
-    useUpdate(() => {
-        setAds(initAds);
-    }, [query]);
+        if (!isLoading && ads.length > 0) addEvent();
+    }, [isLoading]);
 
     return { ads };
 }

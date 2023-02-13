@@ -1,7 +1,6 @@
 import { Container, Flex, VStack } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { AdsListProps } from './AdsList.types';
 import { useAdsList } from './AdsList.use';
 import AdsListItem from './AdsListItem';
 
@@ -9,8 +8,8 @@ import PetSearch from '~/components/PetSearch';
 import PetTypeSelect from '~/components/PetTypeSelect';
 
 
-const AdsList: FC<AdsListProps> = (props) => {
-    const { ads } = useAdsList(props);
+const AdsList: FC = () => {
+    const { ads } = useAdsList();
 
     return (
         <Container my={8}>
