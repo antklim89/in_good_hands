@@ -1,4 +1,4 @@
-import { Container, Flex, VStack } from '@chakra-ui/react';
+import { Container, Flex, Spinner, VStack } from '@chakra-ui/react';
 import { FC } from 'react';
 
 import { useAdsList } from './AdsList.use';
@@ -9,7 +9,7 @@ import PetTypeSelect from '~/components/PetTypeSelect';
 
 
 const AdsList: FC = () => {
-    const { ads } = useAdsList();
+    const { ads, isLoading } = useAdsList();
 
     return (
         <Container my={8}>
@@ -21,6 +21,13 @@ const AdsList: FC = () => {
                 {ads.map((ad) => (
                     <AdsListItem key={ad.id} {...ad} />
                 ))}
+                {isLoading
+                    ? (
+                        <Flex justifyContent="center">
+                            <Spinner size="xl" />
+                        </Flex>
+                    )
+                    : null}
             </VStack>
         </Container>
     );

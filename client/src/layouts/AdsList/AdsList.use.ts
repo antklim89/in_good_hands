@@ -34,5 +34,5 @@ export function useAdsList() {
         if (!isLoading && ads.length > 0) addEvent();
     }, [isLoading]);
 
-    return { ads };
+    return { ads, isLoading };
 }
