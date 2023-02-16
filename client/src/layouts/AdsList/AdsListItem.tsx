@@ -27,7 +27,6 @@ const AdsListItem: FC<AdsListItemProps> = ({
             borderRadius="md"
             boxShadow="sm"
             flexDir={['column', 'column', 'row']}
-            my={8}
             p={4}
             width="full"
         >
