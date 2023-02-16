@@ -1,4 +1,4 @@
-import { Flex, Heading, Button, Box } from '@chakra-ui/react';
+import { Flex, Heading, Button, Box, Text } from '@chakra-ui/react';
 import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/server/src/shareConstants';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,6 +6,7 @@ import { FC } from 'react';
 
 import { AdsListItemProps } from './AdsList.types';
 
+import AdMenu from '~/components/AdMenu';
 import Carousel from '~/components/Carousel';
 import FavoriteButton from '~/components/FavoriteButton';
 import PetAge from '~/components/PetAge';
@@ -18,7 +19,7 @@ const imgWidth = IMAGE_WIDHT / SCALE;
 const imgHeight = IMAGE_HEIGHT / SCALE;
 
 const AdsListItem: FC<AdsListItemProps> = ({
-    id, type, breed, price, images, birthday, inFavorites,
+    id, type, breed, price, images, birthday, inFavorites, owner,
 }) => {
     return (
         <Flex
@@ -68,6 +69,7 @@ const AdsListItem: FC<AdsListItemProps> = ({
                             {breed}
                         </Heading>
                     </Link>
+                    <Text>Owner: {owner.name}</Text>
                     <PetAge birthday={birthday} />
                     <Price flexGrow={1} fontSize={['2xl', '2xl', '3xl']} price={price} />
                 </Flex>
@@ -77,6 +79,7 @@ const AdsListItem: FC<AdsListItemProps> = ({
                     justifyContent="space-between"
                     ml="auto"
                 >
+                    <AdMenu adId={id} ownerId={owner.id} />
                     <FavoriteButton adId={id} inFavorites={inFavorites} />
                     <Button as={Link} href={`/ads/${id}`} variant="outline">
                         Show more...
