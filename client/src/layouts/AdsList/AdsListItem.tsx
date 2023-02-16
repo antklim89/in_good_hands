@@ -22,7 +22,6 @@ const AdsListItem: FC<AdsListItemProps> = ({
 }) => {
     return (
         <Flex
-            as="section"
             border="1px solid lightgrey"
             borderRadius="md"
             boxShadow="sm"
@@ -30,7 +29,7 @@ const AdsListItem: FC<AdsListItemProps> = ({
             p={4}
             width="full"
         >
-            <Box flex="1 1 200px" mr={[0, 0, 8]} sx={{ 'img': { width: imgWidth, objectFit: 'cover', aspectRatio: `${imgWidth} / ${imgHeight}` } }}>
+            <Box flex="1 1 200px" mr={[0, 0, 8]} sx={{ 'img': { m: '0 auto', width: imgWidth, objectFit: 'cover', aspectRatio: `${imgWidth} / ${imgHeight}` } }}>
                 {images.length > 0
                     ? (
                         <Carousel
@@ -62,12 +61,13 @@ const AdsListItem: FC<AdsListItemProps> = ({
 
             <Flex flex="5 1 0" flexDirection="row" >
                 <Flex flexDirection="column">
-                    <Heading fontSize={['xl', '3xl', 'xl', '3xl']} textTransform="uppercase">
-                        {type}
-                    </Heading>
-                    <Heading fontSize={['xl', '3xl', 'xl', '3xl']} textTransform="uppercase">
-                        {breed}
-                    </Heading>
+                    <Link href={`/ads/${id}`}>
+                        <Heading fontSize={['xl', 'xl', '2xl']} textTransform="uppercase">
+                            {type}
+                            <br />
+                            {breed}
+                        </Heading>
+                    </Link>
                     <PetAge birthday={birthday} />
                     <Price flexGrow={1} fontSize={['2xl', '2xl', '3xl']} price={price} />
                 </Flex>
