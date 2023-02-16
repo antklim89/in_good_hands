@@ -11,7 +11,7 @@ import Carousel from '~/components/Carousel';
 import FavoriteButton from '~/components/FavoriteButton';
 import PetAge from '~/components/PetAge';
 import Price from '~/components/Price';
-import { getApiURL } from '~/utils';
+import { getApiURL, useAuthContext } from '~/utils';
 
 
 const SCALE = 2;
@@ -21,6 +21,7 @@ const imgHeight = IMAGE_HEIGHT / SCALE;
 const AdsListItem: FC<AdsListItemProps> = ({
     id, type, breed, price, images, birthday, inFavorites, owner,
 }) => {
+    const { user } = useAuthContext();
     return (
         <Flex
             border="1px solid lightgrey"
@@ -69,7 +70,7 @@ const AdsListItem: FC<AdsListItemProps> = ({
                             {breed}
                         </Heading>
                     </Link>
-                    <Text>Owner: {owner.name}</Text>
+                    {(owner.id === user?.id) ? <Text>Your ad</Text> : null}
                     <PetAge birthday={birthday} />
                     <Price flexGrow={1} fontSize={['2xl', '2xl', '3xl']} price={price} />
                 </Flex>
