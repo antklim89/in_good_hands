@@ -40,6 +40,12 @@ export default async function adPreviewListRoute(app: FastifyInstance) {
                 },
                 ...(cursor ? { cursor: { id: cursor } } : {}),
                 include: {
+                    owner: {
+                        select: {
+                            id: true,
+                            name: true,
+                        },
+                    },
                     images: true,
                     favorites: {
                         where: {

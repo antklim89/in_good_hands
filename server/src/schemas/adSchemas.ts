@@ -58,9 +58,18 @@ export const adInputSchema = {
     },
 } as const;
 
+export const adOwnerSchema = {
+    type: 'object',
+    required: ['id', 'name'],
+    properties: {
+        id: { type: 'string' },
+        name: { type: 'string' },
+    },
+} as const;
+
 export const adResponseSchema = {
     type: 'object',
-    required: ['id', 'createdAt', 'updatedAt', 'name', 'type', 'breed', 'price', 'images', 'birthday', 'description', 'tel', 'email'],
+    required: ['id', 'createdAt', 'updatedAt', 'name', 'type', 'breed', 'price', 'images', 'birthday', 'description', 'tel', 'email', 'owner'],
     properties: {
         id: { type: 'number' },
         createdAt: { type: 'string' },
@@ -77,12 +86,13 @@ export const adResponseSchema = {
         email: { type: 'string' },
         images: { type: 'array', items: imageSchema },
         inFavorites: { type: 'boolean' },
+        owner: adOwnerSchema,
     },
 } as const;
 
 export const adsPreviewListItemResponseSchema = {
     type: 'object',
-    required: ['id', 'createdAt', 'updatedAt', 'name', 'type', 'breed', 'price', 'images', 'birthday'],
+    required: ['id', 'createdAt', 'updatedAt', 'name', 'type', 'breed', 'price', 'images', 'birthday', 'owner'],
     properties: {
         id: { type: 'number' },
         createdAt: { type: 'string' },
@@ -94,6 +104,7 @@ export const adsPreviewListItemResponseSchema = {
         birthday: { type: 'string' },
         images: { type: 'array', items: imageSchema },
         inFavorites: { type: 'boolean' },
+        owner: adOwnerSchema,
     },
 } as const;
 

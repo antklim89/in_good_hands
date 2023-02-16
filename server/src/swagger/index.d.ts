@@ -83,6 +83,11 @@ id: number,
     
     })[],
         inFavorites?: boolean,
+        owner: {
+        id: string,
+        name: string,
+    
+    },
     
     })[]` Default Response
     */
@@ -112,6 +117,10 @@ id: number,
         thumbnail: string;
       }[];
       inFavorites?: boolean;
+      owner: {
+        id: string;
+        name: string;
+      };
     }[];
   } /**
      * No description
@@ -169,6 +178,11 @@ id: number,
     
     })[],
         inFavorites?: boolean,
+        owner: {
+        id: string,
+        name: string,
+    
+    },
     
     }` Default Response
     */
@@ -199,6 +213,10 @@ id: number,
         thumbnail: string;
       }[];
       inFavorites?: boolean;
+      owner: {
+        id: string;
+        name: string;
+      };
     };
   } /**
      * No description
@@ -476,40 +494,6 @@ export declare namespace Auth {
       /** @maxLength 50 */
       telegram?: string;
     };
-  }
-  /**
-   * No description
-   * @tags auth
-   * @name Update
-   * @request PATCH:/auth/update/
-   * @response `200` `void` Default Response
-   */
-  namespace Update {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      email?: string;
-      /**
-       * @minLength 3
-       * @maxLength 30
-       */
-      name?: string;
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      tel?: string;
-      /** @maxLength 50 */
-      whatsapp?: string;
-      /** @maxLength 50 */
-      telegram?: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = void;
   } /**
      * No description
      * @tags auth
@@ -554,6 +538,85 @@ export declare namespace Auth {
         id: string;
       };
       token: string;
+    };
+  }
+  /**
+   * No description
+   * @tags auth
+   * @name Update
+   * @request PATCH:/auth/update/
+   * @response `200` `void` Default Response
+   */
+  namespace Update {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      email?: string;
+      /**
+       * @minLength 3
+       * @maxLength 30
+       */
+      name?: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      tel?: string;
+      /** @maxLength 50 */
+      whatsapp?: string;
+      /** @maxLength 50 */
+      telegram?: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  }
+}
+export declare namespace Image {
+  /**
+   * No description
+   * @tags image
+   * @name Delete
+   * @request DELETE:/image/delete/
+   * @response `201` `void` Default Response
+   */
+  namespace Delete {
+    type RequestParams = {};
+    type RequestQuery = {
+      imageId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  } /**
+     * No description
+     * @tags image
+     * @name Upload
+     * @request POST:/image/upload/
+     * @response `201` `{
+        id: number,
+        src: string,
+        thumbnail: string,
+    
+    }` Default Response
+    */
+  namespace Upload {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = {
+      /** @format binary */
+      image: File;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+      src: string;
+      thumbnail: string;
     };
   }
 }
@@ -622,51 +685,6 @@ export declare namespace Favorites {
         price: number;
       };
     }[];
-  }
-}
-export declare namespace Image {
-  /**
-   * No description
-   * @tags image
-   * @name Delete
-   * @request DELETE:/image/delete/
-   * @response `201` `void` Default Response
-   */
-  namespace Delete {
-    type RequestParams = {};
-    type RequestQuery = {
-      imageId: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = void;
-  } /**
-     * No description
-     * @tags image
-     * @name Upload
-     * @request POST:/image/upload/
-     * @response `201` `{
-        id: number,
-        src: string,
-        thumbnail: string,
-    
-    }` Default Response
-    */
-  namespace Upload {
-    type RequestParams = {};
-    type RequestQuery = {
-      adId: number;
-    };
-    type RequestBody = {
-      /** @format binary */
-      image: File;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-      src: string;
-      thumbnail: string;
-    };
   }
 }
 export declare type QueryParamsType = Record<string | number, any>;
@@ -829,6 +847,11 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
 
 })[],
     inFavorites?: boolean,
+    owner: {
+    id: string,
+    name: string,
+
+},
 
 })[]` Default Response
  */
@@ -858,6 +881,10 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
             thumbnail: string;
           }[];
           inFavorites?: boolean;
+          owner: {
+            id: string;
+            name: string;
+          };
         }[],
         any
       >
@@ -923,6 +950,11 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
 
 })[],
     inFavorites?: boolean,
+    owner: {
+    id: string,
+    name: string,
+
+},
 
 }` Default Response
  */
@@ -953,6 +985,10 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
             thumbnail: string;
           }[];
           inFavorites?: boolean;
+          owner: {
+            id: string;
+            name: string;
+          };
         },
         any
       >
@@ -1240,38 +1276,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       >
     >;
     /**
-     * No description
-     *
-     * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
-     */
-    update: (
-      body: {
-        /**
-         * @minLength 3
-         * @maxLength 50
-         */
-        email?: string;
-        /**
-         * @minLength 3
-         * @maxLength 30
-         */
-        name?: string;
-        /**
-         * @minLength 3
-         * @maxLength 50
-         */
-        tel?: string;
-        /** @maxLength 50 */
-        whatsapp?: string;
-        /** @maxLength 50 */
-        telegram?: string;
-      },
-      params?: RequestParams,
-    ) => Promise<HttpResponse<void, any>>;
-    /**
  * No description
  *
  * @tags auth
@@ -1316,6 +1320,86 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
             id: string;
           };
           token: string;
+        },
+        any
+      >
+    >;
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (
+      body: {
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        email?: string;
+        /**
+         * @minLength 3
+         * @maxLength 30
+         */
+        name?: string;
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        tel?: string;
+        /** @maxLength 50 */
+        whatsapp?: string;
+        /** @maxLength 50 */
+        telegram?: string;
+      },
+      params?: RequestParams,
+    ) => Promise<HttpResponse<void, any>>;
+  };
+  image: {
+    /**
+     * No description
+     *
+     * @tags image
+     * @name Delete
+     * @request DELETE:/image/delete/
+     * @response `201` `void` Default Response
+     */
+    delete: (
+      query: {
+        imageId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<HttpResponse<void, any>>;
+    /**
+ * No description
+ *
+ * @tags image
+ * @name Upload
+ * @request POST:/image/upload/
+ * @response `201` `{
+    id: number,
+    src: string,
+    thumbnail: string,
+
+}` Default Response
+ */
+    upload: (
+      query: {
+        adId: number;
+      },
+      data: {
+        /** @format binary */
+        image: File;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      HttpResponse<
+        {
+          id: number;
+          src: string;
+          thumbnail: string;
         },
         any
       >
@@ -1381,54 +1465,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
             price: number;
           };
         }[],
-        any
-      >
-    >;
-  };
-  image: {
-    /**
-     * No description
-     *
-     * @tags image
-     * @name Delete
-     * @request DELETE:/image/delete/
-     * @response `201` `void` Default Response
-     */
-    delete: (
-      query: {
-        imageId: number;
-      },
-      params?: RequestParams,
-    ) => Promise<HttpResponse<void, any>>;
-    /**
- * No description
- *
- * @tags image
- * @name Upload
- * @request POST:/image/upload/
- * @response `201` `{
-    id: number,
-    src: string,
-    thumbnail: string,
-
-}` Default Response
- */
-    upload: (
-      query: {
-        adId: number;
-      },
-      data: {
-        /** @format binary */
-        image: File;
-      },
-      params?: RequestParams,
-    ) => Promise<
-      HttpResponse<
-        {
-          id: number;
-          src: string;
-          thumbnail: string;
-        },
         any
       >
     >;

@@ -247,6 +247,11 @@ export class Api extends HttpClient {
 
 })[],
     inFavorites?: boolean,
+    owner: {
+    id: string,
+    name: string,
+
+},
 
 })[]` Default Response
  */
@@ -309,6 +314,11 @@ export class Api extends HttpClient {
 
 })[],
     inFavorites?: boolean,
+    owner: {
+    id: string,
+    name: string,
+
+},
 
 }` Default Response
  */
@@ -479,22 +489,6 @@ export class Api extends HttpClient {
         ...params,
       }),
     /**
-     * No description
-     *
-     * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
-     */
-    update: (body, params = {}) =>
-      this.request({
-        path: `/auth/update/`,
-        method: "PATCH",
-        body: body,
-        type: ContentType.Json,
-        ...params,
-      }),
-    /**
  * No description
  *
  * @tags auth
@@ -517,6 +511,62 @@ export class Api extends HttpClient {
         method: "POST",
         body: body,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (body, params = {}) =>
+      this.request({
+        path: `/auth/update/`,
+        method: "PATCH",
+        body: body,
+        type: ContentType.Json,
+        ...params,
+      }),
+  };
+  image = {
+    /**
+     * No description
+     *
+     * @tags image
+     * @name Delete
+     * @request DELETE:/image/delete/
+     * @response `201` `void` Default Response
+     */
+    delete: (query, params = {}) =>
+      this.request({
+        path: `/image/delete/`,
+        method: "DELETE",
+        query: query,
+        ...params,
+      }),
+    /**
+ * No description
+ *
+ * @tags image
+ * @name Upload
+ * @request POST:/image/upload/
+ * @response `201` `{
+    id: number,
+    src: string,
+    thumbnail: string,
+
+}` Default Response
+ */
+    upload: (query, data, params = {}) =>
+      this.request({
+        path: `/image/upload/`,
+        method: "POST",
+        query: query,
+        body: data,
+        type: ContentType.FormData,
         format: "json",
         ...params,
       }),
@@ -576,46 +626,6 @@ export class Api extends HttpClient {
       this.request({
         path: `/favorites/find-many/`,
         method: "GET",
-        format: "json",
-        ...params,
-      }),
-  };
-  image = {
-    /**
-     * No description
-     *
-     * @tags image
-     * @name Delete
-     * @request DELETE:/image/delete/
-     * @response `201` `void` Default Response
-     */
-    delete: (query, params = {}) =>
-      this.request({
-        path: `/image/delete/`,
-        method: "DELETE",
-        query: query,
-        ...params,
-      }),
-    /**
- * No description
- *
- * @tags image
- * @name Upload
- * @request POST:/image/upload/
- * @response `201` `{
-    id: number,
-    src: string,
-    thumbnail: string,
-
-}` Default Response
- */
-    upload: (query, data, params = {}) =>
-      this.request({
-        path: `/image/upload/`,
-        method: "POST",
-        query: query,
-        body: data,
-        type: ContentType.FormData,
         format: "json",
         ...params,
       }),

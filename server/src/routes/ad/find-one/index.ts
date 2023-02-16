@@ -20,6 +20,12 @@ export default async function findOne(app: FastifyInstance) {
                     id: req.query.adId,
                 },
                 include: {
+                    owner: {
+                        select: {
+                            id: true,
+                            name: true,
+                        },
+                    },
                     images: true,
                     favorites: {
                         where: {
