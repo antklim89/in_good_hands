@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { FC } from 'react';
 import { FaTelegramPlane, FaWhatsapp, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 
+import AdMenu from '~/components/AdMenu';
 import Carousel from '~/components/Carousel';
 import FavoriteButton from '~/components/FavoriteButton';
 import PetAge from '~/components/PetAge';
@@ -13,12 +14,13 @@ import { getApiURL } from '~/utils';
 
 
 const Ad: FC<Ad.FindOne.ResponseBody> = ({
-    id, name, breed, type, description, birthday, images, price, tel, email, telegram, whatsapp, inFavorites,
+    id, name, breed, type, description, birthday, images, price, tel, email, telegram, whatsapp, inFavorites, owner,
 }) => {
     return (
         <Container as="section" my={8}>
-            <Flex justifyContent="flex-end" my={4}>
+            <Flex alignItems="center" justifyContent="space-between" my={4}>
                 <FavoriteButton adId={id} inFavorites={inFavorites} mx={4} />
+                <AdMenu adId={id} ownerId={owner.id} />
             </Flex>
             <Flex flexDir={['column-reverse', null, 'row']} mb={4}>
                 <Box
