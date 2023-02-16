@@ -68,7 +68,7 @@ async function generateUsers() {
 async function generateAds(user: User[]) {
     const ads = [];
     for (let index = 0; index < ADS_NUMBER; index += 1) {
-        const [{ email, tel, telegram, whatsapp, id }] = user;
+        const { email, tel, telegram, whatsapp, id } = _.sample(user) || user[0];
         const animal = _.sample(animals);
         const ad = await prisma.ad.create({
             data: {
