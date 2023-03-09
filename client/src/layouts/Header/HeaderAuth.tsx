@@ -21,7 +21,10 @@ const HeaderAuth: FC<HeaderAuthProps> = () => {
     return (
         <>
             <Button
-                colorScheme="primary" ref={btnRef}
+                _hover={{ color: 'primary.600', bg: 'primary.50' }}
+                color="white"
+                ref={btnRef}
+                variant="ghost"
                 onClick={onOpen}
             >
                 <FaUserCircle />

@@ -72,7 +72,6 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                         )
                         : null}
                     <Price
-                        color="primary.50"
                         fontSize="6xl"
                         fontWeight="bold"
                         price={price}

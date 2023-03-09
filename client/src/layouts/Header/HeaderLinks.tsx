@@ -22,8 +22,9 @@ const HeaderLinks: FC<HeaderLinksProps> = ({ onClose, ...props }) => {
             >
                 <li>
                     <Button
+                        _hover={{ color: 'primary.600', bg: 'primary.50' }}
                         as={Link}
-                        color="primary.textLight"
+                        color="white"
                         href="/about"
                         textTransform="uppercase"
                         variant="ghost"
