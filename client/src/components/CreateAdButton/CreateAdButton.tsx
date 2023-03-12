@@ -22,7 +22,8 @@ const CreateAdButton: FC<CreateAdButtonProps> = (props) => {
             {isLargerThen
                 ? (
                     <Button
-                        color="primary.textLight"
+                        _hover={{ color: 'primary.600', bg: 'primary.50' }}
+                        color="white"
                         isLoading={loading}
                         loadingText="creating"
                         textTransform="uppercase"
@@ -34,18 +35,19 @@ const CreateAdButton: FC<CreateAdButtonProps> = (props) => {
                 )
                 : (
                     <IconButton
+                        _hover={{ color: 'primary.600', bg: 'primary.50' }}
                         aria-label="create ad"
                         borderRadius="100%"
                         bottom="2%"
-                        color="primary.textLight"
+                        color="white"
                         fontSize="2xl"
-                        height={75}
+                        height={50}
                         isLoading={loading}
                         position="fixed"
                         right="2%"
                         textTransform="uppercase"
                         variant="solid"
-                        width={75}
+                        width={50}
                         zIndex={1000}
                         onClick={handleCreateNewAd}
                     >

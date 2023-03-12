@@ -6,7 +6,7 @@ const Footer: FC = () => {
     return (
         <Box as="footer" bg="primary.600">
             <Container maxWidth="container.xl">
-                <Text color="primary.textLight" py={4}>&copy; {new Date().getFullYear()} In Good Hands</Text>
+                <Text color="white" py={4}>&copy; {new Date().getFullYear()} In Good Hands</Text>
             </Container>
         </Box>
     );

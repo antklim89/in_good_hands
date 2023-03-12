@@ -19,7 +19,7 @@ const Header: FC = () => {
                 <Text
                     aria-label="logo"
                     as={Link}
-                    color="primary.textLight"
+                    color="white"
                     fontSize="2xl"
                     href="/"
                 >

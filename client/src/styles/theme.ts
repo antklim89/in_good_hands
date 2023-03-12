@@ -14,8 +14,6 @@ export default extendTheme({
             700: '#0F558A',
             800: '#0A385C',
             900: '#051C2E',
-            text: 'black',
-            textLight: 'white',
         },
         secondary: {
             50: '#FFF2E5',
@@ -28,8 +26,6 @@ export default extendTheme({
             700: '#994A00',
             800: '#663200',
             900: '#331900',
-            text: 'black',
-            textLight: 'white',
         },
     },
     breakpoints: {
