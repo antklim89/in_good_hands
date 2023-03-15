@@ -1,4 +1,4 @@
-import { Heading, Box, Button } from '@chakra-ui/react';
+import { Heading, Box, Button, Flex } from '@chakra-ui/react';
 import { FC, useState } from 'react';
 
 import { AuthProps } from './Auth.types';
@@ -12,16 +12,17 @@ const Auth: FC<AuthProps> = ({ type: initType = 'login', onClose }) => {
 
     return (
         <Box>
-            <Heading textTransform="capitalize">
-                {type}
-            </Heading>
-            <Button variant="link" onClick={() => setType(oppositeType)} >
-                or {oppositeType}
-            </Button>
+            <Flex flexDirection="column" justifyContent="center" mb={8}>
+                <Heading textAlign="center" textTransform="capitalize">
+                    {type}
+                </Heading>
+                <Button textAlign="center" variant="link" onClick={() => setType(oppositeType)} >
+                    or {oppositeType}
+                </Button>
+            </Flex>
             <AuthForm type={type} onClose={onClose} />
         </Box>
     );
 };
 
 export default Auth;
-
