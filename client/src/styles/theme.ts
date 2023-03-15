@@ -1,7 +1,11 @@
-import { extendTheme } from '@chakra-ui/react';
+import { extendTheme, ThemeConfig, ThemeOverride } from '@chakra-ui/react';
 
 
-export default extendTheme({
+const config: ThemeOverride & ThemeConfig = {
+    config: {
+        initialColorMode: 'system',
+        useSystemColorMode: false,
+    },
     colors: {
         primary: {
             50: '#E8F4FC',
@@ -36,13 +40,14 @@ export default extendTheme({
         '2xl': '96em',
     },
     styles: {
-        global: {
+        global: ({ colorMode, theme }) => ({
             'p': {
                 overflowWrap: 'break-word',
                 pb: 6,
                 lineHeight: 1.5,
             },
-        },
+            '::placeholder': { color: colorMode === 'light' ? theme.colors.gray[500] : theme.colors.gray[400] },
+        }),
     },
     components: {
         Button: {
@@ -53,10 +58,16 @@ export default extendTheme({
             baseStyle: { maxWidth: 'container.xl' },
         },
         Text: {
-            baseStyle: { color: 'primary.800' },
+            baseStyle: ({ colorMode, theme }) => ({
+                color: colorMode === 'light' ? theme.colors.primary[800] : theme.colors.primary[100],
+            }),
         },
         Heading: {
-            baseStyle: { color: 'primary.800' },
+            baseStyle: ({ colorMode, theme }) => ({
+                color: colorMode === 'light' ? theme.colors.primary[800] : theme.colors.primary[100],
+            }),
         },
     },
-});
+};
+
+export default extendTheme(config);

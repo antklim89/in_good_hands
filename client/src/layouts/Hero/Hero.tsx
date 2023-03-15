@@ -36,10 +36,10 @@ const Hero: FC = () => {
                 height="100%"
             >
                 <Box width="50%">
-                    <Heading as="h1" color="primary.600" fontSize={['xl', '2xl', '5xl']}>
+                    <Heading as="h1" colorScheme="primary" fontSize={['xl', '2xl', '5xl']}>
                         Turning <Text as="span" color="secondary.600" textDecoration="underline">dreams</Text> into reality.
                     </Heading>
-                    <Text color="primary.600" fontSize={['md', 'lg', 'xl']}>
+                    <Text colorScheme="primary" fontSize={['md', 'lg', 'xl']}>
                         Website of ads for the sale of pets
                     </Text>
                 </Box>

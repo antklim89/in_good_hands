@@ -1,4 +1,6 @@
-import { Box, Button, Container, Flex, Text } from '@chakra-ui/react';
+import {
+    Box, Button, Container, Flex, Text, useColorModeValue,
+} from '@chakra-ui/react';
 import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/server/src/shareConstants';
 import { Ad } from '@in-good-hands/server/src/swagger';
 import Image from 'next/image';
@@ -16,6 +18,8 @@ import { getApiURL } from '~/utils';
 const Ad: FC<Ad.FindOne.ResponseBody> = ({
     id, name, breed, type, description, birthday, images, price, tel, email, telegram, whatsapp, inFavorites, owner,
 }) => {
+    const descriptionBg = useColorModeValue('primary.50', 'primary.900');
+
     return (
         <Container as="section" my={8}>
             <Flex alignItems="center" justifyContent="space-between" my={4}>
@@ -109,7 +113,11 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                         )}
                 </Box>
             </Flex>
-            <Text bgColor="gray.100" borderRadius={8} p={4}>
+            <Text
+                bgColor={descriptionBg}
+                borderRadius={8}
+                p={4}
+            >
                 {description}
             </Text>
         </Container>

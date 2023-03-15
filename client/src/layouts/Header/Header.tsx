@@ -1,4 +1,7 @@
-import { Box, Text, Container } from '@chakra-ui/react';
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import {
+    Box, Text, Container, useColorMode, Button,
+} from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC } from 'react';
 
@@ -8,6 +11,8 @@ import HeaderLogo from './HeaderLogo';
 
 
 const Header: FC = () => {
+    const { colorMode, toggleColorMode } = useColorMode();
+
     return (
         <Box
             as="header"
@@ -28,6 +33,16 @@ const Header: FC = () => {
                 <Box flexGrow={1} />
                 <HeaderLinks />
                 <HeaderAuth />
+
+                <Button
+                    _hover={{ color: 'primary.600', bg: 'primary.50' }}
+                    aria-label="switch color mode"
+                    color="white"
+                    variant="ghost"
+                    onClick={toggleColorMode}
+                >
+                    {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                </Button>
             </Container>
         </Box>
     );
