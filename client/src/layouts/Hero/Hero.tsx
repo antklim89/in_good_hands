@@ -24,8 +24,9 @@ const Hero: FC = () => {
             >
                 <NextImage
                     fill
+                    priority
                     alt="hero"
-                    src={heroImage.src}
+                    src={heroImage}
                 />
             </Box>
 
