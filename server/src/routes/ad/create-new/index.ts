@@ -1,7 +1,8 @@
-import { AnimalType } from '@prisma/client';
 import { FastifyInstance, FastifyRequest } from 'fastify';
 
 import schema from './schema';
+
+import { AnimalType } from '@/types';
 
 
 export default async function newAdRoute(app: FastifyInstance) {

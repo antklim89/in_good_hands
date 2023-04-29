@@ -28,22 +28,6 @@ id: number,
     type ResponseBody = {
       id: number;
     };
-  }
-  /**
-   * No description
-   * @tags ad
-   * @name Delete
-   * @request DELETE:/ad/delete/
-   * @response `200` `void` Default Response
-   */
-  namespace Delete {
-    type RequestParams = {};
-    type RequestQuery = {
-      adId: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = void;
   } /**
      * No description
      * @tags ad
@@ -62,6 +46,22 @@ id: number,
     type ResponseBody = {
       id: number;
     }[];
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name Delete
+   * @request DELETE:/ad/delete/
+   * @response `200` `void` Default Response
+   */
+  namespace Delete {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = void;
   } /**
      * No description
      * @tags ad
@@ -373,6 +373,73 @@ id: number,
     type ResponseBody = void;
   }
 }
+export declare namespace Favorites {
+  /**
+   * No description
+   * @tags favorites
+   * @name Create
+   * @request POST:/favorites/create/
+   * @response `200` `number` Default Response
+   */
+  namespace Create {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = number;
+  }
+  /**
+   * No description
+   * @tags favorites
+   * @name Delete
+   * @request DELETE:/favorites/delete/
+   * @response `200` `void` Default Response
+   */
+  namespace Delete {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  } /**
+     * No description
+     * @tags favorites
+     * @name FindMany
+     * @request GET:/favorites/find-many/
+     * @response `200` `({
+        id: number,
+        ad: {
+        id: number,
+        name: string,
+        type: string,
+        breed: string,
+        price: number,
+    
+    },
+    
+    })[]` Default Response
+    */
+  namespace FindMany {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+      ad: {
+        id: number;
+        name: string;
+        type: string;
+        breed: string;
+        price: number;
+      };
+    }[];
+  }
+}
 export declare namespace Auth {
   /**
    * No description
@@ -620,73 +687,6 @@ export declare namespace Image {
     };
   }
 }
-export declare namespace Favorites {
-  /**
-   * No description
-   * @tags favorites
-   * @name Create
-   * @request POST:/favorites/create/
-   * @response `200` `number` Default Response
-   */
-  namespace Create {
-    type RequestParams = {};
-    type RequestQuery = {
-      adId: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = number;
-  }
-  /**
-   * No description
-   * @tags favorites
-   * @name Delete
-   * @request DELETE:/favorites/delete/
-   * @response `200` `void` Default Response
-   */
-  namespace Delete {
-    type RequestParams = {};
-    type RequestQuery = {
-      adId: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = void;
-  } /**
-     * No description
-     * @tags favorites
-     * @name FindMany
-     * @request GET:/favorites/find-many/
-     * @response `200` `({
-        id: number,
-        ad: {
-        id: number,
-        name: string,
-        type: string,
-        breed: string,
-        price: number,
-    
-    },
-    
-    })[]` Default Response
-    */
-  namespace FindMany {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-      ad: {
-        id: number;
-        name: string;
-        type: string;
-        breed: string;
-        price: number;
-      };
-    }[];
-  }
-}
 export declare type QueryParamsType = Record<string | number, any>;
 export declare type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 export interface FullRequestParams extends Omit<RequestInit, "body"> {
@@ -793,20 +793,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       >
     >;
     /**
-     * No description
-     *
-     * @tags ad
-     * @name Delete
-     * @request DELETE:/ad/delete/
-     * @response `200` `void` Default Response
-     */
-    delete: (
-      query: {
-        adId: number;
-      },
-      params?: RequestParams,
-    ) => Promise<HttpResponse<void, any>>;
-    /**
  * No description
  *
  * @tags ad
@@ -825,6 +811,20 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         any
       >
     >;
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name Delete
+     * @request DELETE:/ad/delete/
+     * @response `200` `void` Default Response
+     */
+    delete: (
+      query: {
+        adId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<HttpResponse<void, any>>;
     /**
  * No description
  *
@@ -1150,6 +1150,70 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       params?: RequestParams,
     ) => Promise<HttpResponse<void, any>>;
   };
+  favorites: {
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name Create
+     * @request POST:/favorites/create/
+     * @response `200` `number` Default Response
+     */
+    create: (
+      query: {
+        adId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<HttpResponse<number, any>>;
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name Delete
+     * @request DELETE:/favorites/delete/
+     * @response `200` `void` Default Response
+     */
+    delete: (
+      query: {
+        adId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<HttpResponse<void, any>>;
+    /**
+ * No description
+ *
+ * @tags favorites
+ * @name FindMany
+ * @request GET:/favorites/find-many/
+ * @response `200` `({
+    id: number,
+    ad: {
+    id: number,
+    name: string,
+    type: string,
+    breed: string,
+    price: number,
+
+},
+
+})[]` Default Response
+ */
+    findMany: (params?: RequestParams) => Promise<
+      HttpResponse<
+        {
+          id: number;
+          ad: {
+            id: number;
+            name: string;
+            type: string;
+            breed: string;
+            price: number;
+          };
+        }[],
+        any
+      >
+    >;
+  };
   auth: {
     /**
      * No description
@@ -1401,70 +1465,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
           src: string;
           thumbnail: string;
         },
-        any
-      >
-    >;
-  };
-  favorites: {
-    /**
-     * No description
-     *
-     * @tags favorites
-     * @name Create
-     * @request POST:/favorites/create/
-     * @response `200` `number` Default Response
-     */
-    create: (
-      query: {
-        adId: number;
-      },
-      params?: RequestParams,
-    ) => Promise<HttpResponse<number, any>>;
-    /**
-     * No description
-     *
-     * @tags favorites
-     * @name Delete
-     * @request DELETE:/favorites/delete/
-     * @response `200` `void` Default Response
-     */
-    delete: (
-      query: {
-        adId: number;
-      },
-      params?: RequestParams,
-    ) => Promise<HttpResponse<void, any>>;
-    /**
- * No description
- *
- * @tags favorites
- * @name FindMany
- * @request GET:/favorites/find-many/
- * @response `200` `({
-    id: number,
-    ad: {
-    id: number,
-    name: string,
-    type: string,
-    breed: string,
-    price: number,
-
-},
-
-})[]` Default Response
- */
-    findMany: (params?: RequestParams) => Promise<
-      HttpResponse<
-        {
-          id: number;
-          ad: {
-            id: number;
-            name: string;
-            type: string;
-            breed: string;
-            price: number;
-          };
-        }[],
         any
       >
     >;

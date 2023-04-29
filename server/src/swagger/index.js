@@ -193,21 +193,6 @@ export class Api extends HttpClient {
         ...params,
       }),
     /**
-     * No description
-     *
-     * @tags ad
-     * @name Delete
-     * @request DELETE:/ad/delete/
-     * @response `200` `void` Default Response
-     */
-    delete: (query, params = {}) =>
-      this.request({
-        path: `/ad/delete/`,
-        method: "DELETE",
-        query: query,
-        ...params,
-      }),
-    /**
  * No description
  *
  * @tags ad
@@ -223,6 +208,21 @@ export class Api extends HttpClient {
         path: `/ad/find-ids/`,
         method: "GET",
         format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name Delete
+     * @request DELETE:/ad/delete/
+     * @response `200` `void` Default Response
+     */
+    delete: (query, params = {}) =>
+      this.request({
+        path: `/ad/delete/`,
+        method: "DELETE",
+        query: query,
         ...params,
       }),
     /**
@@ -408,6 +408,65 @@ export class Api extends HttpClient {
         ...params,
       }),
   };
+  favorites = {
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name Create
+     * @request POST:/favorites/create/
+     * @response `200` `number` Default Response
+     */
+    create: (query, params = {}) =>
+      this.request({
+        path: `/favorites/create/`,
+        method: "POST",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name Delete
+     * @request DELETE:/favorites/delete/
+     * @response `200` `void` Default Response
+     */
+    delete: (query, params = {}) =>
+      this.request({
+        path: `/favorites/delete/`,
+        method: "DELETE",
+        query: query,
+        ...params,
+      }),
+    /**
+ * No description
+ *
+ * @tags favorites
+ * @name FindMany
+ * @request GET:/favorites/find-many/
+ * @response `200` `({
+    id: number,
+    ad: {
+    id: number,
+    name: string,
+    type: string,
+    breed: string,
+    price: number,
+
+},
+
+})[]` Default Response
+ */
+    findMany: (params = {}) =>
+      this.request({
+        path: `/favorites/find-many/`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+  };
   auth = {
     /**
      * No description
@@ -567,65 +626,6 @@ export class Api extends HttpClient {
         query: query,
         body: data,
         type: ContentType.FormData,
-        format: "json",
-        ...params,
-      }),
-  };
-  favorites = {
-    /**
-     * No description
-     *
-     * @tags favorites
-     * @name Create
-     * @request POST:/favorites/create/
-     * @response `200` `number` Default Response
-     */
-    create: (query, params = {}) =>
-      this.request({
-        path: `/favorites/create/`,
-        method: "POST",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags favorites
-     * @name Delete
-     * @request DELETE:/favorites/delete/
-     * @response `200` `void` Default Response
-     */
-    delete: (query, params = {}) =>
-      this.request({
-        path: `/favorites/delete/`,
-        method: "DELETE",
-        query: query,
-        ...params,
-      }),
-    /**
- * No description
- *
- * @tags favorites
- * @name FindMany
- * @request GET:/favorites/find-many/
- * @response `200` `({
-    id: number,
-    ad: {
-    id: number,
-    name: string,
-    type: string,
-    breed: string,
-    price: number,
-
-},
-
-})[]` Default Response
- */
-    findMany: (params = {}) =>
-      this.request({
-        path: `/favorites/find-many/`,
-        method: "GET",
         format: "json",
         ...params,
       }),

@@ -27,8 +27,8 @@ export default async function adPreviewListRoute(app: FastifyInstance) {
 
                 where: {
                     isPublished: true,
-                    ...(search ? { description: { search: search.replace(/\s/ig, ' | ') } } : {}),
-                    ...(search ? { breed: { search: search.replace(/\s/ig, ' | ') } } : {}),
+                    ...(search ? { description: { contains: search.replace(/\s/ig, ' | ') } } : {}),
+                    ...(search ? { breed: { contains: search.replace(/\s/ig, ' | ') } } : {}),
                     ...(searchType ? { type: { equals: searchType } } : {}),
 
                     ...((ltePrice || gtePrice)

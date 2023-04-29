@@ -8,7 +8,7 @@ import app from '@/app';
 
 
 export const init = () => {
-    const dbUrl = 'postgresql://anton@localhost:5432/test?schema=public';
+    const dbUrl = 'file:./data/test.sqlite';
 
     const prisma = new PrismaClient({ datasources: { db: { url: dbUrl } } });
     app.prisma = prisma;
