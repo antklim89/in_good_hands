@@ -17,7 +17,7 @@ const Profile: FC = () => {
             <Tabs
                 isFitted
                 isLazy
-                defaultIndex={Number(query.tab || 0)}
+                index={Number(query.tab || 0)}
                 onChange={(index) => replace(`?tab=${index}`)}
             >
                 <TabList>
