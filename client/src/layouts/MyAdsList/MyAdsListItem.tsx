@@ -1,6 +1,6 @@
 import { CheckCircleIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import {
-    Divider, Flex, HStack, IconButton, Text, Tooltip, Box, LinkBox, VStack,
+    Divider, Flex, HStack, IconButton, Text, Tooltip, Box, LinkBox, VStack, useColorModeValue,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,11 +14,12 @@ import ConfirmDialog from '~/components/ConfirmDialog';
 
 const MyAdsListItem: FC<MyAdsListItemProps> = ({ id, breed, name, type, isPublished }) => {
     const { deleting, handleDeleteAd } = useMyAdsListItem(id);
+    const hoverBg = useColorModeValue('gray.50', 'gray.900');
 
     return (
         <>
             <LinkBox
-                _hover={{ bg: 'gray.50' }}
+                _hover={{ bg: hoverBg }}
                 display="flex"
                 py={4}
             >
