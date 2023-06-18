@@ -1,5 +1,5 @@
 import {
-    Box, Divider, Flex, HStack, LinkBox, Text, useColorModeValue,
+    Box, Center, Divider, Flex, HStack, LinkBox, Spinner, Text, useColorModeValue,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,20 +11,20 @@ import { api } from '~/utils';
 
 
 const MyFavorites: FC = () => {
-    const { data: favorites = [] } = useSWR('my-favorites', () => api().favorites.findMany().then((d) => d.data));
+    const { data: favorites = [], isLoading } = useSWR('my-favorites', () => api().favorites.findMany().then((d) => d.data));
     const hoverBg = useColorModeValue('gray.50', 'gray.900');
+
+    if (isLoading) return (
+        <Center my={12}><Spinner /></Center>
+    );
+    if (favorites.length === 0) return (
+        <Text my={4} textAlign="center">
+            You have not added favorites ads yet.
+        </Text>
+    );
 
     return (
         <Box>
-            {
-                favorites.length === 0
-                    ? (
-                        <Text my={4} textAlign="center">
-                            You have not add favorites ads yet.
-                        </Text>
-                    )
-                    : null
-            }
             {favorites.map(({ id, ad }) => (
                 <Fragment key={id}>
                     <LinkBox

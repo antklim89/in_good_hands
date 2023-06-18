@@ -7,7 +7,7 @@ import { api } from '~/utils';
 export function useMyAdsList() {
     const [hasNext, setHasNext] = useState(false);
 
-    const { data: ads = [], mutate } = useSWR('my-ads', async () => {
+    const { data: ads = [], mutate, isLoading } = useSWR('my-ads', async () => {
         const { data } = await api().ad.findMyAds();
         if (data.length > 0) setHasNext(true);
         return data;
@@ -21,5 +21,5 @@ export function useMyAdsList() {
         mutate([...ads || [], ...nextAds], { revalidate: false });
     }, [lastAdId]);
 
-    return { ads, hasNext, handleFetchMore };
+    return { ads, hasNext, handleFetchMore, isLoading };
 }
