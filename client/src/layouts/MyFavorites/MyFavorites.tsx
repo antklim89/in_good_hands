@@ -1,6 +1,9 @@
-import { Box, Flex, HStack, Text } from '@chakra-ui/react';
+import {
+    Box, Divider, Flex, HStack, LinkBox, Text,
+} from '@chakra-ui/react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { FC } from 'react';
+import { FC, Fragment } from 'react';
 import useSWR from 'swr';
 
 import FavoriteButton from '~/components/FavoriteButton';
@@ -22,28 +25,38 @@ const MyFavorites: FC = () => {
                     : null
             }
             {favorites.map(({ id, ad }) => (
-                <Box key={id}>
-                    <HStack flexDir={['column', null, 'row']} py={4}>
-                        <Flex
-                            alignItems="center"
-                            as={Link}
-                            cursor="pointer"
-                            href={`/ads/${ad.id}`}
-                            mr="auto"
-                            textTransform="uppercase"
-                        >
-                            <Text px={4} py={0}>{ad.type} <br /> {ad.breed}</Text>
-                            <Text px={4} py={0}>{ad.name}</Text>
-                            <Text px={4} py={0}>{ad.price}$</Text>
+                <Fragment key={id}>
+                    <LinkBox
+                        _hover={{ bg: 'gray.50' }}
+                        display="flex"
+                        py={4}
+                    >
+                        <Flex as={Link} href={`/ads/${ad.id}`} w="100%">
+                            <Box mr={4}>
+                                <Image
+                                    alt={ad.type}
+                                    height={32}
+                                    src={`/placeholders/${ad.type}-ph.jpg`}
+                                    width={32}
+                                />
+                            </Box>
+                            <Flex flexDirection="column">
+                                <Text p={0}>Name: {ad.name}</Text>
+                                <Text p={0}>Breed: {ad.breed}</Text>
+                            </Flex>
                         </Flex>
-                        <FavoriteButton
-                            inFavorites
-                            adId={ad.id}
-                            iconProps={{ fontSize: 'xl' }}
-                            size="xs"
-                        />
-                    </HStack>
-                </Box>
+
+                        <HStack alignSelf="flex-end">
+                            <FavoriteButton
+                                inFavorites
+                                adId={ad.id}
+                                iconProps={{ fontSize: 'xl' }}
+                                size="xs"
+                            />
+                        </HStack>
+                    </LinkBox>
+                    <Divider />
+                </Fragment>
             ))}
         </Box>
     );
