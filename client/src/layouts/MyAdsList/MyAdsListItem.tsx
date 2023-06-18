@@ -1,7 +1,8 @@
-import { CheckCircleIcon, DeleteIcon, EditIcon, LinkIcon } from '@chakra-ui/icons';
+import { CheckCircleIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import {
-    Divider, Flex, HStack, IconButton, Text, Tooltip,
+    Divider, Flex, HStack, IconButton, Text, Tooltip, Box, LinkBox, VStack,
 } from '@chakra-ui/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 
@@ -16,18 +17,31 @@ const MyAdsListItem: FC<MyAdsListItemProps> = ({ id, breed, name, type, isPublis
 
     return (
         <>
-            <HStack flexDir={['column', null, 'row']} py={4}>
-                <HStack alignSelf={['flex-start', null, 'center']}>
-                    <Flex alignItems="center" textTransform="uppercase">
-                        <Text px={4} py={0}>{type} <br /> {breed}</Text>
-                        <Text px={4} py={0}>{name}</Text>
+            <LinkBox
+                _hover={{ bg: 'gray.50' }}
+                display="flex"
+                py={4}
+            >
+                <Flex as={Link} href={`/ads/${id}`} w="100%">
+                    <Box mr={4}>
+                        <Image
+                            alt={type}
+                            height={32}
+                            src={`/placeholders/${type}-ph.jpg`}
+                            width={32}
+                        />
+                    </Box>
+                    <Flex flexDirection="column">
+                        <Text p={0}>Name: {name}</Text>
+                        <Text p={0}>Breed: {breed}</Text>
                     </Flex>
-                </HStack>
-
-                <Flex grow={1} />
+                </Flex>
 
                 <HStack alignSelf="flex-end">
-                    <IconButton aria-label={isPublished ? 'Published' : 'Not published'} as="div" variant="link">
+                    <IconButton
+                        aria-label={isPublished ? 'Published' : 'Not published'}
+                        variant="link"
+                    >
                         <Tooltip label={isPublished ? 'Published' : 'Not published'}>
                             {isPublished
                                 ? <CheckCircleIcon color="green.500" />
@@ -35,37 +49,31 @@ const MyAdsListItem: FC<MyAdsListItemProps> = ({ id, breed, name, type, isPublis
                         </Tooltip>
                     </IconButton>
 
-                    <IconButton
-                        aria-label="Show Ad"
-                        as={Link}
-                        href={`/ads/${id}`}
-                        icon={<LinkIcon />}
-                        variant="link"
-                    />
+                    <VStack gap={4}>
+                        <IconButton
+                            aria-label="Update Ad"
+                            as={Link}
+                            href={`/ads/update/${id}`}
+                            icon={<EditIcon />}
+                            variant="link"
+                        />
 
-                    <IconButton
-                        aria-label="Update Ad"
-                        as={Link}
-                        href={`/ads/update/${id}`}
-                        icon={<EditIcon />}
-                        variant="link"
-                    />
-
-                    <ConfirmDialog
-                        isLoading={deleting}
-                        message="Are you sure you want to delete this ad?"
-                        renderButton={(toggle) => (
-                            <IconButton
-                                aria-label="Delete Ad"
-                                icon={<DeleteIcon color="red" />}
-                                variant="link"
-                                onClick={toggle}
-                            />
-                        )}
-                        onConfirm={handleDeleteAd}
-                    />
+                        <ConfirmDialog
+                            isLoading={deleting}
+                            message="Are you sure you want to delete this ad?"
+                            renderButton={(toggle) => (
+                                <IconButton
+                                    aria-label="Delete Ad"
+                                    icon={<DeleteIcon color="red" />}
+                                    variant="link"
+                                    onClick={toggle}
+                                />
+                            )}
+                            onConfirm={handleDeleteAd}
+                        />
+                    </VStack>
                 </HStack>
-            </HStack>
+            </LinkBox>
             <Divider />
         </>
     );
