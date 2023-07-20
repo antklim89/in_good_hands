@@ -122,7 +122,7 @@ export class HttpClient {
         ...(requestParams.headers || {}),
         ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
       },
-      signal: cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal,
+      signal: (cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal) || null,
       body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
     }).then(async (response) => {
       const r = response;
@@ -175,38 +175,20 @@ export class Api extends HttpClient {
     });
   ad = {
     /**
- * No description
- *
- * @tags ad
- * @name CreateNew
- * @request POST:/ad/create-new/
- * @response `201` `{
-    id: number,
-
-}` Default Response
- */
+       * No description
+       *
+       * @tags ad
+       * @name CreateNew
+       * @request POST:/ad/create-new/
+       * @response `201` `{
+          id: number,
+      
+      }` Default Response
+       */
     createNew: (params = {}) =>
       this.request({
         path: `/ad/create-new/`,
         method: "POST",
-        format: "json",
-        ...params,
-      }),
-    /**
- * No description
- *
- * @tags ad
- * @name FindIds
- * @request GET:/ad/find-ids/
- * @response `200` `({
-    id: number,
-
-})[]` Default Response
- */
-    findIds: (params = {}) =>
-      this.request({
-        path: `/ad/find-ids/`,
-        method: "GET",
         format: "json",
         ...params,
       }),
@@ -226,35 +208,53 @@ export class Api extends HttpClient {
         ...params,
       }),
     /**
- * No description
- *
- * @tags ad
- * @name FindMany
- * @request GET:/ad/find-many/
- * @response `200` `({
-    id: number,
-    createdAt: string,
-    updatedAt: string,
-    name: string,
-    type: string,
-    breed: string,
-    price: number,
-    birthday: string,
-    images: ({
-    id: number,
-    src: string,
-    thumbnail: string,
-
-})[],
-    inFavorites?: boolean,
-    owner: {
-    id: string,
-    name: string,
-
-},
-
-})[]` Default Response
- */
+       * No description
+       *
+       * @tags ad
+       * @name FindIds
+       * @request GET:/ad/find-ids/
+       * @response `200` `({
+          id: number,
+      
+      })[]` Default Response
+       */
+    findIds: (params = {}) =>
+      this.request({
+        path: `/ad/find-ids/`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+    /**
+       * No description
+       *
+       * @tags ad
+       * @name FindMany
+       * @request GET:/ad/find-many/
+       * @response `200` `({
+          id: number,
+          createdAt: string,
+          updatedAt: string,
+          name: string,
+          type: string,
+          breed: string,
+          price: number,
+          birthday: string,
+          images: ({
+          id: number,
+          src: string,
+          thumbnail: string,
+      
+      })[],
+          inFavorites?: boolean,
+          owner: {
+          id: string,
+          name: string,
+      
+      },
+      
+      })[]` Default Response
+       */
     findMany: (query, params = {}) =>
       this.request({
         path: `/ad/find-many/`,
@@ -264,21 +264,21 @@ export class Api extends HttpClient {
         ...params,
       }),
     /**
- * No description
- *
- * @tags ad
- * @name FindMyAds
- * @request GET:/ad/find-my-ads/
- * @response `200` `({
-    id: number,
-    createdAt: string,
-    name: string,
-    type: string,
-    breed: string,
-    isPublished: boolean,
-
-})[]` Default Response
- */
+       * No description
+       *
+       * @tags ad
+       * @name FindMyAds
+       * @request GET:/ad/find-my-ads/
+       * @response `200` `({
+          id: number,
+          createdAt: string,
+          name: string,
+          type: string,
+          breed: string,
+          isPublished: boolean,
+      
+      })[]` Default Response
+       */
     findMyAds: (query, params = {}) =>
       this.request({
         path: `/ad/find-my-ads/`,
@@ -288,40 +288,40 @@ export class Api extends HttpClient {
         ...params,
       }),
     /**
- * No description
- *
- * @tags ad
- * @name FindOne
- * @request GET:/ad/find-one/
- * @response `200` `{
-    id: number,
-    createdAt: string,
-    updatedAt: string,
-    name: string,
-    type: string,
-    breed: string,
-    price: number,
-    birthday: string,
-    description: string,
-    tel: string,
-    telegram?: string,
-    whatsapp?: string,
-    email: string,
-    images: ({
-    id: number,
-    src: string,
-    thumbnail: string,
-
-})[],
-    inFavorites?: boolean,
-    owner: {
-    id: string,
-    name: string,
-
-},
-
-}` Default Response
- */
+       * No description
+       *
+       * @tags ad
+       * @name FindOne
+       * @request GET:/ad/find-one/
+       * @response `200` `{
+          id: number,
+          createdAt: string,
+          updatedAt: string,
+          name: string,
+          type: string,
+          breed: string,
+          price: number,
+          birthday: string,
+          description: string,
+          tel: string,
+          telegram?: string,
+          whatsapp?: string,
+          email: string,
+          images: ({
+          id: number,
+          src: string,
+          thumbnail: string,
+      
+      })[],
+          inFavorites?: boolean,
+          owner: {
+          id: string,
+          name: string,
+      
+      },
+      
+      }` Default Response
+       */
     findOne: (query, params = {}) =>
       this.request({
         path: `/ad/find-one/`,
@@ -331,57 +331,57 @@ export class Api extends HttpClient {
         ...params,
       }),
     /**
- * No description
- *
- * @tags ad
- * @name FindUpdateData
- * @request GET:/ad/find-update-data/
- * @response `200` `{
-  \** @maxLength 100 *\
-    name: string,
-    type: "cat" | "dog" | "bird" | "aquarium" | "rodent",
-  \**
-   * @minLength 3
-   * @maxLength 100
-   *\
-    breed: string,
-  \**
-   * @minLength 3
-   * @maxLength 4000
-   *\
-    description: string,
-  \**
-   * @minLength 3
-   * @maxLength 100
-   *\
-    email: string,
-  \**
-   * @minLength 3
-   * @maxLength 100
-   *\
-    tel: string,
-  \** @maxLength 50 *\
-    whatsapp?: string,
-  \** @maxLength 50 *\
-    telegram?: string,
-  \**
-   * @min 0
-   * @max 99999
-   *\
-    price: number,
-  \** @format date *\
-    birthday: string,
-    isPublished: boolean,
-    id: number,
-    images: ({
-    id: number,
-    src: string,
-    thumbnail: string,
-
-})[],
-
-}` Default Response
- */
+       * No description
+       *
+       * @tags ad
+       * @name FindUpdateData
+       * @request GET:/ad/find-update-data/
+       * @response `200` `{
+        \** @maxLength 100 *\
+          name: string,
+          type: "cat" | "dog" | "bird" | "aquarium" | "rodent",
+        \**
+         * @minLength 3
+         * @maxLength 100
+         *\
+          breed: string,
+        \**
+         * @minLength 3
+         * @maxLength 4000
+         *\
+          description: string,
+        \**
+         * @minLength 3
+         * @maxLength 100
+         *\
+          email: string,
+        \**
+         * @minLength 3
+         * @maxLength 100
+         *\
+          tel: string,
+        \** @maxLength 50 *\
+          whatsapp?: string,
+        \** @maxLength 50 *\
+          telegram?: string,
+        \**
+         * @min 0
+         * @max 99999
+         *\
+          price: number,
+        \** @format date *\
+          birthday: string,
+          isPublished: boolean,
+          id: number,
+          images: ({
+          id: number,
+          src: string,
+          thumbnail: string,
+      
+      })[],
+      
+      }` Default Response
+       */
     findUpdateData: (query, params = {}) =>
       this.request({
         path: `/ad/find-update-data/`,
@@ -405,6 +405,129 @@ export class Api extends HttpClient {
         query: query,
         body: body,
         type: ContentType.Json,
+        ...params,
+      }),
+  };
+  auth = {
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name ChangePassword
+     * @request PATCH:/auth/change-password/
+     * @response `201` `void` Default Response
+     */
+    changePassword: (body, params = {}) =>
+      this.request({
+        path: `/auth/change-password/`,
+        method: "PATCH",
+        body: body,
+        type: ContentType.Json,
+        ...params,
+      }),
+    /**
+       * No description
+       *
+       * @tags auth
+       * @name Login
+       * @request POST:/auth/login/
+       * @response `200` `{
+          user: {
+          email: string,
+          name: string,
+          id: string,
+      
+      },
+          token: string,
+      
+      }` Default Response
+       */
+    login: (body, params = {}) =>
+      this.request({
+        path: `/auth/login/`,
+        method: "POST",
+        body: body,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+    /**
+       * No description
+       *
+       * @tags auth
+       * @name Me
+       * @request GET:/auth/me/
+       * @response `200` `{
+          id?: string,
+        \**
+         * @minLength 3
+         * @maxLength 50
+         *\
+          email?: string,
+        \**
+         * @minLength 3
+         * @maxLength 30
+         *\
+          name?: string,
+        \**
+         * @minLength 3
+         * @maxLength 50
+         *\
+          tel?: string,
+        \** @maxLength 50 *\
+          whatsapp?: string,
+        \** @maxLength 50 *\
+          telegram?: string,
+      
+      }` Default Response
+       */
+    me: (params = {}) =>
+      this.request({
+        path: `/auth/me/`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (body, params = {}) =>
+      this.request({
+        path: `/auth/update/`,
+        method: "PATCH",
+        body: body,
+        type: ContentType.Json,
+        ...params,
+      }),
+    /**
+       * No description
+       *
+       * @tags auth
+       * @name Register
+       * @request POST:/auth/register/
+       * @response `200` `{
+          user: {
+          email: string,
+          name: string,
+          id: string,
+      
+      },
+          token: string,
+      
+      }` Default Response
+       */
+    register: (body, params = {}) =>
+      this.request({
+        path: `/auth/register/`,
+        method: "POST",
+        body: body,
+        type: ContentType.Json,
+        format: "json",
         ...params,
       }),
   };
@@ -441,152 +564,29 @@ export class Api extends HttpClient {
         ...params,
       }),
     /**
- * No description
- *
- * @tags favorites
- * @name FindMany
- * @request GET:/favorites/find-many/
- * @response `200` `({
-    id: number,
-    ad: {
-    id: number,
-    name: string,
-    type: string,
-    breed: string,
-    price: number,
-
-},
-
-})[]` Default Response
- */
+       * No description
+       *
+       * @tags favorites
+       * @name FindMany
+       * @request GET:/favorites/find-many/
+       * @response `200` `({
+          id: number,
+          ad: {
+          id: number,
+          name: string,
+          type: string,
+          breed: string,
+          price: number,
+      
+      },
+      
+      })[]` Default Response
+       */
     findMany: (params = {}) =>
       this.request({
         path: `/favorites/find-many/`,
         method: "GET",
         format: "json",
-        ...params,
-      }),
-  };
-  auth = {
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name ChangePassword
-     * @request PATCH:/auth/change-password/
-     * @response `201` `void` Default Response
-     */
-    changePassword: (body, params = {}) =>
-      this.request({
-        path: `/auth/change-password/`,
-        method: "PATCH",
-        body: body,
-        type: ContentType.Json,
-        ...params,
-      }),
-    /**
- * No description
- *
- * @tags auth
- * @name Login
- * @request POST:/auth/login/
- * @response `200` `{
-    user: {
-    email: string,
-    name: string,
-    id: string,
-
-},
-    token: string,
-
-}` Default Response
- */
-    login: (body, params = {}) =>
-      this.request({
-        path: `/auth/login/`,
-        method: "POST",
-        body: body,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-    /**
- * No description
- *
- * @tags auth
- * @name Me
- * @request GET:/auth/me/
- * @response `200` `{
-    id?: string,
-  \**
-   * @minLength 3
-   * @maxLength 50
-   *\
-    email?: string,
-  \**
-   * @minLength 3
-   * @maxLength 30
-   *\
-    name?: string,
-  \**
-   * @minLength 3
-   * @maxLength 50
-   *\
-    tel?: string,
-  \** @maxLength 50 *\
-    whatsapp?: string,
-  \** @maxLength 50 *\
-    telegram?: string,
-
-}` Default Response
- */
-    me: (params = {}) =>
-      this.request({
-        path: `/auth/me/`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-    /**
- * No description
- *
- * @tags auth
- * @name Register
- * @request POST:/auth/register/
- * @response `200` `{
-    user: {
-    email: string,
-    name: string,
-    id: string,
-
-},
-    token: string,
-
-}` Default Response
- */
-    register: (body, params = {}) =>
-      this.request({
-        path: `/auth/register/`,
-        method: "POST",
-        body: body,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
-     */
-    update: (body, params = {}) =>
-      this.request({
-        path: `/auth/update/`,
-        method: "PATCH",
-        body: body,
-        type: ContentType.Json,
         ...params,
       }),
   };
@@ -607,18 +607,18 @@ export class Api extends HttpClient {
         ...params,
       }),
     /**
- * No description
- *
- * @tags image
- * @name Upload
- * @request POST:/image/upload/
- * @response `201` `{
-    id: number,
-    src: string,
-    thumbnail: string,
-
-}` Default Response
- */
+       * No description
+       *
+       * @tags image
+       * @name Upload
+       * @request POST:/image/upload/
+       * @response `201` `{
+          id: number,
+          src: string,
+          thumbnail: string,
+      
+      }` Default Response
+       */
     upload: (query, data, params = {}) =>
       this.request({
         path: `/image/upload/`,

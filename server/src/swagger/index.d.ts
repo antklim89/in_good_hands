@@ -11,15 +11,15 @@
 
 export declare namespace Ad {
   /**
-* No description
-* @tags ad
-* @name CreateNew
-* @request POST:/ad/create-new/
-* @response `201` `{
-id: number,
-
-}` Default Response
-*/
+     * No description
+     * @tags ad
+     * @name CreateNew
+     * @request POST:/ad/create-new/
+     * @response `201` `{
+        id: number,
+    
+    }` Default Response
+    */
   namespace CreateNew {
     type RequestParams = {};
     type RequestQuery = {};
@@ -28,7 +28,24 @@ id: number,
     type ResponseBody = {
       id: number;
     };
-  } /**
+  }
+  /**
+   * No description
+   * @tags ad
+   * @name Delete
+   * @request DELETE:/ad/delete/
+   * @response `200` `void` Default Response
+   */
+  namespace Delete {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  }
+  /**
      * No description
      * @tags ad
      * @name FindIds
@@ -48,21 +65,6 @@ id: number,
     }[];
   }
   /**
-   * No description
-   * @tags ad
-   * @name Delete
-   * @request DELETE:/ad/delete/
-   * @response `200` `void` Default Response
-   */
-  namespace Delete {
-    type RequestParams = {};
-    type RequestQuery = {
-      adId: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = void;
-  } /**
      * No description
      * @tags ad
      * @name FindMany
@@ -122,7 +124,8 @@ id: number,
         name: string;
       };
     }[];
-  } /**
+  }
+  /**
      * No description
      * @tags ad
      * @name FindMyAds
@@ -152,7 +155,8 @@ id: number,
       breed: string;
       isPublished: boolean;
     }[];
-  } /**
+  }
+  /**
      * No description
      * @tags ad
      * @name FindOne
@@ -218,7 +222,8 @@ id: number,
         name: string;
       };
     };
-  } /**
+  }
+  /**
      * No description
      * @tags ad
      * @name FindUpdateData
@@ -373,73 +378,6 @@ id: number,
     type ResponseBody = void;
   }
 }
-export declare namespace Favorites {
-  /**
-   * No description
-   * @tags favorites
-   * @name Create
-   * @request POST:/favorites/create/
-   * @response `200` `number` Default Response
-   */
-  namespace Create {
-    type RequestParams = {};
-    type RequestQuery = {
-      adId: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = number;
-  }
-  /**
-   * No description
-   * @tags favorites
-   * @name Delete
-   * @request DELETE:/favorites/delete/
-   * @response `200` `void` Default Response
-   */
-  namespace Delete {
-    type RequestParams = {};
-    type RequestQuery = {
-      adId: number;
-    };
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = void;
-  } /**
-     * No description
-     * @tags favorites
-     * @name FindMany
-     * @request GET:/favorites/find-many/
-     * @response `200` `({
-        id: number,
-        ad: {
-        id: number,
-        name: string,
-        type: string,
-        breed: string,
-        price: number,
-    
-    },
-    
-    })[]` Default Response
-    */
-  namespace FindMany {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-      ad: {
-        id: number;
-        name: string;
-        type: string;
-        breed: string;
-        price: number;
-      };
-    }[];
-  }
-}
 export declare namespace Auth {
   /**
    * No description
@@ -465,7 +403,8 @@ export declare namespace Auth {
     };
     type RequestHeaders = {};
     type ResponseBody = void;
-  } /**
+  }
+  /**
      * No description
      * @tags auth
      * @name Login
@@ -505,7 +444,8 @@ export declare namespace Auth {
       };
       token: string;
     };
-  } /**
+  }
+  /**
      * No description
      * @tags auth
      * @name Me
@@ -561,7 +501,42 @@ export declare namespace Auth {
       /** @maxLength 50 */
       telegram?: string;
     };
-  } /**
+  }
+  /**
+   * No description
+   * @tags auth
+   * @name Update
+   * @request PATCH:/auth/update/
+   * @response `200` `void` Default Response
+   */
+  namespace Update {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      email?: string;
+      /**
+       * @minLength 3
+       * @maxLength 30
+       */
+      name?: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      tel?: string;
+      /** @maxLength 50 */
+      whatsapp?: string;
+      /** @maxLength 50 */
+      telegram?: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  }
+  /**
      * No description
      * @tags auth
      * @name Register
@@ -607,39 +582,73 @@ export declare namespace Auth {
       token: string;
     };
   }
+}
+export declare namespace Favorites {
   /**
    * No description
-   * @tags auth
-   * @name Update
-   * @request PATCH:/auth/update/
+   * @tags favorites
+   * @name Create
+   * @request POST:/favorites/create/
+   * @response `200` `number` Default Response
+   */
+  namespace Create {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = number;
+  }
+  /**
+   * No description
+   * @tags favorites
+   * @name Delete
+   * @request DELETE:/favorites/delete/
    * @response `200` `void` Default Response
    */
-  namespace Update {
+  namespace Delete {
     type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      email?: string;
-      /**
-       * @minLength 3
-       * @maxLength 30
-       */
-      name?: string;
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      tel?: string;
-      /** @maxLength 50 */
-      whatsapp?: string;
-      /** @maxLength 50 */
-      telegram?: string;
+    type RequestQuery = {
+      adId: number;
     };
+    type RequestBody = never;
     type RequestHeaders = {};
     type ResponseBody = void;
+  }
+  /**
+     * No description
+     * @tags favorites
+     * @name FindMany
+     * @request GET:/favorites/find-many/
+     * @response `200` `({
+        id: number,
+        ad: {
+        id: number,
+        name: string,
+        type: string,
+        breed: string,
+        price: number,
+    
+    },
+    
+    })[]` Default Response
+    */
+  namespace FindMany {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+      ad: {
+        id: number;
+        name: string;
+        type: string;
+        breed: string;
+        price: number;
+      };
+    }[];
   }
 }
 export declare namespace Image {
@@ -658,7 +667,8 @@ export declare namespace Image {
     type RequestBody = never;
     type RequestHeaders = {};
     type ResponseBody = void;
-  } /**
+  }
+  /**
      * No description
      * @tags image
      * @name Upload
@@ -687,8 +697,8 @@ export declare namespace Image {
     };
   }
 }
-export declare type QueryParamsType = Record<string | number, any>;
-export declare type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
+export type QueryParamsType = Record<string | number, any>;
+export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 export interface FullRequestParams extends Omit<RequestInit, "body"> {
   /** set parameter to `true` for call `securityWorker` for this request */
   secure?: boolean;
@@ -707,7 +717,7 @@ export interface FullRequestParams extends Omit<RequestInit, "body"> {
   /** request cancellation token */
   cancelToken?: CancelToken;
 }
-export declare type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
+export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
 export interface ApiConfig<SecurityDataType = unknown> {
   baseUrl?: string;
   baseApiParams?: Omit<RequestParams, "baseUrl" | "cancelToken" | "signal">;
@@ -718,7 +728,7 @@ export interface HttpResponse<D extends unknown, E extends unknown = unknown> ex
   data: D;
   error: E;
 }
-declare type CancelToken = Symbol | string | number;
+type CancelToken = Symbol | string | number;
 export declare enum ContentType {
   Json = "application/json",
   FormData = "multipart/form-data",
@@ -774,40 +784,21 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
   getRoot: (params?: RequestParams) => Promise<HttpResponse<void, any>>;
   ad: {
     /**
- * No description
- *
- * @tags ad
- * @name CreateNew
- * @request POST:/ad/create-new/
- * @response `201` `{
-    id: number,
-
-}` Default Response
- */
+       * No description
+       *
+       * @tags ad
+       * @name CreateNew
+       * @request POST:/ad/create-new/
+       * @response `201` `{
+          id: number,
+      
+      }` Default Response
+       */
     createNew: (params?: RequestParams) => Promise<
       HttpResponse<
         {
           id: number;
         },
-        any
-      >
-    >;
-    /**
- * No description
- *
- * @tags ad
- * @name FindIds
- * @request GET:/ad/find-ids/
- * @response `200` `({
-    id: number,
-
-})[]` Default Response
- */
-    findIds: (params?: RequestParams) => Promise<
-      HttpResponse<
-        {
-          id: number;
-        }[],
         any
       >
     >;
@@ -826,35 +817,54 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       params?: RequestParams,
     ) => Promise<HttpResponse<void, any>>;
     /**
- * No description
- *
- * @tags ad
- * @name FindMany
- * @request GET:/ad/find-many/
- * @response `200` `({
-    id: number,
-    createdAt: string,
-    updatedAt: string,
-    name: string,
-    type: string,
-    breed: string,
-    price: number,
-    birthday: string,
-    images: ({
-    id: number,
-    src: string,
-    thumbnail: string,
-
-})[],
-    inFavorites?: boolean,
-    owner: {
-    id: string,
-    name: string,
-
-},
-
-})[]` Default Response
- */
+       * No description
+       *
+       * @tags ad
+       * @name FindIds
+       * @request GET:/ad/find-ids/
+       * @response `200` `({
+          id: number,
+      
+      })[]` Default Response
+       */
+    findIds: (params?: RequestParams) => Promise<
+      HttpResponse<
+        {
+          id: number;
+        }[],
+        any
+      >
+    >;
+    /**
+       * No description
+       *
+       * @tags ad
+       * @name FindMany
+       * @request GET:/ad/find-many/
+       * @response `200` `({
+          id: number,
+          createdAt: string,
+          updatedAt: string,
+          name: string,
+          type: string,
+          breed: string,
+          price: number,
+          birthday: string,
+          images: ({
+          id: number,
+          src: string,
+          thumbnail: string,
+      
+      })[],
+          inFavorites?: boolean,
+          owner: {
+          id: string,
+          name: string,
+      
+      },
+      
+      })[]` Default Response
+       */
     findMany: (
       query?: {
         cursor?: number;
@@ -890,21 +900,21 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       >
     >;
     /**
- * No description
- *
- * @tags ad
- * @name FindMyAds
- * @request GET:/ad/find-my-ads/
- * @response `200` `({
-    id: number,
-    createdAt: string,
-    name: string,
-    type: string,
-    breed: string,
-    isPublished: boolean,
-
-})[]` Default Response
- */
+       * No description
+       *
+       * @tags ad
+       * @name FindMyAds
+       * @request GET:/ad/find-my-ads/
+       * @response `200` `({
+          id: number,
+          createdAt: string,
+          name: string,
+          type: string,
+          breed: string,
+          isPublished: boolean,
+      
+      })[]` Default Response
+       */
     findMyAds: (
       query?: {
         cursor?: number;
@@ -924,40 +934,40 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       >
     >;
     /**
- * No description
- *
- * @tags ad
- * @name FindOne
- * @request GET:/ad/find-one/
- * @response `200` `{
-    id: number,
-    createdAt: string,
-    updatedAt: string,
-    name: string,
-    type: string,
-    breed: string,
-    price: number,
-    birthday: string,
-    description: string,
-    tel: string,
-    telegram?: string,
-    whatsapp?: string,
-    email: string,
-    images: ({
-    id: number,
-    src: string,
-    thumbnail: string,
-
-})[],
-    inFavorites?: boolean,
-    owner: {
-    id: string,
-    name: string,
-
-},
-
-}` Default Response
- */
+       * No description
+       *
+       * @tags ad
+       * @name FindOne
+       * @request GET:/ad/find-one/
+       * @response `200` `{
+          id: number,
+          createdAt: string,
+          updatedAt: string,
+          name: string,
+          type: string,
+          breed: string,
+          price: number,
+          birthday: string,
+          description: string,
+          tel: string,
+          telegram?: string,
+          whatsapp?: string,
+          email: string,
+          images: ({
+          id: number,
+          src: string,
+          thumbnail: string,
+      
+      })[],
+          inFavorites?: boolean,
+          owner: {
+          id: string,
+          name: string,
+      
+      },
+      
+      }` Default Response
+       */
     findOne: (
       query: {
         adId: number;
@@ -994,57 +1004,57 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       >
     >;
     /**
- * No description
- *
- * @tags ad
- * @name FindUpdateData
- * @request GET:/ad/find-update-data/
- * @response `200` `{
-  \** @maxLength 100 *\
-    name: string,
-    type: "cat" | "dog" | "bird" | "aquarium" | "rodent",
-  \**
-   * @minLength 3
-   * @maxLength 100
-   *\
-    breed: string,
-  \**
-   * @minLength 3
-   * @maxLength 4000
-   *\
-    description: string,
-  \**
-   * @minLength 3
-   * @maxLength 100
-   *\
-    email: string,
-  \**
-   * @minLength 3
-   * @maxLength 100
-   *\
-    tel: string,
-  \** @maxLength 50 *\
-    whatsapp?: string,
-  \** @maxLength 50 *\
-    telegram?: string,
-  \**
-   * @min 0
-   * @max 99999
-   *\
-    price: number,
-  \** @format date *\
-    birthday: string,
-    isPublished: boolean,
-    id: number,
-    images: ({
-    id: number,
-    src: string,
-    thumbnail: string,
-
-})[],
-
-}` Default Response
- */
+       * No description
+       *
+       * @tags ad
+       * @name FindUpdateData
+       * @request GET:/ad/find-update-data/
+       * @response `200` `{
+        \** @maxLength 100 *\
+          name: string,
+          type: "cat" | "dog" | "bird" | "aquarium" | "rodent",
+        \**
+         * @minLength 3
+         * @maxLength 100
+         *\
+          breed: string,
+        \**
+         * @minLength 3
+         * @maxLength 4000
+         *\
+          description: string,
+        \**
+         * @minLength 3
+         * @maxLength 100
+         *\
+          email: string,
+        \**
+         * @minLength 3
+         * @maxLength 100
+         *\
+          tel: string,
+        \** @maxLength 50 *\
+          whatsapp?: string,
+        \** @maxLength 50 *\
+          telegram?: string,
+        \**
+         * @min 0
+         * @max 99999
+         *\
+          price: number,
+        \** @format date *\
+          birthday: string,
+          isPublished: boolean,
+          id: number,
+          images: ({
+          id: number,
+          src: string,
+          thumbnail: string,
+      
+      })[],
+      
+      }` Default Response
+       */
     findUpdateData: (
       query: {
         adId: number;
@@ -1150,70 +1160,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       params?: RequestParams,
     ) => Promise<HttpResponse<void, any>>;
   };
-  favorites: {
-    /**
-     * No description
-     *
-     * @tags favorites
-     * @name Create
-     * @request POST:/favorites/create/
-     * @response `200` `number` Default Response
-     */
-    create: (
-      query: {
-        adId: number;
-      },
-      params?: RequestParams,
-    ) => Promise<HttpResponse<number, any>>;
-    /**
-     * No description
-     *
-     * @tags favorites
-     * @name Delete
-     * @request DELETE:/favorites/delete/
-     * @response `200` `void` Default Response
-     */
-    delete: (
-      query: {
-        adId: number;
-      },
-      params?: RequestParams,
-    ) => Promise<HttpResponse<void, any>>;
-    /**
- * No description
- *
- * @tags favorites
- * @name FindMany
- * @request GET:/favorites/find-many/
- * @response `200` `({
-    id: number,
-    ad: {
-    id: number,
-    name: string,
-    type: string,
-    breed: string,
-    price: number,
-
-},
-
-})[]` Default Response
- */
-    findMany: (params?: RequestParams) => Promise<
-      HttpResponse<
-        {
-          id: number;
-          ad: {
-            id: number;
-            name: string;
-            type: string;
-            breed: string;
-            price: number;
-          };
-        }[],
-        any
-      >
-    >;
-  };
   auth: {
     /**
      * No description
@@ -1239,22 +1185,22 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       params?: RequestParams,
     ) => Promise<HttpResponse<void, any>>;
     /**
- * No description
- *
- * @tags auth
- * @name Login
- * @request POST:/auth/login/
- * @response `200` `{
-    user: {
-    email: string,
-    name: string,
-    id: string,
-
-},
-    token: string,
-
-}` Default Response
- */
+       * No description
+       *
+       * @tags auth
+       * @name Login
+       * @request POST:/auth/login/
+       * @response `200` `{
+          user: {
+          email: string,
+          name: string,
+          id: string,
+      
+      },
+          token: string,
+      
+      }` Default Response
+       */
     login: (
       body: {
         /**
@@ -1283,35 +1229,35 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       >
     >;
     /**
- * No description
- *
- * @tags auth
- * @name Me
- * @request GET:/auth/me/
- * @response `200` `{
-    id?: string,
-  \**
-   * @minLength 3
-   * @maxLength 50
-   *\
-    email?: string,
-  \**
-   * @minLength 3
-   * @maxLength 30
-   *\
-    name?: string,
-  \**
-   * @minLength 3
-   * @maxLength 50
-   *\
-    tel?: string,
-  \** @maxLength 50 *\
-    whatsapp?: string,
-  \** @maxLength 50 *\
-    telegram?: string,
-
-}` Default Response
- */
+       * No description
+       *
+       * @tags auth
+       * @name Me
+       * @request GET:/auth/me/
+       * @response `200` `{
+          id?: string,
+        \**
+         * @minLength 3
+         * @maxLength 50
+         *\
+          email?: string,
+        \**
+         * @minLength 3
+         * @maxLength 30
+         *\
+          name?: string,
+        \**
+         * @minLength 3
+         * @maxLength 50
+         *\
+          tel?: string,
+        \** @maxLength 50 *\
+          whatsapp?: string,
+        \** @maxLength 50 *\
+          telegram?: string,
+      
+      }` Default Response
+       */
     me: (params?: RequestParams) => Promise<
       HttpResponse<
         {
@@ -1335,55 +1281,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
           whatsapp?: string;
           /** @maxLength 50 */
           telegram?: string;
-        },
-        any
-      >
-    >;
-    /**
- * No description
- *
- * @tags auth
- * @name Register
- * @request POST:/auth/register/
- * @response `200` `{
-    user: {
-    email: string,
-    name: string,
-    id: string,
-
-},
-    token: string,
-
-}` Default Response
- */
-    register: (
-      body: {
-        /**
-         * @minLength 3
-         * @maxLength 50
-         */
-        password: string;
-        /**
-         * @minLength 3
-         * @maxLength 50
-         */
-        email: string;
-        /**
-         * @minLength 3
-         * @maxLength 30
-         */
-        name: string;
-      },
-      params?: RequestParams,
-    ) => Promise<
-      HttpResponse<
-        {
-          user: {
-            email: string;
-            name: string;
-            id: string;
-          };
-          token: string;
         },
         any
       >
@@ -1420,6 +1317,119 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<HttpResponse<void, any>>;
+    /**
+       * No description
+       *
+       * @tags auth
+       * @name Register
+       * @request POST:/auth/register/
+       * @response `200` `{
+          user: {
+          email: string,
+          name: string,
+          id: string,
+      
+      },
+          token: string,
+      
+      }` Default Response
+       */
+    register: (
+      body: {
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        password: string;
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        email: string;
+        /**
+         * @minLength 3
+         * @maxLength 30
+         */
+        name: string;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      HttpResponse<
+        {
+          user: {
+            email: string;
+            name: string;
+            id: string;
+          };
+          token: string;
+        },
+        any
+      >
+    >;
+  };
+  favorites: {
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name Create
+     * @request POST:/favorites/create/
+     * @response `200` `number` Default Response
+     */
+    create: (
+      query: {
+        adId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<HttpResponse<number, any>>;
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name Delete
+     * @request DELETE:/favorites/delete/
+     * @response `200` `void` Default Response
+     */
+    delete: (
+      query: {
+        adId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<HttpResponse<void, any>>;
+    /**
+       * No description
+       *
+       * @tags favorites
+       * @name FindMany
+       * @request GET:/favorites/find-many/
+       * @response `200` `({
+          id: number,
+          ad: {
+          id: number,
+          name: string,
+          type: string,
+          breed: string,
+          price: number,
+      
+      },
+      
+      })[]` Default Response
+       */
+    findMany: (params?: RequestParams) => Promise<
+      HttpResponse<
+        {
+          id: number;
+          ad: {
+            id: number;
+            name: string;
+            type: string;
+            breed: string;
+            price: number;
+          };
+        }[],
+        any
+      >
+    >;
   };
   image: {
     /**
@@ -1437,18 +1447,18 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       params?: RequestParams,
     ) => Promise<HttpResponse<void, any>>;
     /**
- * No description
- *
- * @tags image
- * @name Upload
- * @request POST:/image/upload/
- * @response `201` `{
-    id: number,
-    src: string,
-    thumbnail: string,
-
-}` Default Response
- */
+       * No description
+       *
+       * @tags image
+       * @name Upload
+       * @request POST:/image/upload/
+       * @response `201` `{
+          id: number,
+          src: string,
+          thumbnail: string,
+      
+      }` Default Response
+       */
     upload: (
       query: {
         adId: number;
