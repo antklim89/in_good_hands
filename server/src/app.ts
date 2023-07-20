@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import path from 'path';
 
 import { fastifyAutoload } from '@fastify/autoload';
@@ -35,7 +36,6 @@ app.register(fastifyAutoload, {
 app.register(fastifyAutoload, {
     dir: path.join(__dirname, 'routes'),
     options: {},
-    // indexPattern: /.*\.route\..*/,
 });
 
 
