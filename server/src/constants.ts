@@ -1,9 +1,7 @@
 import { join } from 'path';
 
-import { getEnv } from './utils';
 
-
-export const JWT_SECRET = getEnv('JWT_SECRET');
+export const JWT_SECRET = process.env.JWT_SECRET || (() => {throw new Error(`JWT_SECRET env variable is required`)})();
 
 
 export const UPLOAD_BASE_URL = '/upload';
