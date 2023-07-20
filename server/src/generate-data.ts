@@ -50,10 +50,10 @@ async function generateUsers() {
     });
     const users = [admin];
     for (let index = 0; index < USERS_NUMBER; index += 1) {
-        const name = faker.name.firstName();
+        const name = faker.person.firstName();
         const user = await prisma.user.create({
             data: {
-                email: faker.internet.email(name),
+                email: faker.internet.email({firstName: name}),
                 name,
                 hash: '$2a$08$6hQB/nrqA0ZI1LkUu0dBVuRWQFTOjMW9qOt2BbHPs6f1n9Fj/tLM6',
                 tel: faker.phone.number(),
@@ -83,7 +83,7 @@ async function generateAds(user: User[]) {
                 isPublished: true,
                 price: Number(faker.finance.amount(100, 5000)),
                 ownerId: id,
-                name: faker.name.lastName(),
+                name: faker.person.lastName(),
             },
         });
         ads.push(ad);
