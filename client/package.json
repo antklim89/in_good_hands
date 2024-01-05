@@ -7,9 +7,12 @@
   "scripts": {
     "dev": "run-p dev:**",
     "dev:next": "next dev -H 0.0.0.0",
-    "dev:typecheck": "tsc --noEmit -w --preserveWatchOutput",
+    "dev:typecheck": "yarn typecheck -w --preserveWatchOutput",
+
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.19",
