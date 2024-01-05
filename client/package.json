@@ -8,10 +8,8 @@
     "dev": "run-p dev:**",
     "dev:next": "next dev -H 0.0.0.0",
     "dev:typecheck": "yarn typecheck -w --preserveWatchOutput",
-
     "build": "next build",
     "start": "next start",
-
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -21,6 +19,7 @@
     "@emotion/styled": "^11",
     "@in-good-hands/server": "*",
     "@netlify/plugin-nextjs": "^4.37.4",
+    "axios": "^1.6.4",
     "cookie": "^0.5.0",
     "core-js": "^3.31.0",
     "formik": "^2.4.2",

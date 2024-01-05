@@ -171,6 +171,23 @@ export class Api extends HttpClient {
     });
   ad = {
     /**
+       * No description
+       *
+       * @tags ad
+       * @name CreateNew
+       * @request POST:/ad/create-new/
+       * @response `201` `{
+          id: number,
+      
+      }` Default Response
+       */
+    createNew: (params = {}) =>
+      this.request({
+        path: `/ad/create-new/`,
+        method: "POST",
+        ...params,
+      }),
+    /**
      * No description
      *
      * @tags ad
@@ -378,23 +395,6 @@ export class Api extends HttpClient {
         query: query,
         body: body,
         type: ContentType.Json,
-        ...params,
-      }),
-    /**
-       * No description
-       *
-       * @tags ad
-       * @name CreateNew
-       * @request POST:/ad/create-new/
-       * @response `201` `{
-          id: number,
-      
-      }` Default Response
-       */
-    createNew: (params = {}) =>
-      this.request({
-        path: `/ad/create-new/`,
-        method: "POST",
         ...params,
       }),
   };

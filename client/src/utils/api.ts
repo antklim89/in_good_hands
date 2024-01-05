@@ -1,6 +1,6 @@
 import type { IncomingMessage } from 'http';
 
-import { Api } from '@in-good-hands/server/src/swagger';
+import { Api } from '@in-good-hands/share/swager';
 
 import { getUserCookie } from './getCookies';
 
@@ -21,19 +21,8 @@ export const api = (req?: IncomingMessage) => {
 
 
     const apiInstance = new Api({
-        customFetch(input, init?) {
-            return fetch(input, init)
-                .then(async (data) => {
-                    if (data.ok) return data;
-
-                    const error = await data.json();
-                    throw new Error(error.message || 'Unexpected Error. Try again later.');
-                });
-        },
-        baseUrl: API_URL,
-        baseApiParams: {
-            headers,
-        },
+        baseURL: API_URL,
+        headers
     });
 
     return apiInstance;

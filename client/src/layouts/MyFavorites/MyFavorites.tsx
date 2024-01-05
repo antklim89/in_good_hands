@@ -11,7 +11,7 @@ import { api } from '~/utils';
 
 
 const MyFavorites: FC = () => {
-    const { data: favorites = [], isLoading } = useSWR('my-favorites', () => api().favorites.findMany().then((d) => d.json()));
+    const { data: favorites = [], isLoading } = useSWR('my-favorites', () => api().favorites.findMany().then((d) => d.data));
     const hoverBg = useColorModeValue('gray.50', 'gray.900');
 
     if (isLoading) return (

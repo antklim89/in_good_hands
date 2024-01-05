@@ -7,7 +7,7 @@ async function generateSwaggerTypes() {
             name: 'index.ts',
             output: path.resolve('swager/generated'),
             url: 'http://localhost:8000/documentation/json',
-            httpClientType: 'fetch',
+            httpClientType: 'axios',
             defaultResponseAsSuccess: true,
             generateRouteTypes: true,
             generateResponses: true,

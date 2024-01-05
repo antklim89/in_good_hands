@@ -23,7 +23,7 @@ export default AdPage;
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({ params, req }) => {
     if (!params || typeof params.adId !== 'string') return { notFound: true };
-    const ad = await api(req).ad.findOne({ adId: Number(params.adId) }).then((d) => d.json());
+    const { data: ad } = await api(req).ad.findOne({ adId: Number(params.adId) });
 
     return { props: { ad } };
 };

@@ -11,6 +11,25 @@
 
 export declare namespace Ad {
   /**
+     * No description
+     * @tags ad
+     * @name CreateNew
+     * @request POST:/ad/create-new/
+     * @response `201` `{
+        id: number,
+    
+    }` Default Response
+    */
+  namespace CreateNew {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+    };
+  }
+  /**
    * No description
    * @tags ad
    * @name Delete
@@ -357,25 +376,6 @@ export declare namespace Ad {
     };
     type RequestHeaders = {};
     type ResponseBody = void;
-  }
-  /**
-     * No description
-     * @tags ad
-     * @name CreateNew
-     * @request POST:/ad/create-new/
-     * @response `201` `{
-        id: number,
-    
-    }` Default Response
-    */
-  namespace CreateNew {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-    };
   }
 }
 export declare namespace Auth {
@@ -780,6 +780,25 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
   getRoot: (params?: RequestParams) => Promise<HttpResponse<void, any>>;
   ad: {
     /**
+       * No description
+       *
+       * @tags ad
+       * @name CreateNew
+       * @request POST:/ad/create-new/
+       * @response `201` `{
+          id: number,
+      
+      }` Default Response
+       */
+    createNew: (params?: RequestParams) => Promise<
+      HttpResponse<
+        {
+          id: number;
+        },
+        any
+      >
+    >;
+    /**
      * No description
      *
      * @tags ad
@@ -1136,25 +1155,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<HttpResponse<void, any>>;
-    /**
-       * No description
-       *
-       * @tags ad
-       * @name CreateNew
-       * @request POST:/ad/create-new/
-       * @response `201` `{
-          id: number,
-      
-      }` Default Response
-       */
-    createNew: (params?: RequestParams) => Promise<
-      HttpResponse<
-        {
-          id: number;
-        },
-        any
-      >
-    >;
   };
   auth: {
     /**
