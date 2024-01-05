@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
 import app from './app';
-import { generateSwaggerTypes } from './utils';
 
 
 const { PORT = 8000, HOST = '0.0.0.0' } = process.env;
@@ -15,6 +14,5 @@ app.listen({ port: Number(PORT), host: HOST }, (err, address) => {
         console.error(err);
         process.exit(1);
     }
-    if (process.env.NODE_ENV !== 'production') generateSwaggerTypes(app);
     app.log.info(`Server is now listening on ${address}`);
 });

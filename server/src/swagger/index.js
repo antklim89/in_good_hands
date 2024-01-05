@@ -188,21 +188,6 @@ export class Api extends HttpClient {
         ...params,
       }),
     /**
-     * No description
-     *
-     * @tags ad
-     * @name Delete
-     * @request DELETE:/ad/delete/
-     * @response `200` `void` Default Response
-     */
-    delete: (query, params = {}) =>
-      this.request({
-        path: `/ad/delete/`,
-        method: "DELETE",
-        query: query,
-        ...params,
-      }),
-    /**
        * No description
        *
        * @tags ad
@@ -217,6 +202,21 @@ export class Api extends HttpClient {
       this.request({
         path: `/ad/find-ids/`,
         method: "GET",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags ad
+     * @name Delete
+     * @request DELETE:/ad/delete/
+     * @response `200` `void` Default Response
+     */
+    delete: (query, params = {}) =>
+      this.request({
+        path: `/ad/delete/`,
+        method: "DELETE",
+        query: query,
         ...params,
       }),
     /**
