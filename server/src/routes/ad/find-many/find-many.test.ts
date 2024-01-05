@@ -1,6 +1,6 @@
 import { ADS_LIMIT } from './index';
 
-import { Ad } from '@/swagger';
+import { Ad } from '@in-good-hands/share/swager'
 import { init } from '@/test';
 import { generateJWT } from '@/utils';
 

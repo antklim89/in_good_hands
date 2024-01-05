@@ -9,231 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-export declare namespace Auth {
-  /**
-   * No description
-   * @tags auth
-   * @name ChangePassword
-   * @request PATCH:/auth/change-password/
-   * @response `201` `void` Default Response
-   */
-  namespace ChangePassword {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      newPassword: string;
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      oldPassword: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = void;
-  }
-  /**
-     * No description
-     * @tags auth
-     * @name Login
-     * @request POST:/auth/login/
-     * @response `200` `{
-        user: {
-        email: string,
-        name: string,
-        id: string,
-    
-    },
-        token: string,
-    
-    }` Default Response
-    */
-  namespace Login {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      password: string;
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      email: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = {
-      user: {
-        email: string;
-        name: string;
-        id: string;
-      };
-      token: string;
-    };
-  }
-  /**
-     * No description
-     * @tags auth
-     * @name Me
-     * @request GET:/auth/me/
-     * @response `200` `{
-        id?: string,
-      \**
-       * @minLength 3
-       * @maxLength 50
-       *\
-        email?: string,
-      \**
-       * @minLength 3
-       * @maxLength 30
-       *\
-        name?: string,
-      \**
-       * @minLength 3
-       * @maxLength 50
-       *\
-        tel?: string,
-      \** @maxLength 50 *\
-        whatsapp?: string,
-      \** @maxLength 50 *\
-        telegram?: string,
-    
-    }` Default Response
-    */
-  namespace Me {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id?: string;
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      email?: string;
-      /**
-       * @minLength 3
-       * @maxLength 30
-       */
-      name?: string;
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      tel?: string;
-      /** @maxLength 50 */
-      whatsapp?: string;
-      /** @maxLength 50 */
-      telegram?: string;
-    };
-  }
-  /**
-     * No description
-     * @tags auth
-     * @name Register
-     * @request POST:/auth/register/
-     * @response `200` `{
-        user: {
-        email: string,
-        name: string,
-        id: string,
-    
-    },
-        token: string,
-    
-    }` Default Response
-    */
-  namespace Register {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      password: string;
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      email: string;
-      /**
-       * @minLength 3
-       * @maxLength 30
-       */
-      name: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = {
-      user: {
-        email: string;
-        name: string;
-        id: string;
-      };
-      token: string;
-    };
-  }
-  /**
-   * No description
-   * @tags auth
-   * @name Update
-   * @request PATCH:/auth/update/
-   * @response `200` `void` Default Response
-   */
-  namespace Update {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = {
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      email?: string;
-      /**
-       * @minLength 3
-       * @maxLength 30
-       */
-      name?: string;
-      /**
-       * @minLength 3
-       * @maxLength 50
-       */
-      tel?: string;
-      /** @maxLength 50 */
-      whatsapp?: string;
-      /** @maxLength 50 */
-      telegram?: string;
-    };
-    type RequestHeaders = {};
-    type ResponseBody = void;
-  }
-}
 export declare namespace Ad {
-  /**
-     * No description
-     * @tags ad
-     * @name CreateNew
-     * @request POST:/ad/create-new/
-     * @response `201` `{
-        id: number,
-    
-    }` Default Response
-    */
-  namespace CreateNew {
-    type RequestParams = {};
-    type RequestQuery = {};
-    type RequestBody = never;
-    type RequestHeaders = {};
-    type ResponseBody = {
-      id: number;
-    };
-  }
   /**
    * No description
    * @tags ad
@@ -582,24 +358,232 @@ export declare namespace Ad {
     type RequestHeaders = {};
     type ResponseBody = void;
   }
+  /**
+     * No description
+     * @tags ad
+     * @name CreateNew
+     * @request POST:/ad/create-new/
+     * @response `201` `{
+        id: number,
+    
+    }` Default Response
+    */
+  namespace CreateNew {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id: number;
+    };
+  }
 }
-export declare namespace Favorites {
+export declare namespace Auth {
   /**
    * No description
-   * @tags favorites
-   * @name Delete
-   * @request DELETE:/favorites/delete/
-   * @response `200` `void` Default Response
+   * @tags auth
+   * @name ChangePassword
+   * @request PATCH:/auth/change-password/
+   * @response `201` `void` Default Response
    */
-  namespace Delete {
+  namespace ChangePassword {
     type RequestParams = {};
-    type RequestQuery = {
-      adId: number;
+    type RequestQuery = {};
+    type RequestBody = {
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      newPassword: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      oldPassword: string;
     };
-    type RequestBody = never;
     type RequestHeaders = {};
     type ResponseBody = void;
   }
+  /**
+     * No description
+     * @tags auth
+     * @name Login
+     * @request POST:/auth/login/
+     * @response `200` `{
+        user: {
+        email: string,
+        name: string,
+        id: string,
+    
+    },
+        token: string,
+    
+    }` Default Response
+    */
+  namespace Login {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      password: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      email: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = {
+      user: {
+        email: string;
+        name: string;
+        id: string;
+      };
+      token: string;
+    };
+  }
+  /**
+     * No description
+     * @tags auth
+     * @name Me
+     * @request GET:/auth/me/
+     * @response `200` `{
+        id?: string,
+      \**
+       * @minLength 3
+       * @maxLength 50
+       *\
+        email?: string,
+      \**
+       * @minLength 3
+       * @maxLength 30
+       *\
+        name?: string,
+      \**
+       * @minLength 3
+       * @maxLength 50
+       *\
+        tel?: string,
+      \** @maxLength 50 *\
+        whatsapp?: string,
+      \** @maxLength 50 *\
+        telegram?: string,
+    
+    }` Default Response
+    */
+  namespace Me {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = {
+      id?: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      email?: string;
+      /**
+       * @minLength 3
+       * @maxLength 30
+       */
+      name?: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      tel?: string;
+      /** @maxLength 50 */
+      whatsapp?: string;
+      /** @maxLength 50 */
+      telegram?: string;
+    };
+  }
+  /**
+     * No description
+     * @tags auth
+     * @name Register
+     * @request POST:/auth/register/
+     * @response `200` `{
+        user: {
+        email: string,
+        name: string,
+        id: string,
+    
+    },
+        token: string,
+    
+    }` Default Response
+    */
+  namespace Register {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      password: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      email: string;
+      /**
+       * @minLength 3
+       * @maxLength 30
+       */
+      name: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = {
+      user: {
+        email: string;
+        name: string;
+        id: string;
+      };
+      token: string;
+    };
+  }
+  /**
+   * No description
+   * @tags auth
+   * @name Update
+   * @request PATCH:/auth/update/
+   * @response `200` `void` Default Response
+   */
+  namespace Update {
+    type RequestParams = {};
+    type RequestQuery = {};
+    type RequestBody = {
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      email?: string;
+      /**
+       * @minLength 3
+       * @maxLength 30
+       */
+      name?: string;
+      /**
+       * @minLength 3
+       * @maxLength 50
+       */
+      tel?: string;
+      /** @maxLength 50 */
+      whatsapp?: string;
+      /** @maxLength 50 */
+      telegram?: string;
+    };
+    type RequestHeaders = {};
+    type ResponseBody = void;
+  }
+}
+export declare namespace Favorites {
   /**
    * No description
    * @tags favorites
@@ -615,6 +599,22 @@ export declare namespace Favorites {
     type RequestBody = never;
     type RequestHeaders = {};
     type ResponseBody = number;
+  }
+  /**
+   * No description
+   * @tags favorites
+   * @name Delete
+   * @request DELETE:/favorites/delete/
+   * @response `200` `void` Default Response
+   */
+  namespace Delete {
+    type RequestParams = {};
+    type RequestQuery = {
+      adId: number;
+    };
+    type RequestBody = never;
+    type RequestHeaders = {};
+    type ResponseBody = void;
   }
   /**
      * No description
@@ -766,12 +766,8 @@ export declare class HttpClient<SecurityDataType = unknown> {
   }: FullRequestParams) => Promise<HttpResponse<T, E>>;
 }
 /**
- * @title In Good Hands API
- * @version 0.1.0
- * @baseUrl http://localhost:8000
- * @externalDocs https://swagger.io
- *
- * Swagger API
+ * @title @fastify/swagger
+ * @version 8.13.0
  */
 export declare class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
   /**
@@ -782,233 +778,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
    * @response `200` `void` Default Response
    */
   getRoot: (params?: RequestParams) => Promise<HttpResponse<void, any>>;
-  auth: {
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name ChangePassword
-     * @request PATCH:/auth/change-password/
-     * @response `201` `void` Default Response
-     */
-    changePassword: (
-      body: {
-        /**
-         * @minLength 3
-         * @maxLength 50
-         */
-        newPassword: string;
-        /**
-         * @minLength 3
-         * @maxLength 50
-         */
-        oldPassword: string;
-      },
-      params?: RequestParams,
-    ) => Promise<HttpResponse<void, any>>;
-    /**
-       * No description
-       *
-       * @tags auth
-       * @name Login
-       * @request POST:/auth/login/
-       * @response `200` `{
-          user: {
-          email: string,
-          name: string,
-          id: string,
-      
-      },
-          token: string,
-      
-      }` Default Response
-       */
-    login: (
-      body: {
-        /**
-         * @minLength 3
-         * @maxLength 50
-         */
-        password: string;
-        /**
-         * @minLength 3
-         * @maxLength 50
-         */
-        email: string;
-      },
-      params?: RequestParams,
-    ) => Promise<
-      HttpResponse<
-        {
-          user: {
-            email: string;
-            name: string;
-            id: string;
-          };
-          token: string;
-        },
-        any
-      >
-    >;
-    /**
-       * No description
-       *
-       * @tags auth
-       * @name Me
-       * @request GET:/auth/me/
-       * @response `200` `{
-          id?: string,
-        \**
-         * @minLength 3
-         * @maxLength 50
-         *\
-          email?: string,
-        \**
-         * @minLength 3
-         * @maxLength 30
-         *\
-          name?: string,
-        \**
-         * @minLength 3
-         * @maxLength 50
-         *\
-          tel?: string,
-        \** @maxLength 50 *\
-          whatsapp?: string,
-        \** @maxLength 50 *\
-          telegram?: string,
-      
-      }` Default Response
-       */
-    me: (params?: RequestParams) => Promise<
-      HttpResponse<
-        {
-          id?: string;
-          /**
-           * @minLength 3
-           * @maxLength 50
-           */
-          email?: string;
-          /**
-           * @minLength 3
-           * @maxLength 30
-           */
-          name?: string;
-          /**
-           * @minLength 3
-           * @maxLength 50
-           */
-          tel?: string;
-          /** @maxLength 50 */
-          whatsapp?: string;
-          /** @maxLength 50 */
-          telegram?: string;
-        },
-        any
-      >
-    >;
-    /**
-       * No description
-       *
-       * @tags auth
-       * @name Register
-       * @request POST:/auth/register/
-       * @response `200` `{
-          user: {
-          email: string,
-          name: string,
-          id: string,
-      
-      },
-          token: string,
-      
-      }` Default Response
-       */
-    register: (
-      body: {
-        /**
-         * @minLength 3
-         * @maxLength 50
-         */
-        password: string;
-        /**
-         * @minLength 3
-         * @maxLength 50
-         */
-        email: string;
-        /**
-         * @minLength 3
-         * @maxLength 30
-         */
-        name: string;
-      },
-      params?: RequestParams,
-    ) => Promise<
-      HttpResponse<
-        {
-          user: {
-            email: string;
-            name: string;
-            id: string;
-          };
-          token: string;
-        },
-        any
-      >
-    >;
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
-     */
-    update: (
-      body: {
-        /**
-         * @minLength 3
-         * @maxLength 50
-         */
-        email?: string;
-        /**
-         * @minLength 3
-         * @maxLength 30
-         */
-        name?: string;
-        /**
-         * @minLength 3
-         * @maxLength 50
-         */
-        tel?: string;
-        /** @maxLength 50 */
-        whatsapp?: string;
-        /** @maxLength 50 */
-        telegram?: string;
-      },
-      params?: RequestParams,
-    ) => Promise<HttpResponse<void, any>>;
-  };
   ad: {
-    /**
-       * No description
-       *
-       * @tags ad
-       * @name CreateNew
-       * @request POST:/ad/create-new/
-       * @response `201` `{
-          id: number,
-      
-      }` Default Response
-       */
-    createNew: (params?: RequestParams) => Promise<
-      HttpResponse<
-        {
-          id: number;
-        },
-        any
-      >
-    >;
     /**
      * No description
      *
@@ -1366,22 +1136,234 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<HttpResponse<void, any>>;
+    /**
+       * No description
+       *
+       * @tags ad
+       * @name CreateNew
+       * @request POST:/ad/create-new/
+       * @response `201` `{
+          id: number,
+      
+      }` Default Response
+       */
+    createNew: (params?: RequestParams) => Promise<
+      HttpResponse<
+        {
+          id: number;
+        },
+        any
+      >
+    >;
   };
-  favorites: {
+  auth: {
     /**
      * No description
      *
-     * @tags favorites
-     * @name Delete
-     * @request DELETE:/favorites/delete/
-     * @response `200` `void` Default Response
+     * @tags auth
+     * @name ChangePassword
+     * @request PATCH:/auth/change-password/
+     * @response `201` `void` Default Response
      */
-    delete: (
-      query: {
-        adId: number;
+    changePassword: (
+      body: {
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        newPassword: string;
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        oldPassword: string;
       },
       params?: RequestParams,
     ) => Promise<HttpResponse<void, any>>;
+    /**
+       * No description
+       *
+       * @tags auth
+       * @name Login
+       * @request POST:/auth/login/
+       * @response `200` `{
+          user: {
+          email: string,
+          name: string,
+          id: string,
+      
+      },
+          token: string,
+      
+      }` Default Response
+       */
+    login: (
+      body: {
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        password: string;
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        email: string;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      HttpResponse<
+        {
+          user: {
+            email: string;
+            name: string;
+            id: string;
+          };
+          token: string;
+        },
+        any
+      >
+    >;
+    /**
+       * No description
+       *
+       * @tags auth
+       * @name Me
+       * @request GET:/auth/me/
+       * @response `200` `{
+          id?: string,
+        \**
+         * @minLength 3
+         * @maxLength 50
+         *\
+          email?: string,
+        \**
+         * @minLength 3
+         * @maxLength 30
+         *\
+          name?: string,
+        \**
+         * @minLength 3
+         * @maxLength 50
+         *\
+          tel?: string,
+        \** @maxLength 50 *\
+          whatsapp?: string,
+        \** @maxLength 50 *\
+          telegram?: string,
+      
+      }` Default Response
+       */
+    me: (params?: RequestParams) => Promise<
+      HttpResponse<
+        {
+          id?: string;
+          /**
+           * @minLength 3
+           * @maxLength 50
+           */
+          email?: string;
+          /**
+           * @minLength 3
+           * @maxLength 30
+           */
+          name?: string;
+          /**
+           * @minLength 3
+           * @maxLength 50
+           */
+          tel?: string;
+          /** @maxLength 50 */
+          whatsapp?: string;
+          /** @maxLength 50 */
+          telegram?: string;
+        },
+        any
+      >
+    >;
+    /**
+       * No description
+       *
+       * @tags auth
+       * @name Register
+       * @request POST:/auth/register/
+       * @response `200` `{
+          user: {
+          email: string,
+          name: string,
+          id: string,
+      
+      },
+          token: string,
+      
+      }` Default Response
+       */
+    register: (
+      body: {
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        password: string;
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        email: string;
+        /**
+         * @minLength 3
+         * @maxLength 30
+         */
+        name: string;
+      },
+      params?: RequestParams,
+    ) => Promise<
+      HttpResponse<
+        {
+          user: {
+            email: string;
+            name: string;
+            id: string;
+          };
+          token: string;
+        },
+        any
+      >
+    >;
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (
+      body: {
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        email?: string;
+        /**
+         * @minLength 3
+         * @maxLength 30
+         */
+        name?: string;
+        /**
+         * @minLength 3
+         * @maxLength 50
+         */
+        tel?: string;
+        /** @maxLength 50 */
+        whatsapp?: string;
+        /** @maxLength 50 */
+        telegram?: string;
+      },
+      params?: RequestParams,
+    ) => Promise<HttpResponse<void, any>>;
+  };
+  favorites: {
     /**
      * No description
      *
@@ -1396,6 +1378,20 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
       },
       params?: RequestParams,
     ) => Promise<HttpResponse<number, any>>;
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name Delete
+     * @request DELETE:/favorites/delete/
+     * @response `200` `void` Default Response
+     */
+    delete: (
+      query: {
+        adId: number;
+      },
+      params?: RequestParams,
+    ) => Promise<HttpResponse<void, any>>;
     /**
        * No description
        *

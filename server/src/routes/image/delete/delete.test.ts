@@ -2,7 +2,7 @@ import { join } from 'path';
 
 import { mkdir, pathExists, writeFile } from 'fs-extra';
 
-import { Image } from '@/swagger';
+import { Image } from '@in-good-hands/share/swager'
 import { init } from '@/test';
 import { generateJWT, getImagePathBySrc } from '@/utils';
 

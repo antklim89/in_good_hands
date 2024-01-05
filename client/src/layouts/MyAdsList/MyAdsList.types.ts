@@ -1,4 +1,4 @@
-import { Ad } from '@in-good-hands/server/src/swagger';
+import { Ad } from '@in-good-hands/share/swager';
 
 
 export type MyAdsListItemProps = Ad.FindMyAds.ResponseBody[number]

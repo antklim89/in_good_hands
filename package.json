@@ -6,12 +6,14 @@
   "useWorkspaces": true,
   "workspaces": [
     "server",
-    "client"
+    "client",
+    "share"
   ],
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
     "start": "turbo start",
+    "typegen": "turbo typegen",
     "test": "yarn --cwd server test",
     "migrate": "yarn --cwd server migrate"
   },

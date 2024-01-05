@@ -1,5 +1,5 @@
 import { IconButtonProps } from '@chakra-ui/react';
-import { Ad } from '@in-good-hands/server/src/swagger';
+import { Ad } from '@in-good-hands/share/swager';
 import { Dispatch, SetStateAction } from 'react';
 
 

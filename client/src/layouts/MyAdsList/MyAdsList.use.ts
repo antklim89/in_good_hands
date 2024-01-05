@@ -16,7 +16,7 @@ export function useMyAdsList() {
     const lastAdId = ads?.slice?.().pop()?.id;
 
     const handleFetchMore = useCallback(async () => {
-        const nextAds = await api().ad.findMyAds({ cursor: lastAdId }).then((d) => d.data);
+        const nextAds = await api().ad.findMyAds({ cursor: lastAdId }).then((d) => d.json());
         if (nextAds.length <= 1) setHasNext(false);
         mutate([...ads || [], ...nextAds], { revalidate: false });
     }, [lastAdId]);

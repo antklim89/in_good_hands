@@ -17,7 +17,7 @@ export var ContentType;
   ContentType["Text"] = "text/plain";
 })(ContentType || (ContentType = {}));
 export class HttpClient {
-  baseUrl = "http://localhost:8000";
+  baseUrl = "";
   securityData = null;
   securityWorker;
   abortControllers = new Map();
@@ -152,12 +152,8 @@ export class HttpClient {
   };
 }
 /**
- * @title In Good Hands API
- * @version 0.1.0
- * @baseUrl http://localhost:8000
- * @externalDocs https://swagger.io
- *
- * Swagger API
+ * @title @fastify/swagger
+ * @version 8.13.0
  */
 export class Api extends HttpClient {
   /**
@@ -173,148 +169,7 @@ export class Api extends HttpClient {
       method: "GET",
       ...params,
     });
-  auth = {
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name ChangePassword
-     * @request PATCH:/auth/change-password/
-     * @response `201` `void` Default Response
-     */
-    changePassword: (body, params = {}) =>
-      this.request({
-        path: `/auth/change-password/`,
-        method: "PATCH",
-        body: body,
-        type: ContentType.Json,
-        ...params,
-      }),
-    /**
-       * No description
-       *
-       * @tags auth
-       * @name Login
-       * @request POST:/auth/login/
-       * @response `200` `{
-          user: {
-          email: string,
-          name: string,
-          id: string,
-      
-      },
-          token: string,
-      
-      }` Default Response
-       */
-    login: (body, params = {}) =>
-      this.request({
-        path: `/auth/login/`,
-        method: "POST",
-        body: body,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-    /**
-       * No description
-       *
-       * @tags auth
-       * @name Me
-       * @request GET:/auth/me/
-       * @response `200` `{
-          id?: string,
-        \**
-         * @minLength 3
-         * @maxLength 50
-         *\
-          email?: string,
-        \**
-         * @minLength 3
-         * @maxLength 30
-         *\
-          name?: string,
-        \**
-         * @minLength 3
-         * @maxLength 50
-         *\
-          tel?: string,
-        \** @maxLength 50 *\
-          whatsapp?: string,
-        \** @maxLength 50 *\
-          telegram?: string,
-      
-      }` Default Response
-       */
-    me: (params = {}) =>
-      this.request({
-        path: `/auth/me/`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-    /**
-       * No description
-       *
-       * @tags auth
-       * @name Register
-       * @request POST:/auth/register/
-       * @response `200` `{
-          user: {
-          email: string,
-          name: string,
-          id: string,
-      
-      },
-          token: string,
-      
-      }` Default Response
-       */
-    register: (body, params = {}) =>
-      this.request({
-        path: `/auth/register/`,
-        method: "POST",
-        body: body,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name Update
-     * @request PATCH:/auth/update/
-     * @response `200` `void` Default Response
-     */
-    update: (body, params = {}) =>
-      this.request({
-        path: `/auth/update/`,
-        method: "PATCH",
-        body: body,
-        type: ContentType.Json,
-        ...params,
-      }),
-  };
   ad = {
-    /**
-       * No description
-       *
-       * @tags ad
-       * @name CreateNew
-       * @request POST:/ad/create-new/
-       * @response `201` `{
-          id: number,
-      
-      }` Default Response
-       */
-    createNew: (params = {}) =>
-      this.request({
-        path: `/ad/create-new/`,
-        method: "POST",
-        format: "json",
-        ...params,
-      }),
     /**
      * No description
      *
@@ -345,7 +200,6 @@ export class Api extends HttpClient {
       this.request({
         path: `/ad/find-ids/`,
         method: "GET",
-        format: "json",
         ...params,
       }),
     /**
@@ -383,7 +237,6 @@ export class Api extends HttpClient {
         path: `/ad/find-many/`,
         method: "GET",
         query: query,
-        format: "json",
         ...params,
       }),
     /**
@@ -407,7 +260,6 @@ export class Api extends HttpClient {
         path: `/ad/find-my-ads/`,
         method: "GET",
         query: query,
-        format: "json",
         ...params,
       }),
     /**
@@ -450,7 +302,6 @@ export class Api extends HttpClient {
         path: `/ad/find-one/`,
         method: "GET",
         query: query,
-        format: "json",
         ...params,
       }),
     /**
@@ -510,7 +361,6 @@ export class Api extends HttpClient {
         path: `/ad/find-update-data/`,
         method: "GET",
         query: query,
-        format: "json",
         ...params,
       }),
     /**
@@ -530,23 +380,145 @@ export class Api extends HttpClient {
         type: ContentType.Json,
         ...params,
       }),
+    /**
+       * No description
+       *
+       * @tags ad
+       * @name CreateNew
+       * @request POST:/ad/create-new/
+       * @response `201` `{
+          id: number,
+      
+      }` Default Response
+       */
+    createNew: (params = {}) =>
+      this.request({
+        path: `/ad/create-new/`,
+        method: "POST",
+        ...params,
+      }),
   };
-  favorites = {
+  auth = {
     /**
      * No description
      *
-     * @tags favorites
-     * @name Delete
-     * @request DELETE:/favorites/delete/
-     * @response `200` `void` Default Response
+     * @tags auth
+     * @name ChangePassword
+     * @request PATCH:/auth/change-password/
+     * @response `201` `void` Default Response
      */
-    delete: (query, params = {}) =>
+    changePassword: (body, params = {}) =>
       this.request({
-        path: `/favorites/delete/`,
-        method: "DELETE",
-        query: query,
+        path: `/auth/change-password/`,
+        method: "PATCH",
+        body: body,
+        type: ContentType.Json,
         ...params,
       }),
+    /**
+       * No description
+       *
+       * @tags auth
+       * @name Login
+       * @request POST:/auth/login/
+       * @response `200` `{
+          user: {
+          email: string,
+          name: string,
+          id: string,
+      
+      },
+          token: string,
+      
+      }` Default Response
+       */
+    login: (body, params = {}) =>
+      this.request({
+        path: `/auth/login/`,
+        method: "POST",
+        body: body,
+        type: ContentType.Json,
+        ...params,
+      }),
+    /**
+       * No description
+       *
+       * @tags auth
+       * @name Me
+       * @request GET:/auth/me/
+       * @response `200` `{
+          id?: string,
+        \**
+         * @minLength 3
+         * @maxLength 50
+         *\
+          email?: string,
+        \**
+         * @minLength 3
+         * @maxLength 30
+         *\
+          name?: string,
+        \**
+         * @minLength 3
+         * @maxLength 50
+         *\
+          tel?: string,
+        \** @maxLength 50 *\
+          whatsapp?: string,
+        \** @maxLength 50 *\
+          telegram?: string,
+      
+      }` Default Response
+       */
+    me: (params = {}) =>
+      this.request({
+        path: `/auth/me/`,
+        method: "GET",
+        ...params,
+      }),
+    /**
+       * No description
+       *
+       * @tags auth
+       * @name Register
+       * @request POST:/auth/register/
+       * @response `200` `{
+          user: {
+          email: string,
+          name: string,
+          id: string,
+      
+      },
+          token: string,
+      
+      }` Default Response
+       */
+    register: (body, params = {}) =>
+      this.request({
+        path: `/auth/register/`,
+        method: "POST",
+        body: body,
+        type: ContentType.Json,
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name Update
+     * @request PATCH:/auth/update/
+     * @response `200` `void` Default Response
+     */
+    update: (body, params = {}) =>
+      this.request({
+        path: `/auth/update/`,
+        method: "PATCH",
+        body: body,
+        type: ContentType.Json,
+        ...params,
+      }),
+  };
+  favorites = {
     /**
      * No description
      *
@@ -560,7 +532,21 @@ export class Api extends HttpClient {
         path: `/favorites/create/`,
         method: "POST",
         query: query,
-        format: "json",
+        ...params,
+      }),
+    /**
+     * No description
+     *
+     * @tags favorites
+     * @name Delete
+     * @request DELETE:/favorites/delete/
+     * @response `200` `void` Default Response
+     */
+    delete: (query, params = {}) =>
+      this.request({
+        path: `/favorites/delete/`,
+        method: "DELETE",
+        query: query,
         ...params,
       }),
     /**
@@ -586,7 +572,6 @@ export class Api extends HttpClient {
       this.request({
         path: `/favorites/find-many/`,
         method: "GET",
-        format: "json",
         ...params,
       }),
   };
@@ -626,7 +611,6 @@ export class Api extends HttpClient {
         query: query,
         body: data,
         type: ContentType.FormData,
-        format: "json",
         ...params,
       }),
   };

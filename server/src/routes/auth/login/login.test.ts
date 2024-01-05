@@ -1,4 +1,4 @@
-import { Auth } from '@/swagger';
+import { Auth } from '@in-good-hands/share/swager'
 import { init, notHashedPassword } from '@/test';
 
 

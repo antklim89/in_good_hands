@@ -9,15 +9,12 @@
     "dev:nodemon": "nodemon ./output/server.js --ignore swagger/",
     "dev:swc": "swc ./src -d ./output -w",
     "dev:typecheck": "yarn typecheck -w --preserveWatchOutput",
-
     "build": "run-s build:**",
     "build:generate": "prisma generate",
     "build:migrate": "prisma migrate deploy",
     "build:generatedata": "swc ./src/generate-data.ts -d ./output && node ./output/generate-data.js",
     "build:swr": "swc ./src -d ./output",
-
     "start": "node ./output/server.js",
-
     "typecheck": "tsc --noEmit",
     "test": "jest --watchAll -i",
     "migrate": "run-s migrate:**",
@@ -37,7 +34,8 @@
     "@fastify/multipart": "^7.7.1",
     "@fastify/sensible": "^5.2.0",
     "@fastify/static": "^6.10.2",
-    "@fastify/swagger": "^8.8.0",
+    "@fastify/swagger": "^8.13.0",
+    "@fastify/swagger-ui": "^2.0.1",
     "@prisma/client": "^5.0.0",
     "@swc-node/register": "^1.6.6",
     "bcryptjs": "^2.4.3",

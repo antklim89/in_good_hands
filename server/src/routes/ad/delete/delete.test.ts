@@ -4,7 +4,7 @@ import { join } from 'path';
 import { ensureDir, writeFile, existsSync } from 'fs-extra';
 
 import { UPLOAD_IMAGES_BASE_PATH } from '@/constants';
-import { Ad } from '@/swagger';
+import { Ad } from '@in-good-hands/share/swager'
 import { init } from '@/test';
 import { generateJWT } from '@/utils';
 

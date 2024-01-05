@@ -2,7 +2,7 @@ import { FastifyInstance, FastifyRequest } from 'fastify';
 
 import schema from './schema';
 
-import { Ad } from '@/swagger';
+import { Ad } from '@in-good-hands/share/swager'
 import type { JWTUser } from '@/types';
 
 

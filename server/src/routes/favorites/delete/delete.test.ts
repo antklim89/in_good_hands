@@ -1,4 +1,4 @@
-import { Favorites } from '@/swagger';
+import { Favorites } from '@in-good-hands/share/swager'
 import { init } from '@/test';
 import { generateJWT } from '@/utils';
 

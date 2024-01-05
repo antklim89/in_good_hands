@@ -2,7 +2,7 @@ import {
     Box, Button, Container, Flex, Text, useColorModeValue,
 } from '@chakra-ui/react';
 import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/server/src/shareConstants';
-import { Ad } from '@in-good-hands/server/src/swagger';
+import { Ad } from '@in-good-hands/share/swager';
 import Image from 'next/image';
 import { FC } from 'react';
 import { FaTelegramPlane, FaWhatsapp, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';

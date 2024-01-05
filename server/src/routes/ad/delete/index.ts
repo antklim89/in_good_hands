@@ -6,7 +6,7 @@ import { pathExists, rm } from 'fs-extra';
 import schema from './schema';
 
 import { UPLOAD_IMAGES_BASE_PATH } from '@/constants';
-import { Ad } from '@/swagger';
+import { Ad } from '@in-good-hands/share/swager'
 
 
 export default async function updateAdRoute(app: FastifyInstance) {

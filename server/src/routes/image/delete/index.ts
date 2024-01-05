@@ -4,7 +4,7 @@ import { rm } from 'fs-extra';
 
 import schema from './schema';
 
-import { Image } from '@/swagger';
+import { Image } from '@in-good-hands/share/swager'
 import { ClientException, getImagePathBySrc } from '@/utils';
 
 

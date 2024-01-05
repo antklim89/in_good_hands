@@ -1,0 +1,29 @@
+import { generateApi } from 'swagger-typescript-api';
+import path from 'path'
+
+async function generateSwaggerTypes() {
+    try {
+        await generateApi({
+            name: 'index.ts',
+            output: path.resolve('swager/generated'),
+            url: 'http://localhost:8000/documentation/json',
+            httpClientType: 'fetch',
+            defaultResponseAsSuccess: true,
+            generateRouteTypes: true,
+            generateResponses: true,
+            toJS: true,
+            extractRequestParams: false,
+            extractRequestBody: false,
+            singleHttpClient: false,
+            cleanOutput: false,
+            enumNamesAsValues: false,
+            moduleNameFirstTag: false,
+            generateUnionEnums: false,
+            silent: true,
+        });
+    } catch (error) {
+        if (error instanceof Error) console.error('Swagger typescript gen error: \n', error.message);
+    }
+}
+
+generateSwaggerTypes();

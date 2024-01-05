@@ -2,7 +2,7 @@ import { FastifyInstance, FastifyRequest } from 'fastify';
 
 import schema from './schema';
 
-import { Auth } from '@/swagger';
+import { Auth } from '@in-good-hands/share/swager'
 import { ClientException, generateJWT, hashPassword } from '@/utils';
 
 

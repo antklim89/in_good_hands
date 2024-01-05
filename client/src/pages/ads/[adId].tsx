@@ -1,4 +1,4 @@
-import type * as Swagger from '@in-good-hands/server/src/swagger';
+import type * as Swagger from '@in-good-hands/share/swager';
 import type { GetServerSideProps, NextPage } from 'next';
 
 import Seo from '~/components/Seo';
@@ -23,7 +23,7 @@ export default AdPage;
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({ params, req }) => {
     if (!params || typeof params.adId !== 'string') return { notFound: true };
-    const { data: ad } = await api(req).ad.findOne({ adId: Number(params.adId) });
+    const ad = await api(req).ad.findOne({ adId: Number(params.adId) }).then((d) => d.json());
 
     return { props: { ad } };
 };

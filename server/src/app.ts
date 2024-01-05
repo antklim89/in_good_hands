@@ -1,6 +1,5 @@
 import 'dotenv/config'
 import path from 'path';
-
 import { fastifyAutoload } from '@fastify/autoload';
 import fastify from 'fastify';
 import { has } from 'lodash';

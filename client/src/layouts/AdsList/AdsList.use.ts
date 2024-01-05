@@ -19,7 +19,10 @@ export function useAdsList() {
 
     const { data: ads = [], mutate, isLoading } = useSWR(
         ['ads', search, type],
-        () => api().ad.findMany({ search, searchType: type }).then((d) => d.data),
+        () => api().ad.findMany({ search, searchType: type }).then((d) => {
+            console.log(d)
+            return d.data
+        }),
     );
 
     const { addEvent } = useInfinityScroll(async () => {

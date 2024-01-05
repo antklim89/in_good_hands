@@ -4,7 +4,7 @@ import formAutoContent from 'form-auto-content';
 import fs from 'fs-extra';
 
 import { UPLOAD_IMAGES_BASE_PATH } from '@/constants';
-import { Image } from '@/swagger';
+import { Image } from '@in-good-hands/share/swager'
 import { createImage, init } from '@/test';
 import { generateJWT } from '@/utils';
 

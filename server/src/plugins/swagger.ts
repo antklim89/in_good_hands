@@ -2,36 +2,14 @@ import fp from 'fastify-plugin';
 
 
 export default fp(async (app) => {
-    app.register(import('@fastify/swagger'), {
-        // routePrefix: '/docs',
-        swagger: {
-            info: {
-                title: 'In Good Hands API',
-                description: 'Swagger API',
-                version: '0.1.0',
-            },
-            externalDocs: {
-                url: 'https://swagger.io',
-                description: 'Find more info here',
-            },
-            host: 'localhost:8000',
-            schemes: ['http'],
-            consumes: ['application/json'],
-            produces: ['application/json'],
-            definitions: {},
+    await app.register(require('@fastify/swagger'))
 
-            securityDefinitions: {
-                auth: {
-                    type: 'apiKey',
-                    name: 'auth',
-                    in: 'header',
-                },
-            },
-        },
-        // uiConfig: {
-        //     docExpansion: 'none',
-        //     deepLinking: false,
-        // },
-        // exposeRoute: true,
-    });
+    await app.register(require('@fastify/swagger-ui'), {
+      routePrefix: '/documentation',
+      uiConfig: {
+        docExpansion: 'full',
+        deepLinking: false
+      },
+      transformSpecificationClone: true
+    })
 });

@@ -2,7 +2,7 @@ import { FastifyInstance, FastifyRequest } from 'fastify';
 
 import schema from './schema';
 
-import { Favorites } from '@/swagger';
+import { Favorites } from '@in-good-hands/share/swager'
 import { ClientException } from '@/utils';
 
 
