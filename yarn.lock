@@ -10177,26 +10177,6 @@ swagger-schema-official@2.0.0-bab6bed:
   resolved "https://registry.yarnpkg.com/swagger-schema-official/-/swagger-schema-official-2.0.0-bab6bed.tgz#70070468d6d2977ca5237b2e519ca7d06a2ea3fd"
   integrity sha512-rCC0NWGKr/IJhtRuPq/t37qvZHI/mH4I4sxflVM+qgVe5Z2uOCivzWaVbuioJaB61kvm5UvB7b49E+oBY0M8jA==
 
-swagger-typescript-api@^13.0.0:
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/swagger-typescript-api/-/swagger-typescript-api-13.0.0.tgz#9aa8eeb675dcefbdd597fb7a4a0fc90cec475f91"
-  integrity sha512-pVQ0huhx+Qz/JgqVpwSWQkZYoOQn3iVxOKqv+7nzrJoL2VYL5xGGb38311WyPVD7EaxG4hwDHQFoKscqmCHi8Q==
-  dependencies:
-    "@types/swagger-schema-official" "2.0.22"
-    cosmiconfig "8.2.0"
-    didyoumean "^1.2.2"
-    eta "^2.2.0"
-    js-yaml "4.1.0"
-    lodash "4.17.21"
-    make-dir "4.0.0"
-    nanoid "3.3.6"
-    node-emoji "2.1.0"
-    node-fetch "^3.3.1"
-    prettier "3.0.0"
-    swagger-schema-official "2.0.0-bab6bed"
-    swagger2openapi "7.0.8"
-    typescript "5.1.6"
-
 swagger-typescript-api@^13.0.3:
   version "13.0.3"
   resolved "https://registry.yarnpkg.com/swagger-typescript-api/-/swagger-typescript-api-13.0.3.tgz#cf7d6955e83463c8324e5fe1a885a3bfc6e54cd9"
