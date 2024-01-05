@@ -3,7 +3,6 @@
   "description": "In good hands",
   "version": "1.0.0",
   "private": true,
-  "npmClient": "yarn",
   "useWorkspaces": true,
   "workspaces": [
     "server",
@@ -51,6 +50,5 @@
   },
   "bugs": {
     "url": "https://github.com/antklim89/in_good_hands.git/issues"
-  },
-  "packageManager": "yarn@3.3.0"
+  }
 }
