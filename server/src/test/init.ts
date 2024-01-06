@@ -1,7 +1,5 @@
 import { PrismaClient } from '@prisma/client';
 
-import { generateSwaggerTypes } from '../utils';
-
 import { populateDb } from './populateDb';
 
 import app from '@/app';
@@ -17,8 +15,6 @@ export const init = () => {
 
     beforeAll(async () => {
         db = await populateDb(prisma);
-
-        await app.ready().then(() => generateSwaggerTypes(app));
     });
 
     afterAll(async () => {
