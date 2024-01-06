@@ -1,9 +1,7 @@
-import { FastifySchema } from 'fastify';
-
 import { favoritesResponse } from '@/schemas';
 
 
-const schema: FastifySchema = {
+const schema = {
     tags: ['favorites'],
     operationId: 'FindMany',
     response: {

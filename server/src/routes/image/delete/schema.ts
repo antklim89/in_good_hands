@@ -1,7 +1,5 @@
-import { FastifySchema } from 'fastify';
 
-
-const schema: FastifySchema = {
+const schema = {
     tags: ['image'],
     operationId: 'Delete',
     response: {

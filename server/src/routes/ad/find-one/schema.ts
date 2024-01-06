@@ -1,9 +1,7 @@
-import { FastifySchema } from 'fastify';
-
 import { adResponseSchema } from '@/schemas';
 
 
-const schema: FastifySchema = {
+const schema = {
     tags: ['ad'],
     operationId: 'FindOne',
     querystring: {

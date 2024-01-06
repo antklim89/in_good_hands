@@ -1,10 +1,8 @@
-import { FastifySchema } from 'fastify';
-
 import { adsPreviewListResponseSchema } from '@/schemas';
 import { animalsTypes } from '@/schemas/adSchemas';
 
 
-const schema: FastifySchema = {
+const schema = {
     tags: ['ad'],
     operationId: 'FindMany',
     querystring: {

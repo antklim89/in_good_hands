@@ -1,9 +1,7 @@
-import { FastifySchema } from 'fastify';
-
 import { imageSchema } from '@/schemas';
 
 
-const schema: FastifySchema = {
+const schema = {
     tags: ['image'],
     operationId: 'Upload',
     consumes: ['multipart/form-data'],
