@@ -26,6 +26,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@in-good-hands/share": "*",
     "@faker-js/faker": "^8.0.2",
     "@fastify/auth": "^4.3.0",
     "@fastify/autoload": "^5.7.1",
