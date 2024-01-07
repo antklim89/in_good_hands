@@ -1,6 +1,7 @@
+import { vi } from 'vitest';
 
 
-jest.mock('../constants', () => ({
+vi.mock('../constants', () => ({
     JWT_SECRET: 'secret',
     UPLOAD_BASE_URL: '/upload',
     UPLOAD_BASE_PATH: '/tmp/fastify/upload/',

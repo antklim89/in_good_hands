@@ -9,7 +9,7 @@ import { ClientException } from '@/utils';
 export default async function updateDataAdRoute(app: FastifyInstance) {
     app.route({
         method: 'GET',
-        url: '/',
+        url: '/find-update-data',
         schema,
         async handler(req: FastifyRequest<{Querystring: Ad.FindUpdateData.RequestQuery}>) {
             const { query } = req;

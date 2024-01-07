@@ -7,7 +7,7 @@ import schema from './schema';
 export default async function update(app: FastifyInstance) {
     app.route({
         method: 'PATCH',
-        url: '/',
+        url: '/update',
         schema,
         async handler(req: FastifyRequest<{Body: Auth.Update.RequestBody}>, repl): Promise<Auth.Update.ResponseBody> {
             const user = req.getUser();

@@ -7,7 +7,7 @@ import schema from './schema';
 export default async function me(app: FastifyInstance) {
     app.route({
         method: 'GET',
-        url: '/',
+        url: '/me',
         schema,
         async handler(req: FastifyRequest, repl): Promise<Auth.Me.ResponseBody> {
             const user = req.getUser();

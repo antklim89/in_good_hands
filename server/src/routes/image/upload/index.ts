@@ -1,6 +1,6 @@
 import { Image } from '@in-good-hands/share/swager';
 import { FastifyInstance, FastifyRequest } from 'fastify';
-import sharp from 'sharp';
+// import sharp from 'sharp';
 
 import schema from './schema';
 import { saveImage, saveThumnail } from './services';
@@ -12,7 +12,7 @@ import { ClientException, getImageFullPath, getImageFullUrl, getImagePath } from
 export default async function newAdRoute(app: FastifyInstance) {
     app.route({
         method: 'POST',
-        url: '/',
+        url: '/upload',
         schema,
         preValidation(req: FastifyRequest<{Querystring: Image.Upload.RequestQuery}>, repl, next) {
             req.body = { image: '' };
@@ -35,15 +35,15 @@ export default async function newAdRoute(app: FastifyInstance) {
 
             const [{ filepath }] = await req.saveRequestFiles();
 
-            const sharpInstance = sharp(filepath);
+            // const sharpInstance = sharp(filepath);
 
-            await saveImage(sharpInstance, imageFullPath);
-            const thumbnail = await saveThumnail(sharpInstance);
+            // await saveImage(sharpInstance, imageFullPath);
+            // const thumbnail = await saveThumnail(sharpInstance);
 
             const result = await app.prisma.image.create({
                 data: {
                     src: imageFullUrl,
-                    thumbnail,
+                    thumbnail: '',
                     adId,
                 },
                 select: {

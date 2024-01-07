@@ -6,7 +6,7 @@ import schema from './schema';
 export default async function newAdRoute(app: FastifyInstance) {
     app.route({
         method: 'GET',
-        url: '/',
+        url: '/find-many',
         schema,
         async handler(req: FastifyRequest) {
             const user = req.getUser();

@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { afterAll, beforeAll } from 'vitest';
 
 import { populateDb } from './populateDb';
 

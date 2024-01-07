@@ -7,7 +7,7 @@ import schema from './schema';
 export default async function newAdRoute(app: FastifyInstance) {
     app.route({
         method: 'GET',
-        url: '/',
+        url: '/find-my-ads',
         schema,
         async handler(req: FastifyRequest<{Querystring: Ad.FindMyAds.RequestQuery}>) {
             const user = req.getUser();

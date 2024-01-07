@@ -9,7 +9,7 @@ import { ClientException, generateJWT, hashPassword } from '@/utils';
 export default async function register(app: FastifyInstance) {
     app.route({
         method: 'POST',
-        url: '/',
+        url: '/register',
         schema,
         async handler(req: FastifyRequest<{Body: Auth.Register.RequestBody}>): Promise<Auth.Register.ResponseBody> {
             const { email, password, name } = req.body;

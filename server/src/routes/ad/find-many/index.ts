@@ -11,7 +11,7 @@ export const ADS_LIMIT = 10;
 export default async function adPreviewListRoute(app: FastifyInstance) {
     app.route({
         method: 'GET',
-        url: '/',
+        url: '/find-many',
         schema,
         async handler(req: FastifyRequest<{Querystring: Ad.FindMany.RequestQuery}>) {
             const user: JWTUser|null = req.checkUser();

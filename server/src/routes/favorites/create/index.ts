@@ -9,7 +9,7 @@ import { ClientException } from '@/utils';
 export default async function newAdRoute(app: FastifyInstance) {
     app.route({
         method: 'POST',
-        url: '/',
+        url: '/create',
         schema,
         async handler(req: FastifyRequest<{Querystring: Favorites.Create.RequestQuery}>) {
             const { adId } = req.query;

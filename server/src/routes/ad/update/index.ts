@@ -9,7 +9,7 @@ import { ClientException } from '@/utils';
 export default async function updateAdRoute(app: FastifyInstance) {
     app.route({
         method: 'PATCH',
-        url: '/',
+        url: '/update',
         schema,
         async handler(req: FastifyRequest<{Body: Ad.Update.RequestBody, Querystring: Ad.Update.RequestQuery}>) {
             const user = req.getUser();

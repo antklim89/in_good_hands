@@ -10,7 +10,7 @@ import { ClientException } from '@/utils';
 export default async function findOne(app: FastifyInstance) {
     app.route({
         method: 'GET',
-        url: '/',
+        url: '/find-one',
         schema,
         async handler(req: FastifyRequest<{Querystring: Ad.FindOne.RequestQuery}>) {
             const user: JWTUser|null = req.checkUser();

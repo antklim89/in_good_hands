@@ -3,6 +3,7 @@ import { join } from 'path';
 
 import { Ad } from '@in-good-hands/share/swager';
 import { ensureDir, writeFile, existsSync } from 'fs-extra';
+import { describe, expect, it } from 'vitest';
 
 import { UPLOAD_IMAGES_BASE_PATH } from '@/constants';
 import { init } from '@/test';

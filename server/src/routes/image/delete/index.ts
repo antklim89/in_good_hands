@@ -11,7 +11,7 @@ import { ClientException, getImagePathBySrc } from '@/utils';
 export default async function newAdRoute(app: FastifyInstance) {
     app.route({
         method: 'DELETE',
-        url: '/',
+        url: '/delete',
         schema,
         async handler(req: FastifyRequest<{Querystring: Image.Delete.RequestQuery}>) {
             const { imageId } = req.query;

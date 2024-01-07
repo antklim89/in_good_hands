@@ -6,7 +6,7 @@ import schema from './schema';
 export default async function adsIdsRoute(app: FastifyInstance) {
     app.route({
         method: 'GET',
-        url: '/',
+        url: '/find-ids',
         schema,
         async handler() {
             return app.prisma.ad.findMany({

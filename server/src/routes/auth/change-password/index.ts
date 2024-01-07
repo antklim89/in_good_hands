@@ -10,7 +10,7 @@ import { ClientException, hashPassword } from '@/utils';
 export default async function changePassword(app: FastifyInstance) {
     app.route({
         method: 'PATCH',
-        url: '/',
+        url: '/change-password',
         schema,
         async handler(
             req: FastifyRequest<{Body: Auth.ChangePassword.RequestBody}>,

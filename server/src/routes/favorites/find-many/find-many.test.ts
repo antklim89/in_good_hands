@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { init } from '@/test';
 import { generateJWT } from '@/utils';
 

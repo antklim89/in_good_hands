@@ -9,7 +9,7 @@ import { ClientException } from '@/utils';
 export default async function newAdRoute(app: FastifyInstance) {
     app.route({
         method: 'DELETE',
-        url: '/',
+        url: '/delete',
         schema,
         async handler(req: FastifyRequest<{Querystring: Favorites.Delete.RequestQuery}>) {
             const { adId } = req.query;

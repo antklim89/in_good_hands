@@ -1,7 +1,5 @@
 import 'dotenv/config';
-import path from 'path';
 
-import { fastifyAutoload } from '@fastify/autoload';
 import fastify from 'fastify';
 import { has } from 'lodash';
 
@@ -27,16 +25,18 @@ const app = fastify({
 });
 
 
-app.register(fastifyAutoload, {
-    dir: path.join(__dirname, 'plugins'),
-    options: {},
-});
+app.register(import('./plugins/compress'));
+app.register(import('./plugins/cors'));
+app.register(import('./plugins/getUser'));
+app.register(import('./plugins/multipart'));
+app.register(import('./plugins/static'));
+app.register(import('./plugins/swagger'));
 
-
-app.register(fastifyAutoload, {
-    dir: path.join(__dirname, 'routes'),
-    options: {},
-});
+app.register(import('./routes/'), { prefix: '/' });
+app.register(import('./routes/ad'), { prefix: '/ad' });
+app.register(import('./routes/auth'), { prefix: '/auth' });
+app.register(import('./routes/favorites'), { prefix: '/favorites' });
+app.register(import('./routes/image'), { prefix: '/image' });
 
 
 app.setErrorHandler((error, req, repl) => {

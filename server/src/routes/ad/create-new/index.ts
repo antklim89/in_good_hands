@@ -8,7 +8,7 @@ import { AnimalType } from '@/types';
 export default async function newAdRoute(app: FastifyInstance) {
     app.route({
         method: 'POST',
-        url: '/',
+        url: '/create-new',
         schema,
         async handler(req: FastifyRequest, repl) {
             const user = req.getUser();

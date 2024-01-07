@@ -12,7 +12,7 @@ import { UPLOAD_IMAGES_BASE_PATH } from '@/constants';
 export default async function updateAdRoute(app: FastifyInstance) {
     app.route({
         method: 'DELETE',
-        url: '/',
+        url: '/delete',
         schema,
         async handler(req: FastifyRequest<{Querystring: Ad.Delete.RequestQuery}>) {
             const { adId } = req.query;

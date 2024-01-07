@@ -1,4 +1,5 @@
 import { Ad } from '@in-good-hands/share/swager';
+import { describe, expect, it } from 'vitest';
 
 import { init } from '@/test';
 

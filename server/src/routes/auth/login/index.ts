@@ -10,7 +10,7 @@ import { ClientException, generateJWT } from '@/utils';
 export default async function login(app: FastifyInstance) {
     app.route({
         method: 'POST',
-        url: '/',
+        url: '/login',
         schema,
         async handler(req: FastifyRequest<{ Body: Auth.Login.RequestBody }>): Promise<Auth.Login.ResponseBody> {
             const { email, password } = req.body;
