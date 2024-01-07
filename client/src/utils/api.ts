@@ -22,7 +22,7 @@ export const api = (req?: IncomingMessage) => {
 
     const apiInstance = new Api({
         baseURL: API_URL,
-        headers
+        headers,
     });
 
     return apiInstance;

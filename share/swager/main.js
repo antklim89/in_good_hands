@@ -1,5 +1,7 @@
+import path from 'path';
+
 import { generateApi } from 'swagger-typescript-api';
-import path from 'path'
+
 
 async function generateSwaggerTypes() {
     try {

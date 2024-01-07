@@ -1,4 +1,5 @@
-import { Ad } from '@in-good-hands/share/swager'
+import { Ad } from '@in-good-hands/share/swager';
+
 import { init } from '@/test';
 
 

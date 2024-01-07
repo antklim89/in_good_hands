@@ -1,8 +1,7 @@
+import { Auth } from '@in-good-hands/share/swager';
 import { FastifyInstance, FastifyRequest } from 'fastify';
 
 import schema from './schema';
-
-import { Auth } from '@in-good-hands/share/swager'
 
 
 export default async function update(app: FastifyInstance) {

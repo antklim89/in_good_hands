@@ -1,8 +1,8 @@
 import { join } from 'path';
 
+import { Image } from '@in-good-hands/share/swager';
 import { mkdir, pathExists, writeFile } from 'fs-extra';
 
-import { Image } from '@in-good-hands/share/swager'
 import { init } from '@/test';
 import { generateJWT, getImagePathBySrc } from '@/utils';
 

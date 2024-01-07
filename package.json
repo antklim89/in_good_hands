@@ -15,7 +15,8 @@
     "start": "turbo start",
     "typegen": "turbo typegen",
     "test": "yarn --cwd server test",
-    "migrate": "yarn --cwd server migrate"
+    "migrate": "yarn --cwd server migrate",
+    "lint": "eslint server/src/** client/src/** share/src/**  --ext .js,.ts,.tsx,.jsx --fix"
   },
   "dependencies": {
     "@netlify/plugin-nextjs": "^4.37.4"

@@ -8,7 +8,7 @@ import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from '~/constants';
 
 const Seo: FC<SeoProps> = ({
     description,
-    keywords = [],
+    keywords,
     title,
 }) => {
 
@@ -20,7 +20,7 @@ const Seo: FC<SeoProps> = ({
             <title>{metaTitle}</title>
             <link href="/favicon.ico" rel="icon" />
             <meta content={metaDescription} name="description" />
-            <meta content={[...keywords].join(', ')} name="keywords" />
+            <meta content={[...(keywords || [])].join(', ')} name="keywords" />
             <meta content={metaDescription} name="description" />
             <meta content={metaTitle} property="og:title" />
             <meta content={metaDescription} property="og:description" />

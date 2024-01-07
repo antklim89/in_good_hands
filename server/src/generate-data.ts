@@ -53,7 +53,7 @@ async function generateUsers() {
         const name = faker.person.firstName();
         const user = await prisma.user.create({
             data: {
-                email: faker.internet.email({firstName: name}),
+                email: faker.internet.email({ firstName: name }),
                 name,
                 hash: '$2a$08$6hQB/nrqA0ZI1LkUu0dBVuRWQFTOjMW9qOt2BbHPs6f1n9Fj/tLM6',
                 tel: faker.phone.number(),

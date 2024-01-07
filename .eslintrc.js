@@ -175,5 +175,5 @@ module.exports = {
         JSX: true,
     },
 
-    ignorePatterns: ['**/node_modules/**/*', '**/.next/**/*', '**/build/**/*', '**/.tmp/**/*', '**/.cache/**/*'],
+    ignorePatterns: ['**/node_modules/**/*', '**/.next/**/*', '**/build/**/*', '**/.tmp/**/*', '**/.cache/**/*', '**/.turbo/**/*', '**/output/**/*'],
 };

@@ -1,9 +1,9 @@
+import { Auth } from '@in-good-hands/share/swager';
 import bcrypt from 'bcryptjs';
 import { FastifyInstance, FastifyRequest } from 'fastify';
 
 import schema from './schema';
 
-import { Auth } from '@in-good-hands/share/swager'
 import { ClientException, hashPassword } from '@/utils';
 
 

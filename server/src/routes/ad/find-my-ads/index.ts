@@ -1,8 +1,7 @@
+import { Ad } from '@in-good-hands/share/swager';
 import { FastifyInstance, FastifyRequest } from 'fastify';
 
 import schema from './schema';
-
-import { Ad } from '@in-good-hands/share/swager'
 
 
 export default async function newAdRoute(app: FastifyInstance) {

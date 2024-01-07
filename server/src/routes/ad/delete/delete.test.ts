@@ -1,10 +1,10 @@
 import { randomUUID } from 'crypto';
 import { join } from 'path';
 
+import { Ad } from '@in-good-hands/share/swager';
 import { ensureDir, writeFile, existsSync } from 'fs-extra';
 
 import { UPLOAD_IMAGES_BASE_PATH } from '@/constants';
-import { Ad } from '@in-good-hands/share/swager'
 import { init } from '@/test';
 import { generateJWT } from '@/utils';
 
