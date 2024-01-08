@@ -1,7 +1,7 @@
 import 'dotenv/config';
 
 import fastify from 'fastify';
-import { has } from 'lodash';
+import _ from 'lodash';
 
 import { ClientException } from './utils';
 
@@ -43,7 +43,7 @@ app.setErrorHandler((error, req, repl) => {
     const { statusCode } = error;
     if (error instanceof ClientException) return error;
 
-    if (has(error, 'validation')) {
+    if (_.has(error, 'validation')) {
         return repl.status(400).send({ message: error.message });
     }
 

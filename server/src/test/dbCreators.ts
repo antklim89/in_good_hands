@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto';
 import { join } from 'path';
 
 import { Prisma } from '@prisma/client';
-import { mkdirSync, writeFileSync } from 'fs-extra';
+import fs from 'fs-extra';
 import _ from 'lodash';
 
 import { UPLOAD_IMAGES_BASE_URL } from '@/constants';
@@ -53,8 +53,8 @@ export function createImage<T extends Partial<Prisma.ImageCreateInput>>(data = {
 
     const imageToDeletePath = getImagePathBySrc(image.src);
 
-    mkdirSync(join(imageToDeletePath, '..'), { recursive: true });
-    writeFileSync(imageToDeletePath, 'test');
+    fs.mkdirSync(join(imageToDeletePath, '..'), { recursive: true });
+    fs.writeFileSync(imageToDeletePath, 'test');
 
     return image;
 }

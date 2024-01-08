@@ -2,7 +2,7 @@ import { join } from 'path';
 
 
 import { Image } from '@in-good-hands/share/swager';
-import { mkdir, pathExists, writeFile } from 'fs-extra';
+import fs from 'fs-extra';
 import { describe, expect, it } from 'vitest';
 
 import { init } from '@/test';
@@ -22,10 +22,10 @@ describe('POST /image/delete', () => {
         const [imageToDelete] = db().images;
         const imageToDeletePath = getImagePathBySrc(imageToDelete.src);
 
-        await mkdir(join(imageToDeletePath, '..'), { recursive: true });
-        await writeFile(imageToDeletePath, 'test');
+        await fs.mkdir(join(imageToDeletePath, '..'), { recursive: true });
+        await fs.writeFile(imageToDeletePath, 'test');
 
-        expect(await pathExists(imageToDeletePath)).toBeTruthy();
+        expect(await fs.pathExists(imageToDeletePath)).toBeTruthy();
 
         const query: {[P in keyof Image.Delete.RequestQuery]: string} = {
             imageId: String(imageToDelete.id),
@@ -44,7 +44,7 @@ describe('POST /image/delete', () => {
             where: { id: imageToDelete.id },
         });
 
-        expect(await pathExists(imageToDeletePath)).toBeFalsy();
+        expect(await fs.pathExists(imageToDeletePath)).toBeFalsy();
         expect(deletedFile).toBeNull();
     });
 

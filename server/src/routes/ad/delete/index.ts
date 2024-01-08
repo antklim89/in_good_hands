@@ -2,7 +2,7 @@ import { join } from 'path';
 
 import { Ad } from '@in-good-hands/share/swager';
 import { FastifyInstance, FastifyRequest } from 'fastify';
-import { pathExists, rm } from 'fs-extra';
+import fs from 'fs-extra';
 
 import schema from './schema';
 
@@ -24,7 +24,7 @@ export default async function updateAdRoute(app: FastifyInstance) {
             });
 
             const imagesDir = join(UPLOAD_IMAGES_BASE_PATH, `${user.id}`, `${adId}`);
-            if (await pathExists(imagesDir)) await rm(imagesDir, { recursive: true }).catch();
+            if (await fs.pathExists(imagesDir)) await fs.rm(imagesDir, { recursive: true }).catch();
 
             return null;
         },

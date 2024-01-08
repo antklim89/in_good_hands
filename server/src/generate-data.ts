@@ -3,7 +3,7 @@ import { resolve } from 'path';
 
 import { faker } from '@faker-js/faker';
 import { Ad, PrismaClient, User } from '@prisma/client';
-import { readdir } from 'fs-extra';
+import fs from 'fs-extra';
 import _ from 'lodash';
 
 
@@ -97,7 +97,7 @@ async function generateImages(ads: Ad[]) {
         const { id, type } = ads[i];
 
         for (let j = 0; j < IMAGES_IN_AD_NUMBER; j += 1) {
-            const images = await readdir(resolve(__dirname, '../upload/placeholders'));
+            const images = await fs.readdir(resolve(__dirname, '../upload/placeholders'));
             const image = _.sample(images.filter((img) => img.includes(type)));
 
             const imageResult = await prisma.image.create({

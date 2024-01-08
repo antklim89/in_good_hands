@@ -1,6 +1,6 @@
 import { Image } from '@in-good-hands/share/swager';
 import { FastifyInstance, FastifyRequest } from 'fastify';
-import { rm } from 'fs-extra';
+import fs from 'fs-extra';
 
 
 import schema from './schema';
@@ -29,7 +29,7 @@ export default async function newAdRoute(app: FastifyInstance) {
                 where: { id: imageId },
             });
 
-            await rm(getImagePathBySrc(deletedImage.src));
+            await fs.rm(getImagePathBySrc(deletedImage.src));
 
             return null;
         },

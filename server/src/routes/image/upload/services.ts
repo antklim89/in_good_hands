@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 
-import { ensureDir } from 'fs-extra';
+import fs from 'fs-extra';
 import { Sharp } from 'sharp';
 
 import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@/shareConstants';
@@ -17,7 +17,7 @@ export async function saveThumnail(sharpInstance: Sharp): Promise<string> {
 }
 
 export async function saveImage(sharpInstance: Sharp, imageFullPath: string) {
-    await ensureDir(resolve(imageFullPath, '..'));
+    await fs.ensureDir(resolve(imageFullPath, '..'));
     await sharpInstance
         .resize(IMAGE_WIDHT, IMAGE_HEIGHT, { fit: 'cover' })
         .webp({ quality: 60 })
