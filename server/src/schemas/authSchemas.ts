@@ -1,3 +1,4 @@
+import { USER_FORM } from '@in-good-hands/share/constants';
 
 
 export const loginSchema = {
@@ -6,13 +7,11 @@ export const loginSchema = {
     properties: {
         password: {
             type: 'string',
-            minLength: 3,
-            maxLength: 50,
+            ...USER_FORM.password,
         },
         email: {
             type: 'string',
-            minLength: 3,
-            maxLength: 50,
+            ...USER_FORM.email,
         },
     },
 };
@@ -25,8 +24,7 @@ export const registerSchema = {
         ...loginSchema.properties,
         name: {
             type: 'string',
-            minLength: 3,
-            maxLength: 30,
+            ...USER_FORM.name,
         },
     },
 };
@@ -37,9 +35,9 @@ export const userProfileSchema = {
     properties: {
         email: registerSchema.properties.email,
         name: registerSchema.properties.name,
-        tel: { type: 'string', minLength: 3, maxLength: 50 },
-        whatsapp: { type: 'string', maxLength: 50 },
-        telegram: { type: 'string', maxLength: 50 },
+        tel: { type: 'string', ...USER_FORM.tel },
+        whatsapp: { type: 'string', ...USER_FORM.whatsapp },
+        telegram: { type: 'string', ...USER_FORM.telegram },
     },
 };
 

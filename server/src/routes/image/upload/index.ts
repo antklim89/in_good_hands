@@ -1,3 +1,4 @@
+import { UPLOAD_IMAGES_LIMIT } from '@in-good-hands/share/constants';
 import { Image } from '@in-good-hands/share/swager';
 import { FastifyInstance, FastifyRequest } from 'fastify';
 // import sharp from 'sharp';
@@ -5,7 +6,6 @@ import { FastifyInstance, FastifyRequest } from 'fastify';
 import schema from './schema';
 import { saveImage, saveThumnail } from './services';
 
-import { UPLOAD_IMAGES_LIMIT } from '@/shareConstants';
 import { ClientException, getImageFullPath, getImageFullUrl, getImagePath } from '@/utils';
 
 

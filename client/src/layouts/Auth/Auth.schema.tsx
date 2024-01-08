@@ -1,25 +1,23 @@
-import { registerSchema } from '@in-good-hands/server/src/schemas/authSchemas';
+import { USER_FORM } from '@in-good-hands/share/constants';
 import zod from 'zod';
 
-
-const props = registerSchema.properties;
 
 export const authSchema = zod.object({
     name: zod.string()
         .trim()
-        .max(props.name.maxLength)
-        .min(props.name.minLength),
+        .max(USER_FORM.name.maxLength)
+        .min(USER_FORM.name.minLength),
     email: zod.string()
         .email()
         .trim()
-        .max(props.email.maxLength)
-        .min(props.email.minLength),
+        .max(USER_FORM.email.maxLength)
+        .min(USER_FORM.email.minLength),
     password: zod.string()
         .trim()
-        .max(props.password.maxLength)
-        .min(props.password.minLength),
+        .max(USER_FORM.password.maxLength)
+        .min(USER_FORM.password.minLength),
     confirm: zod.string()
         .trim()
-        .max(props.password.maxLength)
-        .min(props.password.minLength),
+        .max(USER_FORM.password.maxLength)
+        .min(USER_FORM.password.minLength),
 });

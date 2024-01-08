@@ -1,3 +1,4 @@
+import { ADS_LIMIT } from '@in-good-hands/share/constants';
 import { Ad } from '@in-good-hands/share/swager';
 import { FastifyInstance, FastifyRequest } from 'fastify';
 
@@ -6,12 +7,10 @@ import schema from './schema';
 import type { JWTUser } from '@/types';
 
 
-export const ADS_LIMIT = 10;
-
 export default async function adPreviewListRoute(app: FastifyInstance) {
     app.route({
         method: 'GET',
-        url: '/find-many',
+        url: '/find-many/',
         schema,
         async handler(req: FastifyRequest<{Querystring: Ad.FindMany.RequestQuery}>) {
             const user: JWTUser|null = req.checkUser();

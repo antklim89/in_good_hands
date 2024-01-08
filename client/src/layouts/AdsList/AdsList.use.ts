@@ -1,4 +1,4 @@
-import { animalsTypes } from '@in-good-hands/server/src/schemas/adSchemas';
+import { animalsTypes } from '@in-good-hands/share/constants';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import useSWR from 'swr';

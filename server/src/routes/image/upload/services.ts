@@ -1,9 +1,8 @@
 import { resolve } from 'path';
 
+import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/share/constants';
 import fs from 'fs-extra';
 import { Sharp } from 'sharp';
-
-import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@/shareConstants';
 
 
 export async function saveThumnail(sharpInstance: Sharp): Promise<string> {

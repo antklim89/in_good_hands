@@ -1,6 +1,6 @@
 import { AddIcon } from '@chakra-ui/icons';
 import { Box, IconButton, SimpleGrid, Text, Spinner } from '@chakra-ui/react';
-import { UPLOAD_IMAGES_LIMIT } from '@in-good-hands/server/src/shareConstants';
+import { UPLOAD_IMAGES_LIMIT } from '@in-good-hands/share/constants';
 import { FC, useId } from 'react';
 
 import { UpdateAdProps } from './UpdateAd.types';

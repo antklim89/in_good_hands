@@ -1,7 +1,7 @@
 import {
     Center, Container, Flex, Button, FormControl, FormLabel, Switch,
 } from '@chakra-ui/react';
-import { adInputSchema } from '@in-good-hands/server/src/schemas/adSchemas';
+import { adInputSchema } from '@in-good-hands/share/constants';
 import { FC } from 'react';
 
 import { useUpdateAdFormik } from './UpdateAd.formik';

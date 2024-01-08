@@ -1,5 +1,5 @@
 import { Flex, Heading, Button, Box, Text } from '@chakra-ui/react';
-import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/server/src/shareConstants';
+import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/share/constants';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';

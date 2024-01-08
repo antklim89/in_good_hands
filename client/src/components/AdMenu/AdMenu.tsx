@@ -1,7 +1,7 @@
 import {
     Menu, MenuButton, IconButton, MenuList, Button,
 } from '@chakra-ui/react';
-import { animalsTypes } from '@in-good-hands/server/src/schemas/adSchemas';
+import { animalsTypes } from '@in-good-hands/share/constants';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC, useCallback } from 'react';
