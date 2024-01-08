@@ -7,7 +7,7 @@
   "type": "module",
   "main": "./src/server.ts",
   "scripts": {
-    "typegen": "node ./swager/main.js"
+    "typegen": "node ./swager/generate.js"
   },
   "dependencies": {
     "swagger-typescript-api": "^13.0.3"

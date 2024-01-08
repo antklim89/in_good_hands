@@ -7,13 +7,13 @@ async function generateSwaggerTypes() {
     try {
         await generateApi({
             name: 'index.ts',
-            output: path.resolve('swager/generated'),
+            output: path.resolve('swager'),
             url: 'http://localhost:8000/documentation/json',
             httpClientType: 'axios',
             defaultResponseAsSuccess: true,
             generateRouteTypes: true,
             generateResponses: true,
-            toJS: true,
+            toJS: false,
             extractRequestParams: false,
             extractRequestBody: false,
             singleHttpClient: false,
