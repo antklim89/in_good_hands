@@ -16,3 +16,17 @@ export const USER_FORM = {
     whatsapp: { maxLength: 50 },
     telegram: { maxLength: 50 },
 } as const;
+
+export const AD_FORM = {
+    name: { maxLength: 100 },
+    type: { enum: animalsTypes },
+    breed: { minLength: 3, maxLength: 100 },
+    description: { minLength: 3, maxLength: 4000 },
+    email: { minLength: 3, maxLength: 100 },
+    tel: { minLength: 3, maxLength: 100 },
+    whatsapp: { maxLength: 50 },
+    telegram: { maxLength: 50 },
+    price: { minimum: 0, maximum: 99999 },
+    birthday: {},
+    isPublished: {},
+} as const;

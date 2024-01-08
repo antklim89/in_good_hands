@@ -1,3 +1,5 @@
+import { AD_FORM } from '@in-good-hands/share/constants';
+
 import { imageSchema } from './imageSchemas';
 
 
@@ -9,44 +11,39 @@ export const adInputSchema = {
     properties: {
         name: {
             type: 'string',
-            maxLength: 100,
+            ...AD_FORM.name,
         },
         type: {
             type: 'string',
-            enum: animalsTypes,
+            ...AD_FORM.type,
         },
         breed: {
             type: 'string',
-            minLength: 3,
-            maxLength: 100,
+            ...AD_FORM.breed,
         },
         description: {
             type: 'string',
-            minLength: 3,
-            maxLength: 4000,
+            ...AD_FORM.description,
         },
         email: {
             type: 'string',
-            minLength: 3,
-            maxLength: 100,
+            ...AD_FORM.email,
         },
         tel: {
             type: 'string',
-            minLength: 3,
-            maxLength: 100,
+            ...AD_FORM.tel,
         },
         whatsapp: {
             type: 'string',
-            maxLength: 50,
+            ...AD_FORM.whatsapp,
         },
         telegram: {
             type: 'string',
-            maxLength: 50,
+            ...AD_FORM.telegram,
         },
         price: {
             type: 'number',
-            minimum: 0,
-            maximum: 99999,
+            ...AD_FORM.price,
         },
         birthday: {
             type: 'string',
