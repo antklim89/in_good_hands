@@ -6,7 +6,7 @@ import fs from 'fs-extra';
 
 import schema from './schema';
 
-import { UPLOAD_IMAGES_BASE_PATH } from '@/constants';
+import { UPLOAD_IMAGES_FOLDER_PATH } from '@/constants';
 
 
 export default async function updateAdRoute(app: FastifyInstance) {
@@ -23,7 +23,7 @@ export default async function updateAdRoute(app: FastifyInstance) {
                 where: { id: adId },
             });
 
-            const imagesDir = join(UPLOAD_IMAGES_BASE_PATH, `${user.id}`, `${adId}`);
+            const imagesDir = join(UPLOAD_IMAGES_FOLDER_PATH, `${user.id}`, `${adId}`);
             if (await fs.pathExists(imagesDir)) await fs.rm(imagesDir, { recursive: true }).catch();
 
             return null;
