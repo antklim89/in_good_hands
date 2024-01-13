@@ -16,5 +16,8 @@ export default defineConfig({
                 singleThread: true,
             },
         },
+        env: {
+            JWT_SECRET: 'SECRET',
+        },
     },
 });
