@@ -41,7 +41,7 @@ app.register(import('./routes/image'), { prefix: '/image' });
 
 app.setErrorHandler((error, req, repl) => {
     const { statusCode } = error;
-    if (error instanceof ClientException) return error;
+    if (error.name === ClientException.name) return repl.status(statusCode || 500).send(error);
 
     if (_.has(error, 'validation')) {
         return repl.status(400).send({ message: error.message });

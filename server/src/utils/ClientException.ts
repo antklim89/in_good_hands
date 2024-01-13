@@ -1,7 +1,12 @@
+import type { FastifyError } from '@fastify/error';
 
 
-export class ClientException extends Error {
+export class ClientException implements FastifyError {
+    code: string;
+
+    name = ClientException.name;
+
     constructor(readonly message: string, readonly statusCode: number) {
-        super(message);
+        this.code = statusCode.toString();
     }
 }
