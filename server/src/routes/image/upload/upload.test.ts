@@ -3,9 +3,9 @@ import { resolve } from 'path';
 import { Image } from '@in-good-hands/share/swager';
 import formAutoContent from 'form-auto-content';
 import fs from 'fs-extra';
-import { describe, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
-import { UPLOAD_IMAGES_BASE_PATH } from '@/constants';
+import { UPLOAD_ROOT_DIR } from '@/constants';
 import { createImage, init } from '@/test';
 import { generateJWT } from '@/utils';
 
@@ -17,84 +17,77 @@ const defaultOptions: import('light-my-request').InjectOptions = {
     method: 'POST',
 };
 
-// vi.resetModules();
-// vi.mock('../../../shareConstants', () => ({
-//     UPLOAD_IMAGES_LIMIT: 21,
-//     IMAGE_WIDHT: 1024,
-//     IMAGE_HEIGHT: 768,
-// }));
-// vi.mock('../../../constants', () => ({
-//     JWT_SECRET: 'secret',
-//     UPLOAD_BASE_URL: '/upload',
-//     UPLOAD_BASE_PATH: '/tmp/fastify/upload/',
-//     UPLOAD_IMAGES_BASE_URL: '/upload/images',
-//     UPLOAD_IMAGES_BASE_PATH: '/tmp/fastify/upload/images',
-// }));
+vi.resetModules();
+vi.mock('@/constants', async (importOriginal) => {
+    const actual = await importOriginal() as typeof import('@/constants');
+    return {
+        ...actual,
+        IMAGE_EXTENSION: 'png',
+        UPLOAD_ROOT_URL: '/upload',
+        UPLOAD_IMAGES_URL: '/upload/images',
+        UPLOAD_ROOT_DIR: '/tmp/jest/upload',
+        UPLOAD_IMAGES_DIR: '/tmp/jest/upload/images',
+    };
+});
+
+vi.mock('@in-good-hands/share/constants', async (importOriginal) => {
+    const actual = await importOriginal() as typeof import('@in-good-hands/share/constants');
+    return {
+        ...actual,
+        UPLOAD_IMAGES_LIMIT: 21,
+        IMAGE_WIDHT: 1024,
+        IMAGE_HEIGHT: 768,
+    };
+});
 
 const image = () => fs.createReadStream(resolve(process.cwd(), './src/test/test.image.jpg'));
 
 describe('POST /image/upload', () => {
     it('should upload new image', async () => {
-    //     await fs.rm(UPLOAD_IMAGES_BASE_PATH, { recursive: true, force: true });
+        await fs.rm(UPLOAD_ROOT_DIR, { recursive: true, force: true });
 
-        //     const form = formAutoContent({
-        //         image: image(),
-        //     });
+        const form = formAutoContent({ image: image() });
 
-        //     const query = {
-        //         adId: String(db().ads[0].id),
-        //     };
+        const query = { adId: String(db().ads[0].id) };
 
-        //     form.headers.authentication = generateJWT(db().users[0]).token;
+        form.headers.authentication = generateJWT(db().users[0]).token;
 
-        //     const response = await app.inject({ ...defaultOptions, ...form, query });
-        //     const uploadedImageResponse: Image.Upload.ResponseBody = response.json();
+        const response = await app.inject({ ...defaultOptions, ...form, query });
+        const uploadedImageResponse: Image.Upload.ResponseBody = response.json();
 
+        const uploadedImage = await prisma.image.findUnique({
+            where: { id: uploadedImageResponse.id },
+        });
 
-        //     const uploadedImage = await prisma.image.findUnique({
-        //         where: { id: uploadedImageResponse.id },
-        //     });
-
-    //     expect(uploadedImage).toHaveProperty('id', uploadedImageResponse.id);
-    //     expect(uploadedImage).toHaveProperty('src');
-    //     expect(uploadedImage).toHaveProperty('thumbnail');
-    //     expect(uploadedImage).toHaveProperty('adId', db().ads[0].id);
+        expect(uploadedImage).toHaveProperty('id', uploadedImageResponse.id);
+        expect(uploadedImage).toHaveProperty('src');
+        expect(uploadedImage).toHaveProperty('thumbnail');
+        expect(uploadedImage).toHaveProperty('adId', db().ads[0].id);
     });
 
-    // it('should not upload new image over limit', async () => {
-    //     await fs.rm(UPLOAD_IMAGES_BASE_PATH, { recursive: true, force: true });
-    //     await prisma.image.create({ data: createImage({
-    //         ad: { connect: { id: db().ads[0].id } },
-    //     }) });
-    //     const form = formAutoContent({
-    //         image: image(),
-    //     });
+    it('should not upload new image over limit', async () => {
+        await fs.rm(UPLOAD_ROOT_DIR, { recursive: true, force: true });
+        await prisma.image.create({ data: createImage({
+            ad: { connect: { id: db().ads[0].id } },
+        }) });
 
-    //     const query = {
-    //         adId: String(db().ads[0].id),
-    //     };
+        const form = formAutoContent({ image: image() });
+        const query = { adId: String(db().ads[0].id) };
+        form.headers.authentication = generateJWT(db().users[0]).token;
 
-    //     form.headers.authentication = generateJWT(db().users[0]).token;
+        const response = await app.inject({ ...defaultOptions, ...form, query });
 
-    //     const response = await app.inject({ ...defaultOptions, ...form, query });
-    //     const uploadedImageResponse = response.json();
+        expect(response.statusCode).toEqual(400);
+    });
 
-    //     expect(uploadedImageResponse.statusCode).toEqual(400);
-    // });
+    it('should not upload image from wrong user', async () => {
+        const form = formAutoContent({ image: image() });
+        const query = { adId: String(db().ads[0].id) };
+        form.headers.authentication = generateJWT(db().users[1]).token;
 
-    // it('should not upload image from wrong user', async () => {
-    //     const form = formAutoContent({
-    //         image: image(),
-    //     });
+        const response = await app.inject({ ...defaultOptions, ...form, query });
 
-    //     const query = {
-    //         adId: String(db().ads[0].id),
-    //     };
+        expect(response.statusCode).toEqual(403);
 
-    //     form.headers.authentication = generateJWT(db().users[1]).token;
-    //     const response = await app.inject({ ...defaultOptions, ...form, query });
-
-    //     expect(response.statusCode).toEqual(403);
-
-    // });
+    });
 });

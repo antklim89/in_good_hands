@@ -1,12 +1,12 @@
 import { UPLOAD_IMAGES_LIMIT } from '@in-good-hands/share/constants';
 import { Image } from '@in-good-hands/share/swager';
 import { FastifyInstance, FastifyRequest } from 'fastify';
-// import sharp from 'sharp';
+import Jimp from 'jimp';
 
 import schema from './schema';
 import { saveImage, saveThumnail } from './services';
 
-import { ClientException, getImageFullPath, getImageFullUrl, getImagePath } from '@/utils';
+import { ClientException, getImageFilePath, getImageFullPath, getImageFullUrl } from '@/utils';
 
 
 export default async function newAdRoute(app: FastifyInstance) {
@@ -29,21 +29,22 @@ export default async function newAdRoute(app: FastifyInstance) {
                 throw new ClientException(`Too many images. The limit is ${UPLOAD_IMAGES_LIMIT} images`, 400);
             }
 
-            const imagePath = getImagePath(user.id, adId);
+            const imagePath = getImageFilePath(user.id, adId);
+
             const imageFullPath = getImageFullPath(imagePath);
             const imageFullUrl = getImageFullUrl(imagePath);
 
             const [{ filepath }] = await req.saveRequestFiles();
 
-            // const sharpInstance = sharp(filepath);
+            const jimpInstance = await Jimp.read(filepath);
 
-            // await saveImage(sharpInstance, imageFullPath);
-            // const thumbnail = await saveThumnail(sharpInstance);
+            await saveImage(jimpInstance, imageFullPath);
+            const thumbnail = await saveThumnail(jimpInstance);
 
             const result = await app.prisma.image.create({
                 data: {
                     src: imageFullUrl,
-                    thumbnail: '',
+                    thumbnail,
                     adId,
                 },
                 select: {

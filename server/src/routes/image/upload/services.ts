@@ -2,23 +2,25 @@ import { resolve } from 'path';
 
 import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/share/constants';
 import fs from 'fs-extra';
-import { Sharp } from 'sharp';
+import Jimp from 'jimp';
+
+import { IMAGE_EXTENSION } from '@/constants';
 
 
-export async function saveThumnail(sharpInstance: Sharp): Promise<string> {
-    const sharpResult = await sharpInstance
-        .resize(IMAGE_WIDHT / 16, IMAGE_HEIGHT / 16, { fit: 'cover' })
-        .webp({ quality: 1 })
-        .toBuffer();
-    const thumbnail = `data:image/webp;base64, ${sharpResult.toString('base64')}`;
+export async function saveThumnail(jimpInstance: Jimp): Promise<string> {
+    const thumbnail = await jimpInstance
+        .cover(IMAGE_WIDHT / 32, IMAGE_HEIGHT / 32)
+        .quality(1)
+        .getBase64Async(`image/${IMAGE_EXTENSION}`);
 
     return thumbnail;
 }
 
-export async function saveImage(sharpInstance: Sharp, imageFullPath: string) {
+export async function saveImage(jimpInstance: Jimp, imageFullPath: string) {
     await fs.ensureDir(resolve(imageFullPath, '..'));
-    await sharpInstance
-        .resize(IMAGE_WIDHT, IMAGE_HEIGHT, { fit: 'cover' })
-        .webp({ quality: 60 })
-        .toFile(imageFullPath);
+
+    await jimpInstance
+        .cover(IMAGE_WIDHT, IMAGE_HEIGHT)
+        .quality(60)
+        .writeAsync(imageFullPath);
 }
