@@ -18,6 +18,7 @@ export default defineConfig({
         },
         env: {
             JWT_SECRET: 'SECRET',
+            DATABASE_URL: 'file:./data/test.sqlite',
         },
     },
 });
