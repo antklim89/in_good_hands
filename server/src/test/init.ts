@@ -7,19 +7,18 @@ import app from '@/app';
 
 
 export const init = () => {
-    const dbUrl = 'file:./data/test.sqlite';
+    const prisma = new PrismaClient();
 
-    const prisma = new PrismaClient({ datasources: { db: { url: dbUrl } } });
-    app.prisma = prisma;
     app.log.level = 'silent';
     let db: Awaited<ReturnType<typeof populateDb>>;
 
     beforeAll(async () => {
+        await prisma.$connect();
         db = await populateDb(prisma);
     });
 
     afterAll(async () => {
-        await app.prisma.$disconnect();
+        await prisma.$disconnect();
     });
 
     return {

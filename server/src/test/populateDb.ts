@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import type { PrismaClient } from '@prisma/client';
 import _ from 'lodash';
 
 import { createAd, createImage, createUser } from './dbCreators';
