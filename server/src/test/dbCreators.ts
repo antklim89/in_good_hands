@@ -1,11 +1,11 @@
 import { randomUUID } from 'crypto';
 import { join } from 'path';
 
-import { Prisma } from '@prisma/client';
+import type { Prisma } from '@prisma/client';
 import fs from 'fs-extra';
 import _ from 'lodash';
 
-import { UPLOAD_IMAGES_BASE_URL } from '@/constants';
+import { UPLOAD_IMAGES_URL } from '@/constants';
 import { getImagePathBySrc } from '@/utils';
 
 
@@ -46,7 +46,7 @@ type CreateImageReturn<T> = Omit<Prisma.ImageCreateInput, 'ad'> & T;
 
 export function createImage<T extends Partial<Prisma.ImageCreateInput>>(data = {} as T): CreateImageReturn<T> {
     const image: CreateImageReturn<T> = {
-        src: join(UPLOAD_IMAGES_BASE_URL, randomUUID()),
+        src: join(UPLOAD_IMAGES_URL, randomUUID()),
         thumbnail: '',
         ...data,
     };
