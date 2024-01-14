@@ -1,13 +1,8 @@
-import { PrismaClient } from '@prisma/client';
-
 import app from './app';
 
 
 const { PORT = 8000, HOST = '0.0.0.0' } = process.env;
 
-const prisma = new PrismaClient();
-
-app.prisma = prisma;
 
 // @ts-expect-error exist in vite watch mode
 import.meta?.hot?.on('vite:beforeFullReload', () => {

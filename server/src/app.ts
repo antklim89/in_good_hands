@@ -1,5 +1,4 @@
 import 'dotenv/config';
-
 import fastify from 'fastify';
 import _ from 'lodash';
 
@@ -31,6 +30,7 @@ app.register(import('./plugins/getUser'));
 app.register(import('./plugins/multipart'));
 app.register(import('./plugins/static'));
 app.register(import('./plugins/swagger'));
+app.register(import('./plugins/prisma'));
 
 app.register(import('./routes/'), { prefix: '/' });
 app.register(import('./routes/ad'), { prefix: '/ad' });
