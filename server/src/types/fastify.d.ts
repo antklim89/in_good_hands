@@ -1,10 +1,6 @@
-import { Ad } from '@prisma/client';
 
 
 export declare module 'fastify' {
-    import type { JWTUser } from './JWTUser';
-
-
     export interface FastifyRequest {
         user: {
             id: string
@@ -12,14 +8,12 @@ export declare module 'fastify' {
             email: string
         }
 
-        checkUser(): JWTUser|null
-        getUser(): JWTUser
-        getAdOwner(adId: number): Promise<{user: JWTUser, ad: Ad}>
+        checkUser(): import('./JWTUser').JWTUser | null
+        getUser(): import('./JWTUser').JWTUser
+        getAdOwner(adId: number): Promise<{user: import('./JWTUser').JWTUser, ad: import('@prisma/client').Ad}>
     }
 
-    export interface FastifyInstance {
+    interface FastifyInstance {
         prisma: import('@prisma/client').PrismaClient
     }
 }
-
-
