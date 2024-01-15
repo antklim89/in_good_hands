@@ -20,7 +20,7 @@ export default fp(async (app) => {
             if (!user) throw new ClientException('You are not authorized.', 401);
 
 
-            const ad = await app.prisma.ad.findUnique({
+            const ad = await req.server.prisma.ad.findUnique({
                 where: { id: adId },
             });
 
