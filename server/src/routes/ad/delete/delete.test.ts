@@ -5,7 +5,7 @@ import { Ad } from '@in-good-hands/share/swager';
 import fs from 'fs-extra';
 import { describe, expect, it } from 'vitest';
 
-import { UPLOAD_IMAGES_FOLDER_PATH } from '@/constants';
+import { UPLOAD_IMAGES_DIR } from '@/constants';
 import { init } from '@/test';
 import { generateJWT } from '@/utils';
 
@@ -21,7 +21,7 @@ const defaultOptions: import('light-my-request').InjectOptions = {
 
 describe('DELETE /ad/delete', () => {
     it('should delete ad', async () => {
-        const imageDir = join(UPLOAD_IMAGES_FOLDER_PATH, `${db().users[0].id}`, `${db().ads[0].id}`);
+        const imageDir = join(UPLOAD_IMAGES_DIR, `${db().users[0].id}`, `${db().ads[0].id}`);
         await fs.ensureDir(imageDir);
         await fs.writeFile(join(imageDir, `${randomUUID()}.jpg`), 'test');
 
@@ -51,7 +51,7 @@ describe('DELETE /ad/delete', () => {
     });
 
     it('should not delete ad another user', async () => {
-        const imageDir = join(UPLOAD_IMAGES_FOLDER_PATH, `${db().users[0].id}`, `${db().ads[0].id}`);
+        const imageDir = join(UPLOAD_IMAGES_DIR, `${db().users[0].id}`, `${db().ads[0].id}`);
         await fs.ensureDir(imageDir);
         await fs.writeFile(join(imageDir, `${randomUUID()}.jpg`), 'test');
 

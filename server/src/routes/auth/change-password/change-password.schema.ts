@@ -1,7 +1,10 @@
 import { registerSchema } from '@/schemas';
 
 
-const schema = {
+export const method = 'PATCH';
+export const url = '/change-password/';
+
+export const schema = {
     tags: ['auth'],
     operationId: 'ChangePassword',
     body: {
@@ -14,5 +17,3 @@ const schema = {
     },
     response: { 201: { type: 'null' } },
 };
-
-export default schema;

@@ -1,7 +1,10 @@
 import { registerSchema, authResponseSchema } from '@/schemas';
 
 
-const schema = {
+export const method = 'POST';
+export const url = '/register/';
+
+export const schema = {
     tags: ['auth'],
     operationId: 'Register',
     body: registerSchema,
@@ -9,5 +12,3 @@ const schema = {
         200: authResponseSchema,
     },
 };
-
-export default schema;

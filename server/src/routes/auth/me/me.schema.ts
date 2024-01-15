@@ -1,7 +1,10 @@
 import { userProfileSchema } from '@/schemas';
 
 
-const schema = {
+export const method = 'GET';
+export const url = '/me/';
+
+export const schema = {
     tags: ['auth'],
     operationId: 'Me',
     response: {
@@ -14,5 +17,3 @@ const schema = {
         },
     },
 };
-
-export default schema;

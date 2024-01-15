@@ -1,5 +1,9 @@
 
-const schema = {
+
+export const method = 'DELETE';
+export const url = '/delete/';
+
+export const schema = {
     tags: ['image'],
     operationId: 'Delete',
     response: {
@@ -14,4 +18,3 @@ const schema = {
     },
 };
 
-export default schema;

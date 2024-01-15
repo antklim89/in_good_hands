@@ -1,38 +1,10 @@
-import { FastifyInstance, FastifyRequest } from 'fastify';
+import { FastifyInstance } from 'fastify';
 
-import schema from './schema';
+import handler from './create-new.handler';
+import { method, schema, url } from './create-new.schema';
 
-import { AnimalType } from '@/types';
 
-
-export default async function newAdRoute(app: FastifyInstance) {
-    app.route({
-        method: 'POST',
-        url: '/create-new',
-        schema,
-        async handler(req: FastifyRequest, repl) {
-            const user = req.getUser();
-
-            const newAd = await app.prisma.ad.create({
-                data: {
-                    breed: '',
-                    description: '',
-                    email: '',
-                    isPublished: false,
-                    price: 0,
-                    tel: '',
-                    type: AnimalType.cat,
-                    owner: {
-                        connect: { id: user.id },
-                    },
-                },
-                select: {
-                    id: true,
-                },
-            });
-
-            repl.status(201);
-            return { id: newAd.id };
-        },
-    });
+export default async function route(app: FastifyInstance) {
+    app.route({ method, url, schema, handler });
 }
+

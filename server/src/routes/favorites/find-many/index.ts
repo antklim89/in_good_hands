@@ -1,26 +1,10 @@
-import { FastifyInstance, FastifyRequest } from 'fastify';
+import { FastifyInstance } from 'fastify';
 
-import schema from './schema';
+import handler from './find-many.handler';
+import { method, schema, url } from './find-many.schema';
 
 
-export default async function newAdRoute(app: FastifyInstance) {
-    app.route({
-        method: 'GET',
-        url: '/find-many',
-        schema,
-        async handler(req: FastifyRequest) {
-            const user = req.getUser();
-            const favorites = await app.prisma.favorites.findMany({
-                where: {
-                    ownerId: user.id,
-                },
-                include: {
-                    ad: true,
-                },
-            });
-
-            return favorites;
-        },
-    });
+export default async function route(app: FastifyInstance) {
+    app.route({ method, url, schema, handler });
 }
 

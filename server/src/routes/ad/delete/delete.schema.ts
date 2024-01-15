@@ -1,9 +1,14 @@
-import { adResponseSchema } from '@/schemas';
 
 
-const schema = {
+export const method = 'DELETE';
+export const url = '/delete/';
+
+export const schema = {
     tags: ['ad'],
-    operationId: 'FindOne',
+    operationId: 'Delete',
+    response: {
+        200: { type: 'null' },
+    },
     querystring: {
         type: 'object',
         required: ['adId'],
@@ -11,9 +16,4 @@ const schema = {
             adId: { type: 'number' },
         },
     },
-    response: {
-        200: adResponseSchema,
-    },
 };
-
-export default schema;

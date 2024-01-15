@@ -1,6 +1,9 @@
 import { ADS_LIMIT } from '@in-good-hands/share/constants';
 import { Ad } from '@in-good-hands/share/swager';
+import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
+
+import { method, url } from './find-many.schema';
 
 import { init } from '@/test';
 import { generateJWT } from '@/utils';
@@ -8,11 +11,7 @@ import { generateJWT } from '@/utils';
 
 const { app, db, prisma } = init();
 
-const defaultOptions: import('light-my-request').InjectOptions = {
-    url: '/ad/find-many',
-    method: 'GET',
-    headers: { 'content-type': 'application/json' },
-};
+const defaultOptions: InjectOptions = { url: `/ad${url}`, method, headers: { 'content-type': 'application/json' } };
 
 describe('POST /ad/find-many', () => {
     it('should find all ads', async () => {

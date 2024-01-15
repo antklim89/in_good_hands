@@ -1,6 +1,10 @@
 
 
-const schema = {
+export const method = 'GET';
+export const url = '/find-my-ads/';
+
+
+export const schema = {
     tags: ['ad'],
     operationId: 'FindMyAds',
     querystring: {
@@ -28,4 +32,3 @@ const schema = {
     },
 };
 
-export default schema;

@@ -2,7 +2,10 @@ import { adsPreviewListResponseSchema } from '@/schemas';
 import { animalsTypes } from '@/schemas/adSchemas';
 
 
-const schema = {
+export const method = 'GET';
+export const url = '/find-many/';
+
+export const schema = {
     tags: ['ad'],
     operationId: 'FindMany',
     querystring: {
@@ -20,4 +23,3 @@ const schema = {
     },
 };
 
-export default schema;

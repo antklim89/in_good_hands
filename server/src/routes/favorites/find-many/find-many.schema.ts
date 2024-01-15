@@ -1,7 +1,10 @@
 import { favoritesResponse } from '@/schemas';
 
 
-const schema = {
+export const method = 'GET';
+export const url = '/find-many/';
+
+export const schema = {
     tags: ['favorites'],
     operationId: 'FindMany',
     response: {
@@ -12,4 +15,3 @@ const schema = {
     },
 };
 
-export default schema;

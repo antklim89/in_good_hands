@@ -1,25 +1,10 @@
-import { Auth } from '@in-good-hands/share/swager';
-import { FastifyInstance, FastifyRequest } from 'fastify';
+import { FastifyInstance } from 'fastify';
 
-import schema from './schema';
+import handler from './update.handler';
+import { method, schema, url } from './update.schema';
 
 
-export default async function update(app: FastifyInstance) {
-    app.route({
-        method: 'PATCH',
-        url: '/update',
-        schema,
-        async handler(req: FastifyRequest<{Body: Auth.Update.RequestBody}>, repl): Promise<Auth.Update.ResponseBody> {
-            const user = req.getUser();
-            const { body } = req;
-
-            await app.prisma.user.update({
-                data: body,
-                where: { id: user.id },
-                select: { id: true },
-            });
-
-            return repl.status(200).send();
-        },
-    });
+export default async function route(app: FastifyInstance) {
+    app.route({ method, url, schema, handler });
 }
+

@@ -1,6 +1,9 @@
 
 
-const schema = {
+export const method = 'GET';
+export const url = '/find-ids/';
+
+export const schema = {
     tags: ['ad'],
     operationId: 'FindIds',
     response: {
@@ -17,4 +20,3 @@ const schema = {
     },
 };
 
-export default schema;

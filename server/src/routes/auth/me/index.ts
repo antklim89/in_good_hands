@@ -1,21 +1,10 @@
-import { Auth } from '@in-good-hands/share/swager';
-import { FastifyInstance, FastifyRequest } from 'fastify';
+import { FastifyInstance } from 'fastify';
 
-import schema from './schema';
+import handler from './me.handler';
+import { method, schema, url } from './me.schema';
 
 
-export default async function me(app: FastifyInstance) {
-    app.route({
-        method: 'GET',
-        url: '/me',
-        schema,
-        async handler(req: FastifyRequest, repl): Promise<Auth.Me.ResponseBody> {
-            const user = req.getUser();
-            const profile = await app.prisma.user.findUnique({
-                where: { id: user.id },
-            });
-
-            return repl.status(200).send(profile);
-        },
-    });
+export default async function route(app: FastifyInstance) {
+    app.route({ method, url, schema, handler });
 }
+

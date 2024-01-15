@@ -1,7 +1,10 @@
 import { imageSchema } from '@/schemas';
 
 
-const schema = {
+export const method = 'POST';
+export const url = '/upload/';
+
+export const schema = {
     tags: ['image'],
     operationId: 'Upload',
     consumes: ['multipart/form-data'],
@@ -25,4 +28,3 @@ const schema = {
     },
 };
 
-export default schema;

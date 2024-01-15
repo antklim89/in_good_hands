@@ -1,7 +1,10 @@
 import { adInputSchema, imageSchema } from '@/schemas';
 
 
-const schema = {
+export const method = 'GET';
+export const url = '/find-update-data/';
+
+export const schema = {
     tags: ['ad'],
     operationId: 'FindUpdateData',
     response: {
@@ -23,5 +26,3 @@ const schema = {
         },
     },
 };
-
-export default schema;

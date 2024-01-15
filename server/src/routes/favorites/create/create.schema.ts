@@ -1,9 +1,13 @@
 
-const schema = {
+
+export const method = 'POST';
+export const url = '/create/';
+
+export const schema = {
     tags: ['favorites'],
-    operationId: 'Delete',
+    operationId: 'Create',
     response: {
-        200: { type: 'null' },
+        200: { type: 'number' },
     },
     querystring: {
         type: 'object',
@@ -13,5 +17,3 @@ const schema = {
         },
     },
 };
-
-export default schema;

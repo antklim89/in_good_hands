@@ -1,17 +1,10 @@
 import { FastifyInstance } from 'fastify';
 
-import schema from './schema';
+import handler from './find-ids.handler';
+import { method, schema, url } from './find-ids.schema';
 
 
-export default async function adsIdsRoute(app: FastifyInstance) {
-    app.route({
-        method: 'GET',
-        url: '/find-ids',
-        schema,
-        async handler() {
-            return app.prisma.ad.findMany({
-                select: { id: true },
-            });
-        },
-    });
+export default async function route(app: FastifyInstance) {
+    app.route({ method, url, schema, handler });
 }
+

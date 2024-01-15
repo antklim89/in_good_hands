@@ -1,6 +1,9 @@
 
 
-const schema = {
+export const method = 'POST';
+export const url = '/create-new/';
+
+export const schema = {
     tags: ['ad'],
     operationId: 'CreateNew',
     response: {
@@ -13,4 +16,3 @@ const schema = {
     },
 };
 
-export default schema;

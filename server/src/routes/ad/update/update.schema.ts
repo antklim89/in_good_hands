@@ -1,7 +1,11 @@
 import { adInputSchema } from '@/schemas';
 
 
-const schema = {
+export const method = 'PATCH';
+export const url = '/update/';
+
+
+export const schema = {
     tags: ['ad'],
     operationId: 'Update',
     response: {
@@ -15,5 +19,3 @@ const schema = {
     },
     body: adInputSchema,
 };
-
-export default schema;

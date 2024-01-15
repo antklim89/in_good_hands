@@ -1,7 +1,10 @@
 import { loginSchema, authResponseSchema } from '@/schemas';
 
 
-const schema = {
+export const method = 'POST';
+export const url = '/login/';
+
+export const schema = {
     tags: ['auth'],
     operationId: 'Login',
     body: loginSchema,
@@ -9,5 +12,3 @@ const schema = {
         200: authResponseSchema,
     },
 };
-
-export default schema;
