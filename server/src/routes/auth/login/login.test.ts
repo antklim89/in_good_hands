@@ -1,16 +1,15 @@
 import { Auth } from '@in-good-hands/share/swager';
+import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
+
+import { method, url } from './login.schema';
 
 import { init, notHashedPassword } from '@/test';
 
 
 const { app, db } = init();
 
-const defaultOptions: import('light-my-request').InjectOptions = {
-    url: '/auth/login',
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-};
+const defaultOptions: InjectOptions = { url: `/auth${url}`, method };
 
 describe('POST /auth/register', () => {
     it('should login existed user', async () => {

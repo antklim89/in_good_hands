@@ -1,16 +1,15 @@
 import { Auth } from '@in-good-hands/share/swager';
+import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
+
+import { method, url } from './register.schema';
 
 import { init } from '@/test';
 
 
 const { app, prisma, db } = init();
 
-const defaultOptions: import('light-my-request').InjectOptions = {
-    url: '/auth/register',
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-};
+const defaultOptions: InjectOptions = { url: `/auth${url}`, method };
 
 describe('POST /auth/register', () => {
     it('should register new user', async () => {

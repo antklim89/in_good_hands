@@ -1,5 +1,9 @@
 import { Ad } from '@in-good-hands/share/swager';
+import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
+
+
+import { method, url } from './update.schema';
 
 import { init } from '@/test';
 import { generateJWT } from '@/utils';
@@ -7,11 +11,7 @@ import { generateJWT } from '@/utils';
 
 const { app, db, prisma } = init();
 
-const defaultOptions: import('light-my-request').InjectOptions = {
-    url: '/ad/update',
-    method: 'PATCH',
-    headers: { 'content-type': 'application/json' },
-};
+const defaultOptions: InjectOptions = { url: `/ad${url}`, method };
 
 
 const payload: Ad.Update.RequestBody & Record<string, string|number|boolean> = {

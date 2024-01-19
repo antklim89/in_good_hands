@@ -5,13 +5,14 @@ import { describe, expect, it } from 'vitest';
 
 import { method, url } from './find-many.schema';
 
+
 import { init } from '@/test';
 import { generateJWT } from '@/utils';
 
 
 const { app, db, prisma } = init();
 
-const defaultOptions: InjectOptions = { url: `/ad${url}`, method, headers: { 'content-type': 'application/json' } };
+const defaultOptions: InjectOptions = { url: `/ad${url}`, method };
 
 describe('POST /ad/find-many', () => {
     it('should find all ads', async () => {

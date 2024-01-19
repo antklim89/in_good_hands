@@ -1,5 +1,8 @@
 import { Ad } from '@in-good-hands/share/swager';
+import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
+
+import { method, url } from './find-my-ads.schema';
 
 import { init } from '@/test';
 import { generateJWT } from '@/utils';
@@ -7,10 +10,7 @@ import { generateJWT } from '@/utils';
 
 const { app, db } = init();
 
-const defaultOptions: import('light-my-request').InjectOptions = {
-    url: '/ad/find-my-ads',
-    method: 'GET',
-};
+const defaultOptions: InjectOptions = { url: `/ad${url}`, method };
 
 
 describe('GET /ad/find-my-ads', () => {

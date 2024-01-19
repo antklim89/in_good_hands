@@ -1,4 +1,7 @@
+import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
+
+import { method, url } from './find-many.schema';
 
 import { init } from '@/test';
 import { generateJWT } from '@/utils';
@@ -6,10 +9,7 @@ import { generateJWT } from '@/utils';
 
 const { app, db } = init();
 
-const defaultOptions: import('light-my-request').InjectOptions = {
-    url: '/favorites/find-many',
-    method: 'GET',
-};
+const defaultOptions: InjectOptions = { url: `/favorites${url}`, method };
 
 
 describe('GET /favorites/find-many', () => {

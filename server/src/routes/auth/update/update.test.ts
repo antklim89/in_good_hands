@@ -1,5 +1,8 @@
 import { Auth } from '@in-good-hands/share/swager';
+import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
+
+import { method, url } from './update.schema';
 
 import { init } from '@/test';
 import { generateJWT } from '@/utils';
@@ -7,11 +10,7 @@ import { generateJWT } from '@/utils';
 
 const { app, prisma, db } = init();
 
-const defaultOptions: import('light-my-request').InjectOptions = {
-    url: '/auth/update',
-    method: 'PATCH',
-    headers: { 'content-type': 'application/json' },
-};
+const defaultOptions: InjectOptions = { url: `/auth${url}`, method };
 
 
 describe('PATCH /auth/register', () => {

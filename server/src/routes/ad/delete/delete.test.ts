@@ -2,8 +2,11 @@ import { randomUUID } from 'crypto';
 import { join } from 'path';
 
 import { Ad } from '@in-good-hands/share/swager';
+import type { InjectOptions } from 'fastify';
 import fs from 'fs-extra';
 import { describe, expect, it } from 'vitest';
+
+import { method, url } from './delete.schema';
 
 import { UPLOAD_IMAGES_DIR } from '@/constants';
 import { init } from '@/test';
@@ -12,11 +15,7 @@ import { generateJWT } from '@/utils';
 
 const { app, db, prisma } = init();
 
-const defaultOptions: import('light-my-request').InjectOptions = {
-    url: '/ad/delete',
-    method: 'DELETE',
-    headers: { 'content-type': 'application/json' },
-};
+const defaultOptions: InjectOptions = { url: `/ad${url}`, method };
 
 
 describe('DELETE /ad/delete', () => {

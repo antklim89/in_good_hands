@@ -1,9 +1,12 @@
 import { resolve } from 'path';
 
 import { Image } from '@in-good-hands/share/swager';
+import type { InjectOptions } from 'fastify';
 import formAutoContent from 'form-auto-content';
 import fs from 'fs-extra';
 import { describe, expect, it, vi } from 'vitest';
+
+import { method, url } from './upload.schema';
 
 import { UPLOAD_ROOT_DIR } from '@/constants';
 import { createImage, init } from '@/test';
@@ -12,10 +15,8 @@ import { generateJWT } from '@/utils';
 
 const { app, db, prisma } = init();
 
-const defaultOptions: import('light-my-request').InjectOptions = {
-    url: '/image/upload',
-    method: 'POST',
-};
+const defaultOptions: InjectOptions = { url: `/image${url}`, method };
+
 
 vi.resetModules();
 vi.mock('@/constants', async (importOriginal) => {

@@ -1,15 +1,15 @@
 import { Ad } from '@in-good-hands/share/swager';
+import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
+
+import { method, url } from './find-ids.schema';
 
 import { init } from '@/test';
 
 
 const { app } = init();
 
-const defaultOptions: import('light-my-request').InjectOptions = {
-    url: '/ad/find-ids',
-    method: 'GET',
-};
+const defaultOptions: InjectOptions = { url: `/ad${url}`, method };
 
 
 describe('GET /ad/find-ids', () => {

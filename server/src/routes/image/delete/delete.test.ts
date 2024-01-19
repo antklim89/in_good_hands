@@ -2,8 +2,11 @@ import { join } from 'path';
 
 
 import { Image } from '@in-good-hands/share/swager';
+import type { InjectOptions } from 'fastify';
 import fs from 'fs-extra';
 import { describe, expect, it } from 'vitest';
+
+import { method, url } from './delete.schema';
 
 import { init } from '@/test';
 import { generateJWT, getImagePathBySrc } from '@/utils';
@@ -11,11 +14,7 @@ import { generateJWT, getImagePathBySrc } from '@/utils';
 
 const { app, db, prisma } = init();
 
-const defaultOptions: import('light-my-request').InjectOptions = {
-    url: '/image/delete',
-    method: 'DELETE',
-};
-
+const defaultOptions: InjectOptions = { url: `/image${url}`, method };
 
 describe('POST /image/delete', () => {
     it('should delete image', async () => {
