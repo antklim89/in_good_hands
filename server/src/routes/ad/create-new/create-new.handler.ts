@@ -1,10 +1,10 @@
-import { FastifyRequest } from 'fastify';
+import { FastifyReply, FastifyRequest } from 'fastify';
 
 
 import { AnimalType } from '@/types';
 
 
-export default async function handler(req: FastifyRequest) {
+export default async function handler(req: FastifyRequest, repl: FastifyReply) {
     const user = req.getUser();
 
     const newAd = await req.server.prisma.ad.create({
@@ -24,6 +24,8 @@ export default async function handler(req: FastifyRequest) {
             id: true,
         },
     });
+
+    repl.status(201);
 
     return { id: newAd.id };
 }
