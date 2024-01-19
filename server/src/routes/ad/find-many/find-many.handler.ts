@@ -1,5 +1,6 @@
 import { ADS_LIMIT } from '@in-good-hands/share/constants';
 import { Ad } from '@in-good-hands/share/swager';
+import { Prisma } from '@prisma/client';
 import { FastifyRequest } from 'fastify';
 
 
@@ -10,27 +11,27 @@ export default async function handler(req: FastifyRequest<{ Querystring: Ad.Find
         cursor, search, searchType, ltePrice, gtePrice,
     } = req.query;
 
+
+    const where: Prisma.AdWhereInput = {
+        isPublished: true,
+    };
+
+    if (search) where.description = { contains: search.replace(/\s/ig, ' | ') };
+    if (search) where.breed = { contains: search.replace(/\s/ig, ' | ') };
+    if (searchType) where.type = { equals: searchType };
+    if ((ltePrice || gtePrice)) {
+        where.price = {};
+        if (ltePrice) where.price.lte = ltePrice;
+        if (gtePrice) where.price.gte = gtePrice;
+    }
+
     const ads = await req.server.prisma.ad.findMany({
         orderBy: { id: 'desc' },
         take: ADS_LIMIT,
         skip: cursor ? 1 : 0,
 
-        where: {
-            isPublished: true,
-            ...(search ? { description: { contains: search.replace(/\s/ig, ' | ') } } : {}),
-            ...(search ? { breed: { contains: search.replace(/\s/ig, ' | ') } } : {}),
-            ...(searchType ? { type: { equals: searchType } } : {}),
-
-            ...((ltePrice || gtePrice)
-                ? {
-                    price: {
-                        ...(ltePrice ? { lte: ltePrice } : {}),
-                        ...(gtePrice ? { gte: gtePrice } : {}),
-                    },
-                }
-                : {}),
-        },
-        ...(cursor ? { cursor: { id: cursor } } : {}),
+        where,
+        cursor: cursor ? { id: cursor } : undefined,
         include: {
             owner: {
                 select: {
