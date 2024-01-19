@@ -5,7 +5,7 @@ import { FastifyRequest } from 'fastify';
 
 
 export default async function handler(req: FastifyRequest<{ Querystring: Ad.FindMany.RequestQuery; }>) {
-    const user = req.checkUser();
+    const user = req.tryGetUser();
 
     const {
         cursor, search, searchType, ltePrice, gtePrice,

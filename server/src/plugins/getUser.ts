@@ -11,7 +11,7 @@ export default fp(async (app) => {
             throw new ClientException('You are not authorized.', 401);
         };
 
-        req.checkUser = () => {
+        req.tryGetUser = () => {
             return verifyJWT(req);
         };
 

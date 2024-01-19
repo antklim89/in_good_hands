@@ -8,7 +8,7 @@ export declare module 'fastify' {
             email: string
         }
 
-        checkUser(): import('./JWTUser').JWTUser | null
+        tryGetUser(): import('./JWTUser').JWTUser | null
         getUser(): import('./JWTUser').JWTUser
         getAdOwner(adId: number): Promise<{user: import('./JWTUser').JWTUser, ad: import('@prisma/client').Ad}>
     }

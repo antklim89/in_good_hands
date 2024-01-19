@@ -6,7 +6,7 @@ import { ClientException } from '@/utils';
 
 
 export default async function handler(req: FastifyRequest<{Querystring: Ad.FindOne.RequestQuery}>) {
-    const user: JWTUser|null = req.checkUser();
+    const user: JWTUser|null = req.tryGetUser();
 
     const ad = await req.server.prisma.ad.findUnique({
         where: {
