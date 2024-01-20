@@ -44,7 +44,7 @@ const AdsListItem: FC<AdsListItemProps> = ({
                                     blurDataURL={image.thumbnail}
                                     height={imgHeight}
                                     key={image.id}
-                                    placeholder="blur"
+                                    placeholder={image.thumbnail.length === 0 ? 'empty' : 'blur'}
                                     src={getApiURL(image.src)}
                                     width={imgWidth}
                                 />
