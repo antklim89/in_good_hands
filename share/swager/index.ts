@@ -14,7 +14,7 @@ export namespace Ad {
  * No description
  * @tags ad
  * @name CreateNew
- * @request POST:/ad/create-new
+ * @request POST:/ad/create-new/
  * @response `201` `{
     id: number,
 
@@ -33,7 +33,7 @@ export namespace Ad {
    * No description
    * @tags ad
    * @name Delete
-   * @request DELETE:/ad/delete
+   * @request DELETE:/ad/delete/
    * @response `200` `void` Default Response
    */
   export namespace Delete {
@@ -49,7 +49,7 @@ export namespace Ad {
  * No description
  * @tags ad
  * @name FindIds
- * @request GET:/ad/find-ids
+ * @request GET:/ad/find-ids/
  * @response `200` `({
     id: number,
 
@@ -129,7 +129,7 @@ export namespace Ad {
  * No description
  * @tags ad
  * @name FindMyAds
- * @request GET:/ad/find-my-ads
+ * @request GET:/ad/find-my-ads/
  * @response `200` `({
     id: number,
     createdAt: string,
@@ -160,7 +160,7 @@ export namespace Ad {
  * No description
  * @tags ad
  * @name FindOne
- * @request GET:/ad/find-one
+ * @request GET:/ad/find-one/
  * @response `200` `{
     id: number,
     createdAt: string,
@@ -227,7 +227,7 @@ export namespace Ad {
  * No description
  * @tags ad
  * @name FindUpdateData
- * @request GET:/ad/find-update-data
+ * @request GET:/ad/find-update-data/
  * @response `200` `{
   \** @maxLength 100 *\
     name: string,
@@ -329,7 +329,7 @@ export namespace Ad {
    * No description
    * @tags ad
    * @name Update
-   * @request PATCH:/ad/update
+   * @request PATCH:/ad/update/
    * @response `200` `void` Default Response
    */
   export namespace Update {
@@ -384,7 +384,7 @@ export namespace Auth {
    * No description
    * @tags auth
    * @name ChangePassword
-   * @request PATCH:/auth/change-password
+   * @request PATCH:/auth/change-password/
    * @response `201` `void` Default Response
    */
   export namespace ChangePassword {
@@ -409,7 +409,7 @@ export namespace Auth {
  * No description
  * @tags auth
  * @name Login
- * @request POST:/auth/login
+ * @request POST:/auth/login/
  * @response `200` `{
     user: {
     email: string,
@@ -450,7 +450,7 @@ export namespace Auth {
  * No description
  * @tags auth
  * @name Me
- * @request GET:/auth/me
+ * @request GET:/auth/me/
  * @response `200` `{
     id?: string,
   \**
@@ -507,7 +507,7 @@ export namespace Auth {
  * No description
  * @tags auth
  * @name Register
- * @request POST:/auth/register
+ * @request POST:/auth/register/
  * @response `200` `{
     user: {
     email: string,
@@ -553,7 +553,7 @@ export namespace Auth {
    * No description
    * @tags auth
    * @name Update
-   * @request PATCH:/auth/update
+   * @request PATCH:/auth/update/
    * @response `200` `void` Default Response
    */
   export namespace Update {
@@ -590,7 +590,7 @@ export namespace Favorites {
    * No description
    * @tags favorites
    * @name Create
-   * @request POST:/favorites/create
+   * @request POST:/favorites/create/
    * @response `200` `number` Default Response
    */
   export namespace Create {
@@ -606,7 +606,7 @@ export namespace Favorites {
    * No description
    * @tags favorites
    * @name Delete
-   * @request DELETE:/favorites/delete
+   * @request DELETE:/favorites/delete/
    * @response `200` `void` Default Response
    */
   export namespace Delete {
@@ -622,7 +622,7 @@ export namespace Favorites {
  * No description
  * @tags favorites
  * @name FindMany
- * @request GET:/favorites/find-many
+ * @request GET:/favorites/find-many/
  * @response `200` `({
     id: number,
     ad: {
@@ -659,7 +659,7 @@ export namespace Image {
  * No description
  * @tags image
  * @name Upload
- * @request POST:/image/upload
+ * @request POST:/image/upload/
  * @response `201` `{
     id: number,
     src: string,
@@ -687,7 +687,7 @@ export namespace Image {
    * No description
    * @tags image
    * @name Delete
-   * @request DELETE:/image/delete
+   * @request DELETE:/image/delete/
    * @response `201` `void` Default Response
    */
   export namespace Delete {
@@ -857,7 +857,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
  *
  * @tags ad
  * @name CreateNew
- * @request POST:/ad/create-new
+ * @request POST:/ad/create-new/
  * @response `201` `{
     id: number,
 
@@ -870,7 +870,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         },
         any
       >({
-        path: `/ad/create-new`,
+        path: `/ad/create-new/`,
         method: "POST",
         ...params,
       }),
@@ -880,7 +880,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags ad
      * @name Delete
-     * @request DELETE:/ad/delete
+     * @request DELETE:/ad/delete/
      * @response `200` `void` Default Response
      */
     delete: (
@@ -890,7 +890,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
-        path: `/ad/delete`,
+        path: `/ad/delete/`,
         method: "DELETE",
         query: query,
         ...params,
@@ -901,7 +901,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
  *
  * @tags ad
  * @name FindIds
- * @request GET:/ad/find-ids
+ * @request GET:/ad/find-ids/
  * @response `200` `({
     id: number,
 
@@ -914,7 +914,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         }[],
         any
       >({
-        path: `/ad/find-ids`,
+        path: `/ad/find-ids/`,
         method: "GET",
         ...params,
       }),
@@ -993,7 +993,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
  *
  * @tags ad
  * @name FindMyAds
- * @request GET:/ad/find-my-ads
+ * @request GET:/ad/find-my-ads/
  * @response `200` `({
     id: number,
     createdAt: string,
@@ -1021,7 +1021,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         }[],
         any
       >({
-        path: `/ad/find-my-ads`,
+        path: `/ad/find-my-ads/`,
         method: "GET",
         query: query,
         ...params,
@@ -1032,7 +1032,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
  *
  * @tags ad
  * @name FindOne
- * @request GET:/ad/find-one
+ * @request GET:/ad/find-one/
  * @response `200` `{
     id: number,
     createdAt: string,
@@ -1096,7 +1096,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         },
         any
       >({
-        path: `/ad/find-one`,
+        path: `/ad/find-one/`,
         method: "GET",
         query: query,
         ...params,
@@ -1107,7 +1107,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
  *
  * @tags ad
  * @name FindUpdateData
- * @request GET:/ad/find-update-data
+ * @request GET:/ad/find-update-data/
  * @response `200` `{
   \** @maxLength 100 *\
     name: string,
@@ -1206,7 +1206,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         },
         any
       >({
-        path: `/ad/find-update-data`,
+        path: `/ad/find-update-data/`,
         method: "GET",
         query: query,
         ...params,
@@ -1217,7 +1217,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags ad
      * @name Update
-     * @request PATCH:/ad/update
+     * @request PATCH:/ad/update/
      * @response `200` `void` Default Response
      */
     update: (
@@ -1264,7 +1264,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
-        path: `/ad/update`,
+        path: `/ad/update/`,
         method: "PATCH",
         query: query,
         body: body,
@@ -1278,7 +1278,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags auth
      * @name ChangePassword
-     * @request PATCH:/auth/change-password
+     * @request PATCH:/auth/change-password/
      * @response `201` `void` Default Response
      */
     changePassword: (
@@ -1297,7 +1297,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
-        path: `/auth/change-password`,
+        path: `/auth/change-password/`,
         method: "PATCH",
         body: body,
         type: ContentType.Json,
@@ -1309,7 +1309,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
  *
  * @tags auth
  * @name Login
- * @request POST:/auth/login
+ * @request POST:/auth/login/
  * @response `200` `{
     user: {
     email: string,
@@ -1347,7 +1347,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         },
         any
       >({
-        path: `/auth/login`,
+        path: `/auth/login/`,
         method: "POST",
         body: body,
         type: ContentType.Json,
@@ -1359,7 +1359,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
  *
  * @tags auth
  * @name Me
- * @request GET:/auth/me
+ * @request GET:/auth/me/
  * @response `200` `{
     id?: string,
   \**
@@ -1410,7 +1410,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         },
         any
       >({
-        path: `/auth/me`,
+        path: `/auth/me/`,
         method: "GET",
         ...params,
       }),
@@ -1420,7 +1420,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
  *
  * @tags auth
  * @name Register
- * @request POST:/auth/register
+ * @request POST:/auth/register/
  * @response `200` `{
     user: {
     email: string,
@@ -1463,7 +1463,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         },
         any
       >({
-        path: `/auth/register`,
+        path: `/auth/register/`,
         method: "POST",
         body: body,
         type: ContentType.Json,
@@ -1475,7 +1475,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags auth
      * @name Update
-     * @request PATCH:/auth/update
+     * @request PATCH:/auth/update/
      * @response `200` `void` Default Response
      */
     update: (
@@ -1503,7 +1503,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
-        path: `/auth/update`,
+        path: `/auth/update/`,
         method: "PATCH",
         body: body,
         type: ContentType.Json,
@@ -1516,7 +1516,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags favorites
      * @name Create
-     * @request POST:/favorites/create
+     * @request POST:/favorites/create/
      * @response `200` `number` Default Response
      */
     create: (
@@ -1526,7 +1526,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<number, any>({
-        path: `/favorites/create`,
+        path: `/favorites/create/`,
         method: "POST",
         query: query,
         ...params,
@@ -1537,7 +1537,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags favorites
      * @name Delete
-     * @request DELETE:/favorites/delete
+     * @request DELETE:/favorites/delete/
      * @response `200` `void` Default Response
      */
     delete: (
@@ -1547,7 +1547,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
-        path: `/favorites/delete`,
+        path: `/favorites/delete/`,
         method: "DELETE",
         query: query,
         ...params,
@@ -1558,7 +1558,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
  *
  * @tags favorites
  * @name FindMany
- * @request GET:/favorites/find-many
+ * @request GET:/favorites/find-many/
  * @response `200` `({
     id: number,
     ad: {
@@ -1586,7 +1586,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         }[],
         any
       >({
-        path: `/favorites/find-many`,
+        path: `/favorites/find-many/`,
         method: "GET",
         ...params,
       }),
@@ -1597,7 +1597,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
  *
  * @tags image
  * @name Upload
- * @request POST:/image/upload
+ * @request POST:/image/upload/
  * @response `201` `{
     id: number,
     src: string,
@@ -1623,7 +1623,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         },
         any
       >({
-        path: `/image/upload`,
+        path: `/image/upload/`,
         method: "POST",
         query: query,
         body: data,
@@ -1636,7 +1636,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags image
      * @name Delete
-     * @request DELETE:/image/delete
+     * @request DELETE:/image/delete/
      * @response `201` `void` Default Response
      */
     delete: (
@@ -1646,7 +1646,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
-        path: `/image/delete`,
+        path: `/image/delete/`,
         method: "DELETE",
         query: query,
         ...params,
