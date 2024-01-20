@@ -5,7 +5,11 @@ const nextConfig = {
     reactStrictMode: true,
     compress: true,
     images: {
-        domains: [new URL(NEXT_PUBLIC_API_URL).hostname],
+        remotePatterns: [
+            {
+                hostname: new URL(NEXT_PUBLIC_API_URL).hostname,
+            },
+        ],
     },
     transpilePackages: ['@in-good-hands/server'],
 };
