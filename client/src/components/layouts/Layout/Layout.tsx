@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren } from 'react';
 
-import Seo from '~/components/Seo';
-import Footer from '~/layouts/Footer';
-import Header from '~/layouts/Header';
+import Seo from '~/components/helpers/Seo';
+import Footer from '~/components/layouts/Footer';
+import Header from '~/components/layouts/Header';
 
 
 const Layout: FC<PropsWithChildren<unknown>> = ({ children }) => {

@@ -9,7 +9,7 @@ import { FC } from 'react';
 import { MyAdsListItemProps } from './MyAdsList.types';
 import { useMyAdsListItem } from './MyAdsListItem.use';
 
-import ConfirmDialog from '~/components/ConfirmDialog';
+import ConfirmDialog from '~/components/ui/ConfirmDialog';
 
 
 const MyAdsListItem: FC<MyAdsListItemProps> = ({ id, breed, name, type, isPublished }) => {

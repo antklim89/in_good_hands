@@ -5,11 +5,11 @@ import Link from 'next/link';
 import { FC, useRef } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 
-import Auth from '../Auth';
+import Auth from '../../features/Auth';
 
 import { HeaderAuthProps } from './Header.types';
 
-import NoSsr from '~/components/NoSsr';
+import NoSsr from '~/components/helpers/NoSsr';
 import { useAuthContext } from '~/utils';
 
 

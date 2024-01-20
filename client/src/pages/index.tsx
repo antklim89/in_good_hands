@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 
-import Seo from '~/components/Seo';
-import AdsList from '~/layouts/AdsList';
-import Hero from '~/layouts/Hero';
+import AdsList from '~/components/features/AdsList';
+import Seo from '~/components/helpers/Seo';
+import Hero from '~/components/layouts/Hero';
 
 
 const Home: NextPage = () => {

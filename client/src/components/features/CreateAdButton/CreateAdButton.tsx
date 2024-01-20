@@ -6,7 +6,7 @@ import { FC } from 'react';
 import { CreateAdButtonProps } from './CreateAdButton.types';
 import { useCreateAdButton } from './CreateAdButton.use';
 
-import Protected from '~/components/Protected';
+import Protected from '~/components/helpers/Protected';
 
 
 const CreateAdButton: FC<CreateAdButtonProps> = (props) => {

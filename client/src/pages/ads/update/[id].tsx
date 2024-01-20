@@ -2,8 +2,8 @@ import { Ad } from '@in-good-hands/share/swager';
 import type { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 
-import Seo from '~/components/Seo';
-import UpdateAd from '~/layouts/UpdateAd';
+import UpdateAd from '~/components/features/UpdateAd';
+import Seo from '~/components/helpers/Seo';
 import { api } from '~/utils';
 
 

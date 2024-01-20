@@ -6,11 +6,11 @@ import { FC } from 'react';
 
 import { AdsListItemProps } from './AdsList.types';
 
-import AdMenu from '~/components/AdMenu';
-import Carousel from '~/components/Carousel';
-import FavoriteButton from '~/components/FavoriteButton';
-import PetAge from '~/components/PetAge';
-import Price from '~/components/Price';
+import AdMenu from '~/components/features/AdMenu';
+import FavoriteButton from '~/components/features/FavoriteButton';
+import PetAge from '~/components/features/PetAge';
+import Price from '~/components/helpers/Price';
+import Carousel from '~/components/ui/Carousel';
 import { getApiURL, useAuthContext } from '~/utils';
 
 

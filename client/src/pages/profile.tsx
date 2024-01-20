@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 
-import Protected from '~/components/Protected';
-import Seo from '~/components/Seo';
-import Profile from '~/layouts/Profile';
+import Profile from '~/components/features/Profile';
+import Protected from '~/components/helpers/Protected';
+import Seo from '~/components/helpers/Seo';
 
 
 const ProfilePage: NextPage = () => {

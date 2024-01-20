@@ -1,7 +1,7 @@
 import { Center, Text } from '@chakra-ui/react';
 import { NextPage } from 'next';
 
-import Seo from '~/components/Seo';
+import Seo from '~/components/helpers/Seo';
 
 
 const NotFoundPage: NextPage = () => {

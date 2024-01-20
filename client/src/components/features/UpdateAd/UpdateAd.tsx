@@ -8,7 +8,7 @@ import { useUpdateAdFormik } from './UpdateAd.formik';
 import { UpdateAdProps } from './UpdateAd.types';
 import UpdateAdImages from './UpdateAdImages';
 
-import InputField from '~/components/InputField';
+import InputField from '~/components/ui/InputField';
 
 
 const UpdateAd: FC<UpdateAdProps> = ({ ad }) => {

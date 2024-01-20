@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { FC, Fragment } from 'react';
 import useSWR from 'swr';
 
-import FavoriteButton from '~/components/FavoriteButton';
+import FavoriteButton from '~/components/features/FavoriteButton';
 import { api } from '~/utils';
 
 

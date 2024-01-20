@@ -4,9 +4,9 @@ import {
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 
-import MyAdsList from '~/layouts/MyAdsList';
-import MyFavorites from '~/layouts/MyFavorites';
-import UpdateCredentials from '~/layouts/UpdateCredentials';
+import MyAdsList from '~/components/features/MyAdsList';
+import MyFavorites from '~/components/features/MyFavorites';
+import UpdateCredentials from '~/components/features/UpdateCredentials';
 
 
 const Profile: FC = () => {

@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { useAuthFormik } from './Auth.formik';
 import { AuthFormProps } from './Auth.types';
 
-import InputField from '~/components/InputField';
+import InputField from '~/components/ui/InputField';
 
 
 const AuthForm: FC<AuthFormProps> = ({ type, onClose }) => {

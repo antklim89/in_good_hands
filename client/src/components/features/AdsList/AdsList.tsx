@@ -4,8 +4,8 @@ import { FC } from 'react';
 import { useAdsList } from './AdsList.use';
 import AdsListItem from './AdsListItem';
 
-import PetSearch from '~/components/PetSearch';
-import PetTypeSelect from '~/components/PetTypeSelect';
+import PetSearch from '~/components/features/PetSearch';
+import PetTypeSelect from '~/components/features/PetTypeSelect';
 
 
 const AdsList: FC = () => {

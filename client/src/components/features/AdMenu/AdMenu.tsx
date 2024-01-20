@@ -9,11 +9,11 @@ import { FaEllipsisV } from 'react-icons/fa';
 import { useSWRConfig } from 'swr';
 import { z } from 'zod';
 
-import ConfirmDialog from '../ConfirmDialog';
+import ConfirmDialog from '../../ui/ConfirmDialog';
 
 import { AdMenuProps } from './AdMenu.types';
 
-import { MyAdsListItemProps } from '~/layouts/MyAdsList/MyAdsList.types';
+import { MyAdsListItemProps } from '~/components/features/MyAdsList/MyAdsList.types';
 import { api, useAuthContext } from '~/utils';
 
 

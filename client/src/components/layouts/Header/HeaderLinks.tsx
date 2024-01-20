@@ -5,7 +5,7 @@ import { FC } from 'react';
 
 import { HeaderLinksProps } from './Header.types';
 
-import CreateAdButton from '~/components/CreateAdButton';
+import CreateAdButton from '~/components/features/CreateAdButton';
 
 
 const HeaderLinks: FC<HeaderLinksProps> = ({ onClose, ...props }) => {

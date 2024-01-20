@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 
-import Seo from '~/components/Seo';
-import About from '~/layouts/About';
+import About from '~/components/features/About';
+import Seo from '~/components/helpers/Seo';
 
 
 const AboutPage: NextPage = () => {

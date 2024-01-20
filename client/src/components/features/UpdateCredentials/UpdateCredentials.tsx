@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 import { useUpdateCredentialsFormik } from './UpdateCredentials.formik';
 
-import InputField from '~/components/InputField';
+import InputField from '~/components/ui/InputField';
 import { useAuthContext } from '~/utils';
 
 
