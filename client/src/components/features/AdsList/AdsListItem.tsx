@@ -1,6 +1,14 @@
-import { Flex, Heading, Button, Box, Text } from '@chakra-ui/react';
+import {
+    Box,
+    Button,
+    Card,
+    CardBody,
+    CardFooter,
+    Heading,
+    Stack,
+    Text,
+} from '@chakra-ui/react';
 import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/share/constants';
-import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 
@@ -11,6 +19,7 @@ import FavoriteButton from '~/components/features/FavoriteButton';
 import PetAge from '~/components/features/PetAge';
 import Price from '~/components/helpers/Price';
 import Carousel from '~/components/ui/Carousel';
+import Image from '~/components/ui/Image/Image';
 import { getApiURL, useAuthContext } from '~/utils';
 
 
@@ -22,16 +31,16 @@ const AdsListItem: FC<AdsListItemProps> = ({
     id, type, breed, price, images, birthday, inFavorites, owner,
 }) => {
     const { user } = useAuthContext();
+
     return (
-        <Flex
-            border="1px solid lightgrey"
-            borderRadius="md"
-            boxShadow="sm"
-            flexDir={['column', 'column', 'row']}
-            p={4}
-            width="full"
+        <Card
+            direction={{ base: 'column', sm: 'row' }}
+            display="flex"
+            overflow="hidden"
+            variant="outline"
+            width="100%"
         >
-            <Box flex="1 1 200px" mr={[0, 0, 8]} sx={{ 'img': { m: '0 auto', width: imgWidth, objectFit: 'cover', aspectRatio: `${imgWidth} / ${imgHeight}` } }}>
+            <Box sx={{ '& > *': { width: imgWidth, height: 'imgHeight', objectFit: 'cover' } }}>
                 {images.length > 0
                     ? (
                         <Carousel
@@ -44,6 +53,8 @@ const AdsListItem: FC<AdsListItemProps> = ({
                                     blurDataURL={image.thumbnail}
                                     height={imgHeight}
                                     key={image.id}
+                                    maxW="100%"
+                                    objectFit="cover"
                                     placeholder={image.thumbnail.length === 0 ? 'empty' : 'blur'}
                                     src={getApiURL(image.src)}
                                     width={imgWidth}
@@ -53,41 +64,49 @@ const AdsListItem: FC<AdsListItemProps> = ({
                     )
                     : (
                         <Image
-                            alt={`${type} placeholder`}
+                            alt={`${type} ${breed}`}
                             height={imgHeight}
+                            maxW="100%"
+                            objectFit="cover"
                             src={`/placeholders/${type}-ph.jpg`}
                             width={imgWidth}
                         />
                     )}
             </Box>
 
-            <Flex flex="5 1 0" flexDirection="row" >
-                <Flex flexDirection="column">
-                    <Link href={`/ads/${id}`}>
-                        <Heading fontSize={['xl', 'xl', '2xl']} textTransform="uppercase">
-                            {type}
-                            <br />
-                            {breed}
-                        </Heading>
-                    </Link>
-                    {(owner.id === user?.id) ? <Text>Your ad</Text> : null}
-                    <PetAge birthday={birthday} />
-                    <Price flexGrow={1} fontSize={['2xl', '2xl', '3xl']} price={price} />
-                </Flex>
+            <Stack flexBasis="100%">
+                <CardBody>
+                    <Heading mb={4} size="md">
+                        <Text as="span" textTransform="capitalize">{breed}</Text>
+                    </Heading>
 
-                <Flex
-                    flexDirection="column"
-                    justifyContent="space-between"
-                    ml="auto"
-                >
-                    <AdMenu adId={id} ownerId={owner.id} />
-                    <FavoriteButton adId={id} inFavorites={inFavorites} />
+                    <Text
+                        display="flex" flexDir="column" gap={4}
+                    >
+                        {(owner.id === user?.id) ? <Text>Your ad</Text> : null}
+                        <Text
+                            as="span"
+                            fontSize="xl"
+                            mr={4}
+                            textTransform="capitalize"
+                        >{type}
+                        </Text>
+                        <PetAge birthday={birthday} />
+                        <Price flexGrow={1} fontSize={['2xl', '2xl', '3xl']} price={price} />
+                    </Text>
+                </CardBody>
+
+                <CardFooter justifyContent="flex-end">
                     <Button as={Link} href={`/ads/${id}`} variant="outline">
                         Show more...
                     </Button>
-                </Flex>
-            </Flex>
-        </Flex>
+                </CardFooter>
+            </Stack>
+            <Stack>
+                <AdMenu adId={id} ownerId={owner.id} />
+                <FavoriteButton adId={id} inFavorites={inFavorites} />
+            </Stack>
+        </Card>
     );
 };
 
