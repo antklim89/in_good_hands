@@ -2,11 +2,9 @@ import { randomUUID } from 'crypto';
 import { join } from 'path';
 
 import type { Prisma } from '@prisma/client';
-import fs from 'fs-extra';
 import _ from 'lodash';
 
 import { UPLOAD_IMAGES_URL } from '@/constants';
-import { getImagePathBySrc } from '@/utils';
 
 
 export const hashedPassword = '$2a$08$JrwM2968gWMa.mm.BGoILO7G9CXOw4WDl5HhofuBGnIZMBB6THq1S'; // qwer123
@@ -50,11 +48,6 @@ export function createImage<T extends Partial<Prisma.ImageCreateInput>>(data = {
         thumbnail: '',
         ...data,
     };
-
-    const imageToDeletePath = getImagePathBySrc(image.src);
-
-    fs.mkdirSync(join(imageToDeletePath, '..'), { recursive: true });
-    fs.writeFileSync(imageToDeletePath, 'test');
 
     return image;
 }
