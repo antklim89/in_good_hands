@@ -13,5 +13,5 @@ await esbuild.build({
     minifyIdentifiers: false,
     minifySyntax: false,
     minifyWhitespace: false,
-    plugins: [nodeExternalsPlugin()],
+    plugins: [nodeExternalsPlugin({ allowList: ['@in-good-hands/share'] })],
 });
