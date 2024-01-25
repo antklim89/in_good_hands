@@ -18,9 +18,7 @@
     "migrate": "yarn --cwd server migrate",
     "lint": "eslint server/src/** client/src/** share/src/**  --ext .js,.ts,.tsx,.jsx --fix"
   },
-  "dependencies": {
-    "@netlify/plugin-nextjs": "^4.41.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@netlify/plugin-nextjs": "^4.41.3",
     "@types/bcryptjs": "^2.4.6",
