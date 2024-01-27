@@ -1,4 +1,5 @@
 import { useToast } from '@chakra-ui/react';
+import { AxiosError } from 'axios';
 import { useFormik } from 'formik';
 import { ZodError } from 'zod';
 
@@ -26,7 +27,7 @@ export function useAuthFormik({ type }: AuthFormProps) {
                     location.reload();
                 }
             } catch (error) {
-                if (error instanceof Error) toast({ title: error.message, status: 'error' });
+                if (error instanceof AxiosError) toast({ title: error.response?.data.message || 'Undexpected error. Try again later.', status: 'error' });
             }
         },
         async validate(val) {

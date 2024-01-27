@@ -1,4 +1,5 @@
 import { useToast } from '@chakra-ui/react';
+import { AxiosError } from 'axios';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
 import { ZodError } from 'zod';
@@ -30,7 +31,7 @@ export function useUpdateCredentialsFormik() {
                 await api().auth.update(filtredData);
                 toast({ title: 'Credentials successfully updated.', status: 'success' });
             } catch (error) {
-                if (error instanceof Error) toast({ title: error.message, status: 'error' });
+                if (error instanceof AxiosError) toast({ title: error.response?.data.message || error.message, status: 'error' });
             }
         },
         async validate(val) {

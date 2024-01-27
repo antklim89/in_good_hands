@@ -1,4 +1,5 @@
 import { useToast } from '@chakra-ui/react';
+import { AxiosError } from 'axios';
 import { useFormik } from 'formik';
 import { ZodError } from 'zod';
 
@@ -30,7 +31,7 @@ export function useUpdateAdFormik({ ad }: UpdateAdProps) {
                 await api().ad.update({ id: ad.id }, data);
                 toast({ title: 'Ad updated successfully!', status: 'success' });
             } catch (error) {
-                if (error instanceof Error) toast({ title: error.message, status: 'error' });
+                if (error instanceof AxiosError) toast({ title: error.response?.data.message || error.message, status: 'error' });
             }
         },
         async validate(data) {
