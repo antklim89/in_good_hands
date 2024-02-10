@@ -81,7 +81,7 @@ async function generateAds(user: User[]) {
                 telegram,
                 whatsapp,
                 isPublished: true,
-                price: Number(faker.finance.amount(100, 5000)),
+                price: Number(faker.finance.amount({ min: 100, max:5000 })),
                 ownerId: id,
                 name: faker.person.lastName(),
             },
