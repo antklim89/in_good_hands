@@ -13,7 +13,7 @@
     "build:generateprisma": "prisma generate",
     "build:migrate": "prisma migrate deploy",
     "build:generatedata": "vite-node ./src/generate-data.ts",
-    "start": "vite-node -w ./src/server.ts",
+    "start": "vite-node ./src/server.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
     "migrate": "run-s migrate:**",
