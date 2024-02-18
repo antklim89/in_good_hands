@@ -17,7 +17,6 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@in-good-hands/server": "*",
     "@in-good-hands/share": "*",
     "@netlify/plugin-nextjs": "^4.41.3",
     "axios": "^1.6.6",
