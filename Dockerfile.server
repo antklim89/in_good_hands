@@ -1,0 +1,32 @@
+FROM node:20.11-alpine3.19 AS base
+
+EXPOSE 8000
+
+
+FROM base as dev
+WORKDIR /app/server
+
+CMD [ "yarn", "vite-node", "-w", "./src/server.ts" ]
+
+
+FROM base as prod
+WORKDIR /app
+
+RUN apk add --no-cache libc6-compat
+
+COPY ./package.json yarn.lock ./
+COPY ./server/package.json ./server/
+COPY ./share/package.json ./share/
+
+WORKDIR /app/server
+
+RUN yarn install --frozen-lockfile
+
+COPY ./share/ ../share/
+COPY ./server ./
+COPY ./server/prisma/schema.prisma ./prisma/
+COPY ./server/prisma/migrations/ ./prisma/
+
+RUN yarn prisma generate
+
+CMD [ "yarn", "vite-node", "./src/server.ts" ]

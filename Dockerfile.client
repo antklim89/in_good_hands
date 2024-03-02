@@ -1,0 +1,32 @@
+FROM node:20.11-alpine3.19 as base
+
+EXPOSE 3000
+
+
+FROM base as dev
+WORKDIR /app/client
+
+CMD ["yarn", "next", "dev"]
+
+
+FROM base as prod
+WORKDIR /app
+
+COPY ./package.json yarn.lock ./
+COPY ./client/package.json ./client/
+COPY ./share/package.json ./share/
+
+WORKDIR /app/client
+
+RUN yarn install --frozen-lockfile
+
+COPY ./share/ ../share/
+COPY ./client ./
+
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
+RUN echo ${NEXT_PUBLIC_API_URL}
+RUN yarn next build
+
+CMD ["yarn", "next", "start"]

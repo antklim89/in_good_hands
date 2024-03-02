@@ -1,0 +1,36 @@
+version: "3.5"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+      target: prod
+    restart: unless-stopped
+    container_name: in_good_hands_server
+    ports:
+      - "8000:8000"
+    networks:
+      - api
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+      target: prod
+      args:
+        - NEXT_PUBLIC_API_URL=http://in_good_hands_server:8000
+    restart: unless-stopped
+    depends_on:
+      - server
+    container_name: in_good_hands_client
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://in_good_hands_server:8000
+    networks:
+      - api
+
+networks:
+  api:
+    name: in_good_hands_api
