@@ -8,8 +8,10 @@ services:
       target: dev
     restart: unless-stopped
     container_name: in_good_hands_server
+    env_file:
+      - .env
     ports:
-      - "8000:8000"
+      - "${SERVER_PORT}:8000"
     volumes:
       - ./:/app
     networks:
@@ -24,12 +26,14 @@ services:
     depends_on:
       - server
     container_name: in_good_hands_client
+    env_file:
+      - .env
     ports:
-      - "3000:3000"
+      - "${CLIENT_PORT}:3000"
     volumes:
       - ./:/app
     environment:
-      - NEXT_PUBLIC_API_URL=http://in_good_hands_server:8000
+      - API_URL=http://in_good_hands_server:${SERVER_PORT}
     networks:
       - api
       
