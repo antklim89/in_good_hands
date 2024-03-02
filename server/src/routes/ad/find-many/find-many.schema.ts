@@ -3,7 +3,7 @@ import { animalsTypes } from '@/schemas/adSchemas';
 
 
 export const method = 'GET';
-export const url = '/find-many/';
+export const url = '/find-many';
 
 export const schema = {
     tags: ['ad'],

@@ -1,7 +1,7 @@
 
 
 export const method = 'GET';
-export const url = '/find-ids/';
+export const url = '/find-ids';
 
 export const schema = {
     tags: ['ad'],

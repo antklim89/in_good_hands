@@ -2,7 +2,7 @@ import { adInputSchema } from '@/schemas';
 
 
 export const method = 'PATCH';
-export const url = '/update/';
+export const url = '/update';
 
 
 export const schema = {

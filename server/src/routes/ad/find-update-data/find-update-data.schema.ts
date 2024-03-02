@@ -2,7 +2,7 @@ import { adInputSchema, imageSchema } from '@/schemas';
 
 
 export const method = 'GET';
-export const url = '/find-update-data/';
+export const url = '/find-update-data';
 
 export const schema = {
     tags: ['ad'],

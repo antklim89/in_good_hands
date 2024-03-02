@@ -2,7 +2,7 @@ import { userProfileSchema } from '@/schemas';
 
 
 export const method = 'PATCH';
-export const url = '/update/';
+export const url = '/update';
 
 export const schema = {
     tags: ['auth'],

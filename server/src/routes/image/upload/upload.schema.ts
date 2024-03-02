@@ -2,7 +2,7 @@ import { imageSchema } from '@/schemas';
 
 
 export const method = 'POST';
-export const url = '/upload/';
+export const url = '/upload';
 
 export const schema = {
     tags: ['image'],

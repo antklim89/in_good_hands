@@ -1,7 +1,7 @@
 
 
 export const method = 'GET';
-export const url = '/find-my-ads/';
+export const url = '/find-my-ads';
 
 
 export const schema = {

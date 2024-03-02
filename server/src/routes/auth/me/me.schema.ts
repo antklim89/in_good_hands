@@ -2,7 +2,7 @@ import { userProfileSchema } from '@/schemas';
 
 
 export const method = 'GET';
-export const url = '/me/';
+export const url = '/me';
 
 export const schema = {
     tags: ['auth'],

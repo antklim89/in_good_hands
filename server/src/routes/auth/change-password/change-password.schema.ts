@@ -2,7 +2,7 @@ import { registerSchema } from '@/schemas';
 
 
 export const method = 'PATCH';
-export const url = '/change-password/';
+export const url = '/change-password';
 
 export const schema = {
     tags: ['auth'],

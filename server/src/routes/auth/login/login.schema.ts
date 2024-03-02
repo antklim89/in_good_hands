@@ -2,7 +2,7 @@ import { loginSchema, authResponseSchema } from '@/schemas';
 
 
 export const method = 'POST';
-export const url = '/login/';
+export const url = '/login';
 
 export const schema = {
     tags: ['auth'],

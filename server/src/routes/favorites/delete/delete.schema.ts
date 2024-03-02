@@ -1,6 +1,6 @@
 
 export const method = 'DELETE';
-export const url = '/delete/';
+export const url = '/delete';
 
 export const schema = {
     tags: ['favorites'],

@@ -1,7 +1,7 @@
 
 
 export const method = 'POST';
-export const url = '/create-new/';
+export const url = '/create-new';
 
 export const schema = {
     tags: ['ad'],
