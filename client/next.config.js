@@ -1,4 +1,4 @@
-const { NEXT_PUBLIC_API_URL } = process.env;
+const { API_URL } = process.env;
 
 
 /** @type {import('next').NextConfig} */
@@ -8,16 +8,21 @@ const nextConfig = {
     images: {
         remotePatterns: [
             {
-                hostname: new URL(NEXT_PUBLIC_API_URL).hostname,
+                hostname: new URL(API_URL).hostname,
             },
         ],
+    },
+    env: {
+        API_URL: process.env.API_URL,
+        SERVER_PORT: process.env.SERVER_PORT,
+        CLIENT_PORT: process.env.CLIENT_PORT,
     },
     transpilePackages: ['@in-good-hands/server'],
     async rewrites() {
         return [
             {
                 source: '/server/:path*',
-                destination: `${NEXT_PUBLIC_API_URL}/:path*`,
+                destination: `${API_URL}/:path*`,
             },
         ];
     },
