@@ -10,7 +10,7 @@
     "share"
   ],
   "scripts": {
-    "dev": "docker compose -f docker-compose.dev.yml up",
+    "dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "prod": "docker compose up",
     "build": "docker compose build",
     "down": "docker compose down -v",
