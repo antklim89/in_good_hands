@@ -23,10 +23,10 @@ RUN yarn install --frozen-lockfile
 COPY ./share/ ../share/
 COPY ./client ./
 
-ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ARG API_URL
+ARG CLIENT_PORT
+ARG SERVER_PORT
 
-RUN echo ${NEXT_PUBLIC_API_URL}
 RUN yarn next build
 
 CMD ["yarn", "next", "start"]

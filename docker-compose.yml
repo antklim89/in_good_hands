@@ -22,6 +22,8 @@ services:
       target: prod
       args:
         - API_URL=http://in_good_hands_server:${SERVER_PORT}
+        - CLIENT_PORT=${CLIENT_PORT}
+        - SERVER_PORT=${SERVER_PORT}
     restart: unless-stopped
     depends_on:
       - server
