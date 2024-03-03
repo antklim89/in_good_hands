@@ -13,14 +13,14 @@
     "dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "prod": "docker compose up",
     "build": "docker compose build",
-    "down": "docker compose down -v",
+    "down": "docker compose down",
     "start": "docker compose start",
     "stop": "docker compose stop",
     "typegen": "yarn --cwd share typegen",
     "test": "yarn --cwd server test",
     "migrate": "yarn --cwd server migrate",
     "lint": "eslint server/src/** client/src/** share/src/**  --ext .js,.ts,.tsx,.jsx --fix",
-    "shell": "docker run -it --rm -v ./:/app -w /app node:20.11-alpine3.19"
+    "shell": "docker run -it --rm -v ./:/app -w /app node:20.11-alpine3.19 sh"
   },
   "dependencies": {},
   "devDependencies": {
