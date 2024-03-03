@@ -1,4 +1,3 @@
-const { API_URL } = process.env;
 
 
 /** @type {import('next').NextConfig} */
@@ -8,7 +7,7 @@ const nextConfig = {
     images: {
         remotePatterns: [
             {
-                hostname: new URL(API_URL).hostname,
+                hostname: new URL(process.env.API_URL).hostname,
             },
         ],
     },
@@ -22,7 +21,7 @@ const nextConfig = {
         return [
             {
                 source: '/server/:path*',
-                destination: `${API_URL}/:path*`,
+                destination: `${process.env.API_URL}/:path*`,
             },
         ];
     },

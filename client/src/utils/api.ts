@@ -4,7 +4,7 @@ import { Api } from '@in-good-hands/share/swager';
 
 import { getUserCookie } from './getCookies';
 
-import { API_URL } from '~/constants';
+import { CLIENT_PORT } from '~/constants';
 
 
 export const api = (req?: IncomingMessage) => {
@@ -21,7 +21,7 @@ export const api = (req?: IncomingMessage) => {
 
 
     const apiInstance = new Api({
-        baseURL: API_URL,
+        baseURL: `http://localhost:${CLIENT_PORT}/server`,
         headers,
     });
 
