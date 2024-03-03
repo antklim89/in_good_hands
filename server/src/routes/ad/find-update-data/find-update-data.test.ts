@@ -1,4 +1,4 @@
-import { Ad } from '@in-good-hands/share/swager';
+import { Ad } from '@in-good-hands/share/swagger';
 import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
 

@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 
-import { Image } from '@in-good-hands/share/swager';
+import { Image } from '@in-good-hands/share/swagger';
 import type { InjectOptions } from 'fastify';
 import formAutoContent from 'form-auto-content';
 import fs from 'fs-extra';

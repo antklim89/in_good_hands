@@ -1,4 +1,4 @@
-import type { Auth } from '@in-good-hands/share/swager';
+import type { Auth } from '@in-good-hands/share/swagger';
 import { ReactNode } from 'react';
 
 import { IUser } from '~/types';

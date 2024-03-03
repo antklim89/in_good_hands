@@ -1,5 +1,5 @@
 import { UPLOAD_IMAGES_LIMIT } from '@in-good-hands/share/constants';
-import { Image } from '@in-good-hands/share/swager';
+import { Image } from '@in-good-hands/share/swagger';
 import { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from 'fastify';
 import Jimp from 'jimp';
 

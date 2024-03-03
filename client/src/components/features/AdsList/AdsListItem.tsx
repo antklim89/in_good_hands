@@ -8,7 +8,7 @@ import {
     Stack,
     Text,
 } from '@chakra-ui/react';
-import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/share/constants';
+import { IMAGE_HEIGHT, IMAGE_WIDTH } from '@in-good-hands/share/constants';
 import Link from 'next/link';
 import { FC } from 'react';
 
@@ -24,7 +24,7 @@ import { getApiURL, useAuthContext } from '~/utils';
 
 
 const SCALE = 2;
-const imgWidth = IMAGE_WIDHT / SCALE;
+const imgWidth = IMAGE_WIDTH / SCALE;
 const imgHeight = IMAGE_HEIGHT / SCALE;
 
 const AdsListItem: FC<AdsListItemProps> = ({

@@ -1,6 +1,6 @@
 export const animalsTypes = ['cat', 'dog', 'bird', 'aquarium', 'rodent'] as const;
 
-export const IMAGE_WIDHT = 1024;
+export const IMAGE_WIDTH = 1024;
 export const IMAGE_HEIGHT = 768;
 
 

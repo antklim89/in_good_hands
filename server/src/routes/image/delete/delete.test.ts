@@ -1,7 +1,7 @@
 import { join } from 'path';
 
 
-import { Image } from '@in-good-hands/share/swager';
+import { Image } from '@in-good-hands/share/swagger';
 import type { InjectOptions } from 'fastify';
 import fs from 'fs-extra';
 import { describe, expect, it } from 'vitest';

@@ -1,4 +1,4 @@
-import { Ad } from '@in-good-hands/share/swager';
+import { Ad } from '@in-good-hands/share/swagger';
 import type { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 

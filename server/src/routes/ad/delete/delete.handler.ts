@@ -1,6 +1,6 @@
 import { join } from 'path';
 
-import { Ad } from '@in-good-hands/share/swager';
+import { Ad } from '@in-good-hands/share/swagger';
 import { FastifyRequest } from 'fastify';
 import fs from 'fs-extra';
 

@@ -1,6 +1,6 @@
 import type { IncomingMessage } from 'http';
 
-import { Api } from '@in-good-hands/share/swager';
+import { Api } from '@in-good-hands/share/swagger';
 
 import { getUserCookie } from './getCookies';
 

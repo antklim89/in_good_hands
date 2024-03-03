@@ -1,4 +1,4 @@
-import { Favorites } from '@in-good-hands/share/swager';
+import { Favorites } from '@in-good-hands/share/swagger';
 import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
 

@@ -1,6 +1,6 @@
 import { Button } from '@chakra-ui/react';
 import { animalsTypes } from '@in-good-hands/share/constants';
-import type { Ad } from '@in-good-hands/share/swager';
+import type { Ad } from '@in-good-hands/share/swagger';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { useSWRConfig } from 'swr';
@@ -15,7 +15,7 @@ const adsQuerySchema = z.object({
     type: z.enum(animalsTypes).optional().catch(undefined),
 });
 
-const AdMenuDelete = ({ adId }: {adId: number}) => {
+const AdMenuDelete = ({ adId }: {readonly adId: number}) => {
     const { mutate } = useSWRConfig();
     const router = useRouter();
     const { search, type } = adsQuerySchema.parse(router.query);

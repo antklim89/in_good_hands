@@ -1,6 +1,6 @@
 import { DeleteIcon } from '@chakra-ui/icons';
 import { Box, IconButton, Spinner } from '@chakra-ui/react';
-import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/share/constants';
+import { IMAGE_HEIGHT, IMAGE_WIDTH } from '@in-good-hands/share/constants';
 import Image from 'next/image';
 import { FC } from 'react';
 
@@ -9,7 +9,7 @@ import { useUpdateAdImage } from './UpdateAdImage.use';
 
 
 const SCALE = 15;
-const imgWidth = IMAGE_WIDHT / SCALE;
+const imgWidth = IMAGE_WIDTH / SCALE;
 const imgHeight = IMAGE_HEIGHT / SCALE;
 
 const UpdateAdImage: FC<UpdateAdImageProps> = ({ image, setUploadedImages, ...props }) => {

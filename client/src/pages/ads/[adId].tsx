@@ -1,4 +1,4 @@
-import type * as Swagger from '@in-good-hands/share/swager';
+import type * as Swagger from '@in-good-hands/share/swagger';
 import type { GetServerSideProps, NextPage } from 'next';
 
 import Ad from '~/components/features/Ad';

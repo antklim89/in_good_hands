@@ -1,4 +1,4 @@
-import { Auth } from '@in-good-hands/share/swager';
+import { Auth } from '@in-good-hands/share/swagger';
 import bcrypt from 'bcryptjs';
 import { FastifyRequest } from 'fastify';
 

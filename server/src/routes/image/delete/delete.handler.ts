@@ -1,4 +1,4 @@
-import { Image } from '@in-good-hands/share/swager';
+import { Image } from '@in-good-hands/share/swagger';
 import { FastifyRequest } from 'fastify';
 import fs from 'fs-extra';
 

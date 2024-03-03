@@ -1,8 +1,8 @@
 import {
     Box, Button, Container, Flex, Text, useColorModeValue,
 } from '@chakra-ui/react';
-import { IMAGE_HEIGHT, IMAGE_WIDHT } from '@in-good-hands/share/constants';
-import { Ad } from '@in-good-hands/share/swager';
+import { IMAGE_HEIGHT, IMAGE_WIDTH } from '@in-good-hands/share/constants';
+import { Ad } from '@in-good-hands/share/swagger';
 import Image from 'next/image';
 import { FC } from 'react';
 import { FaTelegramPlane, FaWhatsapp, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
@@ -82,7 +82,7 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                     />
                 </Box>
 
-                <Box flex="1 1 0" sx={{ 'img': { m: '0 auto', width: IMAGE_WIDHT, objectFit: 'cover', aspectRatio: `${IMAGE_WIDHT} / ${IMAGE_HEIGHT}` } }}>
+                <Box flex="1 1 0" sx={{ 'img': { m: '0 auto', width: IMAGE_WIDTH, objectFit: 'cover', aspectRatio: `${IMAGE_WIDTH} / ${IMAGE_HEIGHT}` } }}>
                     {images.length > 0
                         ? (
                             <Carousel
@@ -97,7 +97,7 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                                         key={image.id}
                                         placeholder="blur"
                                         src={getApiURL(image.src)}
-                                        width={IMAGE_WIDHT}
+                                        width={IMAGE_WIDTH}
                                     />
                                 ))}
                             </Carousel>
@@ -108,7 +108,7 @@ const Ad: FC<Ad.FindOne.ResponseBody> = ({
                                 className="cover"
                                 height={IMAGE_HEIGHT}
                                 src={`/placeholders/${type}-ph.jpg`}
-                                width={IMAGE_WIDHT}
+                                width={IMAGE_WIDTH}
                             />
                         )}
                 </Box>
