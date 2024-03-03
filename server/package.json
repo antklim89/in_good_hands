@@ -16,9 +16,7 @@
     "start": "vite-node ./src/server.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
-    "migrate": "run-s migrate:**",
-    "migrate:dev": "prisma migrate dev",
-    "migrate:test": "DATABASE_URL=\"file:./data/test.sqlite\" prisma migrate deploy",
+    "migrate": "prisma migrate dev",
     "studio": "prisma studio --browser none"
   },
   "keywords": [],
