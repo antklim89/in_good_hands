@@ -22,11 +22,12 @@ WORKDIR /app/server
 
 RUN yarn install --frozen-lockfile
 
-COPY ./share/ ../share/
-COPY ./server ./
 COPY ./server/prisma/schema.prisma ./prisma/
 COPY ./server/prisma/migrations/ ./prisma/
 
 RUN yarn prisma generate
+
+COPY ./share/ ../share/
+COPY ./server ./
 
 CMD [ "yarn", "vite-node", "./src/server.ts" ]
