@@ -30,4 +30,6 @@ RUN yarn prisma generate
 COPY ./share/ ../share/
 COPY ./server ./
 
+ENV NODE_ENV production
+
 CMD [ "yarn", "vite-node", "./src/server.ts" ]

@@ -27,6 +27,8 @@ ARG API_URL
 ARG CLIENT_PORT
 ARG SERVER_PORT
 
+ENV NODE_ENV production
+
 RUN yarn next build
 
 CMD ["yarn", "next", "start"]
