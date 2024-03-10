@@ -22,8 +22,9 @@ WORKDIR /app/server
 
 RUN yarn install --frozen-lockfile
 
-COPY ./server/prisma/schema.prisma ./prisma/
-COPY ./server/prisma/migrations/ ./prisma/
+COPY ./server/prisma/ ./prisma/
+
+ARG DATABASE_URL
 
 RUN yarn prisma generate
 
