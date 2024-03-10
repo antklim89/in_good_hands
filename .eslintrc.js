@@ -143,7 +143,7 @@ module.exports = {
         'max-lines-per-function': [2, 200],
         'max-statements': ['error', 20, { ignoreTopLevelFunctions: true }],
         'function-call-argument-newline': [2, 'consistent'],
-        'no-console': ['error', { allow: ['warn', 'error'] }],
+        'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
         'object-curly-spacing': [2, 'always'],
         'no-use-before-define': [1, { functions: false, classes: true }],
         'semi': 2,
