@@ -4,10 +4,10 @@ services:
   db:
     image: "postgres:16.2-alpine3.19"
     restart: unless-stopped
-    container_name: in_good_hands_db
+    hostname: in_good_hands_db
     shm_size: 128mb
     volumes:
-      - in_good_hands_postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     env_file:
       - .env
     networks:
@@ -23,7 +23,7 @@ services:
     restart: unless-stopped
     depends_on:
       - db
-    container_name: in_good_hands_server
+    hostname: in_good_hands_server
     environment:
       DATABASE_URL: "postgresql://postgres:${POSTGRES_PASSWORD}@in_good_hands_db:5432/postgres?schema=public"
     env_file:
@@ -45,7 +45,7 @@ services:
     restart: unless-stopped
     depends_on:
       - server
-    container_name: in_good_hands_client
+    hostname: in_good_hands_client
     env_file:
       - .env
     ports:
@@ -57,7 +57,6 @@ services:
 
 networks:
   api:
-    name: in_good_hands_api
 
 volumes:
-  in_good_hands_postgres_data:
+  postgres_data:
