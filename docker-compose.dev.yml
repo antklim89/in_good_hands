@@ -10,6 +10,3 @@ services:
       target: dev
     volumes:
       - ./:/app
-      
-volumes:
-  in_good_hands_postgres_data_dev:
