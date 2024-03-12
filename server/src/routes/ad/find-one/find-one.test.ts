@@ -1,41 +1,38 @@
 import { Ad } from '@in-good-hands/share/swagger';
-import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
 
 import { method, url } from './find-one.schema';
 
-import { init } from '@/test';
-import { generateJWT } from '@/utils';
+import { genTestJWT, init } from '@/test';
 
 
 const { app, db } = init();
 
-const defaultOptions: InjectOptions = { url: `/ad${url}`, method };
+const defaultOptions = { url: `/ad${url}`, method };
 
 describe('POST /ad/find-one', () => {
     it('should find one ad', async () => {
         const headers = {
-            authentication: generateJWT(db().users[0]).token,
+            authentication: genTestJWT(db().users[0]),
         };
 
-        const query: {[P in keyof Ad.FindOne.RequestQuery]: string} = {
+        const params: {[P in keyof Ad.FindOne.RequestQuery]: string} = {
             adId: String(db().ads[0].id),
         };
 
-        const response = await app.inject({ ...defaultOptions, query, headers });
-        const data: Ad.FindOne.ResponseBody = response.json();
+        const { data } = await app<Ad.FindOne.ResponseBody>({ ...defaultOptions, params, headers });
 
         expect(data).toHaveProperty('id', db().ads[0].id);
         expect(data.inFavorites).toBeTruthy();
     });
 
     it('should not find ad by wrong id', async () => {
-        const query: {[P in keyof Ad.FindOne.RequestQuery]: string} = {
+        const params: {[P in keyof Ad.FindOne.RequestQuery]: string} = {
             adId: String(135438763),
         };
 
-        const response = await app.inject({ ...defaultOptions, query });
+        const { status } = await app<Ad.FindOne.ResponseBody>({ ...defaultOptions, params });
 
-        expect(response.statusCode).toEqual(404);
+        expect(status).toEqual(404);
     });
 });

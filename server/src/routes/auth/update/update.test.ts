@@ -1,5 +1,4 @@
 import { Auth } from '@in-good-hands/share/swagger';
-import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
 
 import { method, url } from './update.schema';
@@ -10,7 +9,7 @@ import { generateJWT } from '@/utils';
 
 const { app, prisma, db } = init();
 
-const defaultOptions: InjectOptions = { url: `/auth${url}`, method };
+const defaultOptions = { url: `/auth${url}`, method };
 
 
 describe('PATCH /auth/register', () => {
@@ -29,9 +28,9 @@ describe('PATCH /auth/register', () => {
             authentication: generateJWT(userToUpdate).token,
         };
 
-        const response = await app.inject({ ...defaultOptions, payload, headers });
+        const { status } = await app({ ...defaultOptions, data: payload, headers });
 
-        expect(response.statusCode).toEqual(200);
+        expect(status).toEqual(200);
 
         const updatedUser = await prisma.user.findUniqueOrThrow({ where: { id: userToUpdate.id } });
         expect(updatedUser.email).toEqual(payload.email);
@@ -47,8 +46,8 @@ describe('PATCH /auth/register', () => {
             email: 'updated2@email.com',
         };
 
-        const response = await app.inject({ ...defaultOptions, payload });
+        const { status } = await app({ ...defaultOptions, data: payload });
 
-        expect(response.statusCode).toEqual(401);
+        expect(status).toEqual(401);
     });
 });

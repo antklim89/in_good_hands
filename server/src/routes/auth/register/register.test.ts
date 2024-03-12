@@ -1,5 +1,4 @@
 import { Auth } from '@in-good-hands/share/swagger';
-import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
 
 import { method, url } from './register.schema';
@@ -9,7 +8,7 @@ import { init } from '@/test';
 
 const { app, prisma, db } = init();
 
-const defaultOptions: InjectOptions = { url: `/auth${url}`, method };
+const defaultOptions = { url: `/auth${url}`, method };
 
 describe('POST /auth/register', () => {
     it('should register new user', async () => {
@@ -19,8 +18,7 @@ describe('POST /auth/register', () => {
             name: 'CorrectName',
         };
 
-        const response = await app.inject({ ...defaultOptions, payload });
-        const data = response.json();
+        const { data } = await app({ ...defaultOptions, data: payload });
         expect(data).toHaveProperty('token');
         expect(data).toHaveProperty('user.email', payload.email);
         expect(data).toHaveProperty('user.name', payload.name);
@@ -38,8 +36,8 @@ describe('POST /auth/register', () => {
         ['password', { name: 'CorrectName2', email: 'correct@email.com' }],
         ['name', { password: 'test123', email: 'correct@email.com' }],
     ])('should not register new user without %s', async (name, payload) => {
-        const response = await app.inject({ ...defaultOptions, payload });
-        expect(response.statusCode).toEqual(400);
+        const { status } = await app({ ...defaultOptions, data: payload });
+        expect(status).toEqual(400);
 
         const usersInDb = await prisma.user.findMany();
         expect(usersInDb).toHaveLength(3);
@@ -51,9 +49,8 @@ describe('POST /auth/register', () => {
             password: 'test123',
             name: 'SameName',
         };
-        const response = await app.inject({ ...defaultOptions, payload });
-        const data = response.json();
-        expect(response.statusCode).toEqual(409);
+        const { data, status } = await app<{message: string}>({ ...defaultOptions, data: payload });
+        expect(status).toEqual(409);
         expect(data.message).toEqual('E-mail already exists.');
 
         const usersInDb = await prisma.user.findMany();

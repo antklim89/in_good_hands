@@ -2,20 +2,18 @@ import { randomUUID } from 'crypto';
 import { join } from 'path';
 
 import { Ad } from '@in-good-hands/share/swagger';
-import type { InjectOptions } from 'fastify';
 import fs from 'fs-extra';
 import { describe, expect, it } from 'vitest';
 
 import { method, url } from './delete.schema';
 
 import { UPLOAD_IMAGES_DIR } from '@/constants';
-import { init } from '@/test';
-import { generateJWT } from '@/utils';
+import { genTestJWT, init } from '@/test';
 
 
 const { app, db, prisma } = init();
 
-const defaultOptions: InjectOptions = { url: `/ad${url}`, method };
+const defaultOptions = { url: `/ad${url}`, method };
 
 
 describe('DELETE /ad/delete', () => {
@@ -31,22 +29,23 @@ describe('DELETE /ad/delete', () => {
         });
 
         const headers = {
-            authentication: generateJWT(db().users[0]).token,
+            authentication: genTestJWT(db().users[0]),
         };
 
-        const query: {[P in keyof Ad.Delete.RequestQuery]: string} = {
+        const params: {[P in keyof Ad.Delete.RequestQuery]: string} = {
             adId: String(adToDelete.id),
         };
 
 
-        const response = await app.inject({ ...defaultOptions, headers, query });
+        const { status } = await app({ ...defaultOptions, headers, params });
         const deletedAd = await prisma.ad.findUnique({
             where: { id: adToDelete.id },
         });
 
         expect(deletedAd).toBeNull();
-        expect(response.statusCode).toEqual(200);
+        expect(status).toEqual(200);
         expect(fs.existsSync(imageDir)).toBeFalsy();
+        await fs.remove(UPLOAD_IMAGES_DIR);
     });
 
     it('should not delete ad another user', async () => {
@@ -57,38 +56,39 @@ describe('DELETE /ad/delete', () => {
         const [, adToDelete] = db().ads;
 
         const headers = {
-            authentication: generateJWT(db().users[1]).token,
+            authentication: genTestJWT(db().users[1]),
         };
 
-        const query: {[P in keyof Ad.Delete.RequestQuery]: string} = {
+        const params: {[P in keyof Ad.Delete.RequestQuery]: string} = {
             adId: String(adToDelete.id),
         };
 
 
-        const response = await app.inject({ ...defaultOptions, headers, query });
+        const { status } = await app({ ...defaultOptions, headers, params }).catch((err) => err);;
         const deletedAd = await prisma.ad.findUnique({
             where: { id: adToDelete.id },
         });
 
         expect(deletedAd).not.toBeNull();
-        expect(response.statusCode).toEqual(403);
+        expect(status).toEqual(403);
         expect(fs.existsSync(imageDir)).toBeTruthy();
+        await fs.remove(UPLOAD_IMAGES_DIR);
     });
 
     it('should delete ad if no image dir', async () => {
         const [, adToDelete] = db().ads;
 
         const headers = {
-            authentication: generateJWT(db().users[0]).token,
+            authentication: genTestJWT(db().users[0]),
         };
 
-        const query: {[P in keyof Ad.Delete.RequestQuery]: string} = {
+        const params: {[P in keyof Ad.Delete.RequestQuery]: string} = {
             adId: String(adToDelete.id),
         };
 
 
-        const response = await app.inject({ ...defaultOptions, headers, query });
-        expect(response.statusCode).toEqual(200);
+        const { status } = await app({ ...defaultOptions, headers, params });
+        expect(status).toEqual(200);
 
         const deletedAd = await prisma.ad.findUnique({
             where: { id: adToDelete.id },

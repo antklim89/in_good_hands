@@ -18,7 +18,7 @@ export default async function handler(req: FastifyRequest<{Querystring: Ad.Delet
     });
 
     const imagesDir = join(UPLOAD_IMAGES_DIR, `${user.id}`, `${adId}`);
-    if (await fs.pathExists(imagesDir)) await fs.rm(imagesDir, { recursive: true }).catch();
+    await fs.remove(imagesDir);
 
     return null;
 }

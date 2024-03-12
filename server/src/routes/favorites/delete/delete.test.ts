@@ -1,5 +1,4 @@
 import { Favorites } from '@in-good-hands/share/swagger';
-import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
 
 import { method, url } from './delete.schema';
@@ -10,7 +9,7 @@ import { generateJWT } from '@/utils';
 
 const { app, db, prisma } = init();
 
-const defaultOptions: InjectOptions = { url: `/favorites${url}`, method };
+const defaultOptions = { url: `/favorites${url}`, method };
 
 
 describe('POST /favorites/delete', () => {
@@ -21,7 +20,7 @@ describe('POST /favorites/delete', () => {
                 ownerId: db().users[0].id,
             },
         });
-        const query: {[P in keyof Favorites.Delete.RequestQuery]: string} = {
+        const params: {[P in keyof Favorites.Delete.RequestQuery]: string} = {
             adId: String(db().ads[1].id),
         };
 
@@ -29,14 +28,14 @@ describe('POST /favorites/delete', () => {
             authentication: generateJWT(db().users[0]).token,
         };
 
-        const response = await app.inject({ ...defaultOptions, query, headers });
+        const { status } = await app({ ...defaultOptions, params, headers });
 
         const deletedFavorites = await prisma.favorites.findUnique({
             where: {
                 id: favoriteToDelete.id,
             },
         });
-        expect(response.statusCode).toBe(200);
+        expect(status).toBe(200);
         expect(deletedFavorites).toBeNull();
     });
 
@@ -47,7 +46,7 @@ describe('POST /favorites/delete', () => {
                 ownerId: db().users[0].id,
             },
         });
-        const query: {[P in keyof Favorites.Delete.RequestQuery]: string} = {
+        const params: {[P in keyof Favorites.Delete.RequestQuery]: string} = {
             adId: String(db().ads[1].id),
         };
 
@@ -55,14 +54,14 @@ describe('POST /favorites/delete', () => {
             authentication: generateJWT(db().users[1]).token,
         };
 
-        const response = await app.inject({ ...defaultOptions, query, headers });
+        const { status } = await app({ ...defaultOptions, params, headers });
 
         const deletedFavorites = await prisma.favorites.findUnique({
             where: {
                 id: favoriteToDelete.id,
             },
         });
-        expect(response.statusCode).toBe(400);
+        expect(status).toBe(400);
         expect(deletedFavorites).not.toBeNull();
     });
 });

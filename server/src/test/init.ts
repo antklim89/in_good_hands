@@ -1,15 +1,26 @@
 import { PrismaClient } from '@prisma/client';
-import { afterAll, beforeAll } from 'vitest';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import { afterAll, beforeAll, inject } from 'vitest';
 
 import { populateDb } from './populateDb';
 
-import app from '@/app';
-
 
 export const init = () => {
-    const prisma = new PrismaClient();
+    const prisma = new PrismaClient({ datasourceUrl: inject('datasourceUrl') });
 
-    app.log.level = 'silent';
+    const app = async <Data = unknown>(args: AxiosRequestConfig) => {
+        const axiosInstance = axios.create({
+            baseURL: `http://localhost:${inject('serverPort')}`,
+        });
+
+        const result = await axiosInstance.request<Data>(args).catch((err: AxiosError) => err.response);
+
+        return { 
+            data: result?.data as Data, 
+            status: result?.status || null, 
+        };
+    };   
+
     let db: Awaited<ReturnType<typeof populateDb>>;
 
     beforeAll(async () => {

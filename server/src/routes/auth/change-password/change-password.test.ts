@@ -1,5 +1,4 @@
 import { Auth } from '@in-good-hands/share/swagger';
-import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
 
 import { method, url } from './change-password.schema';
@@ -10,7 +9,7 @@ import { generateJWT } from '@/utils';
 
 const { app, prisma, db } = init();
 
-const defaultOptions: InjectOptions = { url: `/auth${url}`, method };
+const defaultOptions = { url: `/auth${url}`, method };
 
 
 describe('PATCH /auth/change-password', () => {
@@ -29,9 +28,9 @@ describe('PATCH /auth/change-password', () => {
             where: { id: userToUpdate.id },
         });
 
-        const response = await app.inject({ ...defaultOptions, payload, headers });
+        const { status } = await app({ ...defaultOptions, data: payload, headers });
 
-        expect(response.statusCode).toEqual(201);
+        expect(status).toEqual(201);
 
         const newUpdatedPassword = await prisma.user.findUniqueOrThrow({
             where: { id: userToUpdate.id },

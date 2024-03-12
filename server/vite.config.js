@@ -11,14 +11,12 @@ export default defineConfig({
     },
     root: './src',
     test: {
+        globalSetup: ['./test/globalSetup.ts'],
+        setupFiles: ['./test/setup.ts'],
         poolOptions: {
             threads: {
                 singleThread: true,
             },
-        },
-        env: {
-            JWT_SECRET: 'SECRET',
-            DATABASE_URL: 'file:./data/test.sqlite',
         },
     },
 });

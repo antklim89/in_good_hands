@@ -1,16 +1,14 @@
 import { Ad } from '@in-good-hands/share/swagger';
-import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
 
 import { method, url } from './find-update-data.schema';
 
-import { init } from '@/test';
-import { generateJWT } from '@/utils';
+import { genTestJWT, init } from '@/test';
 
 
 const { app, db } = init();
 
-const defaultOptions: InjectOptions = { url: `/ad${url}`, method };
+const defaultOptions = { url: `/ad${url}`, method };
 
 
 describe('GET /ad/find-update-data', () => {
@@ -18,16 +16,15 @@ describe('GET /ad/find-update-data', () => {
         const [ad] = db().ads;
 
         const headers = {
-            authentication: generateJWT(db().users[0]).token,
+            authentication: genTestJWT(db().users[0]),
         };
-        const query: {[P in keyof Ad.FindUpdateData.RequestQuery]: string} = {
+        const params: {[P in keyof Ad.FindUpdateData.RequestQuery]: string} = {
             adId: String(ad.id),
         };
 
-        const response = await app.inject({ ...defaultOptions, headers, query });
-        const data = response.json();
+        const { data, status } = await app<Ad.FindUpdateData.ResponseBody>({ ...defaultOptions, headers, params });
 
-        expect(response.statusCode).toEqual(200);
+        expect(status).toEqual(200);
 
         expect(data).toHaveProperty('id');
         expect(data).toHaveProperty('isPublished');
@@ -45,14 +42,14 @@ describe('GET /ad/find-update-data', () => {
         const [ad] = db().ads;
 
         const headers = {
-            authentication: generateJWT(db().users[1]).token,
+            authentication: genTestJWT(db().users[1]),
         };
-        const query: {[P in keyof Ad.FindUpdateData.RequestQuery]: string} = {
+        const params: {[P in keyof Ad.FindUpdateData.RequestQuery]: string} = {
             adId: String(ad.id),
         };
 
-        const response = await app.inject({ ...defaultOptions, headers, query });
+        const { status } = await app({ ...defaultOptions, headers, params }).catch((err) => err);
 
-        expect(response.statusCode).toEqual(404);
+        expect(status).toEqual(404);
     });
 });

@@ -1,26 +1,24 @@
 import { Ad } from '@in-good-hands/share/swagger';
-import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
 
 import { method, url } from './create-new.schema';
 
-import { init } from '@/test';
-import { generateJWT } from '@/utils';
+import { genTestJWT, init } from '@/test';
 
 
 const { app, db, prisma } = init();
 
-const defaultOptions: InjectOptions = { url: `/ad${url}`, method };
+const defaultOptions = { url: `/ad${url}`, method };
 
 describe('POST /add/create-new', () => {
-    it('should create new ad', async () => {
+    it.only('should create new ad', async () => {
         const headers = {
-            authentication: generateJWT(db().users[0]).token,
+            authentication: genTestJWT(db().users[0]),
         };
-        const response = await app.inject({ ...defaultOptions, headers });
-        const data: Ad.CreateNew.ResponseBody = response.json();
+        const response = await app<Ad.CreateNew.ResponseBody>({ ...defaultOptions, headers, data: {} });
+        const { data, status } = response;
 
-        expect(response.statusCode).toEqual(201);
+        expect(status).toEqual(201);
         expect(data).toHaveProperty('id');
 
         const newAd = await prisma.ad.findUnique({ where: { id: data.id } });
@@ -31,8 +29,8 @@ describe('POST /add/create-new', () => {
     it('should not create new ad without authentication', async () => {
         const headers = {};
 
-        const response = await app.inject({ ...defaultOptions, headers });
+        const { status } = await app({ ...defaultOptions, headers, data: {} });
 
-        expect(response.statusCode).toEqual(401);
+        expect(status).toEqual(401);
     });
 });

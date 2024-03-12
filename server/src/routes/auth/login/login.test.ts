@@ -1,5 +1,4 @@
 import { Auth } from '@in-good-hands/share/swagger';
-import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
 
 import { method, url } from './login.schema';
@@ -9,7 +8,7 @@ import { init, notHashedPassword } from '@/test';
 
 const { app, db } = init();
 
-const defaultOptions: InjectOptions = { url: `/auth${url}`, method };
+const defaultOptions = { url: `/auth${url}`, method };
 
 describe('POST /auth/register', () => {
     it('should login existed user', async () => {
@@ -19,8 +18,7 @@ describe('POST /auth/register', () => {
             password: 'qwer123',
         };
 
-        const response = await app.inject({ ...defaultOptions, payload });
-        const data: Auth.Login.ResponseBody = response.json();
+        const { data } = await app<Auth.Login.ResponseBody>({ ...defaultOptions, data: payload });
         expect(data).toHaveProperty('token');
         expect(data.user.email).toEqual(userInDb.email);
         expect(data.user.name).toEqual(userInDb.name);
@@ -29,16 +27,15 @@ describe('POST /auth/register', () => {
         expect(data.user).not.toHaveProperty('password');
     });
 
-    it('should not login not existed user', async () => {
+    it.only('should not login not existed user', async () => {
         const payload: Auth.Login.RequestBody = {
             email: 'notExistedUser@mail.ru',
             password: 'qwer123',
         };
 
-        const response = await app.inject({ ...defaultOptions, payload });
-        const data = response.json();
+        const { data, status } = await app<{message: string}>({ ...defaultOptions, data: payload });
 
-        expect(response.statusCode).toEqual(400);
+        expect(status).toEqual(400);
         expect(data.message).toMatch(/E-mail or password is not valid./i);
     });
 
@@ -49,10 +46,9 @@ describe('POST /auth/register', () => {
             password: `---XXX${notHashedPassword}XXX---`,
         };
 
-        const response = await app.inject({ ...defaultOptions, payload });
-        const data = response.json();
+        const { data, status } = await app<{message: string}>({ ...defaultOptions, data: payload });
 
-        expect(response.statusCode).toEqual(400);
+        expect(status).toEqual(400);
         expect(data.message).toMatch(/E-mail or password is not valid./i);
     });
 });

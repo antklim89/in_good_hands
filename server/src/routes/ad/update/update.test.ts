@@ -1,17 +1,15 @@
 import { Ad } from '@in-good-hands/share/swagger';
-import type { InjectOptions } from 'fastify';
 import { describe, expect, it } from 'vitest';
 
 
 import { method, url } from './update.schema';
 
-import { init } from '@/test';
-import { generateJWT } from '@/utils';
+import { genTestJWT, init } from '@/test';
 
 
 const { app, db, prisma } = init();
 
-const defaultOptions: InjectOptions = { url: `/ad${url}`, method };
+const defaultOptions = { url: `/ad${url}`, method };
 
 
 const payload: Ad.Update.RequestBody & Record<string, string|number|boolean> = {
@@ -35,16 +33,15 @@ describe('PATCH /ad/update', () => {
         const [adToUpdate] = db().ads;
 
         const headers = {
-            authentication: generateJWT(db().users[0]).token,
+            authentication: genTestJWT(db().users[0]),
         };
 
-        const query: {[P in keyof Ad.Update.RequestQuery]: string} = {
+        const params: {[P in keyof Ad.Update.RequestQuery]: string} = {
             id: String(adToUpdate.id),
         };
 
-
-        const response = await app.inject({ ...defaultOptions, headers, payload, query });
-        expect(response.statusCode).toEqual(200);
+        const response = await app({ ...defaultOptions, headers, data: payload, params });
+        expect(response.status).toEqual(200);
 
         const updatedAd = await prisma.ad.findUniqueOrThrow({ where: { id: adToUpdate.id } });
 
@@ -61,43 +58,40 @@ describe('PATCH /ad/update', () => {
         expect(updatedAd.createdAt).not.toEqual(payload.createdAt);
         expect(updatedAd.id).not.toEqual(payload.id);
         expect(updatedAd).not.toHaveProperty('foo');
-
     });
 
     it('should not update ad without authentication', async () => {
 
-        const query: {[P in keyof Ad.Update.RequestQuery]: string} = {
+        const params: {[P in keyof Ad.Update.RequestQuery]: string} = {
             id: String(db().ads[0].id),
         };
 
-        const response = await app.inject({ ...defaultOptions, payload: { ...payload, name: 'UPDATED2 NAME' }, query });
+        const { status } = await app({ ...defaultOptions, data: { ...payload, name: 'UPDATED2 NAME' }, params });
 
-        expect(response.statusCode).toEqual(401);
+        expect(status).toEqual(401);
     });
 
-    it('should not update the othe user\'s ad', async () => {
+    it('should not update the other user\'s ad', async () => {
         const [adToUpdate] = db().ads;
         const headers = {
-            authentication: generateJWT(db().users[1]).token,
+            authentication: genTestJWT(db().users[1]),
         };
 
-        const query: {[P in keyof Ad.Update.RequestQuery]: string} = {
+        const params: {[P in keyof Ad.Update.RequestQuery]: string} = {
             id: String(adToUpdate.id),
         };
 
         const notUpdatedDescription = 'NOT UPDATED';
 
-        const response = await app.inject({
+        const response = await app({
             ...defaultOptions,
             headers,
-            payload: { ...payload, description: notUpdatedDescription },
-            query,
+            data: { ...payload, description: notUpdatedDescription },
+            params,
         });
-        expect(response.statusCode).toEqual(404);
+        expect(response.status).toEqual(404);
 
         const updatedAd = await prisma.ad.findUniqueOrThrow({ where: { id: adToUpdate.id } });
         expect(updatedAd.description).not.toEqual(notUpdatedDescription);
-
-
     });
 });

@@ -1,0 +1,21 @@
+
+services:
+  db:
+    volumes: []
+
+  server:
+    build:
+      target: dev
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DATABASE_URL: "postgresql://postgres:${POSTGRES_PASSWORD}@in_good_hands_db:5432/postgres?schema=public"
+      CLIENT_PORT: ${CLIENT_PORT}
+      SERVER_PORT: ${SERVER_PORT}
+    env_file: []
+    volumes:
+      - ./:/app
+      - ./server/src/test/test-upload/upload:/app/server/upload
+    user: "1000:1000"
+      
+
