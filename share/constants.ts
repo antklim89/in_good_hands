@@ -4,7 +4,7 @@ export const IMAGE_WIDTH = 1024;
 export const IMAGE_HEIGHT = 768;
 
 
-export const UPLOAD_IMAGES_LIMIT = 10;
+export const UPLOAD_IMAGES_LIMIT = 21;
 
 export const ADS_LIMIT = 10;
 
