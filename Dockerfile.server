@@ -1,5 +1,7 @@
 FROM node:20.11-alpine3.19 AS base
 
+RUN apk add --no-cache libc6-compat
+
 EXPOSE 8000
 
 
@@ -12,15 +14,13 @@ CMD [ "yarn", "vite-node", "-w", "./src/server.ts" ]
 FROM base as prod
 WORKDIR /app
 
-RUN apk add --no-cache libc6-compat
-
 COPY ./package.json yarn.lock ./
 COPY ./server/package.json ./server/
 COPY ./share/package.json ./share/
 
 WORKDIR /app/server
 
-RUN yarn install --frozen-lockfile
+RUN yarn install --frozen-lockfile --ignore-engines
 
 COPY ./server/prisma/ ./prisma/
 
