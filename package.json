@@ -20,7 +20,7 @@
     "test": "yarn --cwd server test",
     "migrate": "yarn --cwd server migrate",
     "lint": "eslint server/src/** client/src/** share/src/**  --ext .js,.ts,.tsx,.jsx --fix",
-    "shell": "docker run -it --rm -v ./:/app -w /app node:20.11-alpine3.19 sh"
+    "shell": "docker run -it --rm -v ./:/app -w /app -u 1000:1000 node:20.11-alpine3.19 sh"
   },
   "dependencies": {},
   "devDependencies": {
