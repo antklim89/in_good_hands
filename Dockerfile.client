@@ -1,5 +1,7 @@
 FROM node:20.11-alpine3.19 as base
 
+RUN apk add --no-cache libc6-compat
+
 EXPOSE 3000
 
 
