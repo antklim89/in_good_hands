@@ -1,9 +1,9 @@
 import { UPLOAD_IMAGES_LIMIT } from '@in-good-hands/share/constants';
 import { Image } from '@in-good-hands/share/swagger';
 import { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from 'fastify';
-import Jimp from 'jimp';
+import sharp from 'sharp';
 
-import { saveImage, saveThumnail } from './upload.services';
+import { saveImage, saveThumnail as saveThumbnail } from './upload.services';
 
 import { ClientException, getImageFilePath, getImageFullPath, getImageFullUrl } from '@/utils';
 
@@ -38,10 +38,10 @@ export default async function handler(
 
     const [{ filepath }] = await req.saveRequestFiles();
 
-    const jimpInstance = await Jimp.read(filepath);
+    const sharpInstance = sharp(filepath);
 
-    await saveImage(jimpInstance, imageFullPath);
-    const thumbnail = await saveThumnail(jimpInstance);
+    await saveImage(sharpInstance, imageFullPath);
+    const thumbnail = await saveThumbnail(sharpInstance);
 
     const result = await req.server.prisma.image.create({
         data: {
