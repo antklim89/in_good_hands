@@ -17,7 +17,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.server
-      target: prod
       args:
         DATABASE_URL: ${DATABASE_URL}
     restart: unless-stopped
@@ -37,7 +36,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.client
-      # target: prod
       args:
         - API_URL=http://in_good_hands_server:${SERVER_PORT}
         - CLIENT_PORT=${CLIENT_PORT}

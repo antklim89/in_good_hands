@@ -1,7 +1,8 @@
 services:
   server:
     build:
-      target: dev
+      target: base
+    command: [ "yarn", "vite-node", "-w", "./src/server.ts" ]
     volumes:
       - ./:/app
     user: "1000:1000"

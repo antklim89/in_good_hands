@@ -1,9 +1,10 @@
 import { resolve } from 'path';
 
-import { defineConfig } from 'vitest/config';
 
-
-export default defineConfig({
+/**
+ * @type {import('vitest/config').UserConfig}
+ */
+const config = {
     resolve: {
         alias: {
             '@': resolve('src'),
@@ -19,4 +20,5 @@ export default defineConfig({
             },
         },
     },
-});
+};
+export default config;
