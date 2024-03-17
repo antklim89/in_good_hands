@@ -37,7 +37,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.client
-      target: prod
+      # target: prod
       args:
         - API_URL=http://in_good_hands_server:${SERVER_PORT}
         - CLIENT_PORT=${CLIENT_PORT}

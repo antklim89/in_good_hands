@@ -4,9 +4,12 @@ services:
       target: dev
     volumes:
       - ./:/app
+    user: "1000:1000"
 
   client:
     build:
-      target: dev
+      target: base
+    command: ["yarn", "next", "dev"]
     volumes:
       - ./:/app
+    user: "1000:1000"

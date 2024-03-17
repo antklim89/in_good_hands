@@ -3,3 +3,9 @@ dist
 output
 .turbo
 .next
+Dockerfile
+.dockerignore
+npm-debug.log
+README.md
+.next
+.git
