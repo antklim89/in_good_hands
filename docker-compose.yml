@@ -23,6 +23,8 @@ services:
     depends_on:
       - db
     hostname: in_good_hands_server
+    volumes:
+      - upload_images:/app/server/upload
     environment:
       DATABASE_URL: "postgresql://postgres:${POSTGRES_PASSWORD}@in_good_hands_db:5432/postgres?schema=public"
     env_file:
@@ -58,3 +60,4 @@ networks:
 
 volumes:
   postgres_data:
+  upload_images:
