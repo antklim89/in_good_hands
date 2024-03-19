@@ -3,8 +3,6 @@ export const DEFAULT_TITLE = process.env.DEFAULT_TITLE || 'In Good Hands';
 
 
 export const API_URL = process.env.API_URL || (() => { throw new Error('API_URL env is required!'); })();
-export const CLIENT_PORT = process.env.CLIENT_PORT || (() => { throw new Error('CLIENT_PORT env is required!'); })();
-export const SERVER_PORT = process.env.SERVER_PORT || (() => { throw new Error('SERVER_PORT env is required!'); })();
 
 export const USER_STORAGE_NAME = 'USER';
 export const JWT_STORAGE_NAME = 'JWT';
