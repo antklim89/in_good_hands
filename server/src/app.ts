@@ -5,6 +5,7 @@ import { ClientException } from './utils';
 
 
 const app = fastify({
+    ignoreTrailingSlash: true,
     disableRequestLogging: true,
     logger: {
         base: null,
