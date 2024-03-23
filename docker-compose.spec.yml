@@ -5,7 +5,8 @@ services:
 
   server:
     build:
-      target: dev
+      target: base
+    command: [ "yarn", "vite-node", "-w", "./src/server.ts" ]
     environment:
       JWT_SECRET: ${JWT_SECRET}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
