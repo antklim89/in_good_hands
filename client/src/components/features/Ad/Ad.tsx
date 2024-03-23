@@ -2,7 +2,7 @@ import {
     Box, Button, Container, Flex, Text, useColorModeValue,
 } from '@chakra-ui/react';
 import { IMAGE_HEIGHT, IMAGE_WIDTH } from '@in-good-hands/share/constants';
-import { Ad } from '@in-good-hands/share/swagger';
+import type { Ad as AdType } from '@in-good-hands/share/swagger';
 import Image from 'next/image';
 import { FC } from 'react';
 import { FaTelegramPlane, FaWhatsapp, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
@@ -15,7 +15,7 @@ import Carousel from '~/components/ui/Carousel';
 import { getApiURL } from '~/utils';
 
 
-const Ad: FC<Ad.FindOne.ResponseBody> = ({
+const Ad: FC<AdType.FindOne.ResponseBody> = ({
     id, name, breed, type, description, birthday, images, price, tel, email, telegram, whatsapp, inFavorites, owner,
 }) => {
     const descriptionBg = useColorModeValue('primary.50', 'primary.900');
