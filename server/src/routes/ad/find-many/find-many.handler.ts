@@ -10,14 +10,14 @@ export default async function handler(req: FastifyRequest<{ Querystring: Ad.Find
     const {
         cursor, search, searchType, ltePrice, gtePrice,
     } = req.query;
-
-
+    
     const where: Prisma.AdWhereInput = {
         isPublished: true,
     };
 
-    if (search) where.description = { contains: search.replace(/\s/ig, ' | ') };
-    if (search) where.breed = { contains: search.replace(/\s/ig, ' | ') };
+    if (search) where.description = { search: search.replace(/\s+/ig, ' | ') };
+    if (search) where.breed = { search: search.replace(/\s+/ig, ' | ') };
+    
     if (searchType) where.type = { equals: searchType };
     if ((ltePrice || gtePrice)) {
         where.price = {};

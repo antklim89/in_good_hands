@@ -65,13 +65,12 @@ describe('POST /ad/find-many', () => {
     });
 
     it('should finds ads filtered by breed', async () => {
-        const params = {
-            search: 'BEnGaL',
-        };
+        const params = { search: 'BEnGaL' };
 
         const { data } = await app<Ad.FindMany.ResponseBody>({ ...defaultOptions, params });
-        expect(data.every((ad) => new RegExp(params.search, 'i').test(ad.breed))).toBeTruthy();
 
+        expect(data.length).toBeGreaterThan(0);
+        expect(data.every((ad) => new RegExp(params.search, 'i').test(ad.breed))).toBeTruthy();
     });
 
     it('should finds ads filtered by lte price', async () => {
