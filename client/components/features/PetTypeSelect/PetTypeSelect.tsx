@@ -1,4 +1,4 @@
-import { Box, BoxProps, IconButton } from '@chakra-ui/react';
+import { BoxProps, Grid, IconButton } from '@chakra-ui/react';
 import { animalsTypes } from '@in-good-hands/share/constants';
 import { FC } from 'react';
 
@@ -11,10 +11,13 @@ const PetTypeSelect: FC<BoxProps> = (props) => {
     const { router, handleChange } = usePetTypeSelect();
 
     return (
-        <Box
-            display="flex"
+        <Grid
+            alignSelf="center"
+            display="grid"
             gap={[0, 1, 2, 4]}
             justifyContent="center"
+            justifyItems="center"
+            templateColumns={{ base: 'repeat(2, 1fr)', sm: 'repeat(3, 1fr)', lg: 'repeat(6, 1fr)' }}
             {...props}
         >
             <IconButton
@@ -56,8 +59,7 @@ const PetTypeSelect: FC<BoxProps> = (props) => {
                     onClick={handleChange}
                 />
             ))}
-
-        </Box>
+        </Grid>
     );
 };
 

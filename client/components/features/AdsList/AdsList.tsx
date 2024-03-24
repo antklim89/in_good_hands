@@ -12,7 +12,7 @@ const AdsList: FC = () => {
     const { ads, isLoading } = useAdsList();
 
     return (
-        <Container my={8}>
+        <Container my={8} p={[0, 2]}>
             <Flex flexDirection="column">
                 <PetTypeSelect flex="1 1 0" mb={[1, 4]} />
                 <PetSearch flex="3 1 0" mb={[1, 4]} />

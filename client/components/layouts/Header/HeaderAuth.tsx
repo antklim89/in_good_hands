@@ -1,14 +1,16 @@
 import {
+    Box,
     Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerOverlay, Heading, useDisclosure,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC, useRef } from 'react';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUser } from 'react-icons/fa';
 
 import Auth from '../../features/Auth';
 
 import { HeaderAuthProps } from './Header.types';
 
+import CreateAdButton from '~/components/features/CreateAdButton';
 import NoSsr from '~/components/helpers/NoSsr';
 import { useAuthContext } from '~/utils';
 
@@ -27,7 +29,7 @@ const HeaderAuth: FC<HeaderAuthProps> = () => {
                 variant="ghost"
                 onClick={onOpen}
             >
-                <FaUserCircle />
+                <FaUser />
             </Button>
             <NoSsr>
                 <Drawer
@@ -46,6 +48,7 @@ const HeaderAuth: FC<HeaderAuthProps> = () => {
                             mt={24}
                             sx={{ '& > *': { mb: 4 } }}
                         >
+
                             {user
                                 ? (
                                     <>
@@ -53,17 +56,39 @@ const HeaderAuth: FC<HeaderAuthProps> = () => {
                                             {user.name}
                                         </Heading>
                                         <Button
-                                            as={Link} href="/profile" variant="outline"
+                                            as={Link} href="/profile"
+                                            textTransform="uppercase"
+                                            variant="outline"
                                             onClick={onClose}
                                         >
                                             Profile
                                         </Button>
-                                        <Button variant="outline" onClick={logout} >
+                                
+                                        <CreateAdButton onCreate={onClose} />
+                                
+                                        <Button 
+                                            textTransform="uppercase" 
+                                            variant="outline"
+                                            onClick={logout}
+                                        >
                                             Logout
                                         </Button>
                                     </>
                                 )
                                 : <Auth type="login" onClose={onClose} />}
+
+                            <Box flexGrow={1} />
+
+                            <Button
+                                _hover={{ color: 'primary.600', bg: 'primary.50' }}
+                                as={Link}
+                                href="/about"
+                                textTransform="uppercase"
+                                variant="outline"
+                                onClick={onClose}
+                            >
+                                about
+                            </Button>
                         </DrawerBody>
                     </DrawerContent>
                 </Drawer>

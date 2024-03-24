@@ -1,12 +1,5 @@
 import {
-    Box,
-    Button,
-    Card,
-    CardBody,
-    CardFooter,
-    Heading,
-    Stack,
-    Text,
+    Button, Card, Flex, Heading, Text,
 } from '@chakra-ui/react';
 import { IMAGE_HEIGHT, IMAGE_WIDTH } from '@in-good-hands/share/constants';
 import Link from 'next/link';
@@ -34,13 +27,12 @@ const AdsListItem: FC<AdsListItemProps> = ({
 
     return (
         <Card
-            direction={{ base: 'column', sm: 'row' }}
+            direction={{ base: 'column', md: 'row' }}
             display="flex"
             overflow="hidden"
             variant="outline"
-            width="100%"
         >
-            <Box sx={{ '& > *': { width: imgWidth, height: 'imgHeight', objectFit: 'cover' } }}>
+            <Flex flex="1 1 0">
                 {images.length > 0
                     ? (
                         <Carousel
@@ -53,10 +45,10 @@ const AdsListItem: FC<AdsListItemProps> = ({
                                     blurDataURL={image.thumbnail}
                                     height={imgHeight}
                                     key={image.id}
-                                    maxW="100%"
                                     objectFit="cover"
                                     placeholder={image.thumbnail.length === 0 ? 'empty' : 'blur'}
                                     src={getApiURL(image.src)}
+                                    sx={{ width: '100%' }}
                                     width={imgWidth}
                                 />
                             ))}
@@ -66,46 +58,42 @@ const AdsListItem: FC<AdsListItemProps> = ({
                         <Image
                             alt={`${type} ${breed}`}
                             height={imgHeight}
-                            maxW="100%"
                             objectFit="cover"
                             src={`/placeholders/${type}-ph.jpg`}
+                            sx={{ width: '100%' }}
                             width={imgWidth}
                         />
                     )}
-            </Box>
+            </Flex>
 
-            <Stack flexBasis="100%">
-                <CardBody>
-                    <Heading mb={4} size="md">
-                        <Text as="span" textTransform="capitalize">{breed}</Text>
-                    </Heading>
-
-                    <Text
-                        display="flex" flexDir="column" gap={4}
-                    >
-                        {(owner.id === user?.id) ? <Text>Your ad</Text> : null}
-                        <Text
-                            as="span"
-                            fontSize="xl"
-                            mr={4}
-                            textTransform="capitalize"
-                        >{type}
+            <Card flex="2 1 0" flexDirection="column" p={2}>
+                <Flex justifyContent="space-between">
+                    <Flex flexDirection="column">
+                        <Heading alignItems="center" fontSize={['xl',  '2xl']} mb={4}>
+                            <Text p={0} textTransform="capitalize">{breed}</Text> 
+                        </Heading>
+    
+                        <Text display="flex" flexDir="column" gap={4}>
+                            {(owner.id === user?.id) ? <Text>Your ad</Text> : null}
+                            <Text as="span" textTransform="capitalize">{type}</Text>
+                            <PetAge birthday={birthday} />
+                            <Price flexGrow={1} fontSize={['2xl', '2xl', '3xl']} price={price} />
                         </Text>
-                        <PetAge birthday={birthday} />
-                        <Price flexGrow={1} fontSize={['2xl', '2xl', '3xl']} price={price} />
-                    </Text>
-                </CardBody>
-
-                <CardFooter justifyContent="flex-end">
-                    <Button as={Link} href={`/ads/${id}`} variant="outline">
-                        Show more...
-                    </Button>
-                </CardFooter>
-            </Stack>
-            <Stack>
-                <AdMenu adId={id} ownerId={owner.id} />
-                <FavoriteButton adId={id} inFavorites={inFavorites} />
-            </Stack>
+                    </Flex>
+                    <Flex align="flex-end" flexDirection="column">
+                        <AdMenu adId={id} ownerId={owner.id} />
+                        <FavoriteButton adId={id} inFavorites={inFavorites} />
+                    </Flex>
+                </Flex>
+                <Button
+                    as={Link} 
+                    href={`/ads/${id}`} 
+                    mt="auto"
+                    variant="outline"
+                >
+                    Show more...
+                </Button>
+            </Card>
         </Card>
     );
 };
