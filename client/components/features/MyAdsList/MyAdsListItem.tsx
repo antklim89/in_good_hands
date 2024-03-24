@@ -1,6 +1,6 @@
-import { CheckCircleIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
+import { CheckIcon, CloseIcon,  DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import {
-    Divider, Flex, HStack, IconButton, Text, Tooltip, Box, LinkBox, VStack, useColorModeValue,
+    Divider, Flex, HStack, IconButton, Text, Tooltip, Box, LinkBox, useColorModeValue,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -21,6 +21,7 @@ const MyAdsListItem: FC<MyAdsListItemProps> = ({ id, breed, name, type, isPublis
             <LinkBox
                 _hover={{ bg: hoverBg }}
                 display="flex"
+                flexDirection={['column', 'row']}
                 py={4}
             >
                 <Flex as={Link} href={`/ads/${id}`} w="100%">
@@ -33,46 +34,44 @@ const MyAdsListItem: FC<MyAdsListItemProps> = ({ id, breed, name, type, isPublis
                         />
                     </Box>
                     <Flex flexDirection="column">
-                        <Text p={0}>Name: {name}</Text>
-                        <Text p={0}>Breed: {breed}</Text>
+                        <Text fontSize="xl" p={0}>{name}</Text>
+                        <Text p={0}>{breed}</Text>
                     </Flex>
                 </Flex>
 
                 <HStack alignSelf="flex-end">
                     <IconButton
                         aria-label={isPublished ? 'Published' : 'Not published'}
-                        variant="link"
+                        variant="outline"
                     >
                         <Tooltip label={isPublished ? 'Published' : 'Not published'}>
                             {isPublished
-                                ? <CheckCircleIcon color="green.500" />
-                                : <CheckCircleIcon color="black" />}
+                                ? <CheckIcon color="green.500" />
+                                : <CloseIcon color="grey" />}
                         </Tooltip>
                     </IconButton>
 
-                    <VStack gap={4}>
-                        <IconButton
-                            aria-label="Update Ad"
-                            as={Link}
-                            href={`/ads/update/${id}`}
-                            icon={<EditIcon />}
-                            variant="link"
-                        />
+                    <IconButton
+                        aria-label="Update Ad"
+                        as={Link}
+                        href={`/ads/update/${id}`}
+                        icon={<EditIcon />}
+                        variant="outline"
+                    />
 
-                        <ConfirmDialog
-                            isLoading={deleting}
-                            message="Are you sure you want to delete this ad?"
-                            renderButton={(toggle) => (
-                                <IconButton
-                                    aria-label="Delete Ad"
-                                    icon={<DeleteIcon color="red" />}
-                                    variant="link"
-                                    onClick={toggle}
-                                />
-                            )}
-                            onConfirm={handleDeleteAd}
-                        />
-                    </VStack>
+                    <ConfirmDialog
+                        isLoading={deleting}
+                        message="Are you sure you want to delete this ad?"
+                        renderButton={(toggle) => (
+                            <IconButton
+                                aria-label="Delete Ad"
+                                icon={<DeleteIcon color="red" />}
+                                variant="outline"
+                                onClick={toggle}
+                            />
+                        )}
+                        onConfirm={handleDeleteAd}
+                    />
                 </HStack>
             </LinkBox>
             <Divider />
