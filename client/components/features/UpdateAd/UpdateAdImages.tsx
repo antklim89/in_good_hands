@@ -14,7 +14,7 @@ const UpdateAdImages: FC<UpdateAdProps> = ({ ad }) => {
 
     return (
         <Box mb={2}>
-            <Text color="black" pb={2}>
+            <Text pb={2}>
                 Images ({uploadedImages.length} / {UPLOAD_IMAGES_LIMIT})
             </Text>
             <SimpleGrid columns={[4, 6, 8]} gap={1}>
