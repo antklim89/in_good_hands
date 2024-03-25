@@ -1,50 +1,42 @@
-import { Container, Box, Text, Heading } from '@chakra-ui/react';
-import NextImage from 'next/image';
+import {
+    Box, Container, Flex, Heading, Text, useColorModeValue, 
+} from '@chakra-ui/react';
 import { FC } from 'react';
 
-import heroImage from './Hero.image.svg';
+import heroImage from './Hero.image.jpg';
+
+import Image from '~/components/ui/Image';
 
 
 const Hero: FC = () => {
-    return (
-        <Box
-            as="section"
-            height={[150, 200, 300, 400, 500]}
-            overflow="hidden"
-            position="relative"
-            zIndex={-1}
-        >
-            <Box
-                height="100%"
-                left="50%"
-                position="absolute"
-                transform="translateX(-50%)"
-                width={2560}
-                zIndex={-1}
-            >
-                <NextImage
-                    fill
-                    priority
-                    alt="hero"
-                    src={heroImage}
-                />
-            </Box>
+    const bgColor = useColorModeValue('white', 'gray.800');
 
-            <Container
-                alignItems="center"
-                display="flex"
-                height="100%"
+    return (
+        <Container display="flex">
+            <Flex
+                alignItems="center" flex="1 1 0" position="relative"
+                zIndex={100}
             >
-                <Box width="50%">
-                    <Heading as="h1" colorScheme="primary" fontSize={['xl', '2xl', '5xl']}>
-                        Turning <Text as="span" color="secondary.600" textDecoration="underline">dreams</Text> into reality.
-                    </Heading>
-                    <Text colorScheme="primary" fontSize={['md', 'lg', 'xl']}>
-                        Website of ads for the sale of pets
+                <Box
+                    bg={bgColor}
+                    boxShadow="2px 2px 5px black"
+                    left={8}
+                    p={4}
+                    position="absolute"
+                    right={-8}
+                >
+                    <Heading color="secondary.500" fontSize="2xl" textTransform="uppercase" >Give your pet a chance <br />to find a loving home!</Heading>
+                    <Text fontSize="xl">
+                        This is a convenient platform for placing ads for the sale of
+                        pets or find a fitting pet.
                     </Text>
                 </Box>
-            </Container>
-        </Box>
+            </Flex>
+            <Box flex="1 1 0">
+                <Image alt="hero" src={heroImage} />
+            </Box>
+
+        </Container>
     );
 };
 
