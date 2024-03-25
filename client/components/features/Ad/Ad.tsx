@@ -3,7 +3,6 @@ import {
 } from '@chakra-ui/react';
 import { IMAGE_HEIGHT, IMAGE_WIDTH } from '@in-good-hands/share/constants';
 import type { Ad as AdType } from '@in-good-hands/share/swagger';
-import Image from 'next/image';
 import { FC } from 'react';
 import { FaTelegramPlane, FaWhatsapp, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 
@@ -12,6 +11,7 @@ import FavoriteButton from '~/components/features/FavoriteButton';
 import PetAge from '~/components/features/PetAge';
 import Price from '~/components/helpers/Price';
 import Carousel from '~/components/ui/Carousel';
+import Image from '~/components/ui/Image';
 import { getApiURL } from '~/utils';
 
 
@@ -26,6 +26,39 @@ const Ad: FC<AdType.FindOne.ResponseBody> = ({
                 <FavoriteButton adId={id} inFavorites={inFavorites} mx={4} />
                 <AdMenu adId={id} ownerId={owner.id} />
             </Flex>
+            <Box mb={4}>
+                {images.length > 0
+                    ? (
+                        <Carousel
+                            defaultControlsConfig={{ nextButtonText: '>', prevButtonText: '<' }}
+                            renderBottomCenterControls={null}
+                        >
+                            {images.map((image) => (
+                                <Image
+                                    alt={`${type} ${breed}`}
+                                    blurDataURL={image.thumbnail}
+                                    height={IMAGE_HEIGHT}
+                                    key={image.id}
+                                    objectFit="cover"
+                                    placeholder="blur"
+                                    src={getApiURL(image.src)}
+                                    sx={{ width: '100%', height: '100%', maxH: IMAGE_HEIGHT }}
+                                    width={IMAGE_WIDTH}
+                                />
+                            ))}
+                        </Carousel>
+                    )
+                    : (
+                        <Image
+                            alt={`${type} placeholder`}
+                            className="cover"
+                            height={IMAGE_HEIGHT}
+                            src={`/placeholders/${type}-ph.jpg`}
+                            sx={{ width: '100%' }}
+                            width={IMAGE_WIDTH}
+                        />
+                    )}
+            </Box>
             <Flex flexDir={['column-reverse', null, 'row']} mb={4}>
                 <Box
                     alignItems="flex-start" display="flex" flex="1 1 0"
@@ -75,51 +108,23 @@ const Ad: FC<AdType.FindOne.ResponseBody> = ({
                             </Button>
                         )
                         : null}
+                </Box>
+
+                <Box flex="1 1 0">
+                    <Text
+                        bgColor={descriptionBg}
+                        borderRadius={8}
+                        p={4}
+                    >
+                        {description}
+                    </Text>
                     <Price
                         fontSize="6xl"
                         fontWeight="bold"
                         price={price}
                     />
                 </Box>
-
-                <Box flex="1 1 0" sx={{ 'img': { m: '0 auto', width: IMAGE_WIDTH, objectFit: 'cover', aspectRatio: `${IMAGE_WIDTH} / ${IMAGE_HEIGHT}` } }}>
-                    {images.length > 0
-                        ? (
-                            <Carousel
-                                defaultControlsConfig={{ nextButtonText: '>', prevButtonText: '<' }}
-                                renderBottomCenterControls={null}
-                            >
-                                {images.map((image) => (
-                                    <Image
-                                        alt={`${type} ${breed}`}
-                                        blurDataURL={image.thumbnail}
-                                        height={IMAGE_HEIGHT}
-                                        key={image.id}
-                                        placeholder="blur"
-                                        src={getApiURL(image.src)}
-                                        width={IMAGE_WIDTH}
-                                    />
-                                ))}
-                            </Carousel>
-                        )
-                        : (
-                            <Image
-                                alt={`${type} placeholder`}
-                                className="cover"
-                                height={IMAGE_HEIGHT}
-                                src={`/placeholders/${type}-ph.jpg`}
-                                width={IMAGE_WIDTH}
-                            />
-                        )}
-                </Box>
             </Flex>
-            <Text
-                bgColor={descriptionBg}
-                borderRadius={8}
-                p={4}
-            >
-                {description}
-            </Text>
         </Container>
     );
 };
