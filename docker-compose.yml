@@ -28,10 +28,8 @@ services:
       - upload_images:/app/server/upload
     environment:
       DATABASE_URL: "postgresql://postgres:${POSTGRES_PASSWORD}@in_good_hands_db:5432/postgres?schema=public"
-    env_file:
-      - .env
-    ports:
-      - "${SERVER_PORT}:8000"
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
     networks:
       - api
 
@@ -40,14 +38,16 @@ services:
       context: .
       dockerfile: Dockerfile.client
       args:
-        - API_URL=http://in_good_hands_server:${SERVER_PORT}
+        - API_URL=http://in_good_hands_server:8000
     restart: unless-stopped
     depends_on:
       - server
     hostname: in_good_hands_client
     container_name: in_good_hands_client
+    environment:
+      PORT: ${PORT}
     ports:
-      - "${CLIENT_PORT}:3000"
+      - "${PORT}:3000"
     networks:
       - api
 
