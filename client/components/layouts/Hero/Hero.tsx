@@ -1,5 +1,5 @@
 import {
-    Box, Container, Flex, Heading, Text, useColorModeValue, 
+    Box, Container, Flex, Heading, Text, useColorModeValue,
 } from '@chakra-ui/react';
 import { FC } from 'react';
 
@@ -12,9 +12,11 @@ const Hero: FC = () => {
     const bgColor = useColorModeValue('white', 'gray.800');
 
     return (
-        <Container display="flex">
+        <Container display="flex" flexDirection={{ base: 'column', md: 'row' }}>
             <Flex
-                alignItems="center" flex="1 1 0" position="relative"
+                alignItems="center"
+                flex="1 1 0"
+                position="relative"
                 zIndex={100}
             >
                 <Box
@@ -22,10 +24,10 @@ const Hero: FC = () => {
                     boxShadow="2px 2px 5px black"
                     left={8}
                     p={4}
-                    position="absolute"
+                    position={{ base: 'static', md: 'absolute' }}
                     right={-8}
                 >
-                    <Heading color="secondary.500" fontSize="2xl" textTransform="uppercase" >Give your pet a chance <br />to find a loving home!</Heading>
+                    <Heading color="secondary.500" fontSize="2xl" textTransform="uppercase">Give your pet a chance <br />to find a loving home!</Heading>
                     <Text fontSize="xl">
                         This is a convenient platform for placing ads for the sale of
                         pets or find a fitting pet.
