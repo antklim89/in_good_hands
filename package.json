@@ -18,7 +18,9 @@
     "stop": "docker compose stop",
     "typegen": "yarn --cwd share typegen",
     "test": "yarn --cwd server test",
-    "migrate": "yarn --cwd server migrate",
+    "prisma:generate": "docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm server yarn prisma:generate",
+    "prisma:migrate": "docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm server yarn prisma:migrate",
+    "generatedata": "docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm server yarn generatedata",
     "lint": "eslint server/src/** client/src/** share/src/**  --ext .js,.ts,.tsx,.jsx --fix",
     "shell": "docker run -it --rm -v ./:/app -w /app -u 1000:1000 node:20.11-alpine3.19 sh"
   },
