@@ -3,6 +3,8 @@ services:
     build:
       target: base
     command: [ "yarn", "vite-node", "-w", "./src/server.ts" ]
+    ports:
+      - 8000:8000
     volumes:
       - ./:/app
     user: "1000:1000"
