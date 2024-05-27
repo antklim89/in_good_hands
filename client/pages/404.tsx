@@ -1,17 +1,11 @@
-import { Center, Text } from '@chakra-ui/react';
 import { NextPage } from 'next';
 
-import Seo from '~/components/helpers/Seo';
+import NotFound from '~/components/helpers/NotFoundPage';
 
 
 const NotFoundPage: NextPage = () => {
     return (
-        <Center height="100%">
-            <Seo title="Page not found" />
-            <Text fontSize="3xl">
-                404 | This page could not be found.
-            </Text>
-        </Center>
+        <NotFound />
     );
 };
 

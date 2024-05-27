@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 
+import NotFoundPage from '../NotFoundPage';
+
 import { ProtectedProps } from './Protected.types';
 
-import NotFoundPage from '~/pages/404';
 import { useAuthContext } from '~/utils';
 
 

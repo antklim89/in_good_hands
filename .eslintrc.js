@@ -92,6 +92,7 @@ module.exports = {
         'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
         'react/jsx-no-duplicate-props': [2, { ignoreCase: false }],
         'jsx-a11y/label-has-associated-control': 2,
+        'react/prefer-read-only-props': 0,
 
         /**
         * TypeScript
