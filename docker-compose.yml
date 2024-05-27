@@ -56,4 +56,6 @@ networks:
 
 volumes:
   postgres_data:
+    name: in_good_hands_postgres_data
   upload_images:
+    name: in_good_hands_upload_images
